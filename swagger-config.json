@@ -1,0 +1,13 @@
+{
+    "gemName": "form_api",
+    "moduleName": "FormAPI",
+    "gemVersion": "0.1.0",
+    "gemAuthor": "Form Services Ltd.",
+    "gemAuthorEmail": "support@formapi.io",
+    "gemHomepage": "https://github.com/FormAPI/formapi-ruby",
+    "gemSummary": "A client library for the FormAPI PDF generation service",
+    "gemDescription": "A client library for the FormAPI PDF generation service",
+    "gemLicense": "MIT",
+    "hideGenerationTimestamp": true,
+    "httpUserAgent": "ruby-swagger-#{VERSION}"
+}
