@@ -15,12 +15,15 @@ require 'date'
 module FormAPI
 
   class Data
+    attr_accessor :test
+
     attr_accessor :data
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'test' => :'test',
         :'data' => :'data'
       }
     end
@@ -28,6 +31,7 @@ module FormAPI
     # Attribute type mapping.
     def self.swagger_types
       {
+        :'test' => :'BOOLEAN',
         :'data' => :'Object'
       }
     end
@@ -39,6 +43,10 @@ module FormAPI
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
+      end
 
       if attributes.has_key?(:'data')
         self.data = attributes[:'data']
@@ -69,6 +77,7 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          test == o.test &&
           data == o.data
     end
 
@@ -81,7 +90,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [data].hash
+      [test, data].hash
     end
 
     # Builds the object from hash

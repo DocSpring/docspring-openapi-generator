@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-cd "`dirname \"$0\"`/.."
-
-echo "Removing trailing whitespace..."
-find lib -name "*.rb" -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
-
-echo "Fixing gemspec to work around swagger..."
-ruby script/fix_gemspec.rb

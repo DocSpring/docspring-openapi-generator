@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 #
 # This example demonstrates generating a PDF from a preconfigured template,
-# and waiting for the PDF to be processed.
+# and downloading the PDF to a local file.
 #
-# You can run this example with: ./examples/generate_pdf.rb
+# You can run this example with: ./examples/generate_and_download_pdf.rb
 
 require "bundler/setup"
 Bundler.require
@@ -12,6 +12,7 @@ API_TOKEN_ID = 'yRaaR9JmTPtGX7EN'
 API_TOKEN_SECRET = 'IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec'
 TEMPLATE_ID = '6zz3dYRYM67fxMXA'
 
+PDF_FILENAME = '/tmp/formapi-test.pdf'
 
 begin
   FormAPI.configure do |c|
@@ -22,11 +23,11 @@ begin
 
   formapi = FormAPI::Client.new
 
-  puts "Generating PDF and waiting until ready..."
+  puts "Downloading PDF to #{PDF_FILENAME}..."
 
-  response = formapi.generate_pdf(
-    template_id: TEMPLATE_ID,
-    test: true,
+  formapi.generate_and_download_pdf(
+    template_id: '6zz3dYRYM67fxMXA',
+    filename: PDF_FILENAME,
     data: {
       first_name: 'John',
       last_name: 'Smith',
@@ -34,8 +35,10 @@ begin
     }
   )
 
-  puts "PDF was generated:"
-  puts response
+  puts "PDF was downloaded to /tmp/formapi-test.pdf"
+
+  # Open the PDF on Mac or Linux.
+  `type xdg-open > /dev/null 2>&1 && xdg-open '#{PDF_FILENAME}' || open '#{PDF_FILENAME}'`
 
 rescue FormAPI::ApiError => ex
   puts "#{ex.class}: #{ex.message}"

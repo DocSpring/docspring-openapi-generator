@@ -17,6 +17,8 @@ module FormAPI
   class InlineResponse201Submission
     attr_accessor :id
 
+    attr_accessor :test
+
     attr_accessor :state
 
     attr_accessor :download_url
@@ -47,6 +49,7 @@ module FormAPI
     def self.attribute_map
       {
         :'id' => :'id',
+        :'test' => :'test',
         :'state' => :'state',
         :'download_url' => :'download_url'
       }
@@ -56,6 +59,7 @@ module FormAPI
     def self.swagger_types
       {
         :'id' => :'String',
+        :'test' => :'BOOLEAN',
         :'state' => :'String',
         :'download_url' => :'String'
       }
@@ -71,6 +75,10 @@ module FormAPI
 
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
 
       if attributes.has_key?(:'state')
@@ -124,6 +132,7 @@ module FormAPI
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          test == o.test &&
           state == o.state &&
           download_url == o.download_url
     end
@@ -137,7 +146,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, state, download_url].hash
+      [id, test, state, download_url].hash
     end
 
     # Builds the object from hash

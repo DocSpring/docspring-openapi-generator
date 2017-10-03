@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+cd "`dirname \"$0\"`/.."
+
+echo "Removing trailing whitespace..."
+find lib -name "*.rb" -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+
+echo "Fixing gemspec to work around swagger..."
+ruby scripts/fix_gemspec.rb
+
+echo "Injecting extensions..."
+sed -i "s/require 'form_api\/api\/pdf_api'/\
+require File.join(File.dirname(__FILE__), '..\/extensions\/lib\/form_api\/api\/client')/" \
+lib/form_api.rb

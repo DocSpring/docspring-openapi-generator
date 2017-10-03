@@ -1,7 +1,7 @@
 {
     "gemName": "form_api",
     "moduleName": "FormAPI",
-    "gemVersion": "0.1.0",
+    "gemVersion": "0.1.1",
     "gemAuthor": "Form Services Ltd.",
     "gemAuthorEmail": "support@formapi.io",
     "gemHomepage": "https://github.com/FormAPI/formapi-ruby",

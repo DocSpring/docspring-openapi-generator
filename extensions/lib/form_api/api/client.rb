@@ -10,21 +10,27 @@ module FormAPI
     class PollTimeoutError < ApiError; end
     class InvalidResponseError < ApiError; end
 
-    def generate_pdf(template_id, opts = {})
+    def generate_pdf(opts = {})
       unless opts[:data].kind_of?(::Hash)
         raise InvalidDataError, ":data is required, and must be a Hash."
+      end
+
+      # Wait for job to finish by default.
+      if !opts.has_key?(:wait)
+        opts[:wait] = true
       end
 
       # FormAPI requires a nested :data object.
       opts[:data] = { data: opts.delete(:data) }
 
+      template_id = opts.delete :template_id
       response = super(template_id, opts)
+
       return response unless opts[:wait]
 
+      submission = response.submission
       timeout = opts[:timeout] || 60
       start_time = Time.now
-
-      submission = response.submission
 
       # Wait for submission to be ready
       while submission.state != 'processed'
@@ -43,17 +49,14 @@ module FormAPI
     end
 
     def generate_and_download_pdf(opts = {})
-      template_id = opts.delete :template_id
       filename = opts.delete :filename
 
-      response = generate_pdf(template_id, opts.merge(wait: true))
+      response = generate_pdf(opts.merge(wait: true))
       submission = response.submission
 
       pdf_response = Typhoeus.get(submission.download_url, followlocation: true)
 
-      File.open(filename, 'wb') do |f|
-        f.write pdf_response.body
-      end
+      File.open(filename, 'wb') { |f| f.write pdf_response.body }
 
       response
     end
