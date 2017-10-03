@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+./scripts/generate
+rm form_api-*.gem
+gem build form_api.gemspec
+gem push form_api-*.gem
