@@ -43,6 +43,16 @@ response = formapi.generate_pdf(
     number: 42
   }
 )
+
+# {
+#   status: "success",
+#   submission: {
+#     id: "bymRSZYTKDnd6jfY",
+#     test: true,
+#     state: "processed",
+#     download_url: "https://..."
+#   }
+# }
 ```
 
 This submits a PDF request and waits for the job to finish.
