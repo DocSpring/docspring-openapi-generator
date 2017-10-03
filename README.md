@@ -35,15 +35,14 @@ end
 formapi = FormAPI::Client.new
 
 response = formapi.generate_pdf(
-  template_id:      '<TEMPLATE_ID>',   # ID of a template that you have configured
-  test:             true,              # Test documents are free but watermarked
-  template_data: {                     # Data to fill in the template
+  template_id: 'YOUR_TEMPLATE_ID',   # ID of a template that you have configured
+  test: true,                        # Test documents are free but watermarked
+  wait: true,                        # Wait for the PDF to be processed   (default: true)
+  data: {                            # Data to render in the template
     name: "foo",
     number: 42
   }
 )
-
-
 ```
 
 This submits a PDF request and waits for the job to finish.

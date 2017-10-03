@@ -8,6 +8,8 @@
 require "bundler/setup"
 Bundler.require
 
+# This is a real test API token and template on formapi.io
+# -------------------------------------------------------------
 API_TOKEN_ID = 'yRaaR9JmTPtGX7EN'
 API_TOKEN_SECRET = 'IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec'
 TEMPLATE_ID = '6zz3dYRYM67fxMXA'
