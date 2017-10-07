@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.name        = "form_api"
   s.version     = FormAPI::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Form Services Ltd."]
+  s.authors     = ["Form Applications Inc."]
   s.email       = ["support@formapi.io"]
   s.homepage    = "https://github.com/FormAPI/formapi-ruby"
   s.summary     = "A client library for the FormAPI PDF generation service"

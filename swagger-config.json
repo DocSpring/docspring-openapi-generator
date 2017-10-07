@@ -1,8 +1,8 @@
 {
     "gemName": "form_api",
     "moduleName": "FormAPI",
-    "gemVersion": "0.1.2",
-    "gemAuthor": "Form Services Ltd.",
+    "gemVersion": "0.1.3",
+    "gemAuthor": "Form Applications Inc.",
     "gemAuthorEmail": "support@formapi.io",
     "gemHomepage": "https://github.com/FormAPI/formapi-ruby",
     "gemSummary": "A client library for the FormAPI PDF generation service",
