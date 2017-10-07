@@ -14,7 +14,7 @@ require 'date'
 
 module FormAPI
 
-  class InlineResponse401
+  class InlineResponse400
     attr_accessor :status
 
     attr_accessor :error

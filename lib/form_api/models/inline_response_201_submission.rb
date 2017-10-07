@@ -19,7 +19,13 @@ module FormAPI
 
     attr_accessor :test
 
+    attr_accessor :expired
+
+    attr_accessor :expires_at
+
     attr_accessor :state
+
+    attr_accessor :metadata
 
     attr_accessor :download_url
 
@@ -50,7 +56,10 @@ module FormAPI
       {
         :'id' => :'id',
         :'test' => :'test',
+        :'expired' => :'expired',
+        :'expires_at' => :'expires_at',
         :'state' => :'state',
+        :'metadata' => :'metadata',
         :'download_url' => :'download_url'
       }
     end
@@ -60,7 +69,10 @@ module FormAPI
       {
         :'id' => :'String',
         :'test' => :'BOOLEAN',
+        :'expired' => :'BOOLEAN',
+        :'expires_at' => :'String',
         :'state' => :'String',
+        :'metadata' => :'Object',
         :'download_url' => :'String'
       }
     end
@@ -81,8 +93,20 @@ module FormAPI
         self.test = attributes[:'test']
       end
 
+      if attributes.has_key?(:'expired')
+        self.expired = attributes[:'expired']
+      end
+
+      if attributes.has_key?(:'expires_at')
+        self.expires_at = attributes[:'expires_at']
+      end
+
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
       if attributes.has_key?(:'download_url')
@@ -99,6 +123,18 @@ module FormAPI
         invalid_properties.push("invalid value for 'id', id cannot be nil.")
       end
 
+      if @test.nil?
+        invalid_properties.push("invalid value for 'test', test cannot be nil.")
+      end
+
+      if @expired.nil?
+        invalid_properties.push("invalid value for 'expired', expired cannot be nil.")
+      end
+
+      if @expires_at.nil?
+        invalid_properties.push("invalid value for 'expires_at', expires_at cannot be nil.")
+      end
+
       if @state.nil?
         invalid_properties.push("invalid value for 'state', state cannot be nil.")
       end
@@ -110,6 +146,9 @@ module FormAPI
     # @return true if the model is valid
     def valid?
       return false if @id.nil?
+      return false if @test.nil?
+      return false if @expired.nil?
+      return false if @expires_at.nil?
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ["pending", "processed", "invalid_data", "error", "image_download_failed", "image_processing_failed"])
       return false unless state_validator.valid?(@state)
@@ -133,7 +172,10 @@ module FormAPI
       self.class == o.class &&
           id == o.id &&
           test == o.test &&
+          expired == o.expired &&
+          expires_at == o.expires_at &&
           state == o.state &&
+          metadata == o.metadata &&
           download_url == o.download_url
     end
 
@@ -146,7 +188,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, test, state, download_url].hash
+      [id, test, expired, expires_at, state, metadata, download_url].hash
     end
 
     # Builds the object from hash

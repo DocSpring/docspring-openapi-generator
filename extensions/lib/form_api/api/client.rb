@@ -22,6 +22,9 @@ module FormAPI
 
       # FormAPI requires a nested :data object.
       opts[:data] = { data: opts.delete(:data) }
+      if opts[:metadata]
+        opts[:data][:metadata] = opts.delete(:metadata)
+      end
 
       template_id = opts.delete :template_id
       response = super(template_id, opts)
@@ -46,19 +49,6 @@ module FormAPI
         status: submission.state == 'processed' ? 'success' : 'error',
         submission: submission
       )
-    end
-
-    def generate_and_download_pdf(opts = {})
-      filename = opts.delete :filename
-
-      response = generate_pdf(opts.merge(wait: true))
-      submission = response.submission
-
-      pdf_response = Typhoeus.get(submission.download_url, followlocation: true)
-
-      File.open(filename, 'wb') { |f| f.write pdf_response.body }
-
-      response
     end
   end
 end

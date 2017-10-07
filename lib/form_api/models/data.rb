@@ -19,12 +19,15 @@ module FormAPI
 
     attr_accessor :data
 
+    attr_accessor :metadata
+
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'test' => :'test',
-        :'data' => :'data'
+        :'data' => :'data',
+        :'metadata' => :'metadata'
       }
     end
 
@@ -32,7 +35,8 @@ module FormAPI
     def self.swagger_types
       {
         :'test' => :'BOOLEAN',
-        :'data' => :'Object'
+        :'data' => :'Object',
+        :'metadata' => :'Object'
       }
     end
 
@@ -50,6 +54,10 @@ module FormAPI
 
       if attributes.has_key?(:'data')
         self.data = attributes[:'data']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
 
     end
@@ -78,7 +86,8 @@ module FormAPI
       return true if self.equal?(o)
       self.class == o.class &&
           test == o.test &&
-          data == o.data
+          data == o.data &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -90,7 +99,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [test, data].hash
+      [test, data, metadata].hash
     end
 
     # Builds the object from hash
