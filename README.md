@@ -24,7 +24,7 @@ bundle install
 
 ## Usage
 
-See [examples](examples/) for runnable examples.
+See [examples](examples/) for some runnable examples.
 
 ```ruby
 FormAPI.configure do |config|
@@ -41,6 +41,9 @@ response = formapi.generate_pdf(
   data: {                            # Data to render in the template
     name: "foo",
     number: 42
+  },
+  metadata: {                        # Custom data to include in the request, for your own purposes
+    user_id: 123
   }
 )
 
