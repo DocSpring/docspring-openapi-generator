@@ -14,10 +14,20 @@ require 'date'
 
 module FormAPI
 
-  class InlineResponse201
-    attr_accessor :status
+  class InlineResponse201CombinedSubmission
+    attr_accessor :id
 
-    attr_accessor :combined_submission
+    attr_accessor :expired
+
+    attr_accessor :expires_at
+
+    attr_accessor :state
+
+    attr_accessor :metadata
+
+    attr_accessor :submission_ids
+
+    attr_accessor :download_url
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -44,16 +54,26 @@ module FormAPI
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'combined_submission' => :'combined_submission'
+        :'id' => :'id',
+        :'expired' => :'expired',
+        :'expires_at' => :'expires_at',
+        :'state' => :'state',
+        :'metadata' => :'metadata',
+        :'submission_ids' => :'submission_ids',
+        :'download_url' => :'download_url'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'status' => :'String',
-        :'combined_submission' => :'InlineResponse201CombinedSubmission'
+        :'id' => :'String',
+        :'expired' => :'BOOLEAN',
+        :'expires_at' => :'String',
+        :'state' => :'String',
+        :'metadata' => :'Object',
+        :'submission_ids' => :'Array<String>',
+        :'download_url' => :'String'
       }
     end
 
@@ -65,12 +85,34 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'combined_submission')
-        self.combined_submission = attributes[:'combined_submission']
+      if attributes.has_key?(:'expired')
+        self.expired = attributes[:'expired']
+      end
+
+      if attributes.has_key?(:'expires_at')
+        self.expires_at = attributes[:'expires_at']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'submission_ids')
+        if (value = attributes[:'submission_ids']).is_a?(Array)
+          self.submission_ids = value
+        end
+      end
+
+      if attributes.has_key?(:'download_url')
+        self.download_url = attributes[:'download_url']
       end
 
     end
@@ -79,8 +121,20 @@ module FormAPI
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @status.nil?
-        invalid_properties.push("invalid value for 'status', status cannot be nil.")
+      if @id.nil?
+        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+      end
+
+      if @expired.nil?
+        invalid_properties.push("invalid value for 'expired', expired cannot be nil.")
+      end
+
+      if @state.nil?
+        invalid_properties.push("invalid value for 'state', state cannot be nil.")
+      end
+
+      if @submission_ids.nil?
+        invalid_properties.push("invalid value for 'submission_ids', submission_ids cannot be nil.")
       end
 
       return invalid_properties
@@ -89,20 +143,23 @@ module FormAPI
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @status.nil?
-      status_validator = EnumAttributeValidator.new('String', ["success", "error"])
-      return false unless status_validator.valid?(@status)
+      return false if @id.nil?
+      return false if @expired.nil?
+      return false if @state.nil?
+      state_validator = EnumAttributeValidator.new('String', ["pending", "processed", "error"])
+      return false unless state_validator.valid?(@state)
+      return false if @submission_ids.nil?
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ["success", "error"])
-      unless validator.valid?(status)
-        fail ArgumentError, "invalid value for 'status', must be one of #{validator.allowable_values}."
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ["pending", "processed", "error"])
+      unless validator.valid?(state)
+        fail ArgumentError, "invalid value for 'state', must be one of #{validator.allowable_values}."
       end
-      @status = status
+      @state = state
     end
 
     # Checks equality by comparing each attribute.
@@ -110,8 +167,13 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          combined_submission == o.combined_submission
+          id == o.id &&
+          expired == o.expired &&
+          expires_at == o.expires_at &&
+          state == o.state &&
+          metadata == o.metadata &&
+          submission_ids == o.submission_ids &&
+          download_url == o.download_url
     end
 
     # @see the `==` method
@@ -123,7 +185,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [status, combined_submission].hash
+      [id, expired, expires_at, state, metadata, submission_ids, download_url].hash
     end
 
     # Builds the object from hash

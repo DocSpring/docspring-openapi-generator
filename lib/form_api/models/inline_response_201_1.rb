@@ -14,10 +14,10 @@ require 'date'
 
 module FormAPI
 
-  class InlineResponse201
+  class InlineResponse2011
     attr_accessor :status
 
-    attr_accessor :combined_submission
+    attr_accessor :submission
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -45,7 +45,7 @@ module FormAPI
     def self.attribute_map
       {
         :'status' => :'status',
-        :'combined_submission' => :'combined_submission'
+        :'submission' => :'submission'
       }
     end
 
@@ -53,7 +53,7 @@ module FormAPI
     def self.swagger_types
       {
         :'status' => :'String',
-        :'combined_submission' => :'InlineResponse201CombinedSubmission'
+        :'submission' => :'InlineResponse2011Submission'
       }
     end
 
@@ -69,8 +69,8 @@ module FormAPI
         self.status = attributes[:'status']
       end
 
-      if attributes.has_key?(:'combined_submission')
-        self.combined_submission = attributes[:'combined_submission']
+      if attributes.has_key?(:'submission')
+        self.submission = attributes[:'submission']
       end
 
     end
@@ -111,7 +111,7 @@ module FormAPI
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
-          combined_submission == o.combined_submission
+          submission == o.submission
     end
 
     # @see the `==` method
@@ -123,7 +123,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [status, combined_submission].hash
+      [status, submission].hash
     end
 
     # Builds the object from hash

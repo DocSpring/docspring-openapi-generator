@@ -12,7 +12,7 @@ module FormAPI
 
     def generate_pdf(opts = {})
       unless opts[:data].kind_of?(::Hash)
-        raise InvalidDataError, ":data is required, and must be a Hash."
+        raise InvalidDataError, "data is required, and must be a Hash."
       end
 
       # Wait for job to finish by default.
@@ -45,9 +45,53 @@ module FormAPI
         end
       end
 
-      return InlineResponse201.new(
+      return InlineResponse2011.new(
         status: submission.state == 'processed' ? 'success' : 'error',
         submission: submission
+      )
+    end
+
+
+    def combine_submissions(opts = {})
+      unless opts[:submission_ids].kind_of?(::Array)
+        raise InvalidDataError, "submission_ids is required, and must be an Array."
+      end
+
+      # Wait for job to finish by default.
+      if !opts.has_key?(:wait)
+        opts[:wait] = true
+      end
+
+      # FormAPI requires a nested :data object.
+      opts[:data] = { submission_ids: opts.delete(:submission_ids) }
+      if opts[:metadata]
+        opts[:data][:metadata] = opts.delete(:metadata)
+      end
+      if opts[:expire_in]
+        opts[:data][:expire_in] = opts.delete(:expire_in)
+      end
+
+      response = super(opts)
+
+      return response unless opts[:wait]
+
+      combined_submission = response.combined_submission
+      timeout = opts[:timeout] || 60
+      start_time = Time.now
+
+      # Wait for submission to be ready
+      while combined_submission.state != 'processed'
+        sleep 1
+        combined_submission = get_combined_submission(combined_submission.id)
+
+        if Time.now - start_time > timeout
+          raise PollTimeoutError, "Merged PDF was not ready after #{timeout} seconds!"
+        end
+      end
+
+      return InlineResponse201.new(
+        status: combined_submission.state == 'processed' ? 'success' : 'error',
+        combined_submission: combined_submission
       )
     end
   end

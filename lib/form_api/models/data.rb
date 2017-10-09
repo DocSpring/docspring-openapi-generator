@@ -17,17 +17,20 @@ module FormAPI
   class Data
     attr_accessor :test
 
-    attr_accessor :data
+    attr_accessor :submission_ids
 
     attr_accessor :metadata
+
+    attr_accessor :expires_in
 
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'test' => :'test',
-        :'data' => :'data',
-        :'metadata' => :'metadata'
+        :'submission_ids' => :'submission_ids',
+        :'metadata' => :'metadata',
+        :'expires_in' => :'expires_in'
       }
     end
 
@@ -35,8 +38,9 @@ module FormAPI
     def self.swagger_types
       {
         :'test' => :'BOOLEAN',
-        :'data' => :'Object',
-        :'metadata' => :'Object'
+        :'submission_ids' => :'Array<String>',
+        :'metadata' => :'Object',
+        :'expires_in' => :'Float'
       }
     end
 
@@ -52,12 +56,18 @@ module FormAPI
         self.test = attributes[:'test']
       end
 
-      if attributes.has_key?(:'data')
-        self.data = attributes[:'data']
+      if attributes.has_key?(:'submission_ids')
+        if (value = attributes[:'submission_ids']).is_a?(Array)
+          self.submission_ids = value
+        end
       end
 
       if attributes.has_key?(:'metadata')
         self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'expires_in')
+        self.expires_in = attributes[:'expires_in']
       end
 
     end
@@ -66,8 +76,8 @@ module FormAPI
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @data.nil?
-        invalid_properties.push("invalid value for 'data', data cannot be nil.")
+      if @submission_ids.nil?
+        invalid_properties.push("invalid value for 'submission_ids', submission_ids cannot be nil.")
       end
 
       return invalid_properties
@@ -76,7 +86,7 @@ module FormAPI
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @data.nil?
+      return false if @submission_ids.nil?
       return true
     end
 
@@ -86,8 +96,9 @@ module FormAPI
       return true if self.equal?(o)
       self.class == o.class &&
           test == o.test &&
-          data == o.data &&
-          metadata == o.metadata
+          submission_ids == o.submission_ids &&
+          metadata == o.metadata &&
+          expires_in == o.expires_in
     end
 
     # @see the `==` method
@@ -99,7 +110,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [test, data, metadata].hash
+      [test, submission_ids, metadata, expires_in].hash
     end
 
     # Builds the object from hash
