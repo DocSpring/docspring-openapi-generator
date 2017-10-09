@@ -36,7 +36,7 @@ module FormAPI
       start_time = Time.now
 
       # Wait for submission to be ready
-      while submission.state != 'processed'
+      while submission.state == 'pending'
         sleep 1
         submission = get_submission(submission.id)
 
@@ -80,7 +80,7 @@ module FormAPI
       start_time = Time.now
 
       # Wait for submission to be ready
-      while combined_submission.state != 'processed'
+      while combined_submission.state == 'pending'
         sleep 1
         combined_submission = get_combined_submission(combined_submission.id)
 
