@@ -28,7 +28,6 @@ begin
 
   response = formapi.generate_pdf(
     template_id: TEMPLATE_ID,
-    filename: PDF_FILENAME,
     data: {
       first_name: 'John',
       last_name: 'Smith',

@@ -41,6 +41,7 @@ Gem::Specification.new do |s|
   # added by script/fix_gemspec.rb.
   s.add_development_dependency 'rake', '~>11.2', '>= 11.2.2'
   s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
+  s.add_development_dependency 'pry-byebug'
   # </added> : if the above lines are missing in the gemspec, then
   # the matcher for autotest is probably broken
 
