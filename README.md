@@ -8,7 +8,7 @@ then post data to fill out the PDF.
 
 ## Supported Ruby Versions
 
-The `form_api` gem supports Ruby >= `1.9.3`. We run our CI tests on:
+The `form_api` gem supports Ruby >= `1.9.3`. We run our tests with the following Ruby versions:
 
 * `1.9.3`
 * `2.1.10`
