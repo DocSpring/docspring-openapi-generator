@@ -42,7 +42,7 @@ describe 'InlineResponse201' do
     end
   end
 
-  describe 'test attribute "submission"' do
+  describe 'test attribute "combined_submission"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

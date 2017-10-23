@@ -32,25 +32,73 @@ describe 'PDFApi' do
     end
   end
 
+  # unit tests for combine_submissions
+  # Merge generated PDFs together
+  # 
+  # @param [Hash] opts the optional parameters
+  # @option opts [Data] :data 
+  # @return [InlineResponse201]
+  describe 'combine_submissions test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for expire_combined_submission
+  # Expire a combined submission
+  # 
+  # @param combined_submission_id 
+  # @param [Hash] opts the optional parameters
+  # @return [InlineResponse201CombinedSubmission]
+  describe 'expire_combined_submission test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for expire_submission
+  # Expire a PDF submission
+  # 
+  # @param submission_id 
+  # @param [Hash] opts the optional parameters
+  # @return [InlineResponse2011Submission]
+  describe 'expire_submission test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for generate_pdf
   # Generates a new PDF
   # 
   # @param template_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Data] :data 
-  # @return [InlineResponse201]
+  # @option opts [Data1] :data 
+  # @return [InlineResponse2011]
   describe 'generate_pdf test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
+  # unit tests for get_combined_submission
+  # Check the status of a combined submission (merged PDFs)
+  # 
+  # @param combined_submission_id 
+  # @param [Hash] opts the optional parameters
+  # @return [InlineResponse201CombinedSubmission]
+  describe 'get_combined_submission test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_submission
-  # Check the status of a PDF request
+  # Check the status of a PDF
   # 
   # @param submission_id 
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse201Submission]
+  # @return [InlineResponse2011Submission]
   describe 'get_submission test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

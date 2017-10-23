@@ -32,16 +32,6 @@ describe 'InlineResponse401' do
       expect(@instance).to be_instance_of(FormAPI::InlineResponse401)
     end
   end
-  describe 'test attribute "status"' do
-    it 'should work' do
-       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-       #validator = Petstore::EnumTest::EnumAttributeValidator.new('String', ["error"])
-       #validator.allowable_values.each do |value|
-       #  expect { @instance.status = value }.not_to raise_error
-       #end
-    end
-  end
-
   describe 'test attribute "error"' do
     it 'should work' do
        # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
