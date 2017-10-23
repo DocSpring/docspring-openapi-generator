@@ -1,5 +1,7 @@
 # FormAPI Ruby Client
 
+[![Build Status](https://travis-ci.org/FormAPI/formapi-ruby.svg?branch=master)](https://travis-ci.org/FormAPI/formapi-ruby)
+
 This is a Ruby gem for using [FormAPI](https://formapi.io) to generate PDF documents from configured templates.
 
 ## Supported Ruby Versions
