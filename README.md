@@ -2,6 +2,13 @@
 
 This is a Ruby gem for using [FormAPI](https://formapi.io) to generate PDF documents from configured templates.
 
+## Supported Ruby Versions
+
+The `form_api` gem supports Ruby >= `1.9.3`. We run our CI tests on:
+
+* `1.9.3`
+* `2.1.10`
+* `2.4.2`
 
 ## Installation
 

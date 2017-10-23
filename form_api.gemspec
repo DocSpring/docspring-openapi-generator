@@ -33,6 +33,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
   s.add_development_dependency 'vcr', '~> 3.0', '>= 3.0.1'
   s.add_development_dependency 'webmock', '~> 1.24', '>= 1.24.3'
+  # This version of addressable is required for Ruby 1.9.3 support
+  s.add_development_dependency 'addressable',  '~> 2.4.0'
   s.add_development_dependency 'autotest', '~> 4.4', '>= 4.4.6'
   s.add_development_dependency 'autotest-rails-pure', '~> 4.1', '>= 4.1.2'
   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
@@ -40,8 +42,12 @@ Gem::Specification.new do |s|
 
   # added by script/fix_gemspec.rb.
   s.add_development_dependency 'rake', '~>11.2', '>= 11.2.2'
-  s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
-  s.add_development_dependency 'pry-byebug'
+  if RUBY_VERSION >= '2.2.0'
+    s.add_development_dependency 'pry-byebug'
+  else
+    s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
+  end
+
   # </added> : if the above lines are missing in the gemspec, then
   # the matcher for autotest is probably broken
 
