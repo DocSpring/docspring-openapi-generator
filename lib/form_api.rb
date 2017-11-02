@@ -19,6 +19,7 @@ require 'form_api/configuration'
 # Models
 require 'form_api/models/data'
 require 'form_api/models/data_1'
+require 'form_api/models/inline_response_200'
 require 'form_api/models/inline_response_201'
 require 'form_api/models/inline_response_201_1'
 require 'form_api/models/inline_response_201_1_submission'
