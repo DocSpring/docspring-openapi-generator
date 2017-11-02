@@ -21,7 +21,7 @@
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
-Gemfile.lock
+#Gemfile.lock
 .ruby-version
 .ruby-gemset
 .rvmrc
