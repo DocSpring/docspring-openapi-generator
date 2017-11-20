@@ -45,6 +45,7 @@ end
 
 formapi = FormAPI::Client.new
 
+
 response = formapi.generate_pdf(
   template_id: 'YOUR_TEMPLATE_ID',   # ID of a template that you have configured
   test: true,                        # Test documents are free but watermarked
