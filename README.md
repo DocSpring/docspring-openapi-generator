@@ -1,5 +1,9 @@
 # FormAPI Ruby Client
 
+**NOTE**: We've moved all clients to a single repo: [https://github.com/FormAPI/formapi-swagger-codegen]
+
+---------------------------------------------
+
 [![Build Status](https://travis-ci.org/FormAPI/formapi-ruby.svg?branch=master)](https://travis-ci.org/FormAPI/formapi-ruby)
 
 The `form_api` gem is an API client library for [FormAPI](https://formapi.io).
