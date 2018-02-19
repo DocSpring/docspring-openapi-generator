@@ -1,23 +1,104 @@
-# FormAPI API Clients
+# FormAPI Ruby Client
 
-FormAPI is a service that makes it easy to generate PDFs.
-Simply configure your PDF template in our web-based editor,
-post JSON data to fill out the fields, then download your generated PDF.
+The `form_api` gem is an API client library for [FormAPI](https://formapi.io).
+You can use FormAPI to generate PDFs. Configure your PDF template in our online editor,
+then post data to fill out the PDF.
 
-FormAPI uses [swagger-codegen](https://github.com/swagger-api/swagger-codegen) to generate
-API clients for many different programming languages.
+## Supported Ruby Versions
 
-This repo contains a `README` for each language, which incudes installation and usage instructions:
+The `form_api` gem supports Ruby >= `1.9.3`. We run our tests with the following Ruby versions:
 
-* [Ruby](./README.ruby.md)
-* [Python](./README.python.md)
-* [Java](./README.java.md)
-* [PHP](./README.php.md)
-* [JavaScript](./README.js.md)
+* `1.9.3`
+* `2.1.10`
+* `2.4.2`
+
+## Installation
+
+```bash
+gem install form_api
+```
+
+Or add the following to your `Gemfile`.
+
+```ruby
+gem "form_api"
+```
+
+Then run:
+
+```bash
+bundle install
+```
+
+
+## Usage
+
+See [examples](examples/) for some runnable examples.
+
+```ruby
+FormAPI.configure do |config|
+  config.username = "YOUR_API_TOKEN_ID"
+  config.password = "YOUR_API_TOKEN_SECRET"
+end
+
+formapi = FormAPI::Client.new
+
+
+response = formapi.generate_pdf(
+  template_id: 'YOUR_TEMPLATE_ID',   # ID of a template that you have configured
+  test: true,                        # Test documents are free but watermarked
+  wait: true,                        # Wait for the PDF to be processed   (default: true)
+  data: {                            # Data to render in the template
+    name: "foo",
+    number: 42
+  },
+  metadata: {                        # Custom data to include in the request, for your own purposes
+    user_id: 123
+  }
+)
+
+# {
+#   status: "success",
+#   submission: {
+#     id: "bymRSZYTKDnd6jfY",
+#     test: true,
+#     state: "processed",
+#     download_url: "https://..."
+#   }
+# }
+```
+
+This submits a PDF request and waits for the job to finish.
 
 
 ## More Help
 
-See the [FormAPI documentation](https://formapi.io/docs) for more information about FormAPI.
+See the [FormAPI documentation](https://formapi.io/docs) for more information.
 
-Feel free to [send us an email](mailto:support@formapi.io) if you need any help.
+Please [email us](mailto:support@formapi.io) if you need any help.
+
+
+## Development
+
+The majority of the code in this repo is generated using swagger-codegen.
+You can modify this file and regenerate the client using `scripts/generate`.
+
+
+## Release Process
+
+1. Pull latest master
+2. Merge feature branch(es) into master
+3. `script/test`
+4. Increment version in code:
+  - `swagger-config.json`
+  - `lib/formapi/version.rb`
+5. Update [CHANGELOG.md](CHANGELOG.md)
+6. Commit "Release version vX.Y.Z"
+7. `rake release`
+8. Verify package release at https://rubygems.org/gems/formapi
+9. Refresh documentation on formapi.io
+
+
+## Version Policy
+
+This library follows [Semantic Versioning 2.0.0](http://semver.org).

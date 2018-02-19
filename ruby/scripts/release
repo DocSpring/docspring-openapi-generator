@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-
-rm -f form_api-*.gem
-gem build form_api.gemspec
-gem push form_api-*.gem

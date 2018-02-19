@@ -1,0 +1,8 @@
+{
+  "modelPackage": "io.formapi",
+  "invokerPackage": "io.formapi",
+  "apiPackage": "io.formapi",
+  "groupId": "io.formapi",
+  "artifactId": "formapi",
+  "artifactVersion": "1.0.0"
+}

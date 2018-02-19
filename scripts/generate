@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+cd "$(dirname "$0")/.."
+
+LANGUAGE="$1"
+CONFIG_FILE="swagger-config.$LANGUAGE.json"
+
+if [ ! -f "$CONFIG_FILE" ]; then
+  echo "Could not find $CONFIG_FILE"
+  ./swagger config-help -l "$LANGUAGE"
+  exit 1
+fi
+
+if [ -f "./scripts/$LANGUAGE/clean" ]; then
+  ./scripts/$LANGUAGE/clean
+fi
+
+./scripts/swagger generate \
+  -i ../form_api/swagger/v1/swagger.json \
+  -l "$LANGUAGE" \
+  -c "$CONFIG_FILE" \
+  -o "build/$LANGUAGE"
+
+# call a generator cleanup script
+./scripts/$LANGUAGE/post_generate
