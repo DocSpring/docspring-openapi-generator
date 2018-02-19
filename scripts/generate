@@ -11,15 +11,12 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
-if [ -f "./scripts/$LANGUAGE/clean" ]; then
-  ./scripts/$LANGUAGE/clean
-fi
-
 ./scripts/swagger generate \
   -i ../form_api/swagger/v1/swagger.json \
   -l "$LANGUAGE" \
   -c "$CONFIG_FILE" \
-  -o "build/$LANGUAGE"
+  -o "clients/$LANGUAGE"
 
-# call a generator cleanup script
-./scripts/$LANGUAGE/post_generate
+if [ -f "./scripts/$LANGUAGE/post_generate" ]; then
+  ./scripts/$LANGUAGE/post_generate
+fi

@@ -20,3 +20,7 @@ Thumbs.db
 
 ## Ignore baked in swagger generator
 swagger-codegen
+
+
+clients/python/test/venv-2/
+clients/python/test/venv-3/

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+cd "`dirname \"$0\"`/../../clients/python"
+
+rm -rf build dist
+
+./scripts/build
+
+twine upload dist/*
