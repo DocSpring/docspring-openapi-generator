@@ -5,6 +5,13 @@ cd "$(dirname "$0")/.."
 LANGUAGE="$1"
 CONFIG_FILE="swagger-config.$LANGUAGE.json"
 
+if [ -z "$LANGUAGE" ]; then
+  for LANG in ruby python java php javascript; do   # go rust elixir swift4 objc
+    ./scripts/generate "$LANG"
+  done
+  exit
+fi
+
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Could not find $CONFIG_FILE"
   ./swagger config-help -l "$LANGUAGE"

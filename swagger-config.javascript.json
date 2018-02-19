@@ -1,0 +1,7 @@
+{
+  "projectName": "formapi",
+  "moduleName": "formapi",
+  "projectVersion": "1.0.0",
+  "projectLicenseName": "Apache-2.0",
+  "projectDescription": "An API client for the FormAPI PDF generation service"
+}

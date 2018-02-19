@@ -1,0 +1,9 @@
+{
+  "modelPackage": "FormAPI",
+  "apiPackage": "FormAPI",
+  "invokerPackage": "FormAPI",
+  "packagePath": ".",
+  "composerVendorName": "formapi",
+  "composerProjectName": "formapi",
+  "artifactVersion": "1.0.0"
+}

@@ -9,11 +9,16 @@ API clients for many different programming languages.
 
 This repo contains a `README` for each language, which incudes installation and usage instructions:
 
-* [Ruby](./ruby/README.md)
-* [Python](./python/README.md)
-* [Java](./java/README.md)
-* [PHP](./php/README.md)
-* [JavaScript](./javascript/README.md)
+* [Ruby](./README.ruby.md)
+* [Python](./README.python.md)
+* [Java](./README.java.md)
+* [PHP](./README.php.md)
+* [JavaScript](./README.javascript.md)
+<!-- * [Go](./README.go.md)
+* [Rust](./README.rust.md)
+* [Elixir](./README.go.md)
+* [Swift](./README.swift4.md)
+* [Objective-C](./README.objc.md) -->
 
 
 ## More Help
