@@ -1,6 +1,6 @@
 # FormAPI Ruby Client
 
-**NOTE**: We've moved all clients to a single repo: [https://github.com/FormAPI/formapi-swagger-codegen]
+**NOTE**: We've moved all clients to a single repo: [formapi-swagger-codegen](https://github.com/FormAPI/formapi-swagger-codegen)
 
 ---------------------------------------------
 
