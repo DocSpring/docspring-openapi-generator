@@ -24,3 +24,6 @@ swagger-codegen
 
 clients/python/test/venv-2/
 clients/python/test/venv-3/
+
+# Ignore PHP libraries
+clients/php/vendor

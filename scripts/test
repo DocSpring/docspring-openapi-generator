@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+cd "$(dirname "$0")/.."
+
+LANGUAGE="$1"
+
+if [ -z "$LANGUAGE" ]; then
+  for LANG in ruby python java php javascript; do # go rust elixir swift4 objc
+    echo "Running $LANG tests..."
+    $0 $LANG
+  done
+  exit
+fi
+
+if [ -f "./scripts/$LANGUAGE/test" ]; then
+  ./scripts/$LANGUAGE/test
+else
+  echo "No tests for $LANGUAGE!"
+fi

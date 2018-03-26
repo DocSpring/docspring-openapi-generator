@@ -9,6 +9,7 @@ echo "Fixing gemspec to work around swagger..."
 ruby ../../scripts/ruby/fix_gemspec.rb
 
 echo "Installing extensions..."
+rm -rf extensions
 cp -R ../../extensions/ruby extensions
 sed -i "s/require 'form_api\/api\/pdf_api'/\
 require File.join(File.dirname(__FILE__), '..\/extensions\/lib\/form_api\/api\/client')/" \

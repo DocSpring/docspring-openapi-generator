@@ -6,11 +6,15 @@ LANGUAGE="$1"
 CONFIG_FILE="swagger-config.$LANGUAGE.json"
 
 if [ -z "$LANGUAGE" ]; then
-  for LANG in ruby python java php javascript; do   # go rust elixir swift4 objc
+  for LANG in ruby python java php javascript; do # go rust elixir swift4 objc
+    echo "Generating $LANG client library..."
     ./scripts/generate "$LANG"
   done
   exit
 fi
+
+mkdir -p "examples/$LANGUAGE"
+mkdir -p "scripts/$LANGUAGE"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Could not find $CONFIG_FILE"

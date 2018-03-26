@@ -1,0 +1,2 @@
+#!/bin/sh
+ruby ../../scripts/php/update_composer_json.rb

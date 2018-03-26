@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 bad_files       = %q{s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }}
 bad_test_files  = %q{s.test_files    = `find spec/*`.split("\n")}
 good_files      = %q{s.files         = `git ls-files`.split("\n").uniq.sort.select{|f| !f.empty? }}
