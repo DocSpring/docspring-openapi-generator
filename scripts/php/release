@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/../../clients/php"
+
+if ! git remote get-url origin > /dev/null 2>&1;
+  git remote add origin git@github.com:FormAPI/formapi-php.git
+fi
+
+git push origin master -f
