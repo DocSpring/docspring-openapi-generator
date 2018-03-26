@@ -1,26 +1,60 @@
-From 09c317cc50ae5466594206385b866a330331394a Mon Sep 17 00:00:00 2001
+From 57d03c7f1ac9af03dba02d95b14caafb27d0b814 Mon Sep 17 00:00:00 2001
 From: Nathan Broadbent <git@ndbroadbent.com>
-Date: Mon, 26 Mar 2018 15:53:58 +0700
-Subject: [PATCH] Ran post_generate script
+Date: Mon, 26 Mar 2018 15:55:06 +0700
+Subject: [PATCH] Applied patch
 
 ---
- extensions/lib/form_api/api/client.rb              |  98 ++++++++++++++++
  form_api.gemspec                                   |  10 +-
  lib/form_api.rb                                    |   2 +-
+ lib/form_api/api/client.rb                         |  98 ++++++++++++++++
  spec/api/client_spec.rb                            |  28 +++++
  spec/api/pdf_api_spec.rb                           |  11 --
  spec/spec_helper.rb                                |  11 ++
  ...and_wait_for_the_submission_to_be_processed.yml | 127 +++++++++++++++++++++
  7 files changed, 273 insertions(+), 14 deletions(-)
- create mode 100644 extensions/lib/form_api/api/client.rb
+ create mode 100644 lib/form_api/api/client.rb
  create mode 100644 spec/api/client_spec.rb
  create mode 100644 spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml
 
-diff --git a/extensions/lib/form_api/api/client.rb b/extensions/lib/form_api/api/client.rb
+diff --git a/form_api.gemspec b/form_api.gemspec
+index 06198b6..7b21872 100644
+--- a/form_api.gemspec
++++ b/form_api.gemspec
+@@ -38,8 +38,14 @@ Gem::Specification.new do |s|
+   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
+   s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.12'
+ 
+-  s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
+-  s.test_files    = `find spec/*`.split("\n")
++  # added by script/fix_gemspec.rb.
++  s.add_development_dependency 'rake', '~>11.2', '>= 11.2.2'
++  s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
++  # </added> : if the above lines are missing in the gemspec, then
++  # the matcher for autotest is probably broken
++
++  s.files         = `git ls-files`.split("\n").uniq.sort.select{|f| !f.empty? }
++  s.test_files    = `git ls-files spec test`.split("\n")
+   s.executables   = []
+   s.require_paths = ["lib"]
+ end
+diff --git a/lib/form_api.rb b/lib/form_api.rb
+index e931b76..cfa4828 100644
+--- a/lib/form_api.rb
++++ b/lib/form_api.rb
+@@ -29,7 +29,7 @@ require 'form_api/models/inline_response_401'
+ require 'form_api/models/inline_response_422'
+ 
+ # APIs
+-require 'form_api/api/pdf_api'
++require 'form_api/api/client'
+ 
+ module FormAPI
+   class << self
+diff --git a/lib/form_api/api/client.rb b/lib/form_api/api/client.rb
 new file mode 100644
 index 0000000..1e391fa
 --- /dev/null
-+++ b/extensions/lib/form_api/api/client.rb
++++ b/lib/form_api/api/client.rb
 @@ -0,0 +1,98 @@
 +require 'form_api/api/pdf_api'
 +
@@ -120,40 +154,6 @@ index 0000000..1e391fa
 +    end
 +  end
 +end
-diff --git a/form_api.gemspec b/form_api.gemspec
-index 06198b6..7b21872 100644
---- a/form_api.gemspec
-+++ b/form_api.gemspec
-@@ -38,8 +38,14 @@ Gem::Specification.new do |s|
-   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
-   s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.12'
- 
--  s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
--  s.test_files    = `find spec/*`.split("\n")
-+  # added by script/fix_gemspec.rb.
-+  s.add_development_dependency 'rake', '~>11.2', '>= 11.2.2'
-+  s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
-+  # </added> : if the above lines are missing in the gemspec, then
-+  # the matcher for autotest is probably broken
-+
-+  s.files         = `git ls-files`.split("\n").uniq.sort.select{|f| !f.empty? }
-+  s.test_files    = `git ls-files spec test`.split("\n")
-   s.executables   = []
-   s.require_paths = ["lib"]
- end
-diff --git a/lib/form_api.rb b/lib/form_api.rb
-index e931b76..bd16501 100644
---- a/lib/form_api.rb
-+++ b/lib/form_api.rb
-@@ -29,7 +29,7 @@ require 'form_api/models/inline_response_401'
- require 'form_api/models/inline_response_422'
- 
- # APIs
--require 'form_api/api/pdf_api'
-+require File.join(File.dirname(__FILE__), '../extensions/lib/form_api/api/client')
- 
- module FormAPI
-   class << self
 diff --git a/spec/api/client_spec.rb b/spec/api/client_spec.rb
 new file mode 100644
 index 0000000..a45bdb7

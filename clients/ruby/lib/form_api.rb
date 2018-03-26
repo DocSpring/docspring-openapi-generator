@@ -29,7 +29,7 @@ require 'form_api/models/inline_response_401'
 require 'form_api/models/inline_response_422'
 
 # APIs
-require File.join(File.dirname(__FILE__), '../extensions/lib/form_api/api/client')
+require 'form_api/api/client'
 
 module FormAPI
   class << self
