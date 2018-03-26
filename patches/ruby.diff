@@ -1,9 +1,10 @@
-From 57d03c7f1ac9af03dba02d95b14caafb27d0b814 Mon Sep 17 00:00:00 2001
+From 123af2ace68142f9de4cf08497f68bcd40f5898c Mon Sep 17 00:00:00 2001
 From: Nathan Broadbent <git@ndbroadbent.com>
 Date: Mon, 26 Mar 2018 15:55:06 +0700
 Subject: [PATCH] Applied patch
 
 ---
+ Gemfile.lock                                       |  75 ++++++++++++
  form_api.gemspec                                   |  10 +-
  lib/form_api.rb                                    |   2 +-
  lib/form_api/api/client.rb                         |  98 ++++++++++++++++
@@ -11,11 +12,93 @@ Subject: [PATCH] Applied patch
  spec/api/pdf_api_spec.rb                           |  11 --
  spec/spec_helper.rb                                |  11 ++
  ...and_wait_for_the_submission_to_be_processed.yml | 127 +++++++++++++++++++++
- 7 files changed, 273 insertions(+), 14 deletions(-)
+ 8 files changed, 348 insertions(+), 14 deletions(-)
+ create mode 100644 Gemfile.lock
  create mode 100644 lib/form_api/api/client.rb
  create mode 100644 spec/api/client_spec.rb
  create mode 100644 spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml
 
+diff --git a/Gemfile.lock b/Gemfile.lock
+new file mode 100644
+index 0000000..0ca19c1
+--- /dev/null
++++ b/Gemfile.lock
+@@ -0,0 +1,75 @@
++PATH
++  remote: .
++  specs:
++    form_api (0.1.5)
++      json (~> 2.1, >= 2.1.0)
++      typhoeus (~> 1.0, >= 1.0.1)
++
++GEM
++  remote: https://rubygems.org/
++  specs:
++    ZenTest (4.11.1)
++    addressable (2.5.2)
++      public_suffix (>= 2.0.2, < 4.0)
++    autotest (4.4.6)
++      ZenTest (>= 4.4.1)
++    autotest-fsevent (0.2.13)
++      sys-uname
++    autotest-growl (0.2.16)
++    autotest-rails-pure (4.1.2)
++    coderay (1.1.2)
++    crack (0.4.3)
++      safe_yaml (~> 1.0.0)
++    diff-lcs (1.3)
++    ethon (0.11.0)
++      ffi (>= 1.3.0)
++    ffi (1.9.23)
++    hashdiff (0.3.7)
++    json (2.1.0)
++    method_source (0.9.0)
++    pry (0.11.3)
++      coderay (~> 1.1.0)
++      method_source (~> 0.9.0)
++    public_suffix (3.0.2)
++    rake (12.0.0)
++    rspec (3.7.0)
++      rspec-core (~> 3.7.0)
++      rspec-expectations (~> 3.7.0)
++      rspec-mocks (~> 3.7.0)
++    rspec-core (3.7.1)
++      rspec-support (~> 3.7.0)
++    rspec-expectations (3.7.0)
++      diff-lcs (>= 1.2.0, < 2.0)
++      rspec-support (~> 3.7.0)
++    rspec-mocks (3.7.0)
++      diff-lcs (>= 1.2.0, < 2.0)
++      rspec-support (~> 3.7.0)
++    rspec-support (3.7.1)
++    safe_yaml (1.0.4)
++    sys-uname (1.0.3)
++      ffi (>= 1.0.0)
++    typhoeus (1.3.0)
++      ethon (>= 0.9.0)
++    vcr (3.0.3)
++    webmock (1.24.6)
++      addressable (>= 2.3.6)
++      crack (>= 0.3.2)
++      hashdiff
++
++PLATFORMS
++  ruby
++
++DEPENDENCIES
++  autotest (~> 4.4, >= 4.4.6)
++  autotest-fsevent (~> 0.2, >= 0.2.12)
++  autotest-growl (~> 0.2, >= 0.2.16)
++  autotest-rails-pure (~> 4.1, >= 4.1.2)
++  form_api!
++  pry (~> 0.10, >= 0.10.4)
++  rake (~> 12.0.0)
++  rspec (~> 3.6, >= 3.6.0)
++  vcr (~> 3.0, >= 3.0.1)
++  webmock (~> 1.24, >= 1.24.3)
++
++BUNDLED WITH
++   1.16.0.pre.2
 diff --git a/form_api.gemspec b/form_api.gemspec
 index 06198b6..7b21872 100644
 --- a/form_api.gemspec
