@@ -19,7 +19,7 @@ mkdir -p "scripts/$LANGUAGE"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Could not find $CONFIG_FILE"
-  ./swagger config-help -l "$LANGUAGE"
+  ./scripts/swagger config-help -l "$LANGUAGE"
   exit 1
 fi
 
