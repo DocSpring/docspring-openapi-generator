@@ -1,6 +1,4 @@
 {
-  "modelPackage": "FormAPI",
-  "apiPackage": "FormAPI",
   "invokerPackage": "FormAPI",
   "packagePath": ".",
   "composerVendorName": "formapi",

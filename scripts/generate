@@ -47,6 +47,10 @@ if [ -f "../../patches/$LANGUAGE.diff" ]; then
   git apply "../../patches/$LANGUAGE.diff"
   git add -A
   git commit -m "Applied patch"
+
+  if [ -f "../../scripts/$LANGUAGE/install_deps" ]; then
+    ../../scripts/$LANGUAGE/install_deps
+  fi
 elif [ -f "../../scripts/$LANGUAGE/post_generate" ]; then
   ../../scripts/$LANGUAGE/post_generate
   find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +

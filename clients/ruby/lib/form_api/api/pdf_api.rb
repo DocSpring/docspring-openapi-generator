@@ -23,7 +23,7 @@ module FormAPI
     # Merge generated PDFs together
     #
     # @param [Hash] opts the optional parameters
-    # @option opts [Data] :data
+    # @option opts [CreateCombinedSubmissionBody] :create_combined_submission_body
     # @return [InlineResponse201]
     def combine_submissions(opts = {})
       data, _status_code, _headers = combine_submissions_with_http_info(opts)
@@ -33,7 +33,7 @@ module FormAPI
     # Merge generated PDFs together
     #
     # @param [Hash] opts the optional parameters
-    # @option opts [Data] :data
+    # @option opts [CreateCombinedSubmissionBody] :create_combined_submission_body
     # @return [Array<(InlineResponse201, Fixnum, Hash)>] InlineResponse201 data, response status code and response headers
     def combine_submissions_with_http_info(opts = {})
       if @api_client.config.debugging
@@ -56,7 +56,7 @@ module FormAPI
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'data'])
+      post_body = @api_client.object_to_http_body(opts[:'create_combined_submission_body'])
       auth_names = ['basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -181,7 +181,7 @@ module FormAPI
     #
     # @param template_id
     # @param [Hash] opts the optional parameters
-    # @option opts [Data1] :data
+    # @option opts [CreateSubmissionBody] :create_submission_body
     # @return [InlineResponse2011]
     def generate_pdf(template_id, opts = {})
       data, _status_code, _headers = generate_pdf_with_http_info(template_id, opts)
@@ -192,7 +192,7 @@ module FormAPI
     #
     # @param template_id
     # @param [Hash] opts the optional parameters
-    # @option opts [Data1] :data
+    # @option opts [CreateSubmissionBody] :create_submission_body
     # @return [Array<(InlineResponse2011, Fixnum, Hash)>] InlineResponse2011 data, response status code and response headers
     def generate_pdf_with_http_info(template_id, opts = {})
       if @api_client.config.debugging
@@ -219,7 +219,7 @@ module FormAPI
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'data'])
+      post_body = @api_client.object_to_http_body(opts[:'create_submission_body'])
       auth_names = ['basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,

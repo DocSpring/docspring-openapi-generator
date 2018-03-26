@@ -36,7 +36,7 @@ describe 'PDFApi' do
   # Merge generated PDFs together
   #
   # @param [Hash] opts the optional parameters
-  # @option opts [Data] :data
+  # @option opts [CreateCombinedSubmissionBody] :create_combined_submission_body
   # @return [InlineResponse201]
   describe 'combine_submissions test' do
     it "should work" do
@@ -73,7 +73,7 @@ describe 'PDFApi' do
   #
   # @param template_id
   # @param [Hash] opts the optional parameters
-  # @option opts [Data1] :data
+  # @option opts [CreateSubmissionBody] :create_submission_body
   # @return [InlineResponse2011]
   describe 'generate_pdf test' do
     it "should work" do

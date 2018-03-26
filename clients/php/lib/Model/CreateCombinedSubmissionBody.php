@@ -1,6 +1,6 @@
 <?php
 /**
- * Data
+ * CreateCombinedSubmissionBody
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Model;
 
 use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * Data Class Doc Comment
+ * CreateCombinedSubmissionBody Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Data implements ModelInterface, ArrayAccess
+class CreateCombinedSubmissionBody implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class Data implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'data';
+    protected static $swaggerModelName = 'create_combined_submission_body';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

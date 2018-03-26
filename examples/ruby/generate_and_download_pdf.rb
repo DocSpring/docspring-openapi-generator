@@ -3,9 +3,9 @@
 # This example demonstrates generating a PDF from a preconfigured template,
 # and downloading the PDF to a local file.
 #
-# You can run this example with: ./examples/generate_and_download_pdf.rb
-Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
+# You can run this example with: ./examples/ruby/generate_and_download_pdf.rb
 
+Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
 require "bundler/setup"
 Bundler.require
 

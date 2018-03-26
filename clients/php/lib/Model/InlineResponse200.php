@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse422
+ * InlineResponse200
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Model;
 
 use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * InlineResponse422 Class Doc Comment
+ * InlineResponse200 Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse422 implements ModelInterface, ArrayAccess
+class InlineResponse200 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'inline_response_422';
+    protected static $swaggerModelName = 'inline_response_200';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,8 +56,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'status' => 'string',
-        'errors' => 'string[]'
+        'status' => 'string'
     ];
 
     /**
@@ -66,8 +65,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'status' => null,
-        'errors' => null
+        'status' => null
     ];
 
     /**
@@ -97,8 +95,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'status' => 'status',
-        'errors' => 'errors'
+        'status' => 'status'
     ];
 
     /**
@@ -107,8 +104,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'status' => 'setStatus',
-        'errors' => 'setErrors'
+        'status' => 'setStatus'
     ];
 
     /**
@@ -117,8 +113,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'status' => 'getStatus',
-        'errors' => 'getErrors'
+        'status' => 'getStatus'
     ];
 
     /**
@@ -162,7 +157,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const STATUS_ERROR = 'error';
+    const STATUS_SUCCESS = 'success';
 
 
 
@@ -174,7 +169,7 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
     public function getStatusAllowableValues()
     {
         return [
-            self::STATUS_ERROR,
+            self::STATUS_SUCCESS,
         ];
     }
 
@@ -195,7 +190,6 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
     }
 
     /**
@@ -218,9 +212,6 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
             );
         }
 
-        if ($this->container['errors'] === null) {
-            $invalidProperties[] = "'errors' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -238,9 +229,6 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
         }
         $allowedValues = $this->getStatusAllowableValues();
         if (!in_array($this->container['status'], $allowedValues)) {
-            return false;
-        }
-        if ($this->container['errors'] === null) {
             return false;
         }
         return true;
@@ -276,30 +264,6 @@ class InlineResponse422 implements ModelInterface, ArrayAccess
             );
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets errors
-     *
-     * @return string[]
-     */
-    public function getErrors()
-    {
-        return $this->container['errors'];
-    }
-
-    /**
-     * Sets errors
-     *
-     * @param string[] $errors errors
-     *
-     * @return $this
-     */
-    public function setErrors($errors)
-    {
-        $this->container['errors'] = $errors;
 
         return $this;
     }

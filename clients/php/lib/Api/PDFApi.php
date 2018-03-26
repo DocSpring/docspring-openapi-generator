@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -85,15 +85,15 @@ class PDFApi
      *
      * Merge generated PDFs together
      *
-     * @param  \FormAPI\FormAPI\Data $data data (optional)
+     * @param  \FormAPI\Model\CreateCombinedSubmissionBody $create_combined_submission_body create_combined_submission_body (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse201
+     * @return \FormAPI\Model\InlineResponse201
      */
-    public function combineSubmissions($data = null)
+    public function combineSubmissions($create_combined_submission_body = null)
     {
-        list($response) = $this->combineSubmissionsWithHttpInfo($data);
+        list($response) = $this->combineSubmissionsWithHttpInfo($create_combined_submission_body);
         return $response;
     }
 
@@ -102,16 +102,16 @@ class PDFApi
      *
      * Merge generated PDFs together
      *
-     * @param  \FormAPI\FormAPI\Data $data (optional)
+     * @param  \FormAPI\Model\CreateCombinedSubmissionBody $create_combined_submission_body (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse201, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse201, HTTP status code, HTTP response headers (array of strings)
      */
-    public function combineSubmissionsWithHttpInfo($data = null)
+    public function combineSubmissionsWithHttpInfo($create_combined_submission_body = null)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201';
-        $request = $this->combineSubmissionsRequest($data);
+        $returnType = '\FormAPI\Model\InlineResponse201';
+        $request = $this->combineSubmissionsRequest($create_combined_submission_body);
 
         try {
 
@@ -161,7 +161,7 @@ class PDFApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse201',
+                        '\FormAPI\Model\InlineResponse201',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -169,7 +169,7 @@ class PDFApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -177,7 +177,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -185,7 +185,7 @@ class PDFApi
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse422',
+                        '\FormAPI\Model\InlineResponse422',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -200,14 +200,14 @@ class PDFApi
      *
      * Merge generated PDFs together
      *
-     * @param  \FormAPI\FormAPI\Data $data (optional)
+     * @param  \FormAPI\Model\CreateCombinedSubmissionBody $create_combined_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function combineSubmissionsAsync($data = null)
+    public function combineSubmissionsAsync($create_combined_submission_body = null)
     {
-        return $this->combineSubmissionsAsyncWithHttpInfo($data)
+        return $this->combineSubmissionsAsyncWithHttpInfo($create_combined_submission_body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -220,15 +220,15 @@ class PDFApi
      *
      * Merge generated PDFs together
      *
-     * @param  \FormAPI\FormAPI\Data $data (optional)
+     * @param  \FormAPI\Model\CreateCombinedSubmissionBody $create_combined_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function combineSubmissionsAsyncWithHttpInfo($data = null)
+    public function combineSubmissionsAsyncWithHttpInfo($create_combined_submission_body = null)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201';
-        $request = $this->combineSubmissionsRequest($data);
+        $returnType = '\FormAPI\Model\InlineResponse201';
+        $request = $this->combineSubmissionsRequest($create_combined_submission_body);
 
         return $this->client
             ->sendAsync($request)
@@ -270,12 +270,12 @@ class PDFApi
     /**
      * Create request for operation 'combineSubmissions'
      *
-     * @param  \FormAPI\FormAPI\Data $data (optional)
+     * @param  \FormAPI\Model\CreateCombinedSubmissionBody $create_combined_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function combineSubmissionsRequest($data = null)
+    protected function combineSubmissionsRequest($create_combined_submission_body = null)
     {
 
         $resourcePath = '/combined_submissions';
@@ -289,8 +289,8 @@ class PDFApi
 
         // body params
         $_tempBody = null;
-        if (isset($data)) {
-            $_tempBody = $data;
+        if (isset($create_combined_submission_body)) {
+            $_tempBody = $create_combined_submission_body;
         }
 
         if ($multipart) {
@@ -363,7 +363,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse201CombinedSubmission
+     * @return \FormAPI\Model\InlineResponse201CombinedSubmission
      */
     public function expireCombinedSubmission($combined_submission_id)
     {
@@ -380,11 +380,11 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse201CombinedSubmission, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse201CombinedSubmission, HTTP status code, HTTP response headers (array of strings)
      */
     public function expireCombinedSubmissionWithHttpInfo($combined_submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201CombinedSubmission';
+        $returnType = '\FormAPI\Model\InlineResponse201CombinedSubmission';
         $request = $this->expireCombinedSubmissionRequest($combined_submission_id);
 
         try {
@@ -435,7 +435,7 @@ class PDFApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse201CombinedSubmission',
+                        '\FormAPI\Model\InlineResponse201CombinedSubmission',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -443,7 +443,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -451,7 +451,7 @@ class PDFApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -459,7 +459,7 @@ class PDFApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -501,7 +501,7 @@ class PDFApi
      */
     public function expireCombinedSubmissionAsyncWithHttpInfo($combined_submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201CombinedSubmission';
+        $returnType = '\FormAPI\Model\InlineResponse201CombinedSubmission';
         $request = $this->expireCombinedSubmissionRequest($combined_submission_id);
 
         return $this->client
@@ -648,7 +648,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse2011Submission
+     * @return \FormAPI\Model\InlineResponse2011Submission
      */
     public function expireSubmission($submission_id)
     {
@@ -665,11 +665,11 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse2011Submission, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse2011Submission, HTTP status code, HTTP response headers (array of strings)
      */
     public function expireSubmissionWithHttpInfo($submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011Submission';
+        $returnType = '\FormAPI\Model\InlineResponse2011Submission';
         $request = $this->expireSubmissionRequest($submission_id);
 
         try {
@@ -720,7 +720,7 @@ class PDFApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse2011Submission',
+                        '\FormAPI\Model\InlineResponse2011Submission',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -728,7 +728,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -736,7 +736,7 @@ class PDFApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -744,7 +744,7 @@ class PDFApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -786,7 +786,7 @@ class PDFApi
      */
     public function expireSubmissionAsyncWithHttpInfo($submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011Submission';
+        $returnType = '\FormAPI\Model\InlineResponse2011Submission';
         $request = $this->expireSubmissionRequest($submission_id);
 
         return $this->client
@@ -930,15 +930,15 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id template_id (required)
-     * @param  \FormAPI\FormAPI\Data1 $data data (optional)
+     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body create_submission_body (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse2011
+     * @return \FormAPI\Model\InlineResponse2011
      */
-    public function generatePDF($template_id, $data = null)
+    public function generatePDF($template_id, $create_submission_body = null)
     {
-        list($response) = $this->generatePDFWithHttpInfo($template_id, $data);
+        list($response) = $this->generatePDFWithHttpInfo($template_id, $create_submission_body);
         return $response;
     }
 
@@ -948,16 +948,16 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\FormAPI\Data1 $data (optional)
+     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse2011, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse2011, HTTP status code, HTTP response headers (array of strings)
      */
-    public function generatePDFWithHttpInfo($template_id, $data = null)
+    public function generatePDFWithHttpInfo($template_id, $create_submission_body = null)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011';
-        $request = $this->generatePDFRequest($template_id, $data);
+        $returnType = '\FormAPI\Model\InlineResponse2011';
+        $request = $this->generatePDFRequest($template_id, $create_submission_body);
 
         try {
 
@@ -1007,7 +1007,7 @@ class PDFApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse2011',
+                        '\FormAPI\Model\InlineResponse2011',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1015,7 +1015,7 @@ class PDFApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1023,7 +1023,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1031,7 +1031,7 @@ class PDFApi
                 case 422:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse422',
+                        '\FormAPI\Model\InlineResponse422',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1047,14 +1047,14 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\FormAPI\Data1 $data (optional)
+     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function generatePDFAsync($template_id, $data = null)
+    public function generatePDFAsync($template_id, $create_submission_body = null)
     {
-        return $this->generatePDFAsyncWithHttpInfo($template_id, $data)
+        return $this->generatePDFAsyncWithHttpInfo($template_id, $create_submission_body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1068,15 +1068,15 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\FormAPI\Data1 $data (optional)
+     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function generatePDFAsyncWithHttpInfo($template_id, $data = null)
+    public function generatePDFAsyncWithHttpInfo($template_id, $create_submission_body = null)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011';
-        $request = $this->generatePDFRequest($template_id, $data);
+        $returnType = '\FormAPI\Model\InlineResponse2011';
+        $request = $this->generatePDFRequest($template_id, $create_submission_body);
 
         return $this->client
             ->sendAsync($request)
@@ -1119,12 +1119,12 @@ class PDFApi
      * Create request for operation 'generatePDF'
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\FormAPI\Data1 $data (optional)
+     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function generatePDFRequest($template_id, $data = null)
+    protected function generatePDFRequest($template_id, $create_submission_body = null)
     {
         // verify the required parameter 'template_id' is set
         if ($template_id === null) {
@@ -1152,8 +1152,8 @@ class PDFApi
 
         // body params
         $_tempBody = null;
-        if (isset($data)) {
-            $_tempBody = $data;
+        if (isset($create_submission_body)) {
+            $_tempBody = $create_submission_body;
         }
 
         if ($multipart) {
@@ -1226,7 +1226,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse201CombinedSubmission
+     * @return \FormAPI\Model\InlineResponse201CombinedSubmission
      */
     public function getCombinedSubmission($combined_submission_id)
     {
@@ -1243,11 +1243,11 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse201CombinedSubmission, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse201CombinedSubmission, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCombinedSubmissionWithHttpInfo($combined_submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201CombinedSubmission';
+        $returnType = '\FormAPI\Model\InlineResponse201CombinedSubmission';
         $request = $this->getCombinedSubmissionRequest($combined_submission_id);
 
         try {
@@ -1298,7 +1298,7 @@ class PDFApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse201CombinedSubmission',
+                        '\FormAPI\Model\InlineResponse201CombinedSubmission',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1306,7 +1306,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1314,7 +1314,7 @@ class PDFApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1356,7 +1356,7 @@ class PDFApi
      */
     public function getCombinedSubmissionAsyncWithHttpInfo($combined_submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse201CombinedSubmission';
+        $returnType = '\FormAPI\Model\InlineResponse201CombinedSubmission';
         $request = $this->getCombinedSubmissionRequest($combined_submission_id);
 
         return $this->client
@@ -1503,7 +1503,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse2011Submission
+     * @return \FormAPI\Model\InlineResponse2011Submission
      */
     public function getSubmission($submission_id)
     {
@@ -1520,11 +1520,11 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse2011Submission, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse2011Submission, HTTP status code, HTTP response headers (array of strings)
      */
     public function getSubmissionWithHttpInfo($submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011Submission';
+        $returnType = '\FormAPI\Model\InlineResponse2011Submission';
         $request = $this->getSubmissionRequest($submission_id);
 
         try {
@@ -1575,7 +1575,7 @@ class PDFApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse2011Submission',
+                        '\FormAPI\Model\InlineResponse2011Submission',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1583,7 +1583,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1591,7 +1591,7 @@ class PDFApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse400',
+                        '\FormAPI\Model\InlineResponse400',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1633,7 +1633,7 @@ class PDFApi
      */
     public function getSubmissionAsyncWithHttpInfo($submission_id)
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse2011Submission';
+        $returnType = '\FormAPI\Model\InlineResponse2011Submission';
         $request = $this->getSubmissionRequest($submission_id);
 
         return $this->client
@@ -1779,7 +1779,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\FormAPI\InlineResponse200
+     * @return \FormAPI\Model\InlineResponse200
      */
     public function testAuthentication()
     {
@@ -1795,11 +1795,11 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\FormAPI\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\InlineResponse200, HTTP status code, HTTP response headers (array of strings)
      */
     public function testAuthenticationWithHttpInfo()
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse200';
+        $returnType = '\FormAPI\Model\InlineResponse200';
         $request = $this->testAuthenticationRequest();
 
         try {
@@ -1850,7 +1850,7 @@ class PDFApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse200',
+                        '\FormAPI\Model\InlineResponse200',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1858,7 +1858,7 @@ class PDFApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\FormAPI\InlineResponse401',
+                        '\FormAPI\Model\InlineResponse401',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1898,7 +1898,7 @@ class PDFApi
      */
     public function testAuthenticationAsyncWithHttpInfo()
     {
-        $returnType = '\FormAPI\FormAPI\InlineResponse200';
+        $returnType = '\FormAPI\Model\InlineResponse200';
         $request = $this->testAuthenticationRequest();
 
         return $this->client

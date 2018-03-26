@@ -3,9 +3,9 @@
 # This example demonstrates generating a PDF from a preconfigured template,
 # and NOT waiting for the PDF to be processed.
 #
-# You can run this example with: ./examples/generate_pdf.rb
-Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
+# You can run this example with: ./examples/ruby/generate_pdf_async.rb
 
+Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
 require "bundler/setup"
 Bundler.require
 

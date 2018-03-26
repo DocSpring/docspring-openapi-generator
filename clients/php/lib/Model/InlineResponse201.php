@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse2011
+ * InlineResponse201
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Model;
 
 use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * InlineResponse2011 Class Doc Comment
+ * InlineResponse201 Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse2011 implements ModelInterface, ArrayAccess
+class InlineResponse201 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'inline_response_201_1';
+    protected static $swaggerModelName = 'inline_response_201';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'status' => 'string',
-        'submission' => '\FormAPI\FormAPI\InlineResponse2011Submission'
+        'combined_submission' => '\FormAPI\Model\InlineResponse201CombinedSubmission'
     ];
 
     /**
@@ -67,7 +67,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'status' => null,
-        'submission' => null
+        'combined_submission' => null
     ];
 
     /**
@@ -98,7 +98,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'status' => 'status',
-        'submission' => 'submission'
+        'combined_submission' => 'combined_submission'
     ];
 
     /**
@@ -108,7 +108,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'status' => 'setStatus',
-        'submission' => 'setSubmission'
+        'combined_submission' => 'setCombinedSubmission'
     ];
 
     /**
@@ -118,7 +118,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'status' => 'getStatus',
-        'submission' => 'getSubmission'
+        'combined_submission' => 'getCombinedSubmission'
     ];
 
     /**
@@ -197,7 +197,7 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['submission'] = isset($data['submission']) ? $data['submission'] : null;
+        $this->container['combined_submission'] = isset($data['combined_submission']) ? $data['combined_submission'] : null;
     }
 
     /**
@@ -277,25 +277,25 @@ class InlineResponse2011 implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets submission
+     * Gets combined_submission
      *
-     * @return \FormAPI\FormAPI\InlineResponse2011Submission
+     * @return \FormAPI\Model\InlineResponse201CombinedSubmission
      */
-    public function getSubmission()
+    public function getCombinedSubmission()
     {
-        return $this->container['submission'];
+        return $this->container['combined_submission'];
     }
 
     /**
-     * Sets submission
+     * Sets combined_submission
      *
-     * @param \FormAPI\FormAPI\InlineResponse2011Submission $submission submission
+     * @param \FormAPI\Model\InlineResponse201CombinedSubmission $combined_submission combined_submission
      *
      * @return $this
      */
-    public function setSubmission($submission)
+    public function setCombinedSubmission($combined_submission)
     {
-        $this->container['submission'] = $submission;
+        $this->container['combined_submission'] = $combined_submission;
 
         return $this;
     }

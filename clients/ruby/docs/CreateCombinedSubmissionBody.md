@@ -1,4 +1,4 @@
-# FormAPI::Data
+# FormAPI::CreateCombinedSubmissionBody
 
 ## Properties
 Name | Type | Description | Notes

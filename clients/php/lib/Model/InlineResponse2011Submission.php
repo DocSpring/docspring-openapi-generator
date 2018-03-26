@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse201CombinedSubmission
+ * InlineResponse2011Submission
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Model;
 
 use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * InlineResponse201CombinedSubmission Class Doc Comment
+ * InlineResponse2011Submission Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
+class InlineResponse2011Submission implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'inline_response_201_combined_submission';
+    protected static $swaggerModelName = 'inline_response_201_1_submission';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'id' => 'string',
+        'test' => 'bool',
         'expired' => 'bool',
         'expires_at' => 'string',
         'state' => 'string',
         'metadata' => 'object',
-        'submission_ids' => 'string[]',
         'download_url' => 'string'
     ];
 
@@ -72,11 +72,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'id' => null,
+        'test' => null,
         'expired' => null,
         'expires_at' => null,
         'state' => null,
         'metadata' => null,
-        'submission_ids' => null,
         'download_url' => null
     ];
 
@@ -108,11 +108,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'test' => 'test',
         'expired' => 'expired',
         'expires_at' => 'expires_at',
         'state' => 'state',
         'metadata' => 'metadata',
-        'submission_ids' => 'submission_ids',
         'download_url' => 'download_url'
     ];
 
@@ -123,11 +123,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'id' => 'setId',
+        'test' => 'setTest',
         'expired' => 'setExpired',
         'expires_at' => 'setExpiresAt',
         'state' => 'setState',
         'metadata' => 'setMetadata',
-        'submission_ids' => 'setSubmissionIds',
         'download_url' => 'setDownloadUrl'
     ];
 
@@ -138,11 +138,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'id' => 'getId',
+        'test' => 'getTest',
         'expired' => 'getExpired',
         'expires_at' => 'getExpiresAt',
         'state' => 'getState',
         'metadata' => 'getMetadata',
-        'submission_ids' => 'getSubmissionIds',
         'download_url' => 'getDownloadUrl'
     ];
 
@@ -189,7 +189,10 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
 
     const STATE_PENDING = 'pending';
     const STATE_PROCESSED = 'processed';
+    const STATE_INVALID_DATA = 'invalid_data';
     const STATE_ERROR = 'error';
+    const STATE_IMAGE_DOWNLOAD_FAILED = 'image_download_failed';
+    const STATE_IMAGE_PROCESSING_FAILED = 'image_processing_failed';
 
 
 
@@ -203,7 +206,10 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
         return [
             self::STATE_PENDING,
             self::STATE_PROCESSED,
+            self::STATE_INVALID_DATA,
             self::STATE_ERROR,
+            self::STATE_IMAGE_DOWNLOAD_FAILED,
+            self::STATE_IMAGE_PROCESSING_FAILED,
         ];
     }
 
@@ -224,11 +230,11 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
         $this->container['expired'] = isset($data['expired']) ? $data['expired'] : null;
         $this->container['expires_at'] = isset($data['expires_at']) ? $data['expires_at'] : null;
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['submission_ids'] = isset($data['submission_ids']) ? $data['submission_ids'] : null;
         $this->container['download_url'] = isset($data['download_url']) ? $data['download_url'] : null;
     }
 
@@ -244,6 +250,9 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
+        if ($this->container['test'] === null) {
+            $invalidProperties[] = "'test' can't be null";
+        }
         if ($this->container['expired'] === null) {
             $invalidProperties[] = "'expired' can't be null";
         }
@@ -258,9 +267,6 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
             );
         }
 
-        if ($this->container['submission_ids'] === null) {
-            $invalidProperties[] = "'submission_ids' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -276,6 +282,9 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
         if ($this->container['id'] === null) {
             return false;
         }
+        if ($this->container['test'] === null) {
+            return false;
+        }
         if ($this->container['expired'] === null) {
             return false;
         }
@@ -284,9 +293,6 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
         }
         $allowedValues = $this->getStateAllowableValues();
         if (!in_array($this->container['state'], $allowedValues)) {
-            return false;
-        }
-        if ($this->container['submission_ids'] === null) {
             return false;
         }
         return true;
@@ -313,6 +319,30 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets test
+     *
+     * @return bool
+     */
+    public function getTest()
+    {
+        return $this->container['test'];
+    }
+
+    /**
+     * Sets test
+     *
+     * @param bool $test test
+     *
+     * @return $this
+     */
+    public function setTest($test)
+    {
+        $this->container['test'] = $test;
 
         return $this;
     }
@@ -418,30 +448,6 @@ class InlineResponse201CombinedSubmission implements ModelInterface, ArrayAccess
     public function setMetadata($metadata)
     {
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets submission_ids
-     *
-     * @return string[]
-     */
-    public function getSubmissionIds()
-    {
-        return $this->container['submission_ids'];
-    }
-
-    /**
-     * Sets submission_ids
-     *
-     * @param string[] $submission_ids submission_ids
-     *
-     * @return $this
-     */
-    public function setSubmissionIds($submission_ids)
-    {
-        $this->container['submission_ids'] = $submission_ids;
 
         return $this;
     }

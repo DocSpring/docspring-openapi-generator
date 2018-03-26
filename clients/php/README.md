@@ -62,10 +62,10 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi();
-$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data |
+$create_combined_submission_body = new \FormAPI\Model\CreateCombinedSubmissionBody(); // \FormAPI\Model\CreateCombinedSubmissionBody |
 
 try {
-    $result = $api_instance->combineSubmissions($data);
+    $result = $api_instance->combineSubmissions($create_combined_submission_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->combineSubmissions: ', $e->getMessage(), PHP_EOL;
@@ -91,8 +91,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [Data](docs/Model/Data.md)
- - [Data1](docs/Model/Data1.md)
+ - [CreateCombinedSubmissionBody](docs/Model/CreateCombinedSubmissionBody.md)
+ - [CreateSubmissionBody](docs/Model/CreateSubmissionBody.md)
  - [InlineResponse200](docs/Model/InlineResponse200.md)
  - [InlineResponse201](docs/Model/InlineResponse201.md)
  - [InlineResponse2011](docs/Model/InlineResponse2011.md)

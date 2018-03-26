@@ -1,6 +1,6 @@
 <?php
 /**
- * Data1Test
+ * CreateCombinedSubmissionBodyTest
  *
  * PHP version 5
  *
@@ -29,16 +29,16 @@
 namespace FormAPI;
 
 /**
- * Data1Test Class Doc Comment
+ * CreateCombinedSubmissionBodyTest Class Doc Comment
  *
  * @category    Class */
-// * @description Data1
+// * @description CreateCombinedSubmissionBody
 /**
  * @package     FormAPI
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class Data1Test extends \PHPUnit_Framework_TestCase
+class CreateCombinedSubmissionBodyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class Data1Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "Data1"
+     * Test "CreateCombinedSubmissionBody"
      */
-    public function testData1()
+    public function testCreateCombinedSubmissionBody()
     {
     }
 
@@ -84,9 +84,9 @@ class Data1Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "data"
+     * Test attribute "submission_ids"
      */
-    public function testPropertyData()
+    public function testPropertySubmissionIds()
     {
     }
 
@@ -94,6 +94,13 @@ class Data1Test extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
+    {
+    }
+
+    /**
+     * Test attribute "expires_in"
+     */
+    public function testPropertyExpiresIn()
     {
     }
 }

@@ -64,7 +64,7 @@ end
 api_instance = FormAPI::PDFApi.new
 
 opts = {
-  data: FormAPI::Data.new # Data |
+  create_combined_submission_body: FormAPI::CreateCombinedSubmissionBody.new # CreateCombinedSubmissionBody |
 }
 
 begin
@@ -94,8 +94,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [FormAPI::Data](docs/Data.md)
- - [FormAPI::Data1](docs/Data1.md)
+ - [FormAPI::CreateCombinedSubmissionBody](docs/CreateCombinedSubmissionBody.md)
+ - [FormAPI::CreateSubmissionBody](docs/CreateSubmissionBody.md)
  - [FormAPI::InlineResponse200](docs/InlineResponse200.md)
  - [FormAPI::InlineResponse201](docs/InlineResponse201.md)
  - [FormAPI::InlineResponse2011](docs/InlineResponse2011.md)

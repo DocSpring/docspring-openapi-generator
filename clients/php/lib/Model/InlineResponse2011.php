@@ -1,6 +1,6 @@
 <?php
 /**
- * Data1
+ * InlineResponse2011
  *
  * PHP version 5
  *
@@ -26,20 +26,20 @@
  * Do not edit the class manually.
  */
 
-namespace FormAPI\FormAPI;
+namespace FormAPI\Model;
 
 use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * Data1 Class Doc Comment
+ * InlineResponse2011 Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Data1 implements ModelInterface, ArrayAccess
+class InlineResponse2011 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class Data1 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'data_1';
+    protected static $swaggerModelName = 'inline_response_201_1';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -56,9 +56,8 @@ class Data1 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'test' => 'bool',
-        'data' => 'object',
-        'metadata' => 'object'
+        'status' => 'string',
+        'submission' => '\FormAPI\Model\InlineResponse2011Submission'
     ];
 
     /**
@@ -67,9 +66,8 @@ class Data1 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'test' => null,
-        'data' => null,
-        'metadata' => null
+        'status' => null,
+        'submission' => null
     ];
 
     /**
@@ -99,9 +97,8 @@ class Data1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'test' => 'test',
-        'data' => 'data',
-        'metadata' => 'metadata'
+        'status' => 'status',
+        'submission' => 'submission'
     ];
 
     /**
@@ -110,9 +107,8 @@ class Data1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'test' => 'setTest',
-        'data' => 'setData',
-        'metadata' => 'setMetadata'
+        'status' => 'setStatus',
+        'submission' => 'setSubmission'
     ];
 
     /**
@@ -121,9 +117,8 @@ class Data1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'test' => 'getTest',
-        'data' => 'getData',
-        'metadata' => 'getMetadata'
+        'status' => 'getStatus',
+        'submission' => 'getSubmission'
     ];
 
     /**
@@ -167,8 +162,23 @@ class Data1 implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const STATUS_SUCCESS = 'success';
+    const STATUS_ERROR = 'error';
 
 
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_SUCCESS,
+            self::STATUS_ERROR,
+        ];
+    }
 
 
     /**
@@ -186,9 +196,8 @@ class Data1 implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['submission'] = isset($data['submission']) ? $data['submission'] : null;
     }
 
     /**
@@ -200,9 +209,17 @@ class Data1 implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($this->container['status'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -215,7 +232,11 @@ class Data1 implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['data'] === null) {
+        if ($this->container['status'] === null) {
+            return false;
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($this->container['status'], $allowedValues)) {
             return false;
         }
         return true;
@@ -223,73 +244,58 @@ class Data1 implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets test
+     * Gets status
      *
-     * @return bool
+     * @return string
      */
-    public function getTest()
+    public function getStatus()
     {
-        return $this->container['test'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets test
+     * Sets status
      *
-     * @param bool $test test
+     * @param string $status status
      *
      * @return $this
      */
-    public function setTest($test)
+    public function setStatus($status)
     {
-        $this->container['test'] = $test;
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets data
+     * Gets submission
      *
-     * @return object
+     * @return \FormAPI\Model\InlineResponse2011Submission
      */
-    public function getData()
+    public function getSubmission()
     {
-        return $this->container['data'];
+        return $this->container['submission'];
     }
 
     /**
-     * Sets data
+     * Sets submission
      *
-     * @param object $data data
+     * @param \FormAPI\Model\InlineResponse2011Submission $submission submission
      *
      * @return $this
      */
-    public function setData($data)
+    public function setSubmission($submission)
     {
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return object
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
+        $this->container['submission'] = $submission;
 
         return $this;
     }

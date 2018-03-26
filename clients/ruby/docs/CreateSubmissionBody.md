@@ -1,4 +1,4 @@
-# FormAPI::Data1
+# FormAPI::CreateSubmissionBody
 
 ## Properties
 Name | Type | Description | Notes

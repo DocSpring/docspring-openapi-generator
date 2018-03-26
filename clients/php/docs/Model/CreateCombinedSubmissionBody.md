@@ -1,11 +1,12 @@
-# Data1
+# CreateCombinedSubmissionBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **test** | **bool** |  | [optional]
-**data** | **object** |  |
+**submission_ids** | **string[]** |  |
 **metadata** | **object** |  | [optional]
+**expires_in** | **float** |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

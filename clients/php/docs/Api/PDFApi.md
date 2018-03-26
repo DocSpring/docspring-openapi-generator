@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **combineSubmissions**
-> \FormAPI\FormAPI\InlineResponse201 combineSubmissions($data)
+> \FormAPI\Model\InlineResponse201 combineSubmissions($create_combined_submission_body)
 
 Merge generated PDFs together
 
@@ -28,10 +28,10 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data |
+$create_combined_submission_body = new \FormAPI\Model\CreateCombinedSubmissionBody(); // \FormAPI\Model\CreateCombinedSubmissionBody |
 
 try {
-    $result = $api_instance->combineSubmissions($data);
+    $result = $api_instance->combineSubmissions($create_combined_submission_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->combineSubmissions: ', $e->getMessage(), PHP_EOL;
@@ -43,11 +43,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**\FormAPI\FormAPI\Data**](../Model/Data.md)|  | [optional]
+ **create_combined_submission_body** | [**\FormAPI\Model\CreateCombinedSubmissionBody**](../Model/CreateCombinedSubmissionBody.md)|  | [optional]
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse201**](../Model/InlineResponse201.md)
+[**\FormAPI\Model\InlineResponse201**](../Model/InlineResponse201.md)
 
 ### Authorization
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **expireCombinedSubmission**
-> \FormAPI\FormAPI\InlineResponse201CombinedSubmission expireCombinedSubmission($combined_submission_id)
+> \FormAPI\Model\InlineResponse201CombinedSubmission expireCombinedSubmission($combined_submission_id)
 
 Expire a combined submission
 
@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
+[**\FormAPI\Model\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
 
 ### Authorization
 
@@ -108,7 +108,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **expireSubmission**
-> \FormAPI\FormAPI\InlineResponse2011Submission expireSubmission($submission_id)
+> \FormAPI\Model\InlineResponse2011Submission expireSubmission($submission_id)
 
 Expire a PDF submission
 
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
+[**\FormAPI\Model\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
 
 ### Authorization
 
@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **generatePDF**
-> \FormAPI\FormAPI\InlineResponse2011 generatePDF($template_id, $data)
+> \FormAPI\Model\InlineResponse2011 generatePDF($template_id, $create_submission_body)
 
 Generates a new PDF
 
@@ -170,10 +170,10 @@ FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
 $template_id = "template_id_example"; // string |
-$data = new \FormAPI\FormAPI\Data1(); // \FormAPI\FormAPI\Data1 |
+$create_submission_body = new \FormAPI\Model\CreateSubmissionBody(); // \FormAPI\Model\CreateSubmissionBody |
 
 try {
-    $result = $api_instance->generatePDF($template_id, $data);
+    $result = $api_instance->generatePDF($template_id, $create_submission_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->generatePDF: ', $e->getMessage(), PHP_EOL;
@@ -186,11 +186,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **data** | [**\FormAPI\FormAPI\Data1**](../Model/Data1.md)|  | [optional]
+ **create_submission_body** | [**\FormAPI\Model\CreateSubmissionBody**](../Model/CreateSubmissionBody.md)|  | [optional]
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse2011**](../Model/InlineResponse2011.md)
+[**\FormAPI\Model\InlineResponse2011**](../Model/InlineResponse2011.md)
 
 ### Authorization
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getCombinedSubmission**
-> \FormAPI\FormAPI\InlineResponse201CombinedSubmission getCombinedSubmission($combined_submission_id)
+> \FormAPI\Model\InlineResponse201CombinedSubmission getCombinedSubmission($combined_submission_id)
 
 Check the status of a combined submission (merged PDFs)
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
+[**\FormAPI\Model\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
 
 ### Authorization
 
@@ -251,7 +251,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSubmission**
-> \FormAPI\FormAPI\InlineResponse2011Submission getSubmission($submission_id)
+> \FormAPI\Model\InlineResponse2011Submission getSubmission($submission_id)
 
 Check the status of a PDF
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
+[**\FormAPI\Model\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
 
 ### Authorization
 
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **testAuthentication**
-> \FormAPI\FormAPI\InlineResponse200 testAuthentication()
+> \FormAPI\Model\InlineResponse200 testAuthentication()
 
 Test Authentication
 
@@ -327,7 +327,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\FormAPI\FormAPI\InlineResponse200**](../Model/InlineResponse200.md)
+[**\FormAPI\Model\InlineResponse200**](../Model/InlineResponse200.md)
 
 ### Authorization
 

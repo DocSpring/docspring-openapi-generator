@@ -32,7 +32,7 @@ end
 api_instance = FormAPI::PDFApi.new
 
 opts = {
-  data: FormAPI::Data.new # Data |
+  create_combined_submission_body: FormAPI::CreateCombinedSubmissionBody.new # CreateCombinedSubmissionBody |
 }
 
 begin
@@ -48,7 +48,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional]
+ **create_combined_submission_body** | [**CreateCombinedSubmissionBody**](CreateCombinedSubmissionBody.md)|  | [optional]
 
 ### Return type
 
@@ -188,7 +188,7 @@ api_instance = FormAPI::PDFApi.new
 template_id = "template_id_example" # String |
 
 opts = {
-  data: FormAPI::Data1.new # Data1 |
+  create_submission_body: FormAPI::CreateSubmissionBody.new # CreateSubmissionBody |
 }
 
 begin
@@ -205,7 +205,7 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **String**|  |
- **data** | [**Data1**](Data1.md)|  | [optional]
+ **create_submission_body** | [**CreateSubmissionBody**](CreateSubmissionBody.md)|  | [optional]
 
 ### Return type
 
