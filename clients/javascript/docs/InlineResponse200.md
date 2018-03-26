@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **String** |  | 
+**status** | **String** |  |
 
 
 <a name="StatusEnum"></a>

@@ -60,7 +60,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"status":"success","submission":{"state":"pending","test":true,"expired":false,"expires_at":null,"metadata":{},"id":"eyR4KFkaYKHztMdR","download_url":null}}'
-    http_version: 
+    http_version:
   recorded_at: Mon, 23 Oct 2017 08:53:51 GMT
 - request:
     method: get
@@ -122,6 +122,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"state":"processed","test":true,"expired":false,"expires_at":"2017-10-30T08:53:50.350Z","metadata":{},"id":"eyR4KFkaYKHztMdR","download_url":"https://formapi-docs.s3.amazonaws.com/store/submissions/eyR4KFkaYKHztMdR/20171023085350-eyR4KFka.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMQF3V7PUSLOCZYA%2F20171023%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171023T085351Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=e3798e78fdcc1a0293d1b200dd7836eebae74e0c048a1e58e00d64aaf4c9f184"}'
-    http_version: 
+    http_version:
   recorded_at: Mon, 23 Oct 2017 08:53:52 GMT
 recorded_with: VCR 3.0.3

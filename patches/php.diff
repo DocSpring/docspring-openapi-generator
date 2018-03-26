@@ -1,0 +1,26 @@
+From 1345118524f486373a99c376ed5618a65a0c1734 Mon Sep 17 00:00:00 2001
+From: Nathan Broadbent <git@ndbroadbent.com>
+Date: Mon, 26 Mar 2018 15:55:12 +0700
+Subject: [PATCH] Ran post_generate script
+
+---
+ composer.json | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/composer.json b/composer.json
+index e9a859a..2b95768 100644
+--- a/composer.json
++++ b/composer.json
+@@ -26,7 +26,8 @@
+     "require-dev": {
+         "phpunit/phpunit": "^4.8",
+         "squizlabs/php_codesniffer": "~2.6",
+-        "friendsofphp/php-cs-fixer": "~1.12"
++        "friendsofphp/php-cs-fixer": "~1.12",
++        "php-vcr/php-vcr": "^1.4"
+     },
+     "autoload": {
+         "psr-4": { "FormAPI\\" : "lib/" }
+-- 
+2.12.2
+

@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **String** |  | 
-**submission** | [**InlineResponse2011Submission**](InlineResponse2011Submission.md) |  | [optional] 
+**status** | **String** |  |
+**submission** | [**InlineResponse2011Submission**](InlineResponse2011Submission.md) |  | [optional]
 
 
 <a name="StatusEnum"></a>

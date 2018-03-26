@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**StatusEnum**](#StatusEnum) |  | 
-**error** | **String** |  | 
+**status** | [**StatusEnum**](#StatusEnum) |  |
+**error** | **String** |  |
 
 
 <a name="StatusEnum"></a>

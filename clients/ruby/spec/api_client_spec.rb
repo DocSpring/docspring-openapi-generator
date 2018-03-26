@@ -124,7 +124,7 @@ describe FormAPI::ApiClient do
       #api_client = FormAPI::ApiClient.new
       #_model = FormAPI::ModelName.new
       # update the model attribute below
-      #_model.id = 1 
+      #_model.id = 1
       # update the expected value (hash) below
       #expected = {id: 1, name: '', tags: []}
       #expect(api_client.object_to_hash(_model)).to eq(expected)

@@ -62,7 +62,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi();
-$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data | 
+$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data |
 
 try {
     $result = $api_instance->combineSubmissions($data);

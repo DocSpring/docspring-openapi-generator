@@ -63,8 +63,8 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-opts = { 
-  data: FormAPI::Data.new # Data | 
+opts = {
+  data: FormAPI::Data.new # Data |
 }
 
 begin

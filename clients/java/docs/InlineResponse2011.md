@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**StatusEnum**](#StatusEnum) |  | 
+**status** | [**StatusEnum**](#StatusEnum) |  |
 **submission** | [**InlineResponse2011Submission**](InlineResponse2011Submission.md) |  |  [optional]
 
 

@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **String** |  | 
-**combinedSubmission** | [**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md) |  | [optional] 
+**status** | **String** |  |
+**combinedSubmission** | [**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md) |  | [optional]
 
 
 <a name="StatusEnum"></a>

@@ -31,8 +31,8 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let opts = { 
-  'data': new formapi.Data() // Data | 
+let opts = {
+  'data': new formapi.Data() // Data |
 };
 
 apiInstance.combineSubmissions(opts, (error, data, response) => {
@@ -48,7 +48,7 @@ apiInstance.combineSubmissions(opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional] 
+ **data** | [**Data**](Data.md)|  | [optional]
 
 ### Return type
 
@@ -81,7 +81,7 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let combinedSubmissionId = "combinedSubmissionId_example"; // String | 
+let combinedSubmissionId = "combinedSubmissionId_example"; // String |
 
 
 apiInstance.expireCombinedSubmission(combinedSubmissionId, (error, data, response) => {
@@ -97,7 +97,7 @@ apiInstance.expireCombinedSubmission(combinedSubmissionId, (error, data, respons
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **String**|  | 
+ **combinedSubmissionId** | **String**|  |
 
 ### Return type
 
@@ -130,7 +130,7 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let submissionId = "submissionId_example"; // String | 
+let submissionId = "submissionId_example"; // String |
 
 
 apiInstance.expireSubmission(submissionId, (error, data, response) => {
@@ -146,7 +146,7 @@ apiInstance.expireSubmission(submissionId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **String**|  | 
+ **submissionId** | **String**|  |
 
 ### Return type
 
@@ -179,10 +179,10 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let templateId = "templateId_example"; // String | 
+let templateId = "templateId_example"; // String |
 
-let opts = { 
-  'data': new formapi.Data1() // Data1 | 
+let opts = {
+  'data': new formapi.Data1() // Data1 |
 };
 
 apiInstance.generatePDF(templateId, opts, (error, data, response) => {
@@ -198,8 +198,8 @@ apiInstance.generatePDF(templateId, opts, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **String**|  | 
- **data** | [**Data1**](Data1.md)|  | [optional] 
+ **templateId** | **String**|  |
+ **data** | [**Data1**](Data1.md)|  | [optional]
 
 ### Return type
 
@@ -232,7 +232,7 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let combinedSubmissionId = "combinedSubmissionId_example"; // String | 
+let combinedSubmissionId = "combinedSubmissionId_example"; // String |
 
 
 apiInstance.getCombinedSubmission(combinedSubmissionId, (error, data, response) => {
@@ -248,7 +248,7 @@ apiInstance.getCombinedSubmission(combinedSubmissionId, (error, data, response) 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **String**|  | 
+ **combinedSubmissionId** | **String**|  |
 
 ### Return type
 
@@ -281,7 +281,7 @@ basic.password = 'YOUR PASSWORD';
 
 let apiInstance = new formapi.PDFApi();
 
-let submissionId = "submissionId_example"; // String | 
+let submissionId = "submissionId_example"; // String |
 
 
 apiInstance.getSubmission(submissionId, (error, data, response) => {
@@ -297,7 +297,7 @@ apiInstance.getSubmission(submissionId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **String**|  | 
+ **submissionId** | **String**|  |
 
 ### Return type
 

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **String** |  | 
-**errors** | **Array&lt;String&gt;** |  | 
+**status** | **String** |  |
+**errors** | **Array&lt;String&gt;** |  |
 
 

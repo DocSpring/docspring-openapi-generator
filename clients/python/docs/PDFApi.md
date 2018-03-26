@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Merge generated PDFs together
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -35,7 +35,7 @@ configuration.password = 'YOUR_PASSWORD'
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 data = form_api.Data() # Data |  (optional)
 
-try: 
+try:
     # Merge generated PDFs together
     api_response = api_instance.combine_submissions(data=data)
     pprint(api_response)
@@ -47,7 +47,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional] 
+ **data** | [**Data**](Data.md)|  | [optional]
 
 ### Return type
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
 Expire a combined submission
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -84,9 +84,9 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-combined_submission_id = 'combined_submission_id_example' # str | 
+combined_submission_id = 'combined_submission_id_example' # str |
 
-try: 
+try:
     # Expire a combined submission
     api_response = api_instance.expire_combined_submission(combined_submission_id)
     pprint(api_response)
@@ -98,7 +98,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **str**|  | 
+ **combined_submission_id** | **str**|  |
 
 ### Return type
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 Expire a PDF submission
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -135,9 +135,9 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-submission_id = 'submission_id_example' # str | 
+submission_id = 'submission_id_example' # str |
 
-try: 
+try:
     # Expire a PDF submission
     api_response = api_instance.expire_submission(submission_id)
     pprint(api_response)
@@ -149,7 +149,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **str**|  | 
+ **submission_id** | **str**|  |
 
 ### Return type
 
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 Generates a new PDF
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -186,10 +186,10 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-template_id = 'template_id_example' # str | 
+template_id = 'template_id_example' # str |
 data = form_api.Data1() # Data1 |  (optional)
 
-try: 
+try:
     # Generates a new PDF
     api_response = api_instance.generate_pdf(template_id, data=data)
     pprint(api_response)
@@ -201,8 +201,8 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**|  | 
- **data** | [**Data1**](Data1.md)|  | [optional] 
+ **template_id** | **str**|  |
+ **data** | [**Data1**](Data1.md)|  | [optional]
 
 ### Return type
 
@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 Check the status of a combined submission (merged PDFs)
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -239,9 +239,9 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-combined_submission_id = 'combined_submission_id_example' # str | 
+combined_submission_id = 'combined_submission_id_example' # str |
 
-try: 
+try:
     # Check the status of a combined submission (merged PDFs)
     api_response = api_instance.get_combined_submission(combined_submission_id)
     pprint(api_response)
@@ -253,7 +253,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **str**|  | 
+ **combined_submission_id** | **str**|  |
 
 ### Return type
 
@@ -275,7 +275,7 @@ Name | Type | Description  | Notes
 
 Check the status of a PDF
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -290,9 +290,9 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-submission_id = 'submission_id_example' # str | 
+submission_id = 'submission_id_example' # str |
 
-try: 
+try:
     # Check the status of a PDF
     api_response = api_instance.get_submission(submission_id)
     pprint(api_response)
@@ -304,7 +304,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **str**|  | 
+ **submission_id** | **str**|  |
 
 ### Return type
 
@@ -326,7 +326,7 @@ Name | Type | Description  | Notes
 
 Test Authentication
 
-### Example 
+### Example
 ```python
 from __future__ import print_function
 import time
@@ -342,7 +342,7 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 
-try: 
+try:
     # Test Authentication
     api_response = api_instance.test_authentication()
     pprint(api_response)

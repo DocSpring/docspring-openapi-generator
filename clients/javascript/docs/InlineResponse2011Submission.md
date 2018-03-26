@@ -3,13 +3,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**test** | **Boolean** |  | 
-**expired** | **Boolean** |  | 
-**expiresAt** | **String** |  | [optional] 
-**state** | **String** |  | 
-**metadata** | **Object** |  | [optional] 
-**downloadUrl** | **String** |  | [optional] 
+**id** | **String** |  |
+**test** | **Boolean** |  |
+**expired** | **Boolean** |  |
+**expiresAt** | **String** |  | [optional]
+**state** | **String** |  |
+**metadata** | **Object** |  | [optional]
+**downloadUrl** | **String** |  | [optional]
 
 
 <a name="StateEnum"></a>

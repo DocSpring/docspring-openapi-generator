@@ -2,9 +2,9 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.formapi</groupId>
-  <artifactId>formapi</artifactId>
+  <artifactId>FormAPI</artifactId>
   <packaging>jar</packaging>
-  <name>formapi</name>
+  <name>FormAPI</name>
   <version>1.0.0</version>
   <url>https://github.com/swagger-api/swagger-codegen</url>
   <description>Swagger Java</description>

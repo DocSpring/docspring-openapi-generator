@@ -4,11 +4,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**test** | **Boolean** |  | 
-**expired** | **Boolean** |  | 
+**id** | **String** |  |
+**test** | **Boolean** |  |
+**expired** | **Boolean** |  |
 **expiresAt** | **String** |  |  [optional]
-**state** | [**StateEnum**](#StateEnum) |  | 
+**state** | [**StateEnum**](#StateEnum) |  |
 **metadata** | **Object** |  |  [optional]
 **downloadUrl** | **String** |  |  [optional]
 

@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 cd "$(dirname "$0")/.."
 
 LANGUAGE="$1"
 CONFIG_FILE="swagger-config.$LANGUAGE.json"
+CLIENT_DIR="clients/$LANGUAGE"
 
 if [ -z "$LANGUAGE" ]; then
   for LANG in ruby python java php javascript; do # go rust elixir swift4 objc
@@ -22,12 +23,37 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
+rm -rf "$CLIENT_DIR"
+
 ./scripts/swagger generate \
   -i ../form_api/swagger/v1/swagger.json \
   -l "$LANGUAGE" \
   -c "$CONFIG_FILE" \
-  -o "clients/$LANGUAGE"
+  -o "$CLIENT_DIR"
 
-if [ -f "./scripts/$LANGUAGE/post_generate" ]; then
-  ./scripts/$LANGUAGE/post_generate
+cd "$CLIENT_DIR"
+find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+
+git init
+git add -A
+git commit -m "Initial commit"
+
+if [ -f "../../patches/$LANGUAGE.diff" ]; then
+  if ! git apply --check "../../patches/$LANGUAGE.diff"; then
+    echo "Could not apply patch: ../../patches/$LANGUAGE.diff. Please fix the conflicts."
+    exit 1
+  fi
+
+  git apply "../../patches/$LANGUAGE.diff"
+  git add -A
+  git commit -m "Applied patch"
+elif [ -f "../../scripts/$LANGUAGE/post_generate" ]; then
+  ../../scripts/$LANGUAGE/post_generate
+  find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+
+  git add -A
+  git commit -m "Ran post_generate script"
+
+  cd ../..
+  ./scripts/update-patch $LANGUAGE
 fi

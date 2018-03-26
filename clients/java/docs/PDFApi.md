@@ -36,7 +36,7 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-Data data = new Data(); // Data | 
+Data data = new Data(); // Data |
 try {
     InlineResponse201 result = apiInstance.combineSubmissions(data);
     System.out.println(result);
@@ -88,7 +88,7 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-String combinedSubmissionId = "combinedSubmissionId_example"; // String | 
+String combinedSubmissionId = "combinedSubmissionId_example"; // String |
 try {
     InlineResponse201CombinedSubmission result = apiInstance.expireCombinedSubmission(combinedSubmissionId);
     System.out.println(result);
@@ -140,7 +140,7 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-String submissionId = "submissionId_example"; // String | 
+String submissionId = "submissionId_example"; // String |
 try {
     InlineResponse2011Submission result = apiInstance.expireSubmission(submissionId);
     System.out.println(result);
@@ -192,8 +192,8 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-String templateId = "templateId_example"; // String | 
-Data1 data = new Data1(); // Data1 | 
+String templateId = "templateId_example"; // String |
+Data1 data = new Data1(); // Data1 |
 try {
     InlineResponse2011 result = apiInstance.generatePDF(templateId, data);
     System.out.println(result);
@@ -246,7 +246,7 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-String combinedSubmissionId = "combinedSubmissionId_example"; // String | 
+String combinedSubmissionId = "combinedSubmissionId_example"; // String |
 try {
     InlineResponse201CombinedSubmission result = apiInstance.getCombinedSubmission(combinedSubmissionId);
     System.out.println(result);
@@ -298,7 +298,7 @@ basic.setUsername("YOUR USERNAME");
 basic.setPassword("YOUR PASSWORD");
 
 PDFApi apiInstance = new PDFApi();
-String submissionId = "submissionId_example"; // String | 
+String submissionId = "submissionId_example"; // String |
 try {
     InlineResponse2011Submission result = apiInstance.getSubmission(submissionId);
     System.out.println(result);

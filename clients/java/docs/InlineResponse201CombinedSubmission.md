@@ -4,12 +4,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** |  | 
-**expired** | **Boolean** |  | 
+**id** | **String** |  |
+**expired** | **Boolean** |  |
 **expiresAt** | **String** |  |  [optional]
-**state** | [**StateEnum**](#StateEnum) |  | 
+**state** | [**StateEnum**](#StateEnum) |  |
 **metadata** | **Object** |  |  [optional]
-**submissionIds** | **List&lt;String&gt;** |  | 
+**submissionIds** | **List&lt;String&gt;** |  |
 **downloadUrl** | **String** |  |  [optional]
 
 

@@ -1,4 +1,4 @@
-# formapi
+# FormAPI
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Add this dependency to your project's POM:
 ```xml
 <dependency>
     <groupId>io.formapi</groupId>
-    <artifactId>formapi</artifactId>
+    <artifactId>FormAPI</artifactId>
     <version>1.0.0</version>
     <scope>compile</scope>
 </dependency>
@@ -38,7 +38,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "io.formapi:formapi:1.0.0"
+compile "io.formapi:FormAPI:1.0.0"
 ```
 
 ### Others
@@ -49,7 +49,7 @@ At first generate the JAR by executing:
 
 Then manually install the following JARs:
 
-* target/formapi-1.0.0.jar
+* target/FormAPI-1.0.0.jar
 * target/lib/*.jar
 
 ## Getting Started
@@ -70,14 +70,14 @@ public class PDFApiExample {
 
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        
+
         // Configure HTTP basic authorization: basic
         HttpBasicAuth basic = (HttpBasicAuth) defaultClient.getAuthentication("basic");
         basic.setUsername("YOUR USERNAME");
         basic.setPassword("YOUR PASSWORD");
 
         PDFApi apiInstance = new PDFApi();
-        Data data = new Data(); // Data | 
+        Data data = new Data(); // Data |
         try {
             InlineResponse201 result = apiInstance.combineSubmissions(data);
             System.out.println(result);

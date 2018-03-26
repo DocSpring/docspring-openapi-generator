@@ -31,8 +31,8 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-opts = { 
-  data: FormAPI::Data.new # Data | 
+opts = {
+  data: FormAPI::Data.new # Data |
 }
 
 begin
@@ -48,7 +48,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional] 
+ **data** | [**Data**](Data.md)|  | [optional]
 
 ### Return type
 
@@ -83,7 +83,7 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-combined_submission_id = "combined_submission_id_example" # String | 
+combined_submission_id = "combined_submission_id_example" # String |
 
 
 begin
@@ -99,7 +99,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **String**|  | 
+ **combined_submission_id** | **String**|  |
 
 ### Return type
 
@@ -134,7 +134,7 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-submission_id = "submission_id_example" # String | 
+submission_id = "submission_id_example" # String |
 
 
 begin
@@ -150,7 +150,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **String**|  | 
+ **submission_id** | **String**|  |
 
 ### Return type
 
@@ -185,10 +185,10 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-template_id = "template_id_example" # String | 
+template_id = "template_id_example" # String |
 
-opts = { 
-  data: FormAPI::Data1.new # Data1 | 
+opts = {
+  data: FormAPI::Data1.new # Data1 |
 }
 
 begin
@@ -204,8 +204,8 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **String**|  | 
- **data** | [**Data1**](Data1.md)|  | [optional] 
+ **template_id** | **String**|  |
+ **data** | [**Data1**](Data1.md)|  | [optional]
 
 ### Return type
 
@@ -240,7 +240,7 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-combined_submission_id = "combined_submission_id_example" # String | 
+combined_submission_id = "combined_submission_id_example" # String |
 
 
 begin
@@ -256,7 +256,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **String**|  | 
+ **combined_submission_id** | **String**|  |
 
 ### Return type
 
@@ -291,7 +291,7 @@ end
 
 api_instance = FormAPI::PDFApi.new
 
-submission_id = "submission_id_example" # String | 
+submission_id = "submission_id_example" # String |
 
 
 begin
@@ -307,7 +307,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **String**|  | 
+ **submission_id** | **String**|  |
 
 ### Return type
 

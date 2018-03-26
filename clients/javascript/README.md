@@ -79,8 +79,8 @@ basic.password = 'YOUR PASSWORD'
 
 var api = new formapi.PDFApi()
 
-var opts = { 
-  'data': new formapi.Data() // {Data} 
+var opts = {
+  'data': new formapi.Data() // {Data}
 };
 
 var callback = function(error, data, response) {

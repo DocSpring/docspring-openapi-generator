@@ -7,6 +7,4 @@ echo "Removing generated time annotations..."
 find src -name "*.java" -type f -exec sed -E -i 's/@javax\.annotation\.Generated.*$//g' {} +
 
 echo "Removing trailing whitespace..."
-find src -name "*.java" -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
-find . -maxdepth 1 -name "*.gradle" -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
-find . -maxdepth 1 -name "*.xml" -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +

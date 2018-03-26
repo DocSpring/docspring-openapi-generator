@@ -28,7 +28,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data | 
+$data = new \FormAPI\FormAPI\Data(); // \FormAPI\FormAPI\Data |
 
 try {
     $result = $api_instance->combineSubmissions($data);
@@ -75,7 +75,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$combined_submission_id = "combined_submission_id_example"; // string | 
+$combined_submission_id = "combined_submission_id_example"; // string |
 
 try {
     $result = $api_instance->expireCombinedSubmission($combined_submission_id);
@@ -122,7 +122,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$submission_id = "submission_id_example"; // string | 
+$submission_id = "submission_id_example"; // string |
 
 try {
     $result = $api_instance->expireSubmission($submission_id);
@@ -169,8 +169,8 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$template_id = "template_id_example"; // string | 
-$data = new \FormAPI\FormAPI\Data1(); // \FormAPI\FormAPI\Data1 | 
+$template_id = "template_id_example"; // string |
+$data = new \FormAPI\FormAPI\Data1(); // \FormAPI\FormAPI\Data1 |
 
 try {
     $result = $api_instance->generatePDF($template_id, $data);
@@ -218,7 +218,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$combined_submission_id = "combined_submission_id_example"; // string | 
+$combined_submission_id = "combined_submission_id_example"; // string |
 
 try {
     $result = $api_instance->getCombinedSubmission($combined_submission_id);
@@ -265,7 +265,7 @@ FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
 $api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$submission_id = "submission_id_example"; // string | 
+$submission_id = "submission_id_example"; // string |
 
 try {
     $result = $api_instance->getSubmission($submission_id);

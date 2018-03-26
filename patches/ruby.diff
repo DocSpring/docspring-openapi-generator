@@ -1,0 +1,368 @@
+From 09c317cc50ae5466594206385b866a330331394a Mon Sep 17 00:00:00 2001
+From: Nathan Broadbent <git@ndbroadbent.com>
+Date: Mon, 26 Mar 2018 15:53:58 +0700
+Subject: [PATCH] Ran post_generate script
+
+---
+ extensions/lib/form_api/api/client.rb              |  98 ++++++++++++++++
+ form_api.gemspec                                   |  10 +-
+ lib/form_api.rb                                    |   2 +-
+ spec/api/client_spec.rb                            |  28 +++++
+ spec/api/pdf_api_spec.rb                           |  11 --
+ spec/spec_helper.rb                                |  11 ++
+ ...and_wait_for_the_submission_to_be_processed.yml | 127 +++++++++++++++++++++
+ 7 files changed, 273 insertions(+), 14 deletions(-)
+ create mode 100644 extensions/lib/form_api/api/client.rb
+ create mode 100644 spec/api/client_spec.rb
+ create mode 100644 spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml
+
+diff --git a/extensions/lib/form_api/api/client.rb b/extensions/lib/form_api/api/client.rb
+new file mode 100644
+index 0000000..1e391fa
+--- /dev/null
++++ b/extensions/lib/form_api/api/client.rb
+@@ -0,0 +1,98 @@
++require 'form_api/api/pdf_api'
++
++# The original 'lib' files are overriden every time we
++# regenerate the client, so custom methods go in here.
++# Also I want to call it "Client".
++
++module FormAPI
++  class Client < PDFApi
++    class InvalidDataError < ApiError; end
++    class PollTimeoutError < ApiError; end
++    class InvalidResponseError < ApiError; end
++
++    def generate_pdf(opts = {})
++      unless opts[:data].kind_of?(::Hash)
++        raise InvalidDataError, "data is required, and must be a Hash."
++      end
++
++      # Wait for job to finish by default.
++      if !opts.has_key?(:wait)
++        opts[:wait] = true
++      end
++
++      # FormAPI requires a nested :data object.
++      opts[:data] = { data: opts.delete(:data) }
++      if opts[:metadata]
++        opts[:data][:metadata] = opts.delete(:metadata)
++      end
++
++      template_id = opts.delete :template_id
++      response = super(template_id, opts)
++
++      return response unless opts[:wait]
++
++      submission = response.submission
++      timeout = opts[:timeout] || 60
++      start_time = Time.now
++
++      # Wait for submission to be ready
++      while submission.state == 'pending'
++        sleep 1
++        submission = get_submission(submission.id)
++
++        if Time.now - start_time > timeout
++          raise PollTimeoutError, "PDF was not ready after #{timeout} seconds!"
++        end
++      end
++
++      return InlineResponse2011.new(
++        status: submission.state == 'processed' ? 'success' : 'error',
++        submission: submission
++      )
++    end
++
++
++    def combine_submissions(opts = {})
++      unless opts[:submission_ids].kind_of?(::Array)
++        raise InvalidDataError, "submission_ids is required, and must be an Array."
++      end
++
++      # Wait for job to finish by default.
++      if !opts.has_key?(:wait)
++        opts[:wait] = true
++      end
++
++      # FormAPI requires a nested :data object.
++      opts[:data] = { submission_ids: opts.delete(:submission_ids) }
++      if opts[:metadata]
++        opts[:data][:metadata] = opts.delete(:metadata)
++      end
++      if opts[:expire_in]
++        opts[:data][:expire_in] = opts.delete(:expire_in)
++      end
++
++      response = super(opts)
++
++      return response unless opts[:wait]
++
++      combined_submission = response.combined_submission
++      timeout = opts[:timeout] || 60
++      start_time = Time.now
++
++      # Wait for submission to be ready
++      while combined_submission.state == 'pending'
++        sleep 1
++        combined_submission = get_combined_submission(combined_submission.id)
++
++        if Time.now - start_time > timeout
++          raise PollTimeoutError, "Merged PDF was not ready after #{timeout} seconds!"
++        end
++      end
++
++      return InlineResponse201.new(
++        status: combined_submission.state == 'processed' ? 'success' : 'error',
++        combined_submission: combined_submission
++      )
++    end
++  end
++end
+diff --git a/form_api.gemspec b/form_api.gemspec
+index 06198b6..7b21872 100644
+--- a/form_api.gemspec
++++ b/form_api.gemspec
+@@ -38,8 +38,14 @@ Gem::Specification.new do |s|
+   s.add_development_dependency 'autotest-growl', '~> 0.2', '>= 0.2.16'
+   s.add_development_dependency 'autotest-fsevent', '~> 0.2', '>= 0.2.12'
+ 
+-  s.files         = `find *`.split("\n").uniq.sort.select{|f| !f.empty? }
+-  s.test_files    = `find spec/*`.split("\n")
++  # added by script/fix_gemspec.rb.
++  s.add_development_dependency 'rake', '~>11.2', '>= 11.2.2'
++  s.add_development_dependency 'pry', '~>0.10', '>= 0.10.4'
++  # </added> : if the above lines are missing in the gemspec, then
++  # the matcher for autotest is probably broken
++
++  s.files         = `git ls-files`.split("\n").uniq.sort.select{|f| !f.empty? }
++  s.test_files    = `git ls-files spec test`.split("\n")
+   s.executables   = []
+   s.require_paths = ["lib"]
+ end
+diff --git a/lib/form_api.rb b/lib/form_api.rb
+index e931b76..bd16501 100644
+--- a/lib/form_api.rb
++++ b/lib/form_api.rb
+@@ -29,7 +29,7 @@ require 'form_api/models/inline_response_401'
+ require 'form_api/models/inline_response_422'
+ 
+ # APIs
+-require 'form_api/api/pdf_api'
++require File.join(File.dirname(__FILE__), '../extensions/lib/form_api/api/client')
+ 
+ module FormAPI
+   class << self
+diff --git a/spec/api/client_spec.rb b/spec/api/client_spec.rb
+new file mode 100644
+index 0000000..a45bdb7
+--- /dev/null
++++ b/spec/api/client_spec.rb
+@@ -0,0 +1,28 @@
++require 'spec_helper'
++require 'json'
++
++describe FormAPI::Client, vcr: { record: :none } do
++  it 'should generate a PDF and wait for the submission to be processed' do
++    client = FormAPI::Client.new
++    client.api_client.config.username = 'yRaaR9JmTPtGX7EN'
++    client.api_client.config.password = 'IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec'
++    template_id = '6zz3dYRYM67fxMXA'
++
++    expect(client).to receive(:sleep).with(1).once
++
++    response = client.generate_pdf(
++      template_id: template_id,
++      data: {
++        first_name: 'John',
++        last_name: 'Smith',
++        favorite_color: 'Blue'
++      }
++    )
++
++    expect(response.status).to eq 'success'
++    submission = response.submission
++    # expect(submission.id).to eq 'jpZnjXmRtZYxsFx4'
++    expect(submission.state).to eq 'processed'
++    expect(submission.download_url).to include 'https://formapi-docs.s3.amazonaws.com/store/submissions'
++  end
++end
+diff --git a/spec/api/pdf_api_spec.rb b/spec/api/pdf_api_spec.rb
+index 387e2cf..ad012a7 100644
+--- a/spec/api/pdf_api_spec.rb
++++ b/spec/api/pdf_api_spec.rb
+@@ -105,15 +105,4 @@ describe 'PDFApi' do
+     end
+   end
+ 
+-  # unit tests for test_authentication
+-  # Test Authentication
+-  #
+-  # @param [Hash] opts the optional parameters
+-  # @return [InlineResponse200]
+-  describe 'test_authentication test' do
+-    it "should work" do
+-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+-    end
+-  end
+-
+ end
+diff --git a/spec/spec_helper.rb b/spec/spec_helper.rb
+index 99d3585..8d68c9d 100644
+--- a/spec/spec_helper.rb
++++ b/spec/spec_helper.rb
+@@ -12,6 +12,17 @@ Swagger Codegen version: 2.3.0-SNAPSHOT
+ 
+ # load the gem
+ require 'form_api'
++require 'pry'
++require 'vcr'
++require 'webmock/rspec'
++
++VCR.configure do |config|
++  config.cassette_library_dir = 'spec/vcr_cassettes'
++  config.hook_into :webmock
++  config.configure_rspec_metadata!
++  config.default_cassette_options = { record: :none, erb: true }
++end
++
+ 
+ # The following  was generated by the `rspec --init` command. Conventionally, all
+ # specs live under a `spec` directory, which RSpec adds to the `$LOAD_PATH`.
+diff --git a/spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml b/spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml
+new file mode 100644
+index 0000000..2fc2a60
+--- /dev/null
++++ b/spec/vcr_cassettes/FormAPI_Client/should_generate_a_PDF_and_wait_for_the_submission_to_be_processed.yml
+@@ -0,0 +1,127 @@
++---
++http_interactions:
++- request:
++    method: post
++    uri: https://app.formapi.io/api/v1/templates/6zz3dYRYM67fxMXA/submissions
++    body:
++      encoding: UTF-8
++      string: '{"data":{"first_name":"John","last_name":"Smith","favorite_color":"Blue"}}'
++    headers:
++      User-Agent:
++      - ruby-swagger-0.1.4
++      Content-Type:
++      - application/json
++      Accept:
++      - application/json
++      Authorization:
++      - Basic eVJhYVI5Sm1UUHRHWDdFTjpJQjNUUmtTZG00ZjJCZHRVX0QzWWd4amRNQjdsLXIyZk9ndnhEMVl6d2Vj
++      Expect:
++      - ''
++  response:
++    status:
++      code: 201
++      message: Created
++    headers:
++      Date:
++      - Mon, 23 Oct 2017 08:53:50 GMT
++      Content-Type:
++      - application/json; charset=utf-8
++      Transfer-Encoding:
++      - chunked
++      Connection:
++      - keep-alive
++      Set-Cookie:
++      - __cfduid=d4d53a9027be371a677906f589a30f7c41508748829; expires=Tue, 23-Oct-18
++        08:53:49 GMT; path=/; domain=.formapi.io; HttpOnly; Secure
++      X-Frame-Options:
++      - SAMEORIGIN
++      X-Xss-Protection:
++      - 1; mode=block
++      X-Content-Type-Options:
++      - nosniff
++      Etag:
++      - W/"eb69a8124689ebf40ff6462a48cb9abd"
++      Cache-Control:
++      - max-age=0, private, must-revalidate
++      X-Request-Id:
++      - c9a812dd-2625-48f1-94f1-906a0f654da4
++      X-Runtime:
++      - '0.172181'
++      Vary:
++      - Origin
++      Via:
++      - 1.1 vegur
++      Strict-Transport-Security:
++      - max-age=15552000; includeSubDomains; preload
++      Server:
++      - cloudflare-nginx
++      Cf-Ray:
++      - 3b2377d6ddec3108-SIN
++    body:
++      encoding: UTF-8
++      string: '{"status":"success","submission":{"state":"pending","test":true,"expired":false,"expires_at":null,"metadata":{},"id":"eyR4KFkaYKHztMdR","download_url":null}}'
++    http_version:
++  recorded_at: Mon, 23 Oct 2017 08:53:51 GMT
++- request:
++    method: get
++    uri: https://app.formapi.io/api/v1/submissions/eyR4KFkaYKHztMdR
++    body:
++      encoding: US-ASCII
++      string: ''
++    headers:
++      User-Agent:
++      - ruby-swagger-0.1.4
++      Content-Type:
++      - application/json
++      Accept:
++      - application/json
++      Authorization:
++      - Basic eVJhYVI5Sm1UUHRHWDdFTjpJQjNUUmtTZG00ZjJCZHRVX0QzWWd4amRNQjdsLXIyZk9ndnhEMVl6d2Vj
++      Expect:
++      - ''
++  response:
++    status:
++      code: 200
++      message: OK
++    headers:
++      Date:
++      - Mon, 23 Oct 2017 08:53:51 GMT
++      Content-Type:
++      - application/json; charset=utf-8
++      Transfer-Encoding:
++      - chunked
++      Connection:
++      - keep-alive
++      Set-Cookie:
++      - __cfduid=d7142a5733640fb24ab3761cc7bee67a81508748831; expires=Tue, 23-Oct-18
++        08:53:51 GMT; path=/; domain=.formapi.io; HttpOnly; Secure
++      X-Frame-Options:
++      - SAMEORIGIN
++      X-Xss-Protection:
++      - 1; mode=block
++      X-Content-Type-Options:
++      - nosniff
++      Etag:
++      - W/"5cfdc9e8399ed11cb2d8031cbf3f6c8d"
++      Cache-Control:
++      - max-age=0, private, must-revalidate
++      X-Request-Id:
++      - 16162658-cda2-4855-8e86-51e449227d54
++      X-Runtime:
++      - '0.086900'
++      Vary:
++      - Origin
++      Via:
++      - 1.1 vegur
++      Strict-Transport-Security:
++      - max-age=15552000; includeSubDomains; preload
++      Server:
++      - cloudflare-nginx
++      Cf-Ray:
++      - 3b2377e26c733108-SIN
++    body:
++      encoding: UTF-8
++      string: '{"state":"processed","test":true,"expired":false,"expires_at":"2017-10-30T08:53:50.350Z","metadata":{},"id":"eyR4KFkaYKHztMdR","download_url":"https://formapi-docs.s3.amazonaws.com/store/submissions/eyR4KFkaYKHztMdR/20171023085350-eyR4KFka.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMQF3V7PUSLOCZYA%2F20171023%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20171023T085351Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=e3798e78fdcc1a0293d1b200dd7836eebae74e0c048a1e58e00d64aaf4c9f184"}'
++    http_version:
++  recorded_at: Mon, 23 Oct 2017 08:53:52 GMT
++recorded_with: VCR 3.0.3
+-- 
+2.12.2
+
