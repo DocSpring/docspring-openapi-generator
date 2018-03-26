@@ -4,6 +4,7 @@
 # and downloading the PDF to a local file.
 #
 # You can run this example with: ./examples/generate_and_download_pdf.rb
+Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
 
 require "bundler/setup"
 Bundler.require
@@ -46,7 +47,7 @@ begin
   request.on_complete do |response|
     downloaded_file.close
 
-    puts "PDF was downloaded!"
+    puts "PDF was downloaded! Opening file..."
     # Open the downloaded PDF on Mac or Linux.
     `type xdg-open > /dev/null 2>&1 && xdg-open '#{PDF_FILENAME}' || open '#{PDF_FILENAME}'`
   end

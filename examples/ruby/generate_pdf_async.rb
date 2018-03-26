@@ -4,6 +4,7 @@
 # and NOT waiting for the PDF to be processed.
 #
 # You can run this example with: ./examples/generate_pdf.rb
+Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
 
 require "bundler/setup"
 Bundler.require

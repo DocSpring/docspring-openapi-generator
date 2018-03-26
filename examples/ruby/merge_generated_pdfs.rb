@@ -2,6 +2,7 @@
 #
 # This example demonstrates merging multiple generated PDFs into a single PDF.
 #
+Dir.chdir File.join(File.dirname(__FILE__), '../../clients/ruby')
 
 require "bundler/setup"
 Bundler.require
