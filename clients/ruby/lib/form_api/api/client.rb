@@ -21,9 +21,9 @@ module FormAPI
       end
 
       # FormAPI requires a nested :data object.
-      opts[:data] = { data: opts.delete(:data) }
+      opts[:'create_submission_body'] = { data: opts.delete(:data) }
       if opts[:metadata]
-        opts[:data][:metadata] = opts.delete(:metadata)
+        opts[:'create_submission_body'][:metadata] = opts.delete(:metadata)
       end
 
       template_id = opts.delete :template_id
