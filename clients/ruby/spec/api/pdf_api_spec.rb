@@ -32,6 +32,19 @@ describe 'PDFApi' do
     end
   end
 
+  # unit tests for batch_generate_pdf
+  # Generates multiple PDFs
+  #
+  # @param template_id
+  # @param [Hash] opts the optional parameters
+  # @option opts [Array<CreateSubmissionBatchBody>] :create_submission_batch_body
+  # @return [Array<InlineResponse2011>]
+  describe 'batch_generate_pdf test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for combine_submissions
   # Merge generated PDFs together
   #
@@ -61,7 +74,7 @@ describe 'PDFApi' do
   #
   # @param submission_id
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2011Submission]
+  # @return [TemplatestemplateIdsubmissionsbatchSubmission]
   describe 'expire_submission test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -98,8 +111,21 @@ describe 'PDFApi' do
   #
   # @param submission_id
   # @param [Hash] opts the optional parameters
-  # @return [InlineResponse2011Submission]
+  # @return [TemplatestemplateIdsubmissionsbatchSubmission]
   describe 'get_submission test' do
+    it "should work" do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for get_templates
+  # Get a list of all templates
+  #
+  # @param [Hash] opts the optional parameters
+  # @option opts [Integer] :page Default: 1
+  # @option opts [Integer] :per_page Default: 50
+  # @return [Array<InlineResponse2001>]
+  describe 'get_templates test' do
     it "should work" do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

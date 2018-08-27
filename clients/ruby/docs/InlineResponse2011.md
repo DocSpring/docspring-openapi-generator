@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **String** |  |
-**submission** | [**InlineResponse2011Submission**](InlineResponse2011Submission.md) |  | [optional]
+**submission** | [**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md) |  | [optional]
 
 

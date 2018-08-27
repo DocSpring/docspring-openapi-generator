@@ -196,7 +196,7 @@ module FormAPI
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'basic' =>
+        'api_token_basic' =>
           {
             type: 'basic',
             in: 'header',

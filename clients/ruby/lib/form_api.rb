@@ -18,15 +18,17 @@ require 'form_api/configuration'
 
 # Models
 require 'form_api/models/create_combined_submission_body'
+require 'form_api/models/create_submission_batch_body'
 require 'form_api/models/create_submission_body'
 require 'form_api/models/inline_response_200'
+require 'form_api/models/inline_response_200_1'
 require 'form_api/models/inline_response_201'
 require 'form_api/models/inline_response_201_1'
-require 'form_api/models/inline_response_201_1_submission'
 require 'form_api/models/inline_response_201_combined_submission'
 require 'form_api/models/inline_response_400'
 require 'form_api/models/inline_response_401'
 require 'form_api/models/inline_response_422'
+require 'form_api/models/templatestemplate_idsubmissionsbatch_submission'
 
 # APIs
 require 'form_api/api/client'

@@ -1,7 +1,7 @@
-From 123af2ace68142f9de4cf08497f68bcd40f5898c Mon Sep 17 00:00:00 2001
+From d544b945390bcbd19ad9994d800f4dc6df1ee4b9 Mon Sep 17 00:00:00 2001
 From: Nathan Broadbent <git@ndbroadbent.com>
-Date: Mon, 26 Mar 2018 15:55:06 +0700
-Subject: [PATCH] Applied patch
+Date: Tue, 28 Aug 2018 01:39:47 +0700
+Subject: [PATCH 1/3] Applied patch
 
 ---
  Gemfile.lock                                       |  75 ++++++++++++
@@ -121,11 +121,11 @@ index 06198b6..7b21872 100644
    s.require_paths = ["lib"]
  end
 diff --git a/lib/form_api.rb b/lib/form_api.rb
-index e931b76..cfa4828 100644
+index a833e11..7a809f0 100644
 --- a/lib/form_api.rb
 +++ b/lib/form_api.rb
-@@ -29,7 +29,7 @@ require 'form_api/models/inline_response_401'
- require 'form_api/models/inline_response_422'
+@@ -31,7 +31,7 @@ require 'form_api/models/inline_response_422'
+ require 'form_api/models/templatestemplate_idsubmissionsbatch_submission'
  
  # APIs
 -require 'form_api/api/pdf_api'
@@ -272,10 +272,10 @@ index 0000000..a45bdb7
 +  end
 +end
 diff --git a/spec/api/pdf_api_spec.rb b/spec/api/pdf_api_spec.rb
-index 387e2cf..ad012a7 100644
+index 2242af1..b443ff8 100644
 --- a/spec/api/pdf_api_spec.rb
 +++ b/spec/api/pdf_api_spec.rb
-@@ -105,15 +105,4 @@ describe 'PDFApi' do
+@@ -131,15 +131,4 @@ describe 'PDFApi' do
      end
    end
  
@@ -446,6 +446,94 @@ index 0000000..2fc2a60
 +    http_version:
 +  recorded_at: Mon, 23 Oct 2017 08:53:52 GMT
 +recorded_with: VCR 3.0.3
+-- 
+2.12.2
+
+
+From a3ee1cc655c41c361e4cc71f0a6a4071de50ae0a Mon Sep 17 00:00:00 2001
+From: Nathan Broadbent <git@ndbroadbent.com>
+Date: Tue, 28 Aug 2018 01:41:48 +0700
+Subject: [PATCH 2/3] Fix client
+
+---
+ lib/form_api/api/client.rb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/lib/form_api/api/client.rb b/lib/form_api/api/client.rb
+index 1e391fa..a9b89d7 100644
+--- a/lib/form_api/api/client.rb
++++ b/lib/form_api/api/client.rb
+@@ -21,9 +21,9 @@ module FormAPI
+       end
+ 
+       # FormAPI requires a nested :data object.
+-      opts[:data] = { data: opts.delete(:data) }
++      opts[:'create_submission_body'] = { data: opts.delete(:data) }
+       if opts[:metadata]
+-        opts[:data][:metadata] = opts.delete(:metadata)
++        opts[:'create_submission_body'][:metadata] = opts.delete(:metadata)
+       end
+ 
+       template_id = opts.delete :template_id
+-- 
+2.12.2
+
+
+From b050cc60d9643b2196897924dc7add750c749fed Mon Sep 17 00:00:00 2001
+From: Nathan Broadbent <git@ndbroadbent.com>
+Date: Tue, 28 Aug 2018 01:42:26 +0700
+Subject: [PATCH 3/3] Added pry-byebug for debugging
+
+---
+ Gemfile      | 1 +
+ Gemfile.lock | 7 ++++++-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/Gemfile b/Gemfile
+index d255a3a..01ba313 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -4,4 +4,5 @@ gemspec
+ 
+ group :development, :test do
+   gem 'rake', '~> 12.0.0'
++  gem 'pry-byebug'
+ end
+diff --git a/Gemfile.lock b/Gemfile.lock
+index 0ca19c1..d84f837 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -17,6 +17,7 @@ GEM
+       sys-uname
+     autotest-growl (0.2.16)
+     autotest-rails-pure (4.1.2)
++    byebug (10.0.2)
+     coderay (1.1.2)
+     crack (0.4.3)
+       safe_yaml (~> 1.0.0)
+@@ -30,6 +31,9 @@ GEM
+     pry (0.11.3)
+       coderay (~> 1.1.0)
+       method_source (~> 0.9.0)
++    pry-byebug (3.6.0)
++      byebug (~> 10.0)
++      pry (~> 0.10)
+     public_suffix (3.0.2)
+     rake (12.0.0)
+     rspec (3.7.0)
+@@ -66,10 +70,11 @@ DEPENDENCIES
+   autotest-rails-pure (~> 4.1, >= 4.1.2)
+   form_api!
+   pry (~> 0.10, >= 0.10.4)
++  pry-byebug
+   rake (~> 12.0.0)
+   rspec (~> 3.6, >= 3.6.0)
+   vcr (~> 3.0, >= 3.0.1)
+   webmock (~> 1.24, >= 1.24.3)
+ 
+ BUNDLED WITH
+-   1.16.0.pre.2
++   1.16.2
 -- 
 2.12.2
 

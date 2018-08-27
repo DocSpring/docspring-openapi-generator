@@ -1,4 +1,4 @@
-# FormAPI::InlineResponse2011Submission
+# FormAPI::TemplatestemplateIdsubmissionsbatchSubmission
 
 ## Properties
 Name | Type | Description | Notes

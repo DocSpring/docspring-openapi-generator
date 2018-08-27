@@ -4,13 +4,70 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_generate_pdf**](PDFApi.md#batch_generate_pdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
+
+
+# **batch_generate_pdf**
+> Array&lt;InlineResponse2011&gt; batch_generate_pdf(template_id, opts)
+
+Generates multiple PDFs
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+
+template_id = "template_id_example" # String |
+
+opts = {
+  create_submission_batch_body: [FormAPI::CreateSubmissionBatchBody.new] # Array<CreateSubmissionBatchBody> |
+}
+
+begin
+  #Generates multiple PDFs
+  result = api_instance.batch_generate_pdf(template_id, opts)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->batch_generate_pdf: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **String**|  |
+ **create_submission_batch_body** | [**Array&lt;CreateSubmissionBatchBody&gt;**](CreateSubmissionBatchBody.md)|  | [optional]
+
+### Return type
+
+[**Array&lt;InlineResponse2011&gt;**](InlineResponse2011.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 
 
 # **combine_submissions**
@@ -24,7 +81,7 @@ Merge generated PDFs together
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -56,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -76,7 +133,7 @@ Expire a combined submission
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -107,7 +164,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -117,7 +174,7 @@ Name | Type | Description  | Notes
 
 
 # **expire_submission**
-> InlineResponse2011Submission expire_submission(submission_id)
+> TemplatestemplateIdsubmissionsbatchSubmission expire_submission(submission_id)
 
 Expire a PDF submission
 
@@ -127,7 +184,7 @@ Expire a PDF submission
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -154,11 +211,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -178,7 +235,7 @@ Generates a new PDF
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -213,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -233,7 +290,7 @@ Check the status of a combined submission (merged PDFs)
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -264,7 +321,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -274,7 +331,7 @@ Name | Type | Description  | Notes
 
 
 # **get_submission**
-> InlineResponse2011Submission get_submission(submission_id)
+> TemplatestemplateIdsubmissionsbatchSubmission get_submission(submission_id)
 
 Check the status of a PDF
 
@@ -284,7 +341,7 @@ Check the status of a PDF
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -311,11 +368,65 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_templates**
+> Array&lt;InlineResponse2001&gt; get_templates(opts)
+
+Get a list of all templates
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+
+opts = {
+  page: 56, # Integer | Default: 1
+  per_page: 56 # Integer | Default: 50
+}
+
+begin
+  #Get a list of all templates
+  result = api_instance.get_templates(opts)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->get_templates: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **Integer**| Default: 1 | [optional]
+ **per_page** | **Integer**| Default: 50 | [optional]
+
+### Return type
+
+[**Array&lt;InlineResponse2001&gt;**](InlineResponse2001.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -335,7 +446,7 @@ Test Authentication
 require 'form_api'
 # setup authorization
 FormAPI.configure do |config|
-  # Configure HTTP basic authorization: basic
+  # Configure HTTP basic authorization: api_token_basic
   config.username = 'YOUR USERNAME'
   config.password = 'YOUR PASSWORD'
 end
@@ -360,7 +471,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
