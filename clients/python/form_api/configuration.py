@@ -220,7 +220,7 @@ class Configuration(with_metaclass(TypeWithDefault, object)):
         :return: The Auth Settings information dict.
         """
         return {
-            'basic':
+            'api_token_basic':
                 {
                     'type': 'basic',
                     'in': 'header',

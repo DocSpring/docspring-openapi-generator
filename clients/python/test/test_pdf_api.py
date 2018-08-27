@@ -31,6 +31,14 @@ class TestPDFApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_batch_generate_pdf(self):
+        """
+        Test case for batch_generate_pdf
+
+        Generates multiple PDFs
+        """
+        pass
+
     def test_combine_submissions(self):
         """
         Test case for combine_submissions
@@ -76,6 +84,14 @@ class TestPDFApi(unittest.TestCase):
         Test case for get_submission
 
         Check the status of a PDF
+        """
+        pass
+
+    def test_get_templates(self):
+        """
+        Test case for get_templates
+
+        Get a list of all templates
         """
         pass
 

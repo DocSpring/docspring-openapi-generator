@@ -51,19 +51,20 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 form_api.configuration.username = 'YOUR_USERNAME'
 form_api.configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi()
-data = form_api.Data() # Data |  (optional)
+template_id = 'template_id_example' # str |
+create_submission_batch_body = [form_api.CreateSubmissionBatchBody()] # list[CreateSubmissionBatchBody] |  (optional)
 
 try:
-    # Merge generated PDFs together
-    api_response = api_instance.combine_submissions(data=data)
+    # Generates multiple PDFs
+    api_response = api_instance.batch_generate_pdf(template_id, create_submission_batch_body=create_submission_batch_body)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PDFApi->combine_submissions: %s\n" % e)
+    print("Exception when calling PDFApi->batch_generate_pdf: %s\n" % e)
 
 ```
 
@@ -73,33 +74,37 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*PDFApi* | [**batch_generate_pdf**](docs/PDFApi.md#batch_generate_pdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 *PDFApi* | [**combine_submissions**](docs/PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 *PDFApi* | [**expire_combined_submission**](docs/PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 *PDFApi* | [**expire_submission**](docs/PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 *PDFApi* | [**generate_pdf**](docs/PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 *PDFApi* | [**get_combined_submission**](docs/PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 *PDFApi* | [**get_submission**](docs/PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+*PDFApi* | [**get_templates**](docs/PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 *PDFApi* | [**test_authentication**](docs/PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 
 
 ## Documentation For Models
 
- - [Data](docs/Data.md)
- - [Data1](docs/Data1.md)
+ - [CreateCombinedSubmissionBody](docs/CreateCombinedSubmissionBody.md)
+ - [CreateSubmissionBatchBody](docs/CreateSubmissionBatchBody.md)
+ - [CreateSubmissionBody](docs/CreateSubmissionBody.md)
  - [InlineResponse200](docs/InlineResponse200.md)
+ - [InlineResponse2001](docs/InlineResponse2001.md)
  - [InlineResponse201](docs/InlineResponse201.md)
  - [InlineResponse2011](docs/InlineResponse2011.md)
- - [InlineResponse2011Submission](docs/InlineResponse2011Submission.md)
  - [InlineResponse201CombinedSubmission](docs/InlineResponse201CombinedSubmission.md)
  - [InlineResponse400](docs/InlineResponse400.md)
  - [InlineResponse401](docs/InlineResponse401.md)
  - [InlineResponse422](docs/InlineResponse422.md)
+ - [TemplatestemplateIdsubmissionsbatchSubmission](docs/TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 
 ## Documentation For Authorization
 
 
-## basic
+## api_token_basic
 
 - **Type**: HTTP basic authentication
 

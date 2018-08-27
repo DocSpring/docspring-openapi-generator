@@ -1,15 +1,12 @@
-# InlineResponse2011Submission
+# CreateCombinedSubmissionBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  |
-**test** | **bool** |  |
-**expired** | **bool** |  |
-**expires_at** | **str** |  | [optional]
-**state** | **str** |  |
+**test** | **bool** |  | [optional]
+**submission_ids** | **list[str]** |  |
 **metadata** | **object** |  | [optional]
-**download_url** | **str** |  | [optional]
+**expires_in** | **float** |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -19,11 +19,11 @@ import unittest
 
 import form_api
 from form_api.rest import ApiException
-from form_api.models.data_1 import Data1
+from form_api.models.inline_response_200_1 import InlineResponse2001
 
 
-class TestData1(unittest.TestCase):
-    """ Data1 unit test stubs """
+class TestInlineResponse2001(unittest.TestCase):
+    """ InlineResponse2001 unit test stubs """
 
     def setUp(self):
         pass
@@ -31,12 +31,12 @@ class TestData1(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testData1(self):
+    def testInlineResponse2001(self):
         """
-        Test Data1
+        Test InlineResponse2001
         """
         # FIXME: construct object with mandatory attributes with example values
-        #model = form_api.models.data_1.Data1()
+        #model = form_api.models.inline_response_200_1.InlineResponse2001()
         pass
 
 

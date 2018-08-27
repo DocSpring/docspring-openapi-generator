@@ -19,11 +19,11 @@ import unittest
 
 import form_api
 from form_api.rest import ApiException
-from form_api.models.inline_response_201_1_submission import InlineResponse2011Submission
+from form_api.models.create_combined_submission_body import CreateCombinedSubmissionBody
 
 
-class TestInlineResponse2011Submission(unittest.TestCase):
-    """ InlineResponse2011Submission unit test stubs """
+class TestCreateCombinedSubmissionBody(unittest.TestCase):
+    """ CreateCombinedSubmissionBody unit test stubs """
 
     def setUp(self):
         pass
@@ -31,12 +31,12 @@ class TestInlineResponse2011Submission(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testInlineResponse2011Submission(self):
+    def testCreateCombinedSubmissionBody(self):
         """
-        Test InlineResponse2011Submission
+        Test CreateCombinedSubmissionBody
         """
         # FIXME: construct object with mandatory attributes with example values
-        #model = form_api.models.inline_response_201_1_submission.InlineResponse2011Submission()
+        #model = form_api.models.create_combined_submission_body.CreateCombinedSubmissionBody()
         pass
 
 

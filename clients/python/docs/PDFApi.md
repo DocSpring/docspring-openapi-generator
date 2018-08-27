@@ -4,17 +4,72 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batch_generate_pdf**](PDFApi.md#batch_generate_pdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 
 
+# **batch_generate_pdf**
+> list[InlineResponse2011] batch_generate_pdf(template_id, create_submission_batch_body=create_submission_batch_body)
+
+Generates multiple PDFs
+
+### Example
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+template_id = 'template_id_example' # str |
+create_submission_batch_body = [form_api.CreateSubmissionBatchBody()] # list[CreateSubmissionBatchBody] |  (optional)
+
+try:
+    # Generates multiple PDFs
+    api_response = api_instance.batch_generate_pdf(template_id, create_submission_batch_body=create_submission_batch_body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->batch_generate_pdf: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **str**|  |
+ **create_submission_batch_body** | [**list[CreateSubmissionBatchBody]**](CreateSubmissionBatchBody.md)|  | [optional]
+
+### Return type
+
+[**list[InlineResponse2011]**](InlineResponse2011.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **combine_submissions**
-> InlineResponse201 combine_submissions(data=data)
+> InlineResponse201 combine_submissions(create_combined_submission_body=create_combined_submission_body)
 
 Merge generated PDFs together
 
@@ -26,18 +81,18 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-data = form_api.Data() # Data |  (optional)
+create_combined_submission_body = form_api.CreateCombinedSubmissionBody() # CreateCombinedSubmissionBody |  (optional)
 
 try:
     # Merge generated PDFs together
-    api_response = api_instance.combine_submissions(data=data)
+    api_response = api_instance.combine_submissions(create_combined_submission_body=create_combined_submission_body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->combine_submissions: %s\n" % e)
@@ -47,7 +102,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional]
+ **create_combined_submission_body** | [**CreateCombinedSubmissionBody**](CreateCombinedSubmissionBody.md)|  | [optional]
 
 ### Return type
 
@@ -55,7 +110,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -77,7 +132,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -106,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -116,7 +171,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **expire_submission**
-> InlineResponse2011Submission expire_submission(submission_id)
+> TemplatestemplateIdsubmissionsbatchSubmission expire_submission(submission_id)
 
 Expire a PDF submission
 
@@ -128,7 +183,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -153,11 +208,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -167,7 +222,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generate_pdf**
-> InlineResponse2011 generate_pdf(template_id, data=data)
+> InlineResponse2011 generate_pdf(template_id, create_submission_body=create_submission_body)
 
 Generates a new PDF
 
@@ -179,7 +234,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -187,11 +242,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_id = 'template_id_example' # str |
-data = form_api.Data1() # Data1 |  (optional)
+create_submission_body = form_api.CreateSubmissionBody() # CreateSubmissionBody |  (optional)
 
 try:
     # Generates a new PDF
-    api_response = api_instance.generate_pdf(template_id, data=data)
+    api_response = api_instance.generate_pdf(template_id, create_submission_body=create_submission_body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->generate_pdf: %s\n" % e)
@@ -202,7 +257,7 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**|  |
- **data** | [**Data1**](Data1.md)|  | [optional]
+ **create_submission_body** | [**CreateSubmissionBody**](CreateSubmissionBody.md)|  | [optional]
 
 ### Return type
 
@@ -210,7 +265,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -232,7 +287,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -261,7 +316,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -271,7 +326,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_submission**
-> InlineResponse2011Submission get_submission(submission_id)
+> TemplatestemplateIdsubmissionsbatchSubmission get_submission(submission_id)
 
 Check the status of a PDF
 
@@ -283,7 +338,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -308,11 +363,64 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_templates**
+> list[InlineResponse2001] get_templates(page=page, per_page=per_page)
+
+Get a list of all templates
+
+### Example
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+page = 56 # int | Default: 1 (optional)
+per_page = 56 # int | Default: 50 (optional)
+
+try:
+    # Get a list of all templates
+    api_response = api_instance.get_templates(page=page, per_page=per_page)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_templates: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int**| Default: 1 | [optional]
+ **per_page** | **int**| Default: 50 | [optional]
+
+### Return type
+
+[**list[InlineResponse2001]**](InlineResponse2001.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -334,7 +442,7 @@ import form_api
 from form_api.rest import ApiException
 from pprint import pprint
 
-# Configure HTTP basic authorization: basic
+# Configure HTTP basic authorization: api_token_basic
 configuration = form_api.Configuration()
 configuration.username = 'YOUR_USERNAME'
 configuration.password = 'YOUR_PASSWORD'
@@ -359,7 +467,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 

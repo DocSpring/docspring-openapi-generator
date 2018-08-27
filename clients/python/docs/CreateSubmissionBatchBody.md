@@ -1,4 +1,4 @@
-# Data1
+# CreateSubmissionBatchBody
 
 ## Properties
 Name | Type | Description | Notes

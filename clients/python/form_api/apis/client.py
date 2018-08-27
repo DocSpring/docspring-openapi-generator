@@ -36,7 +36,7 @@ class Client(PDFApi):
         template_id = data.get('template_id')
         del data['template_id']
 
-        kwargs['data'] = data
+        kwargs['create_submission_body'] = data
         kwargs['_return_http_data_only'] = True
 
         (data) = self.generate_pdf_with_http_info(template_id, **kwargs)
@@ -65,7 +65,7 @@ class Client(PDFApi):
         :param Data data
         :return: InlineResponse201
         """
-        kwargs['data'] = data
+        kwargs['create_combined_submission_body'] = data
         kwargs['_return_http_data_only'] = True
 
         (data) = self.combine_submissions_with_http_info(**kwargs)

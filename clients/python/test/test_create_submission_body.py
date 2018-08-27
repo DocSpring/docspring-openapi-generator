@@ -19,11 +19,11 @@ import unittest
 
 import form_api
 from form_api.rest import ApiException
-from form_api.models.data import Data
+from form_api.models.create_submission_body import CreateSubmissionBody
 
 
-class TestData(unittest.TestCase):
-    """ Data unit test stubs """
+class TestCreateSubmissionBody(unittest.TestCase):
+    """ CreateSubmissionBody unit test stubs """
 
     def setUp(self):
         pass
@@ -31,12 +31,12 @@ class TestData(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testData(self):
+    def testCreateSubmissionBody(self):
         """
-        Test Data
+        Test CreateSubmissionBody
         """
         # FIXME: construct object with mandatory attributes with example values
-        #model = form_api.models.data.Data()
+        #model = form_api.models.create_submission_body.CreateSubmissionBody()
         pass
 
 

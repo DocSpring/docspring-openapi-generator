@@ -1,7 +1,7 @@
-From 0e03418d4bf879e183618ede8142cde85ef49f54 Mon Sep 17 00:00:00 2001
+From 72cb2421a9be2492137e30105cbc81cefcf4362a Mon Sep 17 00:00:00 2001
 From: Nathan Broadbent <git@ndbroadbent.com>
-Date: Mon, 26 Mar 2018 15:55:08 +0700
-Subject: [PATCH] Ran post_generate script
+Date: Tue, 28 Aug 2018 01:44:01 +0700
+Subject: [PATCH 1/2] Applied patch
 
 ---
  form_api/__init__.py    |  1 +
@@ -11,10 +11,10 @@ Subject: [PATCH] Ran post_generate script
  create mode 100644 form_api/apis/client.py
 
 diff --git a/form_api/__init__.py b/form_api/__init__.py
-index fcf3ea8..db30413 100644
+index 901b42a..a2e64f5 100644
 --- a/form_api/__init__.py
 +++ b/form_api/__init__.py
-@@ -27,6 +27,7 @@ from .models.inline_response_422 import InlineResponse422
+@@ -29,6 +29,7 @@ from .models.templatestemplate_idsubmissionsbatch_submission import Templatestem
  
  # import apis into sdk package
  from .apis.pdf_api import PDFApi
@@ -135,6 +135,41 @@ index f7e34fd..f7f064e 100644
      install_requires=REQUIRES,
      packages=find_packages(),
      include_package_data=True,
+-- 
+2.12.2
+
+
+From 831ef780af33ba0a6c25b101223b11b307e94050 Mon Sep 17 00:00:00 2001
+From: Nathan Broadbent <git@ndbroadbent.com>
+Date: Tue, 28 Aug 2018 01:53:42 +0700
+Subject: [PATCH 2/2] Fix python client
+
+---
+ form_api/apis/client.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/form_api/apis/client.py b/form_api/apis/client.py
+index c58cd72..b6d62f3 100644
+--- a/form_api/apis/client.py
++++ b/form_api/apis/client.py
+@@ -36,7 +36,7 @@ class Client(PDFApi):
+         template_id = data.get('template_id')
+         del data['template_id']
+ 
+-        kwargs['data'] = data
++        kwargs['create_submission_body'] = data
+         kwargs['_return_http_data_only'] = True
+ 
+         (data) = self.generate_pdf_with_http_info(template_id, **kwargs)
+@@ -65,7 +65,7 @@ class Client(PDFApi):
+         :param Data data
+         :return: InlineResponse201
+         """
+-        kwargs['data'] = data
++        kwargs['create_combined_submission_body'] = data
+         kwargs['_return_http_data_only'] = True
+ 
+         (data) = self.combine_submissions_with_http_info(**kwargs)
 -- 
 2.12.2
 

@@ -14,16 +14,18 @@
 from __future__ import absolute_import
 
 # import models into sdk package
-from .models.data import Data
-from .models.data_1 import Data1
+from .models.create_combined_submission_body import CreateCombinedSubmissionBody
+from .models.create_submission_batch_body import CreateSubmissionBatchBody
+from .models.create_submission_body import CreateSubmissionBody
 from .models.inline_response_200 import InlineResponse200
+from .models.inline_response_200_1 import InlineResponse2001
 from .models.inline_response_201 import InlineResponse201
 from .models.inline_response_201_1 import InlineResponse2011
-from .models.inline_response_201_1_submission import InlineResponse2011Submission
 from .models.inline_response_201_combined_submission import InlineResponse201CombinedSubmission
 from .models.inline_response_400 import InlineResponse400
 from .models.inline_response_401 import InlineResponse401
 from .models.inline_response_422 import InlineResponse422
+from .models.templatestemplate_idsubmissionsbatch_submission import TemplatestemplateIdsubmissionsbatchSubmission
 
 # import apis into sdk package
 from .apis.pdf_api import PDFApi

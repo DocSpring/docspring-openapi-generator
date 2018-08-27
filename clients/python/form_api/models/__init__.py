@@ -14,13 +14,15 @@
 from __future__ import absolute_import
 
 # import models into model package
-from .data import Data
-from .data_1 import Data1
+from .create_combined_submission_body import CreateCombinedSubmissionBody
+from .create_submission_batch_body import CreateSubmissionBatchBody
+from .create_submission_body import CreateSubmissionBody
 from .inline_response_200 import InlineResponse200
+from .inline_response_200_1 import InlineResponse2001
 from .inline_response_201 import InlineResponse201
 from .inline_response_201_1 import InlineResponse2011
-from .inline_response_201_1_submission import InlineResponse2011Submission
 from .inline_response_201_combined_submission import InlineResponse201CombinedSubmission
 from .inline_response_400 import InlineResponse400
 from .inline_response_401 import InlineResponse401
 from .inline_response_422 import InlineResponse422
+from .templatestemplate_idsubmissionsbatch_submission import TemplatestemplateIdsubmissionsbatchSubmission

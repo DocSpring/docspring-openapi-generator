@@ -35,6 +35,106 @@ class PDFApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
+    def batch_generate_pdf(self, template_id, **kwargs):
+        """
+        Generates multiple PDFs
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.batch_generate_pdf(template_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str template_id: (required)
+        :param list[CreateSubmissionBatchBody] create_submission_batch_body:
+        :return: list[InlineResponse2011]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.batch_generate_pdf_with_http_info(template_id, **kwargs)
+        else:
+            (data) = self.batch_generate_pdf_with_http_info(template_id, **kwargs)
+            return data
+
+    def batch_generate_pdf_with_http_info(self, template_id, **kwargs):
+        """
+        Generates multiple PDFs
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.batch_generate_pdf_with_http_info(template_id, async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param str template_id: (required)
+        :param list[CreateSubmissionBatchBody] create_submission_batch_body:
+        :return: list[InlineResponse2011]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['template_id', 'create_submission_batch_body']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method batch_generate_pdf" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'template_id' is set
+        if ('template_id' not in params) or (params['template_id'] is None):
+            raise ValueError("Missing the required parameter `template_id` when calling `batch_generate_pdf`")
+
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'template_id' in params:
+            path_params['template_id'] = params['template_id']
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'create_submission_batch_body' in params:
+            body_params = params['create_submission_batch_body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']
+
+        return self.api_client.call_api('/templates/{template_id}/submissions/batch', 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[InlineResponse2011]',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def combine_submissions(self, **kwargs):
         """
         Merge generated PDFs together
@@ -44,7 +144,7 @@ class PDFApi(object):
         >>> result = thread.get()
 
         :param async bool
-        :param Data data:
+        :param CreateCombinedSubmissionBody create_combined_submission_body:
         :return: InlineResponse201
                  If the method is called asynchronously,
                  returns the request thread.
@@ -65,13 +165,13 @@ class PDFApi(object):
         >>> result = thread.get()
 
         :param async bool
-        :param Data data:
+        :param CreateCombinedSubmissionBody create_combined_submission_body:
         :return: InlineResponse201
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['data']
+        all_params = ['create_combined_submission_body']
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -100,8 +200,8 @@ class PDFApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'data' in params:
-            body_params = params['data']
+        if 'create_combined_submission_body' in params:
+            body_params = params['create_combined_submission_body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
@@ -111,7 +211,7 @@ class PDFApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/combined_submissions', 'POST',
                                         path_params,
@@ -203,7 +303,7 @@ class PDFApi(object):
             select_header_accept(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/combined_submissions/{combined_submission_id}', 'DELETE',
                                         path_params,
@@ -230,7 +330,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse2011Submission
+        :return: TemplatestemplateIdsubmissionsbatchSubmission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -251,7 +351,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse2011Submission
+        :return: TemplatestemplateIdsubmissionsbatchSubmission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -295,7 +395,7 @@ class PDFApi(object):
             select_header_accept(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/submissions/{submission_id}', 'DELETE',
                                         path_params,
@@ -304,7 +404,7 @@ class PDFApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='InlineResponse2011Submission',
+                                        response_type='TemplatestemplateIdsubmissionsbatchSubmission',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -322,7 +422,7 @@ class PDFApi(object):
 
         :param async bool
         :param str template_id: (required)
-        :param Data1 data:
+        :param CreateSubmissionBody create_submission_body:
         :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
@@ -344,13 +444,13 @@ class PDFApi(object):
 
         :param async bool
         :param str template_id: (required)
-        :param Data1 data:
+        :param CreateSubmissionBody create_submission_body:
         :return: InlineResponse2011
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['template_id', 'data']
+        all_params = ['template_id', 'create_submission_body']
         all_params.append('async')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -384,8 +484,8 @@ class PDFApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'data' in params:
-            body_params = params['data']
+        if 'create_submission_body' in params:
+            body_params = params['create_submission_body']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.\
             select_header_accept(['application/json'])
@@ -395,7 +495,7 @@ class PDFApi(object):
             select_header_content_type(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/templates/{template_id}/submissions', 'POST',
                                         path_params,
@@ -487,7 +587,7 @@ class PDFApi(object):
             select_header_accept(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/combined_submissions/{combined_submission_id}', 'GET',
                                         path_params,
@@ -514,7 +614,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse2011Submission
+        :return: TemplatestemplateIdsubmissionsbatchSubmission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -535,7 +635,7 @@ class PDFApi(object):
 
         :param async bool
         :param str submission_id: (required)
-        :return: InlineResponse2011Submission
+        :return: TemplatestemplateIdsubmissionsbatchSubmission
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -579,7 +679,7 @@ class PDFApi(object):
             select_header_accept(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/submissions/{submission_id}', 'GET',
                                         path_params,
@@ -588,7 +688,100 @@ class PDFApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='InlineResponse2011Submission',
+                                        response_type='TemplatestemplateIdsubmissionsbatchSubmission',
+                                        auth_settings=auth_settings,
+                                        async=params.get('async'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def get_templates(self, **kwargs):
+        """
+        Get a list of all templates
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_templates(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param int page: Default: 1
+        :param int per_page: Default: 50
+        :return: list[InlineResponse2001]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async'):
+            return self.get_templates_with_http_info(**kwargs)
+        else:
+            (data) = self.get_templates_with_http_info(**kwargs)
+            return data
+
+    def get_templates_with_http_info(self, **kwargs):
+        """
+        Get a list of all templates
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async=True
+        >>> thread = api.get_templates_with_http_info(async=True)
+        >>> result = thread.get()
+
+        :param async bool
+        :param int page: Default: 1
+        :param int per_page: Default: 50
+        :return: list[InlineResponse2001]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['page', 'per_page']
+        all_params.append('async')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_templates" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+        if 'page' in params:
+            query_params.append(('page', params['page']))
+        if 'per_page' in params:
+            query_params.append(('per_page', params['per_page']))
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']
+
+        return self.api_client.call_api('/templates', 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[InlineResponse2001]',
                                         auth_settings=auth_settings,
                                         async=params.get('async'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -663,7 +856,7 @@ class PDFApi(object):
             select_header_accept(['application/json'])
 
         # Authentication setting
-        auth_settings = ['basic']
+        auth_settings = ['api_token_basic']
 
         return self.api_client.call_api('/authentication', 'GET',
                                         path_params,
