@@ -11,5 +11,5 @@ Swagger Codegen version: 2.3.0-SNAPSHOT
 =end
 
 module FormAPI
-  VERSION = "0.1.5"
+  VERSION = "0.2.0"
 end
