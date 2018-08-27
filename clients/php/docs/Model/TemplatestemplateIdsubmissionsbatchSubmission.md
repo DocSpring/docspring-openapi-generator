@@ -1,4 +1,4 @@
-# InlineResponse2011Submission
+# TemplatestemplateIdsubmissionsbatchSubmission
 
 ## Properties
 Name | Type | Description | Notes

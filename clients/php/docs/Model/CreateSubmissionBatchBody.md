@@ -1,10 +1,11 @@
-# InlineResponse2011
+# CreateSubmissionBatchBody
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  |
-**submission** | [**\FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md) |  | [optional]
+**test** | **bool** |  | [optional]
+**data** | **object** |  |
+**metadata** | **object** |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

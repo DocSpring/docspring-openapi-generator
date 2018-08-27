@@ -13,10 +13,12 @@ foreach (glob(__DIR__ . '/../../clients/php/lib/**/*.php') as $filename)
 }
 
 $formapi = new FormAPI\Client();
-$formapi->getConfig()->setUsername("yRaaR9JmTPtGX7EN");
-$formapi->getConfig()->setPassword("IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec");
+$formapi->getConfig()->setUsername("api_test_eFQz2rYXxCEeCPnRMH");
+$formapi->getConfig()->setPassword("QpttJtiIy5_i-uorLi9enzZ5VuFx6lFvJYu53YUyVz8");
+$formapi->getConfig()->setHost("app.formapi.local:3000");
+$formapi->getConfig()->setScheme("http");
 
-$template_id = '6zz3dYRYM67fxMXA';
+$template_id = 'tpl_gdHHYPqcEF94Phgzfh';
 $pdf_filename = '/tmp/formapi-php.pdf';
 
 try {

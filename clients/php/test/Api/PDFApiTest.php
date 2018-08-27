@@ -71,6 +71,16 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for batchGeneratePDF
+     *
+     * Generates multiple PDFs.
+     *
+     */
+    public function testBatchGeneratePDF()
+    {
+    }
+
+    /**
      * Test case for combineSubmissions
      *
      * Merge generated PDFs together.
@@ -127,6 +137,16 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
      *
      */
     public function testGetSubmission()
+    {
+    }
+
+    /**
+     * Test case for getTemplates
+     *
+     * Get a list of all templates.
+     *
+     */
+    public function testGetTemplates()
     {
     }
 

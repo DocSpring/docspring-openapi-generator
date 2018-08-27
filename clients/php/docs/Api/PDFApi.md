@@ -4,14 +4,65 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batchGeneratePDF**](PDFApi.md#batchGeneratePDF) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**combineSubmissions**](PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expireCombinedSubmission**](PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expireSubmission**](PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generatePDF**](PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**getCombinedSubmission**](PDFApi.md#getCombinedSubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**getSubmission**](PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**getTemplates**](PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 
+
+# **batchGeneratePDF**
+> \FormAPI\Model\InlineResponse2011[] batchGeneratePDF($template_id, $create_submission_batch_body)
+
+Generates multiple PDFs
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+
+$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
+$template_id = "template_id_example"; // string |
+$create_submission_batch_body = array(new \FormAPI\Model\CreateSubmissionBatchBody()); // \FormAPI\Model\CreateSubmissionBatchBody[] |
+
+try {
+    $result = $api_instance->batchGeneratePDF($template_id, $create_submission_batch_body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->batchGeneratePDF: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **string**|  |
+ **create_submission_batch_body** | [**\FormAPI\Model\CreateSubmissionBatchBody[]**](../Model/CreateSubmissionBatchBody.md)|  | [optional]
+
+### Return type
+
+[**\FormAPI\Model\InlineResponse2011[]**](../Model/InlineResponse2011.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **combineSubmissions**
 > \FormAPI\Model\InlineResponse201 combineSubmissions($create_combined_submission_body)
@@ -23,7 +74,7 @@ Merge generated PDFs together
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -51,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -70,7 +121,7 @@ Expire a combined submission
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -98,7 +149,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -108,7 +159,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **expireSubmission**
-> \FormAPI\Model\InlineResponse2011Submission expireSubmission($submission_id)
+> \FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission expireSubmission($submission_id)
 
 Expire a PDF submission
 
@@ -117,7 +168,7 @@ Expire a PDF submission
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -141,11 +192,11 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
+[**\FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission**](../Model/TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -164,7 +215,7 @@ Generates a new PDF
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -194,7 +245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -213,7 +264,7 @@ Check the status of a combined submission (merged PDFs)
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -241,7 +292,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -251,7 +302,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSubmission**
-> \FormAPI\Model\InlineResponse2011Submission getSubmission($submission_id)
+> \FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission getSubmission($submission_id)
 
 Check the status of a PDF
 
@@ -260,7 +311,7 @@ Check the status of a PDF
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -284,11 +335,60 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse2011Submission**](../Model/InlineResponse2011Submission.md)
+[**\FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission**](../Model/TemplatestemplateIdsubmissionsbatchSubmission.md)
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **getTemplates**
+> \FormAPI\Model\InlineResponse2001[] getTemplates($page, $per_page)
+
+Get a list of all templates
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+
+$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
+$page = 56; // int | Default: 1
+$per_page = 56; // int | Default: 50
+
+try {
+    $result = $api_instance->getTemplates($page, $per_page);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->getTemplates: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **int**| Default: 1 | [optional]
+ **per_page** | **int**| Default: 50 | [optional]
+
+### Return type
+
+[**\FormAPI\Model\InlineResponse2001[]**](../Model/InlineResponse2001.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -307,7 +407,7 @@ Test Authentication
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-// Configure HTTP basic authorization: basic
+// Configure HTTP basic authorization: api_token_basic
 FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
 FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
 
@@ -331,7 +431,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[basic](../../README.md#basic)
+[api_token_basic](../../README.md#api_token_basic)
 
 ### HTTP request headers
 

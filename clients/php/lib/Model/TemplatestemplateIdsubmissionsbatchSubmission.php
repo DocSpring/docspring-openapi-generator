@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse2011Submission
+ * TemplatestemplateIdsubmissionsbatchSubmission
  *
  * PHP version 5
  *
@@ -32,14 +32,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * InlineResponse2011Submission Class Doc Comment
+ * TemplatestemplateIdsubmissionsbatchSubmission Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse2011Submission implements ModelInterface, ArrayAccess
+class TemplatestemplateIdsubmissionsbatchSubmission implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -48,7 +48,7 @@ class InlineResponse2011Submission implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'inline_response_201_1_submission';
+    protected static $swaggerModelName = 'templatestemplate_idsubmissionsbatch_submission';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

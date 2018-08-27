@@ -1,6 +1,6 @@
 <?php
 /**
- * InlineResponse2011SubmissionTest
+ * CreateSubmissionBatchBodyTest
  *
  * PHP version 5
  *
@@ -29,16 +29,16 @@
 namespace FormAPI;
 
 /**
- * InlineResponse2011SubmissionTest Class Doc Comment
+ * CreateSubmissionBatchBodyTest Class Doc Comment
  *
  * @category    Class */
-// * @description InlineResponse2011Submission
+// * @description CreateSubmissionBatchBody
 /**
  * @package     FormAPI
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class InlineResponse2011SubmissionTest extends \PHPUnit_Framework_TestCase
+class CreateSubmissionBatchBodyTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,16 +70,9 @@ class InlineResponse2011SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "InlineResponse2011Submission"
+     * Test "CreateSubmissionBatchBody"
      */
-    public function testInlineResponse2011Submission()
-    {
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
+    public function testCreateSubmissionBatchBody()
     {
     }
 
@@ -91,23 +84,9 @@ class InlineResponse2011SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "expired"
+     * Test attribute "data"
      */
-    public function testPropertyExpired()
-    {
-    }
-
-    /**
-     * Test attribute "expires_at"
-     */
-    public function testPropertyExpiresAt()
-    {
-    }
-
-    /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
+    public function testPropertyData()
     {
     }
 
@@ -115,13 +94,6 @@ class InlineResponse2011SubmissionTest extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
-    {
-    }
-
-    /**
-     * Test attribute "download_url"
-     */
-    public function testPropertyDownloadUrl()
     {
     }
 }
