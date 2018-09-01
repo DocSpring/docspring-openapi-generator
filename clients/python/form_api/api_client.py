@@ -71,11 +71,15 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Swagger-Codegen/0.2.0/python'
+        self.user_agent = 'Swagger-Codegen/0.2.1/python'
 
     def __del__(self):
-        self.pool.close()
-        self.pool.join()
+        # Ignore RuntimeError("cannot join current thread") from threading.py
+        try:
+            self.pool.close()
+            self.pool.join()
+        except RuntimeError:
+            pass
 
     @property
     def user_agent(self):
