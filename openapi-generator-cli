@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")"
+java $JAVA_OPTS -cp formapi-generator/target/formapi-generator-1.0.0.jar\
+:openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar \
+org.openapitools.codegen.OpenAPIGenerator $*

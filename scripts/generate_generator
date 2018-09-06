@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Example of how to generate a generator
+
+./openapi-generator-cli meta -n FormApiClient -o generators/ruby \
+  -t CLIENT \
+  -p io.formapi.codegen
+
+
+# Compile it
+mvn package -DskipTests=true
+
+
+# Use it:
+java -cp generators/ruby/target/FormApiClient-openapi-generator-1.0.0.jar\
+:openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar \
+org.openapitools.codegen.OpenAPIGenerator help

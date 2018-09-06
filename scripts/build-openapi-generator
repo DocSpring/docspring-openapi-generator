@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/../openapi-generator"
+mvn install -DskipTests=true

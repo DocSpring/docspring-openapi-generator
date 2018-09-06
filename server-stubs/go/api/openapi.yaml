@@ -1,0 +1,834 @@
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+servers:
+- url: https://app.formapi.io/api/v1
+paths:
+  /authentication:
+    get:
+      operationId: testAuthentication
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                status: success
+              schema:
+                $ref: '#/components/schemas/authentication_success_response'
+          description: authentication succeeded
+        401:
+          content:
+            application/json:
+              example:
+                error: Invalid API token.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+      security:
+      - api_token_basic: []
+      summary: Test Authentication
+      tags:
+      - PDF
+  /combined_submissions:
+    post:
+      operationId: combineSubmissions
+      requestBody:
+        $ref: '#/components/requestBodies/create_combined_submission_data'
+        content:
+          application/json:
+            schema:
+              properties:
+                test:
+                  type: boolean
+                submission_ids:
+                  items:
+                    type: string
+                  type: array
+                metadata:
+                  properties: {}
+                  type: object
+                expires_in:
+                  type: number
+              required:
+              - submission_ids
+              title: create_combined_submission_data
+              type: object
+        required: false
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                status: success
+                combined_submission:
+                  id: com_YLGSFnLmdP9ZspS4rY
+                  state: pending
+                  expired: false
+                  submission_ids:
+                  - sub_q6DpxzjzQfrmjYQGcF
+                  - sub_5kYr5SJ52dXfnKHGcT
+                  metadata:
+                    foo: 123
+                    bar: baz
+              schema:
+                $ref: '#/components/schemas/create_combined_submission_response'
+          description: combined submission created
+        400:
+          content:
+            application/json:
+              example:
+                status: error
+                error: JSON payload must contain a "submission_ids" array.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: invalid JSON
+        401:
+          content:
+            application/json:
+              example:
+                error: Invalid API token.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        422:
+          content:
+            application/json:
+              example:
+                status: error
+                errors:
+                - 'submission_ids: Could not find submission with ID: MISSING_ID'
+              schema:
+                $ref: '#/components/schemas/invalid_request_response'
+          description: invalid request
+      security:
+      - api_token_basic: []
+      summary: Merge generated PDFs together
+      tags:
+      - PDF
+  /combined_submissions/{combined_submission_id}:
+    delete:
+      operationId: expireCombinedSubmission
+      parameters:
+      - in: path
+        name: combined_submission_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: com_2gfb7n4nxNhqXSgxmt
+                state: processed
+                expired: true
+                expires_at: 2018-09-04T15:46:50.448-04:00
+                submission_ids:
+                - sub_2tLG4HDZdTQ27EqeDq
+                - sub_MkRGY6cEqkzq5yDK5b
+                metadata:
+                  qux: abc
+                  user_id: 42
+              schema:
+                $ref: '#/components/schemas/combined_submission'
+          description: submission was expired
+        401:
+          content:
+            application/json:
+              example:
+                error: You need to sign in or sign up before continuing.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        403:
+          content:
+            application/json:
+              example:
+                status: error
+                error: You must use a live API token to expire a combined submission.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: test API token used
+        404:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Combined submission not found.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: combined submission not found
+      security:
+      - api_token_basic: []
+      summary: Expire a combined submission
+      tags:
+      - PDF
+    get:
+      operationId: getCombinedSubmission
+      parameters:
+      - in: path
+        name: combined_submission_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: com_kkqhrX2bCKkTTFmS6R
+                state: processed
+                expired: false
+                expires_at: 2018-09-04T15:51:49.327-04:00
+                submission_ids:
+                - sub_nTaDDqngP4kecLh6RL
+                - sub_qbMznZ2PX7Z6XLMgaN
+                metadata:
+                  qux: abc
+                  user_id: 42
+                download_url: file:///Users/ndbroadbent/code/form_api/public/uploads/store/submissions/LtgtLxQYsHakQFsq/20171002192229-LtgkQFsq.pdf
+              schema:
+                $ref: '#/components/schemas/combined_submission'
+          description: processed combined submission found
+        401:
+          content:
+            application/json:
+              example:
+                error: You need to sign in or sign up before continuing.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        404:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Combined submission not found.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: combined submission not found
+      security:
+      - api_token_basic: []
+      summary: Check the status of a combined submission (merged PDFs)
+      tags:
+      - PDF
+  /templates/{template_id}/submissions/batch:
+    post:
+      operationId: batchGeneratePDF
+      parameters:
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/create_submission_batch_data'
+              type: array
+        required: false
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+              - status: success
+                submission:
+                  id: sub_fh34AXXnF7pa6T3DZK
+                  state: pending
+                  test: false
+                  expired: false
+                  metadata:
+                    submission_number: 1
+              - status: success
+                submission:
+                  id: sub_PsNd4rsgjKZ4LDNkgp
+                  state: pending
+                  test: false
+                  expired: false
+                  metadata:
+                    submission_number: 2
+              schema:
+                items:
+                  $ref: '#/components/schemas/create_submission_response'
+                type: array
+          description: submissions created
+        400:
+          content:
+            application/json:
+              example:
+                status: error
+                error: JSON payload must be an array of objects.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: invalid JSON
+        401:
+          content:
+            application/json:
+              example:
+                error: Invalid API token.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        422:
+          content:
+            application/json:
+              example:
+              - status: error
+                submission:
+                  id: sub_YxY2h5DXKeSeApcGAe
+                  state: invalid_data
+                  test: false
+                  expired: false
+                  metadata:
+                    submission_number: 1
+                errors:
+                - The root object did not contain a required property of 'description'
+              - status: error
+                submission:
+                  id: sub_MFcsYdZPgeFJMGrs7H
+                  state: invalid_data
+                  test: false
+                  expired: false
+                  metadata:
+                    submission_number: 2
+                errors:
+                - The root object did not contain a required property of 'title'
+              schema:
+                items:
+                  $ref: '#/components/schemas/invalid_request_response'
+                type: array
+          description: invalid requests
+      security:
+      - api_token_basic: []
+      summary: Generates multiple PDFs
+      tags:
+      - PDF
+  /templates/{template_id}/submissions:
+    post:
+      operationId: generatePDF
+      parameters:
+      - in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        $ref: '#/components/requestBodies/create_submission_data'
+        content:
+          application/json:
+            schema:
+              properties:
+                test:
+                  type: boolean
+                data:
+                  properties: {}
+                  type: object
+                html:
+                  type: string
+                css:
+                  type: string
+                metadata:
+                  properties: {}
+                  type: object
+              required:
+              - data
+              title: create_submission_data
+              type: object
+        required: false
+      responses:
+        201:
+          content:
+            application/json:
+              example:
+                status: success
+                submission:
+                  id: sub_Xfm2KXzLYD5rYyqHgs
+                  state: pending
+                  test: false
+                  expired: false
+                  metadata:
+                    foo: 123
+                    bar: baz
+              schema:
+                $ref: '#/components/schemas/create_submission_response'
+          description: submission created
+        400:
+          content:
+            application/json:
+              example:
+                status: error
+                error: JSON payload must contain a "data" object.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: invalid JSON
+        401:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Unauthorized
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        422:
+          content:
+            application/json:
+              example:
+                status: error
+                submission:
+                  id: sub_RT6r3sJPY6mtKp2p5d
+                  state: invalid_data
+                  test: false
+                  expired: false
+                  metadata:
+                    foo: 123
+                    bar: baz
+                errors:
+                - The root object did not contain a required property of 'description'
+              schema:
+                $ref: '#/components/schemas/invalid_request_response'
+          description: invalid request
+      security:
+      - api_token_basic: []
+      summary: Generates a new PDF
+      tags:
+      - PDF
+  /submissions/{submission_id}:
+    delete:
+      operationId: expireSubmission
+      parameters:
+      - in: path
+        name: submission_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: sub_G2njYpYe234KQRKaR3
+                state: processed
+                test: true
+                expired: true
+                expires_at: 2018-09-04T15:46:55.274-04:00
+                metadata:
+                  qux: abc
+                  user_id: 42
+              schema:
+                $ref: '#/components/schemas/submission'
+          description: submission was expired
+        401:
+          content:
+            application/json:
+              example:
+                error: You need to sign in or sign up before continuing.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        403:
+          content:
+            application/json:
+              example:
+                status: error
+                error: You must use a live API token to expire a submission.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: test API token used
+        404:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Submission not found.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: submission not found
+      security:
+      - api_token_basic: []
+      summary: Expire a PDF submission
+      tags:
+      - PDF
+    get:
+      operationId: getSubmission
+      parameters:
+      - in: path
+        name: submission_id
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+                id: sub_NAn79m9hNRFyFMTTHP
+                state: processed
+                test: true
+                expired: false
+                expires_at: 2018-09-11T15:46:54.394-04:00
+                metadata:
+                  qux: abc
+                  user_id: 42
+                download_url: file:///Users/ndbroadbent/code/form_api/public/uploads/store/submissions/LtgtLxQYsHakQFsq/20171002192229-LtgkQFsq.pdf
+                permanent_download_url: http://localhost/submissions/sub_NAn79m9hNRFyFMTTHP/download
+              schema:
+                $ref: '#/components/schemas/submission'
+          description: processed submission found
+        401:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Unauthorized
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+        404:
+          content:
+            application/json:
+              example:
+                status: error
+                error: Submission not found.
+              schema:
+                $ref: '#/components/schemas/error_response'
+          description: submission not found
+      security:
+      - api_token_basic: []
+      summary: Check the status of a PDF
+      tags:
+      - PDF
+  /templates:
+    get:
+      operationId: getTemplates
+      parameters:
+      - description: 'Default: 1'
+        in: query
+        name: page
+        schema:
+          minimum: 1
+          type: integer
+      - description: 'Default: 50'
+        in: query
+        name: per_page
+        schema:
+          maximum: 50
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          content:
+            application/json:
+              example:
+              - id: tpl_Gyxn6NzdYQRLDgX6DM
+                name: Template 1
+                public_web_form: false
+                public_submissions: false
+                template_type: pdf
+                document_processed: true
+                expire_submissions: true
+                expire_after: 7
+                expiration_interval: days
+                allow_additional_properties: false
+                blockchain_timestamp_verification: false
+                page_count: 0
+                page_dimensions:
+                - - 612
+                  - 792
+              schema:
+                items:
+                  $ref: '#/components/schemas/template'
+                title: templates
+                type: array
+          description: with pagination options
+        401:
+          content:
+            application/json:
+              example:
+                error: You need to sign in or sign up before continuing.
+              schema:
+                $ref: '#/components/schemas/authentication_error_response'
+          description: authentication failed
+      security:
+      - api_token_basic: []
+      summary: Get a list of all templates
+      tags:
+      - PDF
+components:
+  requestBodies:
+    create_combined_submission_data:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_combined_submission_data'
+    create_submission_data:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_submission_data'
+  schemas:
+    template:
+      example:
+        expiration_interval: minutes
+        webhook_url: webhook_url
+        expire_after: 0.80082819046101150206595775671303272247314453125
+        allow_additional_properties: true
+        public_submissions: true
+        slack_webhook_url: slack_webhook_url
+        blockchain_timestamp_verification: true
+        public_web_form: true
+        expire_submissions: true
+        name: name
+        template_type: template_type
+        id: id
+        page_dimensions:
+        - - 6.02745618307040320615897144307382404804229736328125
+          - 6.02745618307040320615897144307382404804229736328125
+        - - 6.02745618307040320615897144307382404804229736328125
+          - 6.02745618307040320615897144307382404804229736328125
+        redirect_url: redirect_url
+      properties:
+        expiration_interval:
+          enum:
+          - minutes
+          - hours
+          - days
+          type: string
+        webhook_url:
+          nullable: true
+          type: string
+        expire_after:
+          type: number
+        allow_additional_properties:
+          type: boolean
+        public_submissions:
+          type: boolean
+        slack_webhook_url:
+          nullable: true
+          type: string
+        blockchain_timestamp_verification:
+          type: boolean
+        public_web_form:
+          type: boolean
+        expire_submissions:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        template_type:
+          type: string
+        id:
+          type: string
+        page_dimensions:
+          items:
+            items:
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        redirect_url:
+          nullable: true
+          type: string
+    create_combined_submission_data:
+      properties:
+        test:
+          type: boolean
+        submission_ids:
+          items:
+            type: string
+          type: array
+        metadata:
+          properties: {}
+          type: object
+        expires_in:
+          type: number
+      required:
+      - submission_ids
+      title: create_combined_submission_data
+      type: object
+    combined_submission:
+      example:
+        metadata: '{}'
+        expired: true
+        expires_at: expires_at
+        download_url: download_url
+        submission_ids:
+        - submission_ids
+        - submission_ids
+        id: id
+        state: pending
+      properties:
+        metadata:
+          properties: {}
+          type: object
+        expired:
+          type: boolean
+        expires_at:
+          nullable: true
+          type: string
+        download_url:
+          nullable: true
+          type: string
+        submission_ids:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        state:
+          enum:
+          - pending
+          - processed
+          - error
+          type: string
+    create_combined_submission_response:
+      example:
+        combined_submission:
+          metadata: '{}'
+          expired: true
+          expires_at: expires_at
+          download_url: download_url
+          submission_ids:
+          - submission_ids
+          - submission_ids
+          id: id
+          state: pending
+        status: success
+      properties:
+        combined_submission:
+          $ref: '#/components/schemas/combined_submission'
+        status:
+          enum:
+          - success
+          - error
+          type: string
+    create_submission_data:
+      properties:
+        test:
+          type: boolean
+        data:
+          properties: {}
+          type: object
+        html:
+          type: string
+        css:
+          type: string
+        metadata:
+          properties: {}
+          type: object
+      required:
+      - data
+      title: create_submission_data
+      type: object
+    error_response:
+      properties:
+        status:
+          enum:
+          - error
+          type: string
+        error:
+          type: string
+      required:
+      - error
+      - status
+      title: error_response
+      type: object
+    invalid_request_response:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        status:
+          enum:
+          - error
+          type: string
+    submission:
+      example:
+        metadata: '{}'
+        expired: true
+        expires_at: expires_at
+        test: true
+        download_url: download_url
+        id: id
+        state: pending
+      properties:
+        metadata:
+          properties: {}
+          type: object
+        expired:
+          type: boolean
+        expires_at:
+          nullable: true
+          type: string
+        test:
+          type: boolean
+        download_url:
+          nullable: true
+          type: string
+        id:
+          type: string
+        state:
+          enum:
+          - pending
+          - processed
+          - invalid_data
+          - error
+          - image_download_failed
+          - image_processing_failed
+          type: string
+    create_submission_response:
+      example:
+        submission:
+          metadata: '{}'
+          expired: true
+          expires_at: expires_at
+          test: true
+          download_url: download_url
+          id: id
+          state: pending
+        status: success
+      properties:
+        submission:
+          $ref: '#/components/schemas/submission'
+        status:
+          enum:
+          - success
+          - error
+          type: string
+    authentication_success_response:
+      example:
+        status: success
+      properties:
+        status:
+          enum:
+          - success
+          type: string
+    authentication_error_response:
+      properties:
+        error:
+          type: string
+    create_submission_batch_data:
+      properties:
+        css:
+          type: string
+        metadata:
+          properties: {}
+          type: object
+        test:
+          type: boolean
+        data:
+          properties: {}
+          type: object
+        html:
+          type: string
+  securitySchemes:
+    api_token_basic:
+      description: 'Username: API Token ID, Password: API Token Secret'
+      scheme: basic
+      type: http

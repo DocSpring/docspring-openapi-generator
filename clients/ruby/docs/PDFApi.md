@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf**
-> Array&lt;InlineResponse2011&gt; batch_generate_pdf(template_id, opts)
+> Array&lt;CreateSubmissionResponse&gt; batch_generate_pdf(template_id, create_submission_data)
 
 Generates multiple PDFs
 
@@ -32,16 +32,12 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-template_id = "template_id_example" # String |
-
-opts = {
-  create_submission_batch_body: [FormAPI::CreateSubmissionBatchBody.new] # Array<CreateSubmissionBatchBody> |
-}
+template_id = 'tpl_000000000000000001' # String | 
+create_submission_data = nil # Array<CreateSubmissionData> | 
 
 begin
   #Generates multiple PDFs
-  result = api_instance.batch_generate_pdf(template_id, opts)
+  result = api_instance.batch_generate_pdf(template_id, create_submission_data)
   p result
 rescue FormAPI::ApiError => e
   puts "Exception when calling PDFApi->batch_generate_pdf: #{e}"
@@ -52,12 +48,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **String**|  |
- **create_submission_batch_body** | [**Array&lt;CreateSubmissionBatchBody&gt;**](CreateSubmissionBatchBody.md)|  | [optional]
+ **template_id** | **String**|  | 
+ **create_submission_data** | [**Array&lt;CreateSubmissionData&gt;**](Array.md)|  | 
 
 ### Return type
 
-[**Array&lt;InlineResponse2011&gt;**](InlineResponse2011.md)
+[**Array&lt;CreateSubmissionResponse&gt;**](CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -71,7 +67,7 @@ Name | Type | Description  | Notes
 
 
 # **combine_submissions**
-> InlineResponse201 combine_submissions(opts)
+> CreateCombinedSubmissionResponse combine_submissions(opts)
 
 Merge generated PDFs together
 
@@ -87,9 +83,8 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
 opts = {
-  create_combined_submission_body: FormAPI::CreateCombinedSubmissionBody.new # CreateCombinedSubmissionBody |
+  combined_submission_data: FormAPI::CombinedSubmissionData.new # CombinedSubmissionData | 
 }
 
 begin
@@ -105,11 +100,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_combined_submission_body** | [**CreateCombinedSubmissionBody**](CreateCombinedSubmissionBody.md)|  | [optional]
+ **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional] 
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
 
 ### Authorization
 
@@ -123,7 +118,7 @@ Name | Type | Description  | Notes
 
 
 # **expire_combined_submission**
-> InlineResponse201CombinedSubmission expire_combined_submission(combined_submission_id)
+> CombinedSubmission expire_combined_submission(combined_submission_id)
 
 Expire a combined submission
 
@@ -139,9 +134,7 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-combined_submission_id = "combined_submission_id_example" # String |
-
+combined_submission_id = 'com_000000000000000001' # String | 
 
 begin
   #Expire a combined submission
@@ -156,11 +149,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **String**|  |
+ **combined_submission_id** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
@@ -174,7 +167,7 @@ Name | Type | Description  | Notes
 
 
 # **expire_submission**
-> TemplatestemplateIdsubmissionsbatchSubmission expire_submission(submission_id)
+> Submission expire_submission(submission_id)
 
 Expire a PDF submission
 
@@ -190,9 +183,7 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-submission_id = "submission_id_example" # String |
-
+submission_id = 'sub_000000000000000001' # String | 
 
 begin
   #Expire a PDF submission
@@ -207,11 +198,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **String**|  |
+ **submission_id** | **String**|  | 
 
 ### Return type
 
-[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -225,7 +216,7 @@ Name | Type | Description  | Notes
 
 
 # **generate_pdf**
-> InlineResponse2011 generate_pdf(template_id, opts)
+> CreateSubmissionResponse generate_pdf(template_id, create_submission_data)
 
 Generates a new PDF
 
@@ -241,16 +232,12 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-template_id = "template_id_example" # String |
-
-opts = {
-  create_submission_body: FormAPI::CreateSubmissionBody.new # CreateSubmissionBody |
-}
+template_id = 'tpl_000000000000000001' # String | 
+create_submission_data = FormAPI::CreateSubmissionData.new # CreateSubmissionData | 
 
 begin
   #Generates a new PDF
-  result = api_instance.generate_pdf(template_id, opts)
+  result = api_instance.generate_pdf(template_id, create_submission_data)
   p result
 rescue FormAPI::ApiError => e
   puts "Exception when calling PDFApi->generate_pdf: #{e}"
@@ -261,12 +248,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **String**|  |
- **create_submission_body** | [**CreateSubmissionBody**](CreateSubmissionBody.md)|  | [optional]
+ **template_id** | **String**|  | 
+ **create_submission_data** | [**CreateSubmissionData**](CreateSubmissionData.md)|  | 
 
 ### Return type
 
-[**InlineResponse2011**](InlineResponse2011.md)
+[**CreateSubmissionResponse**](CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -280,7 +267,7 @@ Name | Type | Description  | Notes
 
 
 # **get_combined_submission**
-> InlineResponse201CombinedSubmission get_combined_submission(combined_submission_id)
+> CombinedSubmission get_combined_submission(combined_submission_id)
 
 Check the status of a combined submission (merged PDFs)
 
@@ -296,9 +283,7 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-combined_submission_id = "combined_submission_id_example" # String |
-
+combined_submission_id = 'com_000000000000000001' # String | 
 
 begin
   #Check the status of a combined submission (merged PDFs)
@@ -313,11 +298,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **String**|  |
+ **combined_submission_id** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
@@ -331,7 +316,7 @@ Name | Type | Description  | Notes
 
 
 # **get_submission**
-> TemplatestemplateIdsubmissionsbatchSubmission get_submission(submission_id)
+> Submission get_submission(submission_id)
 
 Check the status of a PDF
 
@@ -347,9 +332,7 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
-submission_id = "submission_id_example" # String |
-
+submission_id = 'sub_000000000000000001' # String | 
 
 begin
   #Check the status of a PDF
@@ -364,11 +347,11 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **String**|  |
+ **submission_id** | **String**|  | 
 
 ### Return type
 
-[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -382,7 +365,7 @@ Name | Type | Description  | Notes
 
 
 # **get_templates**
-> Array&lt;InlineResponse2001&gt; get_templates(opts)
+> Array&lt;Template&gt; get_templates(opts)
 
 Get a list of all templates
 
@@ -398,10 +381,9 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-
 opts = {
-  page: 56, # Integer | Default: 1
-  per_page: 56 # Integer | Default: 50
+  page: 2, # Integer | Default: 1
+  per_page: 1 # Integer | Default: 50
 }
 
 begin
@@ -417,12 +399,12 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **Integer**| Default: 1 | [optional]
- **per_page** | **Integer**| Default: 50 | [optional]
+ **page** | **Integer**| Default: 1 | [optional] 
+ **per_page** | **Integer**| Default: 50 | [optional] 
 
 ### Return type
 
-[**Array&lt;InlineResponse2001&gt;**](InlineResponse2001.md)
+[**Array&lt;Template&gt;**](Template.md)
 
 ### Authorization
 
@@ -436,7 +418,7 @@ Name | Type | Description  | Notes
 
 
 # **test_authentication**
-> InlineResponse200 test_authentication
+> AuthenticationSuccessResponse test_authentication
 
 Test Authentication
 
@@ -467,7 +449,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**AuthenticationSuccessResponse**](AuthenticationSuccessResponse.md)
 
 ### Authorization
 

@@ -14,50 +14,57 @@ if [ -z "$LANGUAGE" ]; then
   exit
 fi
 
+case "$LANGUAGE" in
+  ruby)
+    GENERATOR_NAME="formapi-ruby";;
+  *)
+    GENERATOR_NAME="$LANGUAGE";;
+esac
+
 mkdir -p "examples/$LANGUAGE"
 mkdir -p "scripts/$LANGUAGE"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Could not find $CONFIG_FILE"
-  ./scripts/swagger config-help -l "$LANGUAGE"
+  ./openapi-generator-cli config-help -l "$LANGUAGE"
   exit 1
 fi
 
 rm -rf "$CLIENT_DIR"
 
-./scripts/swagger generate \
-  -i ../form_api/swagger/v1/swagger.json \
-  -l "$LANGUAGE" \
-  -c "$CONFIG_FILE" \
-  -o "$CLIENT_DIR"
+./openapi-generator-cli generate \
+  --input-spec ../form_api/swagger/v1/swagger.json \
+  --generator-name "$GENERATOR_NAME" \
+  --config "$CONFIG_FILE" \
+  --output "$CLIENT_DIR"
 
-cd "$CLIENT_DIR"
-find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+# cd "$CLIENT_DIR"
+# find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
 
-git init
-git add -A
-git commit -m "Initial commit"
+# git init
+# git add -A
+# git commit -m "Initial commit"
 
-if [ -f "../../patches/$LANGUAGE.diff" ]; then
-  if ! git apply --check "../../patches/$LANGUAGE.diff"; then
-    echo "Could not apply patch: ../../patches/$LANGUAGE.diff. Please fix the conflicts."
-    exit 1
-  fi
+# if [ -f "../../patches/$LANGUAGE.diff" ]; then
+#   if ! git apply --check "../../patches/$LANGUAGE.diff"; then
+#     echo "Could not apply patch: ../../patches/$LANGUAGE.diff. Please fix the conflicts."
+#     exit 1
+#   fi
 
-  git apply "../../patches/$LANGUAGE.diff"
-  git add -A
-  git commit -m "Applied patch"
+#   git apply "../../patches/$LANGUAGE.diff"
+#   git add -A
+#   git commit -m "Applied patch"
 
-  if [ -f "../../scripts/$LANGUAGE/install_deps" ]; then
-    ../../scripts/$LANGUAGE/install_deps
-  fi
-elif [ -f "../../scripts/$LANGUAGE/post_generate" ]; then
-  ../../scripts/$LANGUAGE/post_generate
-  find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
+#   if [ -f "../../scripts/$LANGUAGE/install_deps" ]; then
+#     ../../scripts/$LANGUAGE/install_deps
+#   fi
+# elif [ -f "../../scripts/$LANGUAGE/post_generate" ]; then
+#   ../../scripts/$LANGUAGE/post_generate
+#   find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
 
-  git add -A
-  git commit -m "Ran post_generate script"
+#   git add -A
+#   git commit -m "Ran post_generate script"
 
-  cd ../..
-  ./scripts/update-patch $LANGUAGE
-fi
+#   cd ../..
+#   ./scripts/update-patch $LANGUAGE
+# fi
