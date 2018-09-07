@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/../../clients/csharp"
+rm -rf src/*/bin/Debug/
+bash build.sh

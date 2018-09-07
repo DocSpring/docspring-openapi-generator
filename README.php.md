@@ -1,6 +1,6 @@
-# DocRaptor Java Native Client Library
+# FormAPI Java Native Client Library
 
-This is a maven package for using [DocRaptor API](https://docraptor.com/documentation) to convert [HTML to PDF and XLSX](https://docraptor.com).
+This is a maven package for using [FormAPI](https://docraptor.com/documentation) to convert [HTML to PDF and XLSX](https://docraptor.com).
 
 
 ## Installation
@@ -66,14 +66,14 @@ We have guides for doing some of the common things:
 
 * [Headers and Footers](https://docraptor.com/documentation/style#pdf-headers-footers) including page skipping
 * [CSS Media Selector](https://docraptor.com/documentation/api#api_basic_pdf) to make the page look exactly as it does in your browser
-* Protect content with [HTTP authentication](https://docraptor.com/documentation/api#api_http_user) or [proxies](https://docraptor.com/documentation/api#api_http_proxy) so only DocRaptor can access them
+* Protect content with [HTTP authentication](https://docraptor.com/documentation/api#api_http_user) or [proxies](https://docraptor.com/documentation/api#api_http_proxy) so only FormAPI can access them
 
 
 ## More Help
 
-DocRaptor has a lot of more [styling](https://docraptor.com/documentation/style) and [implementation options](https://docraptor.com/documentation/api).
+FormAPI has a lot of more [styling](https://docraptor.com/documentation/style) and [implementation options](https://docraptor.com/documentation/api).
 
-Stuck? We're experts at using DocRaptor so please [email us](mailto:support@docraptor.com) if you run into trouble.
+Stuck? We're experts at using FormAPI so please [email us](mailto:support@docraptor.com) if you run into trouble.
 
 
 ## Development
@@ -101,7 +101,7 @@ If you haven't released before, please see the [release setup guide](RELEASE_SET
 10. `gpg --use-agent --armor --detach-sign` and press ^C after authenticating
 11. `mvn clean deploy`
 12. Verify package release at [Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.docraptor%22%20AND%20a%3A%22docraptor%22)  (takes anywhere from minutes to days)
-13. Use the git tag and make a new release with `target/docraptor-*` attached, https://github.com/DocRaptor/docraptor-java/tags
+13. Use the git tag and make a new release with `target/docraptor-*` attached, https://github.com/FormAPI/docraptor-java/tags
 14. Refresh documentation on docraptor.com
 
 

@@ -3,7 +3,7 @@ set -e
 cd "$(dirname "$0")/.."
 
 LANGUAGE="$1"
-CONFIG_FILE="swagger-config.$LANGUAGE.json"
+CONFIG_FILE="config/$LANGUAGE.json"
 CLIENT_DIR="clients/$LANGUAGE"
 
 if [ -z "$LANGUAGE" ]; then
@@ -14,31 +14,25 @@ if [ -z "$LANGUAGE" ]; then
   exit
 fi
 
-case "$LANGUAGE" in
-  ruby)
-    GENERATOR_NAME="formapi-ruby";;
-  python)
-    GENERATOR_NAME="formapi-python";;
-  php)
-    GENERATOR_NAME="formapi-php";;
-  *)
-    GENERATOR_NAME="$LANGUAGE";;
-esac
+GENERATOR_NAME="formapi-$LANGUAGE"
 
 mkdir -p "examples/$LANGUAGE"
 mkdir -p "scripts/$LANGUAGE"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   echo "Could not find $CONFIG_FILE"
-  ./openapi-generator-cli config-help -l "$LANGUAGE"
+  ./openapi-generator-cli config-help -g "$LANGUAGE"
   exit 1
 fi
 
 case "$LANGUAGE" in
   php)
-    # Preserve installed libraries in vendor
     for f in $CLIENT_DIR/*; do
       if ! [[ "$f" = *'/vendor' ]]; then rm -r $f; fi
+    done;;
+  csharp)
+    for f in $CLIENT_DIR/*; do
+      if ! [[ "$f" = *'/nuget.exe' ]] && ! [[ "$f" = *'/packages' ]]; then rm -r $f; fi
     done;;
   *)
     rm -rf "$CLIENT_DIR"

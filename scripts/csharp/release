@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/../.."
+./scripts/csharp/build
+
+cd "clients/csharp/src/FormApi.Client"
+rm -f FormApi.Client.*.nupkg
+nuget pack -Build -OutputDirectory . FormApi.Client.csproj
+
+# Visit https://www.nuget.org/account/apikeys, then run:
+# $ nuget setApiKey ...
+nuget push FormApi.Client.*.nupkg -Source https://www.nuget.org
