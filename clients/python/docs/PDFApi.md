@@ -16,11 +16,13 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf**
-> list[InlineResponse2011] batch_generate_pdf(template_id, create_submission_batch_body=create_submission_batch_body)
+> list[CreateSubmissionResponse] batch_generate_pdf(template_id, create_submission_data)
 
 Generates multiple PDFs
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -35,12 +37,12 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-template_id = 'template_id_example' # str |
-create_submission_batch_body = [form_api.CreateSubmissionBatchBody()] # list[CreateSubmissionBatchBody] |  (optional)
+template_id = 'tpl_000000000000000001' # str | 
+create_submission_data = NULL # list[CreateSubmissionData] | 
 
 try:
     # Generates multiple PDFs
-    api_response = api_instance.batch_generate_pdf(template_id, create_submission_batch_body=create_submission_batch_body)
+    api_response = api_instance.batch_generate_pdf(template_id, create_submission_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->batch_generate_pdf: %s\n" % e)
@@ -50,12 +52,12 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**|  |
- **create_submission_batch_body** | [**list[CreateSubmissionBatchBody]**](CreateSubmissionBatchBody.md)|  | [optional]
+ **template_id** | **str**|  | 
+ **create_submission_data** | [**list[CreateSubmissionData]**](list.md)|  | 
 
 ### Return type
 
-[**list[InlineResponse2011]**](InlineResponse2011.md)
+[**list[CreateSubmissionResponse]**](CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -69,11 +71,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **combine_submissions**
-> InlineResponse201 combine_submissions(create_combined_submission_body=create_combined_submission_body)
+> CreateCombinedSubmissionResponse combine_submissions(combined_submission_data=combined_submission_data)
 
 Merge generated PDFs together
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -88,11 +92,11 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-create_combined_submission_body = form_api.CreateCombinedSubmissionBody() # CreateCombinedSubmissionBody |  (optional)
+combined_submission_data = form_api.CombinedSubmissionData() # CombinedSubmissionData |  (optional)
 
 try:
     # Merge generated PDFs together
-    api_response = api_instance.combine_submissions(create_combined_submission_body=create_combined_submission_body)
+    api_response = api_instance.combine_submissions(combined_submission_data=combined_submission_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->combine_submissions: %s\n" % e)
@@ -102,11 +106,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_combined_submission_body** | [**CreateCombinedSubmissionBody**](CreateCombinedSubmissionBody.md)|  | [optional]
+ **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional] 
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
 
 ### Authorization
 
@@ -120,11 +124,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **expire_combined_submission**
-> InlineResponse201CombinedSubmission expire_combined_submission(combined_submission_id)
+> CombinedSubmission expire_combined_submission(combined_submission_id)
 
 Expire a combined submission
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -139,7 +145,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-combined_submission_id = 'combined_submission_id_example' # str |
+combined_submission_id = 'com_000000000000000001' # str | 
 
 try:
     # Expire a combined submission
@@ -153,11 +159,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **str**|  |
+ **combined_submission_id** | **str**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
@@ -171,11 +177,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **expire_submission**
-> TemplatestemplateIdsubmissionsbatchSubmission expire_submission(submission_id)
+> Submission expire_submission(submission_id)
 
 Expire a PDF submission
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -190,7 +198,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-submission_id = 'submission_id_example' # str |
+submission_id = 'sub_000000000000000001' # str | 
 
 try:
     # Expire a PDF submission
@@ -204,11 +212,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **str**|  |
+ **submission_id** | **str**|  | 
 
 ### Return type
 
-[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -222,11 +230,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **generate_pdf**
-> InlineResponse2011 generate_pdf(template_id, create_submission_body=create_submission_body)
+> CreateSubmissionResponse generate_pdf(template_id, create_submission_data)
 
 Generates a new PDF
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -241,12 +251,12 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-template_id = 'template_id_example' # str |
-create_submission_body = form_api.CreateSubmissionBody() # CreateSubmissionBody |  (optional)
+template_id = 'tpl_000000000000000001' # str | 
+create_submission_data = form_api.CreateSubmissionData() # CreateSubmissionData | 
 
 try:
     # Generates a new PDF
-    api_response = api_instance.generate_pdf(template_id, create_submission_body=create_submission_body)
+    api_response = api_instance.generate_pdf(template_id, create_submission_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->generate_pdf: %s\n" % e)
@@ -256,12 +266,12 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **template_id** | **str**|  |
- **create_submission_body** | [**CreateSubmissionBody**](CreateSubmissionBody.md)|  | [optional]
+ **template_id** | **str**|  | 
+ **create_submission_data** | [**CreateSubmissionData**](CreateSubmissionData.md)|  | 
 
 ### Return type
 
-[**InlineResponse2011**](InlineResponse2011.md)
+[**CreateSubmissionResponse**](CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -275,11 +285,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_combined_submission**
-> InlineResponse201CombinedSubmission get_combined_submission(combined_submission_id)
+> CombinedSubmission get_combined_submission(combined_submission_id)
 
 Check the status of a combined submission (merged PDFs)
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -294,7 +306,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-combined_submission_id = 'combined_submission_id_example' # str |
+combined_submission_id = 'com_000000000000000001' # str | 
 
 try:
     # Check the status of a combined submission (merged PDFs)
@@ -308,11 +320,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_id** | **str**|  |
+ **combined_submission_id** | **str**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
@@ -326,11 +338,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_submission**
-> TemplatestemplateIdsubmissionsbatchSubmission get_submission(submission_id)
+> Submission get_submission(submission_id)
 
 Check the status of a PDF
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -345,7 +359,7 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-submission_id = 'submission_id_example' # str |
+submission_id = 'sub_000000000000000001' # str | 
 
 try:
     # Check the status of a PDF
@@ -359,11 +373,11 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submission_id** | **str**|  |
+ **submission_id** | **str**|  | 
 
 ### Return type
 
-[**TemplatestemplateIdsubmissionsbatchSubmission**](TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
@@ -377,11 +391,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_templates**
-> list[InlineResponse2001] get_templates(page=page, per_page=per_page)
+> list[Template] get_templates(page=page, per_page=per_page)
 
 Get a list of all templates
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -396,8 +412,8 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-page = 56 # int | Default: 1 (optional)
-per_page = 56 # int | Default: 50 (optional)
+page = 2 # int | Default: 1 (optional)
+per_page = 1 # int | Default: 50 (optional)
 
 try:
     # Get a list of all templates
@@ -411,12 +427,12 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int**| Default: 1 | [optional]
- **per_page** | **int**| Default: 50 | [optional]
+ **page** | **int**| Default: 1 | [optional] 
+ **per_page** | **int**| Default: 50 | [optional] 
 
 ### Return type
 
-[**list[InlineResponse2001]**](InlineResponse2001.md)
+[**list[Template]**](Template.md)
 
 ### Authorization
 
@@ -430,11 +446,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **test_authentication**
-> InlineResponse200 test_authentication()
+> AuthenticationSuccessResponse test_authentication()
 
 Test Authentication
 
 ### Example
+
+* Basic Authentication (api_token_basic): 
 ```python
 from __future__ import print_function
 import time
@@ -463,7 +481,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**AuthenticationSuccessResponse**](AuthenticationSuccessResponse.md)
 
 ### Authorization
 

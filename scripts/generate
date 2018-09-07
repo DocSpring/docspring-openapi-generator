@@ -17,6 +17,8 @@ fi
 case "$LANGUAGE" in
   ruby)
     GENERATOR_NAME="formapi-ruby";;
+  python)
+    GENERATOR_NAME="formapi-python";;
   *)
     GENERATOR_NAME="$LANGUAGE";;
 esac

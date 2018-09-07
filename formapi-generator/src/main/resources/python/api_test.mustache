@@ -1,0 +1,50 @@
+# coding: utf-8
+# Note - this file is just used to generate a scaffold for the tests
+# We overwrite it with test_pdf_api.py
+
+{{>partial_header}}
+
+from __future__ import absolute_import
+
+import unittest
+
+import {{packageName}}
+from {{apiPackage}}.{{classVarName}} import {{classname}}  # noqa: E501
+from {{packageName}}.rest import ApiException
+from pprint import pprint
+
+
+class {{#operations}}Test{{classname}}(unittest.TestCase):
+    """{{classname}} unit test stubs"""
+
+    def setUp(self):
+        # Configure HTTP basic authorization: api_token_basic
+        configuration = form_api.Configuration()
+        configuration.username = 'api_token123'
+        configuration.password = 'testsecret123'
+        configuration.host = 'localhost:31337/api/v1'
+        configuration.scheme = 'http'
+
+        # create an instance of the API class
+        self.api = form_api.PDFApi(form_api.ApiClient(configuration))
+
+    def tearDown(self):
+        pass
+
+   {{#operation}}
+    def test_{{operationId}}(self):
+        """Test case for {{{operationId}}}
+
+{{#summary}}
+        {{{summary}}}  # noqa: E501
+{{/summary}}
+        """
+{{#allParams}}        {{paramName}} = {{{example}}} # {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
+{{/allParams}}
+        {{#returnType}}api_response = {{/returnType}}self.api.{{{operationId}}}({{#allParams}}{{#required}}{{paramName}}{{/required}}{{^required}}{{paramName}}={{paramName}}{{/required}}{{#hasMore}}, {{/hasMore}}{{/allParams}}){{#returnType}}
+        {{/returnType}}
+   {{/operation}}
+{{/operations}}
+
+if __name__ == '__main__':
+    unittest.main()
