@@ -1,2 +1,3 @@
 io.formapi.codegen.FormApiRubyClientCodegen
 io.formapi.codegen.FormApiPythonClientCodegen
+io.formapi.codegen.FormApiPhpClientCodegen

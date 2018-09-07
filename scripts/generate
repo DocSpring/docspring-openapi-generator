@@ -19,6 +19,8 @@ case "$LANGUAGE" in
     GENERATOR_NAME="formapi-ruby";;
   python)
     GENERATOR_NAME="formapi-python";;
+  php)
+    GENERATOR_NAME="formapi-php";;
   *)
     GENERATOR_NAME="$LANGUAGE";;
 esac
@@ -32,7 +34,16 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
-rm -rf "$CLIENT_DIR"
+case "$LANGUAGE" in
+  php)
+    # Preserve installed libraries in vendor
+    for f in $CLIENT_DIR/*; do
+      if ! [[ "$f" = *'/vendor' ]]; then rm -r $f; fi
+    done;;
+  *)
+    rm -rf "$CLIENT_DIR"
+esac
+
 
 ./openapi-generator-cli generate \
   --input-spec ../form_api/swagger/v1/swagger.json \

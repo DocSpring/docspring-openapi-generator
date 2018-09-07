@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **batchGeneratePDF**
-> \FormAPI\Model\InlineResponse2011[] batchGeneratePDF($template_id, $create_submission_batch_body)
+> \FormAPI\Model\CreateSubmissionResponse[] batchGeneratePDF($template_id, $create_submission_data)
 
 Generates multiple PDFs
 
@@ -26,15 +26,22 @@ Generates multiple PDFs
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$template_id = "template_id_example"; // string |
-$create_submission_batch_body = array(new \FormAPI\Model\CreateSubmissionBatchBody()); // \FormAPI\Model\CreateSubmissionBatchBody[] |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = tpl_000000000000000001; // string | 
+$create_submission_data = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionData[] | 
 
 try {
-    $result = $api_instance->batchGeneratePDF($template_id, $create_submission_batch_body);
+    $result = $apiInstance->batchGeneratePDF($template_id, $create_submission_data);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->batchGeneratePDF: ', $e->getMessage(), PHP_EOL;
@@ -47,11 +54,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **create_submission_batch_body** | [**\FormAPI\Model\CreateSubmissionBatchBody[]**](../Model/CreateSubmissionBatchBody.md)|  | [optional]
+ **create_submission_data** | [**\FormAPI\Model\CreateSubmissionData[]**](../Model/array.md)|  |
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse2011[]**](../Model/InlineResponse2011.md)
+[**\FormAPI\Model\CreateSubmissionResponse[]**](../Model/CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -65,7 +72,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **combineSubmissions**
-> \FormAPI\Model\InlineResponse201 combineSubmissions($create_combined_submission_body)
+> \FormAPI\Model\CreateCombinedSubmissionResponse combineSubmissions($combined_submission_data)
 
 Merge generated PDFs together
 
@@ -75,14 +82,21 @@ Merge generated PDFs together
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$create_combined_submission_body = new \FormAPI\Model\CreateCombinedSubmissionBody(); // \FormAPI\Model\CreateCombinedSubmissionBody |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$combined_submission_data = new \FormAPI\Model\CombinedSubmissionData(); // \FormAPI\Model\CombinedSubmissionData | 
 
 try {
-    $result = $api_instance->combineSubmissions($create_combined_submission_body);
+    $result = $apiInstance->combineSubmissions($combined_submission_data);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->combineSubmissions: ', $e->getMessage(), PHP_EOL;
@@ -94,11 +108,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_combined_submission_body** | [**\FormAPI\Model\CreateCombinedSubmissionBody**](../Model/CreateCombinedSubmissionBody.md)|  | [optional]
+ **combined_submission_data** | [**\FormAPI\Model\CombinedSubmissionData**](../Model/CombinedSubmissionData.md)|  | [optional]
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse201**](../Model/InlineResponse201.md)
+[**\FormAPI\Model\CreateCombinedSubmissionResponse**](../Model/CreateCombinedSubmissionResponse.md)
 
 ### Authorization
 
@@ -112,7 +126,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **expireCombinedSubmission**
-> \FormAPI\Model\InlineResponse201CombinedSubmission expireCombinedSubmission($combined_submission_id)
+> \FormAPI\Model\CombinedSubmission expireCombinedSubmission($combined_submission_id)
 
 Expire a combined submission
 
@@ -122,14 +136,21 @@ Expire a combined submission
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$combined_submission_id = "combined_submission_id_example"; // string |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$combined_submission_id = com_000000000000000001; // string | 
 
 try {
-    $result = $api_instance->expireCombinedSubmission($combined_submission_id);
+    $result = $apiInstance->expireCombinedSubmission($combined_submission_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->expireCombinedSubmission: ', $e->getMessage(), PHP_EOL;
@@ -145,7 +166,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
+[**\FormAPI\Model\CombinedSubmission**](../Model/CombinedSubmission.md)
 
 ### Authorization
 
@@ -159,7 +180,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **expireSubmission**
-> \FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission expireSubmission($submission_id)
+> \FormAPI\Model\Submission expireSubmission($submission_id)
 
 Expire a PDF submission
 
@@ -169,14 +190,21 @@ Expire a PDF submission
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$submission_id = "submission_id_example"; // string |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$submission_id = sub_000000000000000001; // string | 
 
 try {
-    $result = $api_instance->expireSubmission($submission_id);
+    $result = $apiInstance->expireSubmission($submission_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->expireSubmission: ', $e->getMessage(), PHP_EOL;
@@ -192,7 +220,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission**](../Model/TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**\FormAPI\Model\Submission**](../Model/Submission.md)
 
 ### Authorization
 
@@ -206,7 +234,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **generatePDF**
-> \FormAPI\Model\InlineResponse2011 generatePDF($template_id, $create_submission_body)
+> \FormAPI\Model\CreateSubmissionResponse generatePDF($template_id, $create_submission_data)
 
 Generates a new PDF
 
@@ -216,15 +244,22 @@ Generates a new PDF
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$template_id = "template_id_example"; // string |
-$create_submission_body = new \FormAPI\Model\CreateSubmissionBody(); // \FormAPI\Model\CreateSubmissionBody |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = tpl_000000000000000001; // string | 
+$create_submission_data = new \FormAPI\Model\CreateSubmissionData(); // \FormAPI\Model\CreateSubmissionData | 
 
 try {
-    $result = $api_instance->generatePDF($template_id, $create_submission_body);
+    $result = $apiInstance->generatePDF($template_id, $create_submission_data);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->generatePDF: ', $e->getMessage(), PHP_EOL;
@@ -237,11 +272,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **create_submission_body** | [**\FormAPI\Model\CreateSubmissionBody**](../Model/CreateSubmissionBody.md)|  | [optional]
+ **create_submission_data** | [**\FormAPI\Model\CreateSubmissionData**](../Model/CreateSubmissionData.md)|  |
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse2011**](../Model/InlineResponse2011.md)
+[**\FormAPI\Model\CreateSubmissionResponse**](../Model/CreateSubmissionResponse.md)
 
 ### Authorization
 
@@ -255,7 +290,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getCombinedSubmission**
-> \FormAPI\Model\InlineResponse201CombinedSubmission getCombinedSubmission($combined_submission_id)
+> \FormAPI\Model\CombinedSubmission getCombinedSubmission($combined_submission_id)
 
 Check the status of a combined submission (merged PDFs)
 
@@ -265,14 +300,21 @@ Check the status of a combined submission (merged PDFs)
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$combined_submission_id = "combined_submission_id_example"; // string |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$combined_submission_id = com_000000000000000001; // string | 
 
 try {
-    $result = $api_instance->getCombinedSubmission($combined_submission_id);
+    $result = $apiInstance->getCombinedSubmission($combined_submission_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->getCombinedSubmission: ', $e->getMessage(), PHP_EOL;
@@ -288,7 +330,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse201CombinedSubmission**](../Model/InlineResponse201CombinedSubmission.md)
+[**\FormAPI\Model\CombinedSubmission**](../Model/CombinedSubmission.md)
 
 ### Authorization
 
@@ -302,7 +344,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSubmission**
-> \FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission getSubmission($submission_id)
+> \FormAPI\Model\Submission getSubmission($submission_id)
 
 Check the status of a PDF
 
@@ -312,14 +354,21 @@ Check the status of a PDF
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$submission_id = "submission_id_example"; // string |
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$submission_id = sub_000000000000000001; // string | 
 
 try {
-    $result = $api_instance->getSubmission($submission_id);
+    $result = $apiInstance->getSubmission($submission_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->getSubmission: ', $e->getMessage(), PHP_EOL;
@@ -335,7 +384,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\TemplatestemplateIdsubmissionsbatchSubmission**](../Model/TemplatestemplateIdsubmissionsbatchSubmission.md)
+[**\FormAPI\Model\Submission**](../Model/Submission.md)
 
 ### Authorization
 
@@ -349,7 +398,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getTemplates**
-> \FormAPI\Model\InlineResponse2001[] getTemplates($page, $per_page)
+> \FormAPI\Model\Template[] getTemplates($page, $per_page)
 
 Get a list of all templates
 
@@ -359,15 +408,22 @@ Get a list of all templates
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
-$page = 56; // int | Default: 1
-$per_page = 56; // int | Default: 50
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$page = 2; // int | Default: 1
+$per_page = 1; // int | Default: 50
 
 try {
-    $result = $api_instance->getTemplates($page, $per_page);
+    $result = $apiInstance->getTemplates($page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->getTemplates: ', $e->getMessage(), PHP_EOL;
@@ -384,7 +440,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse2001[]**](../Model/InlineResponse2001.md)
+[**\FormAPI\Model\Template[]**](../Model/Template.md)
 
 ### Authorization
 
@@ -398,7 +454,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **testAuthentication**
-> \FormAPI\Model\InlineResponse200 testAuthentication()
+> \FormAPI\Model\AuthenticationSuccessResponse testAuthentication()
 
 Test Authentication
 
@@ -408,13 +464,20 @@ Test Authentication
 require_once(__DIR__ . '/vendor/autoload.php');
 
 // Configure HTTP basic authorization: api_token_basic
-FormAPI\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
-FormAPI\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
 
-$api_instance = new FormAPI\Api\PDFApi(new \Http\Adapter\Guzzle6\Client());
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
 
 try {
-    $result = $api_instance->testAuthentication();
+    $result = $apiInstance->testAuthentication();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->testAuthentication: ', $e->getMessage(), PHP_EOL;
@@ -427,7 +490,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\FormAPI\Model\InlineResponse200**](../Model/InlineResponse200.md)
+[**\FormAPI\Model\AuthenticationSuccessResponse**](../Model/AuthenticationSuccessResponse.md)
 
 ### Authorization
 
