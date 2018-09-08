@@ -29,6 +29,7 @@ build/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
+TestResult.xml
 [Bb]uild[Ll]og.*
 
 *_i.c
