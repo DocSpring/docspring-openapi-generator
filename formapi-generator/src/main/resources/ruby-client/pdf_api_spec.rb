@@ -70,11 +70,14 @@ describe 'PDFApi' do
   # @return [CreateCombinedSubmissionResponse]
   describe 'combine_submissions test' do
     it 'should work' do
-      response = api_instance.combine_submissions(combined_submission_data: {
-        submission_ids: ['sub_000000000000000001', 'sub_000000000000000002'],
-      })
+      response = api_instance.combine_submissions(
+        combined_submission_data: {
+          submission_ids: %w[sub_000000000000000001 sub_000000000000000002],
+        }
+      )
       expect(response.status).to eq 'success'
       expect(response.combined_submission.id).to start_with 'com_'
+      expect(response.combined_submission.state).to eq 'pending'
     end
   end
   # integration tests for expire_combined_submission

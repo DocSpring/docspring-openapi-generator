@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+cd "`dirname \"$0\"`/../../clients/javascript"
+printf "Checking NPM user: "
+npm whoami
+
+npm publish --access=public

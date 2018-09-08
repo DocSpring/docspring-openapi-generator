@@ -1,62 +1,112 @@
-# formapi.PDFApi
+# FormAPI.PDFApi
 
 All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**batchGeneratePDF**](PDFApi.md#batchGeneratePDF) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**combineSubmissions**](PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expireCombinedSubmission**](PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expireSubmission**](PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generatePDF**](PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**getCombinedSubmission**](PDFApi.md#getCombinedSubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**getSubmission**](PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**getTemplates**](PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 
 
-<a name="combineSubmissions"></a>
-# **combineSubmissions**
-> InlineResponse201 combineSubmissions(opts)
+<a name="batchGeneratePDF"></a>
+# **batchGeneratePDF**
+> [CreateSubmissionResponse] batchGeneratePDF(templateId, createSubmissionData)
 
-Merge generated PDFs together
+Generates multiple PDFs
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let opts = {
-  'data': new formapi.Data() // Data |
-};
-
-apiInstance.combineSubmissions(opts, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var templateId = tpl_000000000000000001; // String | 
+var createSubmissionData = [new FormAPI.CreateSubmissionData()]; // [CreateSubmissionData] | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.batchGeneratePDF(templateId, createSubmissionData, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **data** | [**Data**](Data.md)|  | [optional]
+ **templateId** | **String**|  | 
+ **createSubmissionData** | [**[CreateSubmissionData]**](Array.md)|  | 
 
 ### Return type
 
-[**InlineResponse201**](InlineResponse201.md)
+[**[CreateSubmissionResponse]**](CreateSubmissionResponse.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="combineSubmissions"></a>
+# **combineSubmissions**
+> CreateCombinedSubmissionResponse combineSubmissions(opts)
+
+Merge generated PDFs together
+
+### Example
+```javascript
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
+
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
+
+var apiInstance = new FormAPI.PDFApi();
+var opts = {
+  'combinedSubmissionData': new FormAPI.CombinedSubmissionData() // CombinedSubmissionData | 
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.combineSubmissions(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **combinedSubmissionData** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional] 
+
+### Return type
+
+[**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -65,47 +115,45 @@ Name | Type | Description  | Notes
 
 <a name="expireCombinedSubmission"></a>
 # **expireCombinedSubmission**
-> InlineResponse201CombinedSubmission expireCombinedSubmission(combinedSubmissionId)
+> CombinedSubmission expireCombinedSubmission(combinedSubmissionId)
 
 Expire a combined submission
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let combinedSubmissionId = "combinedSubmissionId_example"; // String |
-
-
-apiInstance.expireCombinedSubmission(combinedSubmissionId, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var combinedSubmissionId = com_000000000000000001; // String | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.expireCombinedSubmission(combinedSubmissionId, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **String**|  |
+ **combinedSubmissionId** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -114,47 +162,45 @@ Name | Type | Description  | Notes
 
 <a name="expireSubmission"></a>
 # **expireSubmission**
-> InlineResponse2011Submission expireSubmission(submissionId)
+> Submission expireSubmission(submissionId)
 
 Expire a PDF submission
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let submissionId = "submissionId_example"; // String |
-
-
-apiInstance.expireSubmission(submissionId, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var submissionId = sub_000000000000000001; // String | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.expireSubmission(submissionId, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **String**|  |
+ **submissionId** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -163,51 +209,47 @@ Name | Type | Description  | Notes
 
 <a name="generatePDF"></a>
 # **generatePDF**
-> InlineResponse2011 generatePDF(templateId, opts)
+> CreateSubmissionResponse generatePDF(templateId, createSubmissionData)
 
 Generates a new PDF
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let templateId = "templateId_example"; // String |
-
-let opts = {
-  'data': new formapi.Data1() // Data1 |
-};
-
-apiInstance.generatePDF(templateId, opts, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var templateId = tpl_000000000000000001; // String | 
+var createSubmissionData = new FormAPI.CreateSubmissionData(); // CreateSubmissionData | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.generatePDF(templateId, createSubmissionData, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **String**|  |
- **data** | [**Data1**](Data1.md)|  | [optional]
+ **templateId** | **String**|  | 
+ **createSubmissionData** | [**CreateSubmissionData**](CreateSubmissionData.md)|  | 
 
 ### Return type
 
-[**InlineResponse2011**](InlineResponse2011.md)
+[**CreateSubmissionResponse**](CreateSubmissionResponse.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -216,47 +258,45 @@ Name | Type | Description  | Notes
 
 <a name="getCombinedSubmission"></a>
 # **getCombinedSubmission**
-> InlineResponse201CombinedSubmission getCombinedSubmission(combinedSubmissionId)
+> CombinedSubmission getCombinedSubmission(combinedSubmissionId)
 
 Check the status of a combined submission (merged PDFs)
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let combinedSubmissionId = "combinedSubmissionId_example"; // String |
-
-
-apiInstance.getCombinedSubmission(combinedSubmissionId, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var combinedSubmissionId = com_000000000000000001; // String | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getCombinedSubmission(combinedSubmissionId, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **String**|  |
+ **combinedSubmissionId** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse201CombinedSubmission**](InlineResponse201CombinedSubmission.md)
+[**CombinedSubmission**](CombinedSubmission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -265,47 +305,96 @@ Name | Type | Description  | Notes
 
 <a name="getSubmission"></a>
 # **getSubmission**
-> InlineResponse2011Submission getSubmission(submissionId)
+> Submission getSubmission(submissionId)
 
 Check the status of a PDF
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-let submissionId = "submissionId_example"; // String |
-
-
-apiInstance.getSubmission(submissionId, (error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var submissionId = sub_000000000000000001; // String | 
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.getSubmission(submissionId, callback);
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **String**|  |
+ **submissionId** | **String**|  | 
 
 ### Return type
 
-[**InlineResponse2011Submission**](InlineResponse2011Submission.md)
+[**Submission**](Submission.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getTemplates"></a>
+# **getTemplates**
+> [Template] getTemplates(opts)
+
+Get a list of all templates
+
+### Example
+```javascript
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
+
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
+
+var apiInstance = new FormAPI.PDFApi();
+var opts = {
+  'page': 2, // Number | Default: 1
+  'perPage': 1 // Number | Default: 50
+};
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.getTemplates(opts, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **page** | **Number**| Default: 1 | [optional] 
+ **perPage** | **Number**| Default: 50 | [optional] 
+
+### Return type
+
+[**[Template]**](Template.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 
@@ -314,29 +403,29 @@ Name | Type | Description  | Notes
 
 <a name="testAuthentication"></a>
 # **testAuthentication**
-> InlineResponse200 testAuthentication()
+> AuthenticationSuccessResponse testAuthentication()
 
 Test Authentication
 
 ### Example
 ```javascript
-import formapi from 'formapi';
-let defaultClient = formapi.ApiClient.instance;
+var FormAPI = require('@formapi/formapi');
+var defaultClient = FormAPI.ApiClient.instance;
 
-// Configure HTTP basic authorization: basic
-let basic = defaultClient.authentications['basic'];
-basic.username = 'YOUR USERNAME';
-basic.password = 'YOUR PASSWORD';
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
 
-let apiInstance = new formapi.PDFApi();
-
-apiInstance.testAuthentication((error, data, response) => {
+var apiInstance = new FormAPI.PDFApi();
+var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
     console.log('API called successfully. Returned data: ' + data);
   }
-});
+};
+apiInstance.testAuthentication(callback);
 ```
 
 ### Parameters
@@ -344,11 +433,11 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**AuthenticationSuccessResponse**](AuthenticationSuccessResponse.md)
 
 ### Authorization
 
-[basic](../README.md#basic)
+[api_token_basic](../README.md#api_token_basic)
 
 ### HTTP request headers
 

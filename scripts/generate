@@ -34,6 +34,10 @@ case "$LANGUAGE" in
     for f in $CLIENT_DIR/*; do
       if ! [[ "$f" = *'/nuget.exe' ]] && ! [[ "$f" = *'/packages' ]]; then rm -r $f; fi
     done;;
+  javascript)
+    for f in $CLIENT_DIR/*; do
+      if ! [[ "$f" = *'/node_modules' ]]; then rm -r $f; fi
+    done;;
   *)
     rm -rf "$CLIENT_DIR"
 esac

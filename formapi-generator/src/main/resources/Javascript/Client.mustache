@@ -1,0 +1,78 @@
+// The mustache templates don't have the required import data when
+// used as a supportingFile. So just need to hardcode the header stuff for now.
+
+{{>licenseInfo}}
+{{=< >=}}(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['<#invokerPackage><&invokerPackage>/</invokerPackage>api/PDFApi', '<#invokerPackage><&invokerPackage>/</invokerPackage>ApiClient'<#imports>, '<#invokerPackage><&invokerPackage>/</invokerPackage><#modelPackage><&modelPackage>/</modelPackage><import>'</imports>], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('./PDFApi'), require('../ApiClient')<#imports>, require('../<#modelPackage><&modelPackage>/</modelPackage><import>')</imports>);
+  } else {
+    // Browser globals (root is window)
+    if (!root.<&moduleName>) {
+      root.<&moduleName> = {};
+    }
+    root.<&moduleName>.<&classname> = factory(root.<&moduleName>.PDFApi, root.<&moduleName>.ApiClient<#imports>, root.<&moduleName>.<import></imports>);
+  }
+}(this, function(PDFApi, ApiClient<#imports>, <import></imports>) {
+  'use strict';
+<={{ }}=>
+
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['api/PDFApi', 'ApiClient', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/Template'], factory);
+  } else if (typeof module === 'object' && module.exports) {
+    // CommonJS-like environments that support module.exports, like Node.
+    module.exports = factory(require('./PDFApi'), require('../ApiClient'), require('../model/AuthenticationError'), require('../model/AuthenticationSuccessResponse'), require('../model/CombinedSubmission'), require('../model/CombinedSubmissionData'), require('../model/CreateCombinedSubmissionResponse'), require('../model/CreateSubmissionData'), require('../model/CreateSubmissionResponse'), require('../model/Error'), require('../model/InvalidRequest'), require('../model/Submission'), require('../model/Template'));
+  } else {
+    // Browser globals (root is window)
+    if (!root.formapi) {
+      root.formapi = {};
+    }
+    root.formapi.Client = factory(root.formapi.PDFApi, root.formapi.ApiClient, root.formapi.AuthenticationError, root.formapi.AuthenticationSuccessResponse, root.formapi.CombinedSubmission, root.formapi.CombinedSubmissionData, root.formapi.CreateCombinedSubmissionResponse, root.formapi.CreateSubmissionData, root.formapi.CreateSubmissionResponse, root.formapi.Error, root.formapi.InvalidRequest, root.formapi.Submission, root.formapi.Template);
+  }
+}(this, function (PDFApi, ApiClient, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionData, CreateSubmissionResponse, Error, InvalidRequest, Submission, Template) {
+  'use strict';
+
+  /**
+   * PDF service.
+   * @module api/Client
+   * @version 1.0.0
+   */
+
+  /**
+   * Constructs a new Client.
+   * @alias module:api/Client
+   * @class
+   * @param {module:ApiClient} [apiClient] Optional API client implementation to use,
+   * default to {@link module:ApiClient#instance} if unspecified.
+   */
+  var exports = function (apiClient) {
+    this.apiClient = apiClient || ApiClient.instance;
+    this.pdfApi = new PDFApi(this.apiClient);
+    var self = this;
+
+    this.combineSubmissions = function (opts, callback) {
+      self.pdfApi.combineSubmissions(opts, function (response, error) {
+        // if (error) throw error;
+        callback(response, error);
+      });
+    }
+
+    this.generatePDF = function (templateId, createSubmissionData, callback) {
+      self.pdfApi.generatePDF(template_id, submission_data, function(response, error) {
+        // if (error) throw error;
+        callback(response, error);
+      });
+    };
+
+    // this.batchGeneratePDF = function (templateId, createSubmissionData, callback) {
+    // };
+
+  };
+
+  return exports;
+}));
