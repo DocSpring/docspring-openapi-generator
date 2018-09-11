@@ -1,9 +1,9 @@
-# CreateCombinedSubmissionResponse
+# CreateSubmissionResponse1
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combined_submission** | [**CombinedSubmission**](CombinedSubmission.md) |  | [optional] 
+**submission** | [**Submission**](Submission.md) |  | [optional] 
 **errors** | **list[str]** |  | [optional] 
 **status** | **str** |  | [optional] 
 

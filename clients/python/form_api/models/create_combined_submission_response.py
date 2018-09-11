@@ -32,23 +32,28 @@ class CreateCombinedSubmissionResponse(object):
     """
     openapi_types = {
         'combined_submission': 'CombinedSubmission',
+        'errors': 'list[str]',
         'status': 'str'
     }
 
     attribute_map = {
         'combined_submission': 'combined_submission',
+        'errors': 'errors',
         'status': 'status'
     }
 
-    def __init__(self, combined_submission=None, status=None):  # noqa: E501
+    def __init__(self, combined_submission=None, errors=None, status=None):  # noqa: E501
         """CreateCombinedSubmissionResponse - a model defined in OpenAPI"""  # noqa: E501
 
         self._combined_submission = None
+        self._errors = None
         self._status = None
         self.discriminator = None
 
         if combined_submission is not None:
             self.combined_submission = combined_submission
+        if errors is not None:
+            self.errors = errors
         if status is not None:
             self.status = status
 
@@ -72,6 +77,27 @@ class CreateCombinedSubmissionResponse(object):
         """
 
         self._combined_submission = combined_submission
+
+    @property
+    def errors(self):
+        """Gets the errors of this CreateCombinedSubmissionResponse.  # noqa: E501
+
+
+        :return: The errors of this CreateCombinedSubmissionResponse.  # noqa: E501
+        :rtype: list[str]
+        """
+        return self._errors
+
+    @errors.setter
+    def errors(self, errors):
+        """Sets the errors of this CreateCombinedSubmissionResponse.
+
+
+        :param errors: The errors of this CreateCombinedSubmissionResponse.  # noqa: E501
+        :type: list[str]
+        """
+
+        self._errors = errors
 
     @property
     def status(self):

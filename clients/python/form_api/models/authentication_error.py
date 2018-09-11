@@ -31,20 +31,52 @@ class AuthenticationError(object):
                             and the value is json key in definition.
     """
     openapi_types = {
+        'status': 'str',
         'error': 'str'
     }
 
     attribute_map = {
+        'status': 'status',
         'error': 'error'
     }
 
-    def __init__(self, error=None):  # noqa: E501
+    def __init__(self, status=None, error=None):  # noqa: E501
         """AuthenticationError - a model defined in OpenAPI"""  # noqa: E501
 
+        self._status = None
         self._error = None
         self.discriminator = None
 
+        if status is not None:
+            self.status = status
         self.error = error
+
+    @property
+    def status(self):
+        """Gets the status of this AuthenticationError.  # noqa: E501
+
+
+        :return: The status of this AuthenticationError.  # noqa: E501
+        :rtype: str
+        """
+        return self._status
+
+    @status.setter
+    def status(self, status):
+        """Sets the status of this AuthenticationError.
+
+
+        :param status: The status of this AuthenticationError.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["error"]  # noqa: E501
+        if status not in allowed_values:
+            raise ValueError(
+                "Invalid value for `status` ({0}), must be one of {1}"  # noqa: E501
+                .format(status, allowed_values)
+            )
+
+        self._status = status
 
     @property
     def error(self):

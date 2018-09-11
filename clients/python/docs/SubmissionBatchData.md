@@ -1,11 +1,12 @@
-# CreateCombinedSubmissionResponse
+# SubmissionBatchData
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combined_submission** | [**CombinedSubmission**](CombinedSubmission.md) |  | [optional] 
-**errors** | **list[str]** |  | [optional] 
-**status** | **str** |  | [optional] 
+**metadata** | **object** |  | [optional] 
+**test** | **bool** |  | [optional] 
+**template_id** | **str** |  | [optional] 
+**submissions** | [**list[CreateSubmissionDataBatchRequest]**](CreateSubmissionDataBatchRequest.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

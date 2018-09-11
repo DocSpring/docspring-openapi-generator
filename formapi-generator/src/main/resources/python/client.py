@@ -18,9 +18,14 @@ import re
 import time
 
 from .pdf_api import PDFApi
-
+from form_api.models.create_submission_response import CreateSubmissionResponse
+from form_api.models.create_combined_submission_response import CreateCombinedSubmissionResponse
+from form_api.models.create_submission_batch_response import CreateSubmissionBatchResponse
 
 class PollTimeoutError(Exception):
+    pass
+
+class FailedBatchError(Exception):
     pass
 
 
@@ -38,9 +43,14 @@ class Client(PDFApi):
         """
         kwargs['_return_http_data_only'] = True
 
-        (data) = self.generate_pdf_with_http_info(template_id, data, **kwargs)
+        wait = kwargs.pop('wait', True)
 
-        submission = data.submission
+        (response) = self.generate_pdf_with_http_info(
+            template_id, data, **kwargs)
+        if not wait:
+            return response
+
+        submission = response.submission
 
         start_time = time.time()
         timeout = 60
@@ -56,7 +66,65 @@ class Client(PDFApi):
                 raise PollTimeoutError(
                     "PDF was not ready after %d seconds!" % timeout)
 
-        return submission
+        return CreateSubmissionResponse(
+            submission=submission,
+            status=('success' if submission.state == 'processed' else 'error'))
+
+    def batch_generate_pdfs(self, submission_batch_data, **kwargs):
+        """
+        Batch generate PDFs and waits for PDFs to be ready.
+        :param SubmissionBatchData submission_batch_data:
+        :return: CreateSubmissionResponse
+        """
+        kwargs['_return_http_data_only'] = True
+
+        wait = kwargs.pop('wait', True)
+
+        (response) = self.batch_generate_pdfs_with_http_info(
+            submission_batch_data, **kwargs)
+
+        if not wait:
+            return response
+
+        batch = response.submission_batch
+        submission_responses = response.submissions
+
+        start_time = time.time()
+        timeout = 600
+        if 'timeout' in kwargs and kwargs['timeout'] is not None:
+            timeout = kwargs['timeout']
+
+        # Wait for batch to be ready
+        while (batch.state == 'pending'):
+            time.sleep(1)
+            batch = self.get_submission_batch(batch.id)
+
+            if time.time() - start_time > timeout:
+                raise PollTimeoutError(
+                    "PDF was not ready after %d seconds!" % timeout)
+
+        # Now we need to fetch the updated submissions
+        batch_with_subs = self.get_submission_batch(batch.id, include_submissions=True)
+
+        updated_submissions_dict = {}
+        for sub in batch_with_subs.submissions:
+            if not sub.id:
+                continue
+            updated_submissions_dict[sub.id] = sub
+        for sub in submission_responses:
+            if not sub.submission:
+                continue
+            updated_sub = updated_submissions_dict.get(sub.submission.id)
+            if not updated_sub:
+                sub.status = 'error'
+                continue
+            sub.submission = updated_sub
+            sub.status = 'success' if updated_sub.state == 'processed' else 'error'
+
+        return CreateSubmissionBatchResponse(
+            submission_batch=batch,
+            submissions=submission_responses,
+            status=('success' if batch.state == 'processed' else 'error'))
 
     def combine_submissions(self, data, **kwargs):
         """
@@ -66,13 +134,17 @@ class Client(PDFApi):
         """
         kwargs['combined_submission_data'] = data
         kwargs['_return_http_data_only'] = True
+        wait = kwargs.pop('wait', True)
 
-        (data) = self.combine_submissions_with_http_info(**kwargs)
+        (response) = self.combine_submissions_with_http_info(**kwargs)
 
-        combined_submission = data.combined_submission
+        if not wait:
+            return response
+
+        combined_submission = response.combined_submission
 
         start_time = time.time()
-        timeout = 60
+        timeout = 600
         if 'timeout' in kwargs and kwargs['timeout'] is not None:
             timeout = kwargs['timeout']
 
@@ -86,4 +158,23 @@ class Client(PDFApi):
                 raise PollTimeoutError(
                     "Combined PDF was not ready after %d seconds!" % timeout)
 
-        return combined_submission
+        return CreateCombinedSubmissionResponse(
+            combined_submission=combined_submission,
+            status=('success' if combined_submission.state == 'processed' else 'error'))
+
+    def batch_generate_and_combine_pdfs(self, submission_batch_data, **kwargs):
+        """
+        Batch generate PDFs and combines them into a single PDF.
+        :param SubmissionBatchData submission_batch_data:
+        :return: CreateCombinedSubmissionResponse
+        """
+        wait = kwargs.pop('wait', True)
+        response = self.batch_generate_pdfs(submission_batch_data, **kwargs)
+
+        if response.status != 'success':
+            raise FailedBatchError("Batch job failed, cannot combine PDFs!")
+
+        submission_ids = list(map(lambda s: s.submission.id, response.submissions))
+        return self.combine_submissions({
+            'submission_ids': submission_ids
+        }, wait=wait)

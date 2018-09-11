@@ -29,10 +29,9 @@ class TestClient(unittest.TestCase):
     def setUp(self):
         # Configure HTTP basic authorization: api_token_basic
         configuration = form_api.Configuration()
-        configuration.username = 'api_token123'
-        configuration.password = 'testsecret123'
+        configuration.api_token_id = 'api_token123'
+        configuration.api_token_secret = 'testsecret123'
         configuration.host = 'localhost:31337/api/v1'
-        configuration.scheme = 'http'
 
         # create an instance of the API class
         self.api = form_api.Client(form_api.ApiClient(configuration))
@@ -48,7 +47,7 @@ class TestClient(unittest.TestCase):
         with mock.patch.object(time, 'sleep') as sleep_patched:
           template_id = 'tpl_000000000000000001'  # str |
 
-          submission = self.api.generate_pdf(
+          response = self.api.generate_pdf(
               template_id, {
                   'data': {
                       'title': 'Test PDF',
@@ -56,9 +55,59 @@ class TestClient(unittest.TestCase):
                   }
               })
           sleep_patched.assert_called()
+          self.assertEquals(response.status, 'success')
+          submission = response.submission
           self.assertRegexpMatches(submission.id, '^sub_')
           self.assertEquals(submission.expired, False)
           self.assertEquals(submission.state, 'processed')
+
+    def test_batch_generate_pdfs(self):
+        """Test case for batch_generate_pdfs
+
+        Batch Generates PDFs
+        """
+        with mock.patch.object(time, 'sleep') as sleep_patched:
+            template_id = 'tpl_000000000000000001'  # str |
+
+            response = self.api.batch_generate_pdfs({
+                'template_id': template_id,
+                'metadata': { 'user_id': 123 },
+                'test': True,
+                'submissions': [
+                    {
+                        'data': {
+                            'title': 'Test PDF',
+                            'description': 'This PDF is great!',
+                        }
+                    },
+                    {
+                        'data': {
+                            'title': 'Test PDF 2',
+                            'description': 'This PDF is also great!',
+                        }
+                    }
+                ]}, wait=True)
+            sleep_patched.assert_called()
+
+            self.assertEquals(response.status, 'success')
+            batch = response.submission_batch
+            self.assertRegexpMatches(batch.id, '^sba_')
+            self.assertEquals(batch.state, 'processed')
+            self.assertEquals(batch.metadata['user_id'], 123)
+            self.assertEquals(batch.total_count, 2)
+            self.assertEquals(batch.pending_count, 0)
+            self.assertEquals(batch.error_count, 0)
+            self.assertEquals(batch.completion_percentage, 100)
+
+            submissions = response.submissions
+            self.assertEquals(len(submissions), 2)
+            first_response = submissions[0]
+            self.assertEquals(first_response.status, 'success')
+            submission = first_response.submission
+            self.assertRegexpMatches(submission.id, '^sub_')
+            self.assertEquals(submission.expired, False)
+            self.assertEquals(submission.state, 'processed')
+
 
     def test_combine_submissions(self):
         """Test case for combine_submissions
@@ -66,13 +115,50 @@ class TestClient(unittest.TestCase):
         Merge generated PDFs together  # noqa: E501
         """
         with mock.patch.object(time, "sleep") as sleep_patched:
-          combined_submission = self.api.combine_submissions({
-              'submission_ids': ['sub_000000000000000001', 'sub_000000000000000002']
-          })
-          sleep_patched.assert_called()
-          self.assertRegexpMatches(combined_submission.id, '^com_')
-          self.assertEquals(combined_submission.expired, False)
-          self.assertEquals(combined_submission.state, 'processed')
+            response = self.api.combine_submissions({
+                'submission_ids': ['sub_000000000000000001', 'sub_000000000000000002']
+            }, wait=True)
+            sleep_patched.assert_called()
+            self.assertEquals(response.status, 'success')
+            combined_submission = response.combined_submission
+            self.assertRegexpMatches(combined_submission.id, '^com_')
+            self.assertEquals(combined_submission.expired, False)
+            self.assertEquals(len(combined_submission.submission_ids), 2)
+            self.assertEquals(combined_submission.state, 'processed')
+
+    def test_batch_generate_and_combine_pdfs(self):
+        """Test case for batch_generate_and_combine_pdfs
+
+        Batch generate and merge PDFs together  # noqa: E501
+        """
+        with mock.patch.object(time, "sleep") as sleep_patched:
+            template_id = 'tpl_000000000000000001'  # str |
+            response = self.api.batch_generate_and_combine_pdfs({
+                'template_id': template_id,
+                'metadata': {'user_id': 123},
+                'test': True,
+                'submissions': [
+                    {
+                        'data': {
+                            'title': 'Test PDF',
+                            'description': 'This PDF is great!',
+                        }
+                    },
+                    {
+                        'data': {
+                            'title': 'Test PDF 2',
+                            'description': 'This PDF is also great!',
+                        }
+                    }
+                ]}, wait=True)
+
+            sleep_patched.assert_called()
+            combined_submission = response.combined_submission
+            self.assertRegexpMatches(combined_submission.id, '^com_')
+            self.assertEquals(combined_submission.expired, False)
+            self.assertEquals(len(combined_submission.submission_ids), 2)
+            self.assertEquals(combined_submission.state, 'processed')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,9 +1,11 @@
-# CreateCombinedSubmissionResponse
+# CreateSubmissionBatchResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combined_submission** | [**CombinedSubmission**](CombinedSubmission.md) |  | [optional] 
+**submission_batch** | [**SubmissionBatch**](SubmissionBatch.md) |  | [optional] 
+**submissions** | [**list[CreateSubmissionResponse1]**](CreateSubmissionResponse1.md) |  | [optional] 
+**error** | **str** |  | [optional] 
 **errors** | **list[str]** |  | [optional] 
 **status** | **str** |  | [optional] 
 

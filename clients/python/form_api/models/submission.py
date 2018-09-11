@@ -35,9 +35,11 @@ class Submission(object):
         'test': 'bool',
         'expired': 'bool',
         'expires_at': 'str',
+        'processed_at': 'str',
         'state': 'str',
         'metadata': 'object',
-        'download_url': 'str'
+        'download_url': 'str',
+        'batch_id': 'str'
     }
 
     attribute_map = {
@@ -45,21 +47,25 @@ class Submission(object):
         'test': 'test',
         'expired': 'expired',
         'expires_at': 'expires_at',
+        'processed_at': 'processed_at',
         'state': 'state',
         'metadata': 'metadata',
-        'download_url': 'download_url'
+        'download_url': 'download_url',
+        'batch_id': 'batch_id'
     }
 
-    def __init__(self, id=None, test=None, expired=None, expires_at=None, state=None, metadata=None, download_url=None):  # noqa: E501
+    def __init__(self, id=None, test=None, expired=None, expires_at=None, processed_at=None, state=None, metadata=None, download_url=None, batch_id=None):  # noqa: E501
         """Submission - a model defined in OpenAPI"""  # noqa: E501
 
         self._id = None
         self._test = None
         self._expired = None
         self._expires_at = None
+        self._processed_at = None
         self._state = None
         self._metadata = None
         self._download_url = None
+        self._batch_id = None
         self.discriminator = None
 
         self.id = id
@@ -67,11 +73,15 @@ class Submission(object):
         self.expired = expired
         if expires_at is not None:
             self.expires_at = expires_at
+        if processed_at is not None:
+            self.processed_at = processed_at
         self.state = state
         if metadata is not None:
             self.metadata = metadata
         if download_url is not None:
             self.download_url = download_url
+        if batch_id is not None:
+            self.batch_id = batch_id
 
     @property
     def id(self):
@@ -164,6 +174,27 @@ class Submission(object):
         self._expires_at = expires_at
 
     @property
+    def processed_at(self):
+        """Gets the processed_at of this Submission.  # noqa: E501
+
+
+        :return: The processed_at of this Submission.  # noqa: E501
+        :rtype: str
+        """
+        return self._processed_at
+
+    @processed_at.setter
+    def processed_at(self, processed_at):
+        """Sets the processed_at of this Submission.
+
+
+        :param processed_at: The processed_at of this Submission.  # noqa: E501
+        :type: str
+        """
+
+        self._processed_at = processed_at
+
+    @property
     def state(self):
         """Gets the state of this Submission.  # noqa: E501
 
@@ -233,6 +264,27 @@ class Submission(object):
         """
 
         self._download_url = download_url
+
+    @property
+    def batch_id(self):
+        """Gets the batch_id of this Submission.  # noqa: E501
+
+
+        :return: The batch_id of this Submission.  # noqa: E501
+        :rtype: str
+        """
+        return self._batch_id
+
+    @batch_id.setter
+    def batch_id(self, batch_id):
+        """Sets the batch_id of this Submission.
+
+
+        :param batch_id: The batch_id of this Submission.  # noqa: E501
+        :type: str
+        """
+
+        self._batch_id = batch_id
 
     def to_dict(self):
         """Returns the model properties as a dict"""

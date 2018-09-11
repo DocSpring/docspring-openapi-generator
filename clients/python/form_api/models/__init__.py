@@ -19,9 +19,14 @@ from form_api.models.authentication_success_response import AuthenticationSucces
 from form_api.models.combined_submission import CombinedSubmission
 from form_api.models.combined_submission_data import CombinedSubmissionData
 from form_api.models.create_combined_submission_response import CreateCombinedSubmissionResponse
+from form_api.models.create_submission_batch_response import CreateSubmissionBatchResponse
 from form_api.models.create_submission_data import CreateSubmissionData
+from form_api.models.create_submission_data_batch_request import CreateSubmissionDataBatchRequest
 from form_api.models.create_submission_response import CreateSubmissionResponse
+from form_api.models.create_submission_response1 import CreateSubmissionResponse1
 from form_api.models.error import Error
 from form_api.models.invalid_request import InvalidRequest
 from form_api.models.submission import Submission
+from form_api.models.submission_batch import SubmissionBatch
+from form_api.models.submission_batch_data import SubmissionBatchData
 from form_api.models.template import Template

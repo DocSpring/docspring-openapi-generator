@@ -32,12 +32,12 @@ class PDFApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def batch_generate_pdf(self, template_id, create_submission_data, **kwargs):  # noqa: E501
+    def batch_generate_pdf_v1(self, template_id, create_submission_data, **kwargs):  # noqa: E501
         """Generates multiple PDFs  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.batch_generate_pdf(template_id, create_submission_data, async_req=True)
+        >>> thread = api.batch_generate_pdf_v1(template_id, create_submission_data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -49,17 +49,17 @@ class PDFApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.batch_generate_pdf_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
+            return self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
         else:
-            (data) = self.batch_generate_pdf_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
+            (data) = self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
             return data
 
-    def batch_generate_pdf_with_http_info(self, template_id, create_submission_data, **kwargs):  # noqa: E501
+    def batch_generate_pdf_v1_with_http_info(self, template_id, create_submission_data, **kwargs):  # noqa: E501
         """Generates multiple PDFs  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.batch_generate_pdf_with_http_info(template_id, create_submission_data, async_req=True)
+        >>> thread = api.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -82,18 +82,18 @@ class PDFApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method batch_generate_pdf" % key
+                    " to method batch_generate_pdf_v1" % key
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
         # verify the required parameter 'template_id' is set
         if ('template_id' not in local_var_params or
                 local_var_params['template_id'] is None):
-            raise ValueError("Missing the required parameter `template_id` when calling `batch_generate_pdf`")  # noqa: E501
+            raise ValueError("Missing the required parameter `template_id` when calling `batch_generate_pdf_v1`")  # noqa: E501
         # verify the required parameter 'create_submission_data' is set
         if ('create_submission_data' not in local_var_params or
                 local_var_params['create_submission_data'] is None):
-            raise ValueError("Missing the required parameter `create_submission_data` when calling `batch_generate_pdf`")  # noqa: E501
+            raise ValueError("Missing the required parameter `create_submission_data` when calling `batch_generate_pdf_v1`")  # noqa: E501
 
         collection_formats = {}
 
@@ -138,37 +138,135 @@ class PDFApi(object):
             _request_timeout=local_var_params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def combine_submissions(self, **kwargs):  # noqa: E501
+    def batch_generate_pdfs(self, submission_batch_data, **kwargs):  # noqa: E501
+        """Generates multiple PDFs  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.batch_generate_pdfs(submission_batch_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SubmissionBatchData submission_batch_data: (required)
+        :return: CreateSubmissionBatchResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.batch_generate_pdfs_with_http_info(submission_batch_data, **kwargs)  # noqa: E501
+        else:
+            (data) = self.batch_generate_pdfs_with_http_info(submission_batch_data, **kwargs)  # noqa: E501
+            return data
+
+    def batch_generate_pdfs_with_http_info(self, submission_batch_data, **kwargs):  # noqa: E501
+        """Generates multiple PDFs  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.batch_generate_pdfs_with_http_info(submission_batch_data, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param SubmissionBatchData submission_batch_data: (required)
+        :return: CreateSubmissionBatchResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['submission_batch_data']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method batch_generate_pdfs" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'submission_batch_data' is set
+        if ('submission_batch_data' not in local_var_params or
+                local_var_params['submission_batch_data'] is None):
+            raise ValueError("Missing the required parameter `submission_batch_data` when calling `batch_generate_pdfs`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'submission_batch_data' in local_var_params:
+            body_params = local_var_params['submission_batch_data']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/submissions/batches', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='CreateSubmissionBatchResponse',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def combine_submissions(self, combined_submission_data, **kwargs):  # noqa: E501
         """Merge generated PDFs together  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.combine_submissions(async_req=True)
+        >>> thread = api.combine_submissions(combined_submission_data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CombinedSubmissionData combined_submission_data:
+        :param CombinedSubmissionData combined_submission_data: (required)
         :return: CreateCombinedSubmissionResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.combine_submissions_with_http_info(**kwargs)  # noqa: E501
+            return self.combine_submissions_with_http_info(combined_submission_data, **kwargs)  # noqa: E501
         else:
-            (data) = self.combine_submissions_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.combine_submissions_with_http_info(combined_submission_data, **kwargs)  # noqa: E501
             return data
 
-    def combine_submissions_with_http_info(self, **kwargs):  # noqa: E501
+    def combine_submissions_with_http_info(self, combined_submission_data, **kwargs):  # noqa: E501
         """Merge generated PDFs together  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.combine_submissions_with_http_info(async_req=True)
+        >>> thread = api.combine_submissions_with_http_info(combined_submission_data, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CombinedSubmissionData combined_submission_data:
+        :param CombinedSubmissionData combined_submission_data: (required)
         :return: CreateCombinedSubmissionResponse
                  If the method is called asynchronously,
                  returns the request thread.
@@ -190,6 +288,10 @@ class PDFApi(object):
                 )
             local_var_params[key] = val
         del local_var_params['kwargs']
+        # verify the required parameter 'combined_submission_data' is set
+        if ('combined_submission_data' not in local_var_params or
+                local_var_params['combined_submission_data'] is None):
+            raise ValueError("Missing the required parameter `combined_submission_data` when calling `combine_submissions`")  # noqa: E501
 
         collection_formats = {}
 
@@ -707,6 +809,104 @@ class PDFApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='Submission',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_submission_batch(self, submission_batch_id, **kwargs):  # noqa: E501
+        """Check the status of a submission batch job  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_submission_batch(submission_batch_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str submission_batch_id: (required)
+        :param bool include_submissions:
+        :return: SubmissionBatch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_submission_batch_with_http_info(submission_batch_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_submission_batch_with_http_info(submission_batch_id, **kwargs)  # noqa: E501
+            return data
+
+    def get_submission_batch_with_http_info(self, submission_batch_id, **kwargs):  # noqa: E501
+        """Check the status of a submission batch job  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_submission_batch_with_http_info(submission_batch_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str submission_batch_id: (required)
+        :param bool include_submissions:
+        :return: SubmissionBatch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['submission_batch_id', 'include_submissions']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_submission_batch" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'submission_batch_id' is set
+        if ('submission_batch_id' not in local_var_params or
+                local_var_params['submission_batch_id'] is None):
+            raise ValueError("Missing the required parameter `submission_batch_id` when calling `get_submission_batch`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'submission_batch_id' in local_var_params:
+            path_params['submission_batch_id'] = local_var_params['submission_batch_id']  # noqa: E501
+
+        query_params = []
+        if 'include_submissions' in local_var_params:
+            query_params.append(('include_submissions', local_var_params['include_submissions']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/submissions/batches/{submission_batch_id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SubmissionBatch',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

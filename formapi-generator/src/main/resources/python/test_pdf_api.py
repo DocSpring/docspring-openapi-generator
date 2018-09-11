@@ -28,10 +28,9 @@ class TestPDFApi(unittest.TestCase):
     def setUp(self):
         # Configure HTTP basic authorization: api_token_basic
         configuration = form_api.Configuration()
-        configuration.username = 'api_token123'
-        configuration.password = 'testsecret123'
+        configuration.api_token_id = 'api_token123'
+        configuration.api_token_secret = 'testsecret123'
         configuration.host = 'localhost:31337/api/v1'
-        configuration.scheme = 'http'
 
         # create an instance of the API class
         self.api = form_api.PDFApi(form_api.ApiClient(configuration))
@@ -39,14 +38,17 @@ class TestPDFApi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_batch_generate_pdf(self):
-        """Test case for batch_generate_pdf
+    def test_batch_generate_pdfs(self):
+        """Test case for batch_generate_pdfs
 
         Generates multiple PDFs  # noqa: E501
         """
         template_id = 'tpl_000000000000000001'  # str |
-        api_response = self.api.batch_generate_pdf(
-            template_id, [
+        api_response = self.api.batch_generate_pdfs({
+            'template_id': template_id,
+            'metadata': { 'user_id' : 123 },
+            'test': True,
+            'submissions': [
                 {
                     'data': {
                         'title': 'Test PDF',
@@ -59,9 +61,22 @@ class TestPDFApi(unittest.TestCase):
                         'description': 'This PDF is also great!',
                     }
                 }
-            ])
-        self.assertEquals(len(api_response), 2)
-        first_response = api_response[0]
+            ]
+        })
+
+        self.assertEquals(api_response.status, 'success')
+        batch = api_response.submission_batch
+        self.assertRegexpMatches(batch.id, '^sba_')
+        self.assertEquals(batch.state, 'pending')
+        self.assertEquals(batch.metadata['user_id'], 123)
+        self.assertEquals(batch.total_count, 2)
+        self.assertEquals(batch.pending_count, 2)
+        self.assertEquals(batch.error_count, 0)
+        self.assertEquals(batch.completion_percentage, 0)
+
+        submissions = api_response.submissions
+        self.assertEquals(len(submissions), 2)
+        first_response = submissions[0]
         self.assertEquals(first_response.status, 'success')
         submission = first_response.submission
         self.assertRegexpMatches(submission.id, '^sub_')

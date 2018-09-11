@@ -4,19 +4,21 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_generate_pdf**](PDFApi.md#batch_generate_pdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 
 
-# **batch_generate_pdf**
-> list[CreateSubmissionResponse] batch_generate_pdf(template_id, create_submission_data)
+# **batch_generate_pdf_v1**
+> list[CreateSubmissionResponse] batch_generate_pdf_v1(template_id, create_submission_data)
 
 Generates multiple PDFs
 
@@ -42,10 +44,10 @@ create_submission_data = NULL # list[CreateSubmissionData] |
 
 try:
     # Generates multiple PDFs
-    api_response = api_instance.batch_generate_pdf(template_id, create_submission_data)
+    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling PDFApi->batch_generate_pdf: %s\n" % e)
+    print("Exception when calling PDFApi->batch_generate_pdf_v1: %s\n" % e)
 ```
 
 ### Parameters
@@ -70,8 +72,61 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **batch_generate_pdfs**
+> CreateSubmissionBatchResponse batch_generate_pdfs(submission_batch_data)
+
+Generates multiple PDFs
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+submission_batch_data = form_api.SubmissionBatchData() # SubmissionBatchData | 
+
+try:
+    # Generates multiple PDFs
+    api_response = api_instance.batch_generate_pdfs(submission_batch_data)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->batch_generate_pdfs: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_data** | [**SubmissionBatchData**](SubmissionBatchData.md)|  | 
+
+### Return type
+
+[**CreateSubmissionBatchResponse**](CreateSubmissionBatchResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **combine_submissions**
-> CreateCombinedSubmissionResponse combine_submissions(combined_submission_data=combined_submission_data)
+> CreateCombinedSubmissionResponse combine_submissions(combined_submission_data)
 
 Merge generated PDFs together
 
@@ -92,11 +147,11 @@ configuration.password = 'YOUR_PASSWORD'
 
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
-combined_submission_data = form_api.CombinedSubmissionData() # CombinedSubmissionData |  (optional)
+combined_submission_data = form_api.CombinedSubmissionData() # CombinedSubmissionData | 
 
 try:
     # Merge generated PDFs together
-    api_response = api_instance.combine_submissions(combined_submission_data=combined_submission_data)
+    api_response = api_instance.combine_submissions(combined_submission_data)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->combine_submissions: %s\n" % e)
@@ -106,7 +161,7 @@ except ApiException as e:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional] 
+ **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | 
 
 ### Return type
 
@@ -378,6 +433,61 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Submission**](Submission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_submission_batch**
+> SubmissionBatch get_submission_batch(submission_batch_id, include_submissions=include_submissions)
+
+Check the status of a submission batch job
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+submission_batch_id = 'sba_000000000000000001' # str | 
+include_submissions = true # bool |  (optional)
+
+try:
+    # Check the status of a submission batch job
+    api_response = api_instance.get_submission_batch(submission_batch_id, include_submissions=include_submissions)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_submission_batch: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_id** | **str**|  | 
+ **include_submissions** | **bool**|  | [optional] 
+
+### Return type
+
+[**SubmissionBatch**](SubmissionBatch.md)
 
 ### Authorization
 
