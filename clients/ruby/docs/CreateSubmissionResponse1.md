@@ -1,9 +1,9 @@
-# FormAPI::CreateCombinedSubmissionResponse
+# FormAPI::CreateSubmissionResponse1
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**combined_submission** | [**CombinedSubmission**](CombinedSubmission.md) |  | [optional] 
+**submission** | [**Submission**](Submission.md) |  | [optional] 
 **errors** | **Array&lt;String&gt;** |  | [optional] 
 **status** | **String** |  | [optional] 
 

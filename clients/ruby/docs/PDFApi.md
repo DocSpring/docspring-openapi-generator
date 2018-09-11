@@ -4,19 +4,21 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batch_generate_pdf**](PDFApi.md#batch_generate_pdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 
 
-# **batch_generate_pdf**
-> Array&lt;CreateSubmissionResponse&gt; batch_generate_pdf(template_id, create_submission_data)
+# **batch_generate_pdf_v1**
+> Array&lt;CreateSubmissionResponse&gt; batch_generate_pdf_v1(template_id, create_submission_data)
 
 Generates multiple PDFs
 
@@ -37,10 +39,10 @@ create_submission_data = nil # Array<CreateSubmissionData> |
 
 begin
   #Generates multiple PDFs
-  result = api_instance.batch_generate_pdf(template_id, create_submission_data)
+  result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
   p result
 rescue FormAPI::ApiError => e
-  puts "Exception when calling PDFApi->batch_generate_pdf: #{e}"
+  puts "Exception when calling PDFApi->batch_generate_pdf_v1: #{e}"
 end
 ```
 
@@ -66,8 +68,57 @@ Name | Type | Description  | Notes
 
 
 
+# **batch_generate_pdfs**
+> CreateSubmissionBatchResponse batch_generate_pdfs(submission_batch_data)
+
+Generates multiple PDFs
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+submission_batch_data = FormAPI::SubmissionBatchData.new # SubmissionBatchData | 
+
+begin
+  #Generates multiple PDFs
+  result = api_instance.batch_generate_pdfs(submission_batch_data)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->batch_generate_pdfs: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_data** | [**SubmissionBatchData**](SubmissionBatchData.md)|  | 
+
+### Return type
+
+[**CreateSubmissionBatchResponse**](CreateSubmissionBatchResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
 # **combine_submissions**
-> CreateCombinedSubmissionResponse combine_submissions(opts)
+> CreateCombinedSubmissionResponse combine_submissions(combined_submission_data)
 
 Merge generated PDFs together
 
@@ -83,13 +134,11 @@ FormAPI.configure do |config|
 end
 
 api_instance = FormAPI::PDFApi.new
-opts = {
-  combined_submission_data: FormAPI::CombinedSubmissionData.new # CombinedSubmissionData | 
-}
+combined_submission_data = FormAPI::CombinedSubmissionData.new # CombinedSubmissionData | 
 
 begin
   #Merge generated PDFs together
-  result = api_instance.combine_submissions(opts)
+  result = api_instance.combine_submissions(combined_submission_data)
   p result
 rescue FormAPI::ApiError => e
   puts "Exception when calling PDFApi->combine_submissions: #{e}"
@@ -100,7 +149,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional] 
+ **combined_submission_data** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | 
 
 ### Return type
 
@@ -352,6 +401,59 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Submission**](Submission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_submission_batch**
+> SubmissionBatch get_submission_batch(submission_batch_id, opts)
+
+Check the status of a submission batch job
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+submission_batch_id = 'sba_000000000000000001' # String | 
+opts = {
+  include_submissions: true # BOOLEAN | 
+}
+
+begin
+  #Check the status of a submission batch job
+  result = api_instance.get_submission_batch(submission_batch_id, opts)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->get_submission_batch: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_id** | **String**|  | 
+ **include_submissions** | **BOOLEAN**|  | [optional] 
+
+### Return type
+
+[**SubmissionBatch**](SubmissionBatch.md)
 
 ### Authorization
 

@@ -13,10 +13,24 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module FormAPI
-  class AuthenticationError
-    attr_accessor :status
+  class SubmissionBatch
+    attr_accessor :pending_count
 
-    attr_accessor :error
+    attr_accessor :completion_percentage
+
+    attr_accessor :metadata
+
+    attr_accessor :total_count
+
+    attr_accessor :submissions
+
+    attr_accessor :processed_at
+
+    attr_accessor :id
+
+    attr_accessor :state
+
+    attr_accessor :error_count
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -43,16 +57,30 @@ module FormAPI
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'error' => :'error'
+        :'pending_count' => :'pending_count',
+        :'completion_percentage' => :'completion_percentage',
+        :'metadata' => :'metadata',
+        :'total_count' => :'total_count',
+        :'submissions' => :'submissions',
+        :'processed_at' => :'processed_at',
+        :'id' => :'id',
+        :'state' => :'state',
+        :'error_count' => :'error_count'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'error' => :'String'
+        :'pending_count' => :'Integer',
+        :'completion_percentage' => :'Integer',
+        :'metadata' => :'Object',
+        :'total_count' => :'Integer',
+        :'submissions' => :'Array<Submission>',
+        :'processed_at' => :'String',
+        :'id' => :'String',
+        :'state' => :'String',
+        :'error_count' => :'Integer'
       }
     end
 
@@ -64,12 +92,42 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'pending_count')
+        self.pending_count = attributes[:'pending_count']
       end
 
-      if attributes.has_key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.has_key?(:'completion_percentage')
+        self.completion_percentage = attributes[:'completion_percentage']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'total_count')
+        self.total_count = attributes[:'total_count']
+      end
+
+      if attributes.has_key?(:'submissions')
+        if (value = attributes[:'submissions']).is_a?(Array)
+          self.submissions = value
+        end
+      end
+
+      if attributes.has_key?(:'processed_at')
+        self.processed_at = attributes[:'processed_at']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'error_count')
+        self.error_count = attributes[:'error_count']
       end
     end
 
@@ -77,30 +135,25 @@ module FormAPI
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @error.nil?
-        invalid_properties.push('invalid value for "error", error cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ['error'])
-      return false unless status_validator.valid?(@status)
-      return false if @error.nil?
+      state_validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'error'])
+      return false unless state_validator.valid?(@state)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ['error'])
-      unless validator.valid?(status)
-        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'error'])
+      unless validator.valid?(state)
+        fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
       end
-      @status = status
+      @state = state
     end
 
     # Checks equality by comparing each attribute.
@@ -108,8 +161,15 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          error == o.error
+          pending_count == o.pending_count &&
+          completion_percentage == o.completion_percentage &&
+          metadata == o.metadata &&
+          total_count == o.total_count &&
+          submissions == o.submissions &&
+          processed_at == o.processed_at &&
+          id == o.id &&
+          state == o.state &&
+          error_count == o.error_count
     end
 
     # @see the `==` method
@@ -121,7 +181,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [status, error].hash
+      [pending_count, completion_percentage, metadata, total_count, submissions, processed_at, id, state, error_count].hash
     end
 
     # Builds the object from hash

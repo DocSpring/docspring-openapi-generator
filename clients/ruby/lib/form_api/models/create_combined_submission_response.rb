@@ -16,6 +16,8 @@ module FormAPI
   class CreateCombinedSubmissionResponse
     attr_accessor :combined_submission
 
+    attr_accessor :errors
+
     attr_accessor :status
 
     class EnumAttributeValidator
@@ -44,6 +46,7 @@ module FormAPI
     def self.attribute_map
       {
         :'combined_submission' => :'combined_submission',
+        :'errors' => :'errors',
         :'status' => :'status'
       }
     end
@@ -52,6 +55,7 @@ module FormAPI
     def self.openapi_types
       {
         :'combined_submission' => :'CombinedSubmission',
+        :'errors' => :'Array<String>',
         :'status' => :'String'
       }
     end
@@ -66,6 +70,12 @@ module FormAPI
 
       if attributes.has_key?(:'combined_submission')
         self.combined_submission = attributes[:'combined_submission']
+      end
+
+      if attributes.has_key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
+        end
       end
 
       if attributes.has_key?(:'status')
@@ -104,6 +114,7 @@ module FormAPI
       return true if self.equal?(o)
       self.class == o.class &&
           combined_submission == o.combined_submission &&
+          errors == o.errors &&
           status == o.status
     end
 
@@ -116,7 +127,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [combined_submission, status].hash
+      [combined_submission, errors, status].hash
     end
 
     # Builds the object from hash

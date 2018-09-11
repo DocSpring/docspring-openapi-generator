@@ -24,8 +24,8 @@ module FormAPI
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
     # @return [Array<CreateSubmissionResponse>]
-    def batch_generate_pdf(template_id, create_submission_data, opts = {})
-      data, _status_code, _headers = batch_generate_pdf_with_http_info(template_id, create_submission_data, opts)
+    def batch_generate_pdf_v1(template_id, create_submission_data, opts = {})
+      data, _status_code, _headers = batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts)
       data
     end
 
@@ -34,17 +34,17 @@ module FormAPI
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<CreateSubmissionResponse>, Fixnum, Hash)>] Array<CreateSubmissionResponse> data, response status code and response headers
-    def batch_generate_pdf_with_http_info(template_id, create_submission_data, opts = {})
+    def batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: PDFApi.batch_generate_pdf ...'
+        @api_client.config.logger.debug 'Calling API: PDFApi.batch_generate_pdf_v1 ...'
       end
       # verify the required parameter 'template_id' is set
       if @api_client.config.client_side_validation && template_id.nil?
-        fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.batch_generate_pdf"
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.batch_generate_pdf_v1"
       end
       # verify the required parameter 'create_submission_data' is set
       if @api_client.config.client_side_validation && create_submission_data.nil?
-        fail ArgumentError, "Missing the required parameter 'create_submission_data' when calling PDFApi.batch_generate_pdf"
+        fail ArgumentError, "Missing the required parameter 'create_submission_data' when calling PDFApi.batch_generate_pdf_v1"
       end
       # resource path
       local_var_path = '/templates/{template_id}/submissions/batch'.sub('{' + 'template_id' + '}', template_id.to_s)
@@ -73,27 +73,84 @@ module FormAPI
         :auth_names => auth_names,
         :return_type => 'Array<CreateSubmissionResponse>')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PDFApi#batch_generate_pdf\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: PDFApi#batch_generate_pdf_v1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Generates multiple PDFs
+    # @param submission_batch_data 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateSubmissionBatchResponse]
+    def batch_generate_pdfs(submission_batch_data, opts = {})
+      data, _status_code, _headers = batch_generate_pdfs_with_http_info(submission_batch_data, opts)
+      data
+    end
+
+    # Generates multiple PDFs
+    # @param submission_batch_data 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateSubmissionBatchResponse, Fixnum, Hash)>] CreateSubmissionBatchResponse data, response status code and response headers
+    def batch_generate_pdfs_with_http_info(submission_batch_data, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.batch_generate_pdfs ...'
+      end
+      # verify the required parameter 'submission_batch_data' is set
+      if @api_client.config.client_side_validation && submission_batch_data.nil?
+        fail ArgumentError, "Missing the required parameter 'submission_batch_data' when calling PDFApi.batch_generate_pdfs"
+      end
+      # resource path
+      local_var_path = '/submissions/batches'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(submission_batch_data)
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'CreateSubmissionBatchResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#batch_generate_pdfs\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
 
     # Merge generated PDFs together
+    # @param combined_submission_data 
     # @param [Hash] opts the optional parameters
-    # @option opts [CombinedSubmissionData] :combined_submission_data 
     # @return [CreateCombinedSubmissionResponse]
-    def combine_submissions(opts = {})
-      data, _status_code, _headers = combine_submissions_with_http_info(opts)
+    def combine_submissions(combined_submission_data, opts = {})
+      data, _status_code, _headers = combine_submissions_with_http_info(combined_submission_data, opts)
       data
     end
 
     # Merge generated PDFs together
+    # @param combined_submission_data 
     # @param [Hash] opts the optional parameters
-    # @option opts [CombinedSubmissionData] :combined_submission_data 
     # @return [Array<(CreateCombinedSubmissionResponse, Fixnum, Hash)>] CreateCombinedSubmissionResponse data, response status code and response headers
-    def combine_submissions_with_http_info(opts = {})
+    def combine_submissions_with_http_info(combined_submission_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.combine_submissions ...'
+      end
+      # verify the required parameter 'combined_submission_data' is set
+      if @api_client.config.client_side_validation && combined_submission_data.nil?
+        fail ArgumentError, "Missing the required parameter 'combined_submission_data' when calling PDFApi.combine_submissions"
       end
       # resource path
       local_var_path = '/combined_submissions'
@@ -112,7 +169,7 @@ module FormAPI
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(opts[:'combined_submission_data'])
+      post_body = @api_client.object_to_http_body(combined_submission_data)
       auth_names = ['api_token_basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -386,6 +443,60 @@ module FormAPI
         :return_type => 'Submission')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#get_submission\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Check the status of a submission batch job
+    # @param submission_batch_id 
+    # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :include_submissions 
+    # @return [SubmissionBatch]
+    def get_submission_batch(submission_batch_id, opts = {})
+      data, _status_code, _headers = get_submission_batch_with_http_info(submission_batch_id, opts)
+      data
+    end
+
+    # Check the status of a submission batch job
+    # @param submission_batch_id 
+    # @param [Hash] opts the optional parameters
+    # @option opts [BOOLEAN] :include_submissions 
+    # @return [Array<(SubmissionBatch, Fixnum, Hash)>] SubmissionBatch data, response status code and response headers
+    def get_submission_batch_with_http_info(submission_batch_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.get_submission_batch ...'
+      end
+      # verify the required parameter 'submission_batch_id' is set
+      if @api_client.config.client_side_validation && submission_batch_id.nil?
+        fail ArgumentError, "Missing the required parameter 'submission_batch_id' when calling PDFApi.get_submission_batch"
+      end
+      # resource path
+      local_var_path = '/submissions/batches/{submission_batch_id}'.sub('{' + 'submission_batch_id' + '}', submission_batch_id.to_s)
+
+      # query parameters
+      query_params = {}
+      query_params[:'include_submissions'] = opts[:'include_submissions'] if !opts[:'include_submissions'].nil?
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'SubmissionBatch')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#get_submission_batch\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -10,14 +10,14 @@ Bundler.require
 
 begin
   FormAPI.configure do |c|
-    c.username  = ENV['FORM_API_TOKEN_ID']
-    c.password  = ENV['FORM_API_TOKEN_SECRET']
+    c.username  = ENV['FORMAPI_TOKEN_ID']
+    c.password  = ENV['FORMAPI_TOKEN_SECRET']
   end
 
   formapi = FormAPI::Client.new
 
   response = formapi.combine_submissions(
-    submission_ids: ["SUBMISSION_1_ID", "SUBMISSION_2_ID", ... ],
+    submission_ids: ["SUBMISSION_1_ID", "SUBMISSION_2_ID"],
     metadata: {
       user_id: 123
     }

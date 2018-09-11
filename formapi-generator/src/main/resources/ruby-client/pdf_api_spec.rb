@@ -19,10 +19,9 @@ require 'json'
 describe 'PDFApi' do
   before do
     FormAPI.configure do |c|
-      c.username  = 'api_token123'
-      c.password  = 'testsecret123'
-      c.host = 'localhost:31337'
-      c.scheme = 'http'
+      c.api_token_id = 'api_token123'
+      c.api_token_secret = 'testsecret123'
+      c.host = 'http://localhost:31337'
     end
   end
 
@@ -32,16 +31,16 @@ describe 'PDFApi' do
     # run after each test
   end
 
-  # integration tests for batch_generate_pdf
+  # integration tests for batch_generate_pdf (v1)
   # Generates multiple PDFs
   # @param template_id
   # @param create_submission_data
   # @param [Hash] opts the optional parameters
   # @return [Array<CreateSubmissionResponse>]
-  describe 'batch_generate_pdf test' do
+  describe 'batch_generate_pdf v1 test' do
     it 'should work' do
-      template_id = 'tpl_000000000000000001' # String |
-      responses = api_instance.batch_generate_pdf(template_id, [
+      template_id = 'tpl_000000000000000001'
+      responses = api_instance.batch_generate_pdf_v1(template_id, [
         {
           data: {
             title: 'Test PDF',
@@ -63,6 +62,70 @@ describe 'PDFApi' do
       expect(submission.state).to eq 'pending'
     end
   end
+
+  # Integration tests for batch_generate_pdf (v2)
+  describe 'batch_generate_pdfs v2 test' do
+    it 'should work' do
+      template_id = 'tpl_000000000000000001'
+      response = api_instance.batch_generate_pdfs(
+        metadata: { user_id: 123 },
+        test: true,
+        submissions: [
+          {
+            template_id: template_id,
+            data: {
+              title: 'Test PDF',
+              description: 'This PDF is great!',
+            }
+          },
+          {
+            template_id: template_id,
+            data: {
+              title: 'Test PDF 2',
+              description: 'This PDF is also great!',
+            }
+          }
+        ]
+      )
+      expect(response.status).to eq 'success'
+      batch = response.submission_batch
+      expect(batch.id).to start_with 'sba_'
+      expect(batch.state).to eq 'pending'
+      expect(batch.total_count).to eq 2
+      expect(batch.pending_count).to eq 2
+      expect(batch.error_count).to eq 0
+      expect(batch.completion_percentage).to eq 0
+
+      expect(response.submissions.size).to eq 2
+      submission_response = response.submissions.first
+      expect(submission_response.status).to eq 'success'
+      submission = submission_response.submission
+      expect(submission.id).to start_with 'sub_'
+      expect(submission.expired).to eq false
+      expect(submission.state).to eq 'pending'
+    end
+  end
+
+  describe 'get_submission_batch test' do
+    it 'should get the batch including submissions' do
+      submission_batch_id = 'sba_000000000000000001'
+      batch = api_instance.get_submission_batch(submission_batch_id, include_submissions: true)
+      expect(batch.id).to eq 'sba_000000000000000001'
+      expect(batch.total_count).to eq 2
+      expect(batch.pending_count).to eq 0
+      expect(batch.completion_percentage).to eq 100
+      expect(batch.state).to eq 'processed'
+      expect(batch.submissions.count).to eq 2
+    end
+
+    it 'should get the batch without submissions' do
+      submission_batch_id = 'sba_000000000000000001'
+      batch = api_instance.get_submission_batch(submission_batch_id)
+      expect(batch.id).to eq 'sba_000000000000000001'
+      expect(batch.submissions).to be_nil
+    end
+  end
+
   # integration tests for combine_submissions
   # Merge generated PDFs together
   # @param [Hash] opts the optional parameters
@@ -71,10 +134,7 @@ describe 'PDFApi' do
   describe 'combine_submissions test' do
     it 'should work' do
       response = api_instance.combine_submissions(
-        combined_submission_data: {
-          submission_ids: %w[sub_000000000000000001 sub_000000000000000002],
-        }
-      )
+        submission_ids: %w[sub_000000000000000001 sub_000000000000000002])
       expect(response.status).to eq 'success'
       expect(response.combined_submission.id).to start_with 'com_'
       expect(response.combined_submission.state).to eq 'pending'
@@ -87,7 +147,7 @@ describe 'PDFApi' do
   # @return [CombinedSubmission]
   describe 'expire_combined_submission test' do
     it 'should work' do
-      combined_submission_id = 'com_000000000000000001' # String |
+      combined_submission_id = 'com_000000000000000001'
       combined_submission = api_instance.expire_combined_submission(combined_submission_id)
       expect(combined_submission.expired).to eq true
     end
@@ -99,7 +159,7 @@ describe 'PDFApi' do
   # @return [Submission]
   describe 'expire_submission test' do
     it 'should work' do
-      submission_id = 'sub_000000000000000001' # String |
+      submission_id = 'sub_000000000000000001'
       submission = api_instance.expire_submission(submission_id)
       expect(submission.expired).to eq true
     end
@@ -112,7 +172,7 @@ describe 'PDFApi' do
   # @return [CreateSubmissionResponse]
   describe 'generate_pdf test' do
     it 'should work' do
-      template_id = 'tpl_000000000000000001' # String |
+      template_id = 'tpl_000000000000000001'
       response = api_instance.generate_pdf(template_id,
         data: {
           title: 'Test PDF',
@@ -132,7 +192,7 @@ describe 'PDFApi' do
   # @return [CombinedSubmission]
   describe 'get_combined_submission test' do
     it 'should work' do
-      combined_submission_id = 'com_000000000000000001' # String |
+      combined_submission_id = 'com_000000000000000001'
       combined_submission = api_instance.get_combined_submission(combined_submission_id)
       expect(combined_submission.id).to start_with 'com_'
     end
@@ -144,7 +204,7 @@ describe 'PDFApi' do
   # @return [Submission]
   describe 'get_submission test' do
     it 'should work' do
-      submission_id = 'sub_000000000000000001' # String |
+      submission_id = 'sub_000000000000000001'
       submission = api_instance.get_submission(submission_id)
       expect(submission.id).to start_with 'sub_'
     end

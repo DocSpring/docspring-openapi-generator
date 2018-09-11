@@ -7,8 +7,10 @@ Name | Type | Description | Notes
 **test** | **BOOLEAN** |  | 
 **expired** | **BOOLEAN** |  | 
 **expires_at** | **String** |  | [optional] 
+**processed_at** | **String** |  | [optional] 
 **state** | **String** |  | 
 **metadata** | **Object** |  | [optional] 
 **download_url** | **String** |  | [optional] 
+**batch_id** | **String** |  | [optional] 
 
 

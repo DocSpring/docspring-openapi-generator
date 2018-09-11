@@ -13,10 +13,12 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module FormAPI
-  class AuthenticationError
-    attr_accessor :status
+  class CreateSubmissionResponse1
+    attr_accessor :submission
 
-    attr_accessor :error
+    attr_accessor :errors
+
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -43,16 +45,18 @@ module FormAPI
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'status' => :'status',
-        :'error' => :'error'
+        :'submission' => :'submission',
+        :'errors' => :'errors',
+        :'status' => :'status'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'status' => :'String',
-        :'error' => :'String'
+        :'submission' => :'Submission',
+        :'errors' => :'Array<String>',
+        :'status' => :'String'
       }
     end
 
@@ -64,12 +68,18 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'submission')
+        self.submission = attributes[:'submission']
       end
 
-      if attributes.has_key?(:'error')
-        self.error = attributes[:'error']
+      if attributes.has_key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
+        end
+      end
+
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -77,26 +87,21 @@ module FormAPI
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @error.nil?
-        invalid_properties.push('invalid value for "error", error cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ['error'])
+      status_validator = EnumAttributeValidator.new('String', ['success', 'error', 'valid_but_not_saved'])
       return false unless status_validator.valid?(@status)
-      return false if @error.nil?
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] status Object to be assigned
     def status=(status)
-      validator = EnumAttributeValidator.new('String', ['error'])
+      validator = EnumAttributeValidator.new('String', ['success', 'error', 'valid_but_not_saved'])
       unless validator.valid?(status)
         fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
@@ -108,8 +113,9 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          status == o.status &&
-          error == o.error
+          submission == o.submission &&
+          errors == o.errors &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -121,7 +127,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [status, error].hash
+      [submission, errors, status].hash
     end
 
     # Builds the object from hash

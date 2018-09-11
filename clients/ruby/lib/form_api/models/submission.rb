@@ -22,11 +22,15 @@ module FormAPI
 
     attr_accessor :expires_at
 
+    attr_accessor :processed_at
+
     attr_accessor :state
 
     attr_accessor :metadata
 
     attr_accessor :download_url
+
+    attr_accessor :batch_id
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,9 +61,11 @@ module FormAPI
         :'test' => :'test',
         :'expired' => :'expired',
         :'expires_at' => :'expires_at',
+        :'processed_at' => :'processed_at',
         :'state' => :'state',
         :'metadata' => :'metadata',
-        :'download_url' => :'download_url'
+        :'download_url' => :'download_url',
+        :'batch_id' => :'batch_id'
       }
     end
 
@@ -70,9 +76,11 @@ module FormAPI
         :'test' => :'BOOLEAN',
         :'expired' => :'BOOLEAN',
         :'expires_at' => :'String',
+        :'processed_at' => :'String',
         :'state' => :'String',
         :'metadata' => :'Object',
-        :'download_url' => :'String'
+        :'download_url' => :'String',
+        :'batch_id' => :'String'
       }
     end
 
@@ -100,6 +108,10 @@ module FormAPI
         self.expires_at = attributes[:'expires_at']
       end
 
+      if attributes.has_key?(:'processed_at')
+        self.processed_at = attributes[:'processed_at']
+      end
+
       if attributes.has_key?(:'state')
         self.state = attributes[:'state']
       end
@@ -110,6 +122,10 @@ module FormAPI
 
       if attributes.has_key?(:'download_url')
         self.download_url = attributes[:'download_url']
+      end
+
+      if attributes.has_key?(:'batch_id')
+        self.batch_id = attributes[:'batch_id']
       end
     end
 
@@ -167,9 +183,11 @@ module FormAPI
           test == o.test &&
           expired == o.expired &&
           expires_at == o.expires_at &&
+          processed_at == o.processed_at &&
           state == o.state &&
           metadata == o.metadata &&
-          download_url == o.download_url
+          download_url == o.download_url &&
+          batch_id == o.batch_id
     end
 
     # @see the `==` method
@@ -181,7 +199,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, test, expired, expires_at, state, metadata, download_url].hash
+      [id, test, expired, expires_at, processed_at, state, metadata, download_url, batch_id].hash
     end
 
     # Builds the object from hash
