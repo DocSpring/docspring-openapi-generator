@@ -60,7 +60,7 @@ module FormAPI
       return response unless options[:wait]
 
       batch = response.submission_batch
-      submissions = response.submissions
+      submission_responses = response.submissions
       timeout = options[:timeout] || 600
       start_time = Time.now
 
@@ -83,7 +83,7 @@ module FormAPI
             next h unless sub && sub.id
             h[sub.id] = sub
           end
-        submissions.each do |sub|
+        submission_responses.each do |sub|
           # If there's no submission it's already an error.
           next unless sub.submission
           updated_sub = updated_submissions_hash[sub.submission.id]
@@ -99,7 +99,7 @@ module FormAPI
       CreateSubmissionBatchResponse.new(
         status: batch.state == 'processed' ? 'success' : 'error',
         submission_batch: batch,
-        submissions: submissions
+        submissions: submission_responses
       )
     end
 
