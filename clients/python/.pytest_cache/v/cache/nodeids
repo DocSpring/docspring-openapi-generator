@@ -5,6 +5,7 @@
   "test/test_client.py::TestClient::test_batch_generate_pdfs",
   "test/test_client.py::TestClient::test_combine_submissions",
   "test/test_client.py::TestClient::test_generate_pdf",
+  "test/test_client.py::TestClient::test_generate_pdf_with_error",
   "test/test_combined_submission.py::TestCombinedSubmission::testCombinedSubmission",
   "test/test_combined_submission_data.py::TestCombinedSubmissionData::testCombinedSubmissionData",
   "test/test_create_combined_submission_response.py::TestCreateCombinedSubmissionResponse::testCreateCombinedSubmissionResponse",

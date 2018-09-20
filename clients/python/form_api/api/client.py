@@ -22,8 +22,10 @@ from form_api.models.create_submission_response import CreateSubmissionResponse
 from form_api.models.create_combined_submission_response import CreateCombinedSubmissionResponse
 from form_api.models.create_submission_batch_response import CreateSubmissionBatchResponse
 
+
 class PollTimeoutError(Exception):
     pass
+
 
 class FailedBatchError(Exception):
     pass
@@ -33,6 +35,13 @@ class Client(PDFApi):
     """
       FormAPI API Client
     """
+
+    def wait(self):
+        """
+        Just calls sleep(1), but we need to mock this specific sleep
+        in tests.
+        """
+        time.sleep(1)
 
     def generate_pdf(self, template_id, data, **kwargs):
         """
@@ -59,7 +68,7 @@ class Client(PDFApi):
 
         # Wait for submission to be ready
         while (submission.state == 'pending'):
-            time.sleep(1)
+            self.wait()
             submission = self.get_submission(submission.id)
 
             if time.time() - start_time > timeout:
@@ -96,7 +105,7 @@ class Client(PDFApi):
 
         # Wait for batch to be ready
         while (batch.state == 'pending'):
-            time.sleep(1)
+            self.wait()
             batch = self.get_submission_batch(batch.id)
 
             if time.time() - start_time > timeout:
@@ -104,7 +113,8 @@ class Client(PDFApi):
                     "PDF was not ready after %d seconds!" % timeout)
 
         # Now we need to fetch the updated submissions
-        batch_with_subs = self.get_submission_batch(batch.id, include_submissions=True)
+        batch_with_subs = self.get_submission_batch(
+            batch.id, include_submissions=True)
 
         updated_submissions_dict = {}
         for sub in batch_with_subs.submissions:
@@ -150,7 +160,7 @@ class Client(PDFApi):
 
         # Wait for submission to be ready
         while (combined_submission.state == 'pending'):
-            time.sleep(1)
+            self.wait()
             combined_submission = self.get_combined_submission(
                 combined_submission.id)
 
@@ -174,7 +184,8 @@ class Client(PDFApi):
         if response.status != 'success':
             raise FailedBatchError("Batch job failed, cannot combine PDFs!")
 
-        submission_ids = list(map(lambda s: s.submission.id, response.submissions))
+        submission_ids = list(
+            map(lambda s: s.submission.id, response.submissions))
         return self.combine_submissions({
             'submission_ids': submission_ids
         }, wait=wait)

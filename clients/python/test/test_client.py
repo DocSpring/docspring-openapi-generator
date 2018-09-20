@@ -34,7 +34,7 @@ class TestClient(unittest.TestCase):
         configuration.host = 'localhost:31337/api/v1'
 
         # create an instance of the API class
-        self.api = form_api.Client(form_api.ApiClient(configuration))
+        self.client = form_api.Client(form_api.ApiClient(configuration))
 
     def tearDown(self):
         pass
@@ -44,32 +44,53 @@ class TestClient(unittest.TestCase):
 
         Generates PDFs
         """
-        with mock.patch.object(time, 'sleep') as sleep_patched:
+        with mock.patch.object(form_api.Client, 'wait') as wait_patched:
           template_id = 'tpl_000000000000000001'  # str |
 
-          response = self.api.generate_pdf(
+          response = self.client.generate_pdf(
               template_id, {
                   'data': {
                       'title': 'Test PDF',
                       'description': 'This PDF is great!'
                   }
               })
-          sleep_patched.assert_called()
+          wait_patched.assert_called()
           self.assertEquals(response.status, 'success')
           submission = response.submission
           self.assertRegexpMatches(submission.id, '^sub_')
           self.assertEquals(submission.expired, False)
           self.assertEquals(submission.state, 'processed')
 
+
+    def test_generate_pdf_with_error(self):
+        """Test case for generate_pdf with error
+
+        Generates PDFs
+        """
+        with mock.patch.object(form_api.Client, 'wait') as wait_patched:
+            with self.assertRaises(ApiException) as context:
+                template_id = 'tpl_000000000000000001'  # str |
+                self.client.generate_pdf(
+                    template_id, {
+                        'data': {
+                            'title': 'Test PDF',
+                        }
+                    })
+            # self.assertEquals(context.exception.data['status'], 'error')
+            # self.assertEquals(context.exception.data['errors'], [
+            #     "The root object did not contain a required property of 'description'"
+            # ])
+            wait_patched.assert_not_called()
+
     def test_batch_generate_pdfs(self):
         """Test case for batch_generate_pdfs
 
         Batch Generates PDFs
         """
-        with mock.patch.object(time, 'sleep') as sleep_patched:
+        with mock.patch.object(form_api.Client, 'wait') as wait_patched:
             template_id = 'tpl_000000000000000001'  # str |
 
-            response = self.api.batch_generate_pdfs({
+            response = self.client.batch_generate_pdfs({
                 'template_id': template_id,
                 'metadata': { 'user_id': 123 },
                 'test': True,
@@ -87,7 +108,7 @@ class TestClient(unittest.TestCase):
                         }
                     }
                 ]}, wait=True)
-            sleep_patched.assert_called()
+            wait_patched.assert_called()
 
             self.assertEquals(response.status, 'success')
             batch = response.submission_batch
@@ -114,11 +135,11 @@ class TestClient(unittest.TestCase):
 
         Merge generated PDFs together  # noqa: E501
         """
-        with mock.patch.object(time, "sleep") as sleep_patched:
-            response = self.api.combine_submissions({
+        with mock.patch.object(time, "sleep") as wait_patched:
+            response = self.client.combine_submissions({
                 'submission_ids': ['sub_000000000000000001', 'sub_000000000000000002']
             }, wait=True)
-            sleep_patched.assert_called()
+            wait_patched.assert_called()
             self.assertEquals(response.status, 'success')
             combined_submission = response.combined_submission
             self.assertRegexpMatches(combined_submission.id, '^com_')
@@ -131,9 +152,9 @@ class TestClient(unittest.TestCase):
 
         Batch generate and merge PDFs together  # noqa: E501
         """
-        with mock.patch.object(time, "sleep") as sleep_patched:
+        with mock.patch.object(time, "sleep") as wait_patched:
             template_id = 'tpl_000000000000000001'  # str |
-            response = self.api.batch_generate_and_combine_pdfs({
+            response = self.client.batch_generate_and_combine_pdfs({
                 'template_id': template_id,
                 'metadata': {'user_id': 123},
                 'test': True,
@@ -152,7 +173,7 @@ class TestClient(unittest.TestCase):
                     }
                 ]}, wait=True)
 
-            sleep_patched.assert_called()
+            wait_patched.assert_called()
             combined_submission = response.combined_submission
             self.assertRegexpMatches(combined_submission.id, '^com_')
             self.assertEquals(combined_submission.expired, False)

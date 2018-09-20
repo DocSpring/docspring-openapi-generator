@@ -21,11 +21,12 @@ fa_client = form_api.Client()
 fa_client.api_client.configuration.username = "yRaaR9JmTPtGX7EN"
 fa_client.api_client.configuration.password = "IB3TRkSdm4f2BdtU_D3YgxjdMB7l-r2fOgvxD1Yzwec"
 # fa_client.api_client.configuration.debug = True
+
+# ID of a template that you have configured
 template_id = "6zz3dYRYM67fxMXA"
 
 try:
-  submission = fa_client.generate_pdf({
-    "template_id": template_id,       # ID of a template that you have configured
+  response = fa_client.generate_pdf(template_id, {
     "test": True,                     # test documents are free but watermarked
     "data": {                         # Data to render in the template
       "first_name": "John",
@@ -36,6 +37,7 @@ try:
       "user_id": 123,
     }
   })
+  submission = response.submission
 
   print(submission)
 
