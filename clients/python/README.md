@@ -79,10 +79,12 @@ Class | Method | HTTP request | Description
 *PDFApi* | [**batch_generate_pdf_v1**](docs/PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 *PDFApi* | [**batch_generate_pdfs**](docs/PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 *PDFApi* | [**combine_submissions**](docs/PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+*PDFApi* | [**create_data_request_token**](docs/PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 *PDFApi* | [**expire_combined_submission**](docs/PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 *PDFApi* | [**expire_submission**](docs/PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 *PDFApi* | [**generate_pdf**](docs/PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 *PDFApi* | [**get_combined_submission**](docs/PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+*PDFApi* | [**get_data_request**](docs/PDFApi.md#get_data_request) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 *PDFApi* | [**get_submission**](docs/PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 *PDFApi* | [**get_submission_batch**](docs/PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 *PDFApi* | [**get_templates**](docs/PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
@@ -97,15 +99,19 @@ Class | Method | HTTP request | Description
  - [CombinedSubmissionData](docs/CombinedSubmissionData.md)
  - [CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
  - [CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
+ - [CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
+ - [CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [CreateSubmissionData](docs/CreateSubmissionData.md)
  - [CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
+ - [CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
- - [CreateSubmissionResponse1](docs/CreateSubmissionResponse1.md)
  - [Error](docs/Error.md)
  - [InvalidRequest](docs/InvalidRequest.md)
  - [Submission](docs/Submission.md)
  - [SubmissionBatch](docs/SubmissionBatch.md)
  - [SubmissionBatchData](docs/SubmissionBatchData.md)
+ - [SubmissionDataRequest](docs/SubmissionDataRequest.md)
  - [Template](docs/Template.md)
 
 

@@ -70,7 +70,13 @@ namespace FormApi.Client.Model
             /// Enum Imageprocessingfailed for value: image_processing_failed
             /// </summary>
             [EnumMember(Value = "image_processing_failed")]
-            Imageprocessingfailed = 6
+            Imageprocessingfailed = 6,
+
+            /// <summary>
+            /// Enum Waitingfordatarequests for value: waiting_for_data_requests
+            /// </summary>
+            [EnumMember(Value = "waiting_for_data_requests")]
+            Waitingfordatarequests = 7
 
         }
 
@@ -91,10 +97,12 @@ namespace FormApi.Client.Model
         /// <param name="test">test (required).</param>
         /// <param name="expired">expired (required).</param>
         /// <param name="expiresAt">expiresAt.</param>
+        /// <param name="processedAt">processedAt.</param>
         /// <param name="state">state (required).</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="downloadUrl">downloadUrl.</param>
-        public Submission(string id = default(string), bool? test = default(bool?), bool? expired = default(bool?), string expiresAt = default(string), StateEnum state = default(StateEnum), Object metadata = default(Object), string downloadUrl = default(string))
+        /// <param name="batchId">batchId.</param>
+        public Submission(string id = default(string), bool? test = default(bool?), bool? expired = default(bool?), string expiresAt = default(string), string processedAt = default(string), StateEnum state = default(StateEnum), Object metadata = default(Object), string downloadUrl = default(string), string batchId = default(string))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -133,8 +141,10 @@ namespace FormApi.Client.Model
                 this.State = state;
             }
             this.ExpiresAt = expiresAt;
+            this.ProcessedAt = processedAt;
             this.Metadata = metadata;
             this.DownloadUrl = downloadUrl;
+            this.BatchId = batchId;
         }
         
         /// <summary>
@@ -161,6 +171,12 @@ namespace FormApi.Client.Model
         [DataMember(Name="expires_at", EmitDefaultValue=false)]
         public string ExpiresAt { get; set; }
 
+        /// <summary>
+        /// Gets or Sets ProcessedAt
+        /// </summary>
+        [DataMember(Name="processed_at", EmitDefaultValue=false)]
+        public string ProcessedAt { get; set; }
+
 
         /// <summary>
         /// Gets or Sets Metadata
@@ -175,6 +191,12 @@ namespace FormApi.Client.Model
         public string DownloadUrl { get; set; }
 
         /// <summary>
+        /// Gets or Sets BatchId
+        /// </summary>
+        [DataMember(Name="batch_id", EmitDefaultValue=false)]
+        public string BatchId { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -186,9 +208,11 @@ namespace FormApi.Client.Model
             sb.Append("  Test: ").Append(Test).Append("\n");
             sb.Append("  Expired: ").Append(Expired).Append("\n");
             sb.Append("  ExpiresAt: ").Append(ExpiresAt).Append("\n");
+            sb.Append("  ProcessedAt: ").Append(ProcessedAt).Append("\n");
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("  DownloadUrl: ").Append(DownloadUrl).Append("\n");
+            sb.Append("  BatchId: ").Append(BatchId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -244,6 +268,11 @@ namespace FormApi.Client.Model
                     this.ExpiresAt.Equals(input.ExpiresAt))
                 ) && 
                 (
+                    this.ProcessedAt == input.ProcessedAt ||
+                    (this.ProcessedAt != null &&
+                    this.ProcessedAt.Equals(input.ProcessedAt))
+                ) && 
+                (
                     this.State == input.State ||
                     (this.State != null &&
                     this.State.Equals(input.State))
@@ -257,6 +286,11 @@ namespace FormApi.Client.Model
                     this.DownloadUrl == input.DownloadUrl ||
                     (this.DownloadUrl != null &&
                     this.DownloadUrl.Equals(input.DownloadUrl))
+                ) && 
+                (
+                    this.BatchId == input.BatchId ||
+                    (this.BatchId != null &&
+                    this.BatchId.Equals(input.BatchId))
                 );
         }
 
@@ -277,12 +311,16 @@ namespace FormApi.Client.Model
                     hashCode = hashCode * 59 + this.Expired.GetHashCode();
                 if (this.ExpiresAt != null)
                     hashCode = hashCode * 59 + this.ExpiresAt.GetHashCode();
+                if (this.ProcessedAt != null)
+                    hashCode = hashCode * 59 + this.ProcessedAt.GetHashCode();
                 if (this.State != null)
                     hashCode = hashCode * 59 + this.State.GetHashCode();
                 if (this.Metadata != null)
                     hashCode = hashCode * 59 + this.Metadata.GetHashCode();
                 if (this.DownloadUrl != null)
                     hashCode = hashCode * 59 + this.DownloadUrl.GetHashCode();
+                if (this.BatchId != null)
+                    hashCode = hashCode * 59 + this.BatchId.GetHashCode();
                 return hashCode;
             }
         }

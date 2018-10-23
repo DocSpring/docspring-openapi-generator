@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/Template'], factory);
+    define(['ApiClient', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionBatchResponse', 'model/CreateSubmissionBatchV1SubmissionsResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionDataRequestTokenResponse', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/SubmissionBatch', 'model/SubmissionBatchData', 'model/SubmissionDataRequest', 'model/Template'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AuthenticationError'), require('../model/AuthenticationSuccessResponse'), require('../model/CombinedSubmission'), require('../model/CombinedSubmissionData'), require('../model/CreateCombinedSubmissionResponse'), require('../model/CreateSubmissionData'), require('../model/CreateSubmissionResponse'), require('../model/Error'), require('../model/InvalidRequest'), require('../model/Submission'), require('../model/Template'));
+    module.exports = factory(require('../ApiClient'), require('../model/AuthenticationError'), require('../model/AuthenticationSuccessResponse'), require('../model/CombinedSubmission'), require('../model/CombinedSubmissionData'), require('../model/CreateCombinedSubmissionResponse'), require('../model/CreateSubmissionBatchResponse'), require('../model/CreateSubmissionBatchV1SubmissionsResponse'), require('../model/CreateSubmissionData'), require('../model/CreateSubmissionDataRequestTokenResponse'), require('../model/CreateSubmissionResponse'), require('../model/Error'), require('../model/InvalidRequest'), require('../model/Submission'), require('../model/SubmissionBatch'), require('../model/SubmissionBatchData'), require('../model/SubmissionDataRequest'), require('../model/Template'));
   } else {
     // Browser globals (root is window)
     if (!root.FormAPI) {
       root.FormAPI = {};
     }
-    root.FormAPI.PDFApi = factory(root.FormAPI.ApiClient, root.FormAPI.AuthenticationError, root.FormAPI.AuthenticationSuccessResponse, root.FormAPI.CombinedSubmission, root.FormAPI.CombinedSubmissionData, root.FormAPI.CreateCombinedSubmissionResponse, root.FormAPI.CreateSubmissionData, root.FormAPI.CreateSubmissionResponse, root.FormAPI.Error, root.FormAPI.InvalidRequest, root.FormAPI.Submission, root.FormAPI.Template);
+    root.FormAPI.PDFApi = factory(root.FormAPI.ApiClient, root.FormAPI.AuthenticationError, root.FormAPI.AuthenticationSuccessResponse, root.FormAPI.CombinedSubmission, root.FormAPI.CombinedSubmissionData, root.FormAPI.CreateCombinedSubmissionResponse, root.FormAPI.CreateSubmissionBatchResponse, root.FormAPI.CreateSubmissionBatchV1SubmissionsResponse, root.FormAPI.CreateSubmissionData, root.FormAPI.CreateSubmissionDataRequestTokenResponse, root.FormAPI.CreateSubmissionResponse, root.FormAPI.Error, root.FormAPI.InvalidRequest, root.FormAPI.Submission, root.FormAPI.SubmissionBatch, root.FormAPI.SubmissionBatchData, root.FormAPI.SubmissionDataRequest, root.FormAPI.Template);
   }
-}(this, function(ApiClient, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionData, CreateSubmissionResponse, Error, InvalidRequest, Submission, Template) {
+}(this, function(ApiClient, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionBatchResponse, CreateSubmissionBatchV1SubmissionsResponse, CreateSubmissionData, CreateSubmissionDataRequestTokenResponse, CreateSubmissionResponse, Error, InvalidRequest, Submission, SubmissionBatch, SubmissionBatchData, SubmissionDataRequest, Template) {
   'use strict';
 
   /**
@@ -48,10 +48,10 @@
 
 
     /**
-     * Callback function to receive the result of the batchGeneratePDF operation.
-     * @callback module:api/PDFApi~batchGeneratePDFCallback
+     * Callback function to receive the result of the batchGeneratePdfV1 operation.
+     * @callback module:api/PDFApi~batchGeneratePdfV1Callback
      * @param {String} error Error message, if any.
-     * @param {Array.<module:model/CreateSubmissionResponse>} data The data returned by the service call.
+     * @param {Array.<module:model/CreateSubmissionBatchV1SubmissionsResponse>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -59,20 +59,20 @@
      * Generates multiple PDFs
      * @param {String} templateId 
      * @param {Array.<CreateSubmissionData>} createSubmissionData 
-     * @param {module:api/PDFApi~batchGeneratePDFCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<module:model/CreateSubmissionResponse>}
+     * @param {module:api/PDFApi~batchGeneratePdfV1Callback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/CreateSubmissionBatchV1SubmissionsResponse>}
      */
-    this.batchGeneratePDF = function(templateId, createSubmissionData, callback) {
+    this.batchGeneratePdfV1 = function(templateId, createSubmissionData, callback) {
       var postBody = createSubmissionData;
 
       // verify the required parameter 'templateId' is set
       if (templateId === undefined || templateId === null) {
-        throw new Error("Missing the required parameter 'templateId' when calling batchGeneratePDF");
+        throw new Error("Missing the required parameter 'templateId' when calling batchGeneratePdfV1");
       }
 
       // verify the required parameter 'createSubmissionData' is set
       if (createSubmissionData === undefined || createSubmissionData === null) {
-        throw new Error("Missing the required parameter 'createSubmissionData' when calling batchGeneratePDF");
+        throw new Error("Missing the required parameter 'createSubmissionData' when calling batchGeneratePdfV1");
       }
 
 
@@ -91,10 +91,56 @@
       var authNames = ['api_token_basic'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = [CreateSubmissionResponse];
+      var returnType = [CreateSubmissionBatchV1SubmissionsResponse];
 
       return this.apiClient.callApi(
         '/templates/{template_id}/submissions/batch', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the batchGeneratePdfs operation.
+     * @callback module:api/PDFApi~batchGeneratePdfsCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CreateSubmissionBatchResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Generates multiple PDFs
+     * @param {module:model/SubmissionBatchData} submissionBatchData 
+     * @param {module:api/PDFApi~batchGeneratePdfsCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CreateSubmissionBatchResponse}
+     */
+    this.batchGeneratePdfs = function(submissionBatchData, callback) {
+      var postBody = submissionBatchData;
+
+      // verify the required parameter 'submissionBatchData' is set
+      if (submissionBatchData === undefined || submissionBatchData === null) {
+        throw new Error("Missing the required parameter 'submissionBatchData' when calling batchGeneratePdfs");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['api_token_basic'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = CreateSubmissionBatchResponse;
+
+      return this.apiClient.callApi(
+        '/submissions/batches', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -110,14 +156,17 @@
 
     /**
      * Merge generated PDFs together
-     * @param {Object} opts Optional parameters
-     * @param {module:model/CombinedSubmissionData} opts.combinedSubmissionData 
+     * @param {module:model/CombinedSubmissionData} combinedSubmissionData 
      * @param {module:api/PDFApi~combineSubmissionsCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/CreateCombinedSubmissionResponse}
      */
-    this.combineSubmissions = function(opts, callback) {
-      opts = opts || {};
-      var postBody = opts['combinedSubmissionData'];
+    this.combineSubmissions = function(combinedSubmissionData, callback) {
+      var postBody = combinedSubmissionData;
+
+      // verify the required parameter 'combinedSubmissionData' is set
+      if (combinedSubmissionData === undefined || combinedSubmissionData === null) {
+        throw new Error("Missing the required parameter 'combinedSubmissionData' when calling combineSubmissions");
+      }
 
 
       var pathParams = {
@@ -138,6 +187,53 @@
 
       return this.apiClient.callApi(
         '/combined_submissions', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the createDataRequestToken operation.
+     * @callback module:api/PDFApi~createDataRequestTokenCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/CreateSubmissionDataRequestTokenResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Creates a new data request token for form authentication
+     * @param {String} dataRequestId 
+     * @param {module:api/PDFApi~createDataRequestTokenCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CreateSubmissionDataRequestTokenResponse}
+     */
+    this.createDataRequestToken = function(dataRequestId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'dataRequestId' is set
+      if (dataRequestId === undefined || dataRequestId === null) {
+        throw new Error("Missing the required parameter 'dataRequestId' when calling createDataRequestToken");
+      }
+
+
+      var pathParams = {
+        'data_request_id': dataRequestId
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['api_token_basic'];
+      var contentTypes = [];
+      var accepts = ['application/json'];
+      var returnType = CreateSubmissionDataRequestTokenResponse;
+
+      return this.apiClient.callApi(
+        '/data_requests/{data_request_id}/tokens', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
@@ -338,6 +434,53 @@
     }
 
     /**
+     * Callback function to receive the result of the getDataRequest operation.
+     * @callback module:api/PDFApi~getDataRequestCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SubmissionDataRequest} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Look up a submission data request
+     * @param {String} dataRequestId 
+     * @param {module:api/PDFApi~getDataRequestCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/SubmissionDataRequest}
+     */
+    this.getDataRequest = function(dataRequestId, callback) {
+      var postBody = null;
+
+      // verify the required parameter 'dataRequestId' is set
+      if (dataRequestId === undefined || dataRequestId === null) {
+        throw new Error("Missing the required parameter 'dataRequestId' when calling getDataRequest");
+      }
+
+
+      var pathParams = {
+        'data_request_id': dataRequestId
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['api_token_basic'];
+      var contentTypes = [];
+      var accepts = ['application/json'];
+      var returnType = SubmissionDataRequest;
+
+      return this.apiClient.callApi(
+        '/data_requests/{data_request_id}', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the getSubmission operation.
      * @callback module:api/PDFApi~getSubmissionCallback
      * @param {String} error Error message, if any.
@@ -379,6 +522,57 @@
 
       return this.apiClient.callApi(
         '/submissions/{submission_id}', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the getSubmissionBatch operation.
+     * @callback module:api/PDFApi~getSubmissionBatchCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/SubmissionBatch} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Check the status of a submission batch job
+     * @param {String} submissionBatchId 
+     * @param {Object} opts Optional parameters
+     * @param {Boolean} opts.includeSubmissions 
+     * @param {module:api/PDFApi~getSubmissionBatchCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/SubmissionBatch}
+     */
+    this.getSubmissionBatch = function(submissionBatchId, opts, callback) {
+      opts = opts || {};
+      var postBody = null;
+
+      // verify the required parameter 'submissionBatchId' is set
+      if (submissionBatchId === undefined || submissionBatchId === null) {
+        throw new Error("Missing the required parameter 'submissionBatchId' when calling getSubmissionBatch");
+      }
+
+
+      var pathParams = {
+        'submission_batch_id': submissionBatchId
+      };
+      var queryParams = {
+        'include_submissions': opts['includeSubmissions'],
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['api_token_basic'];
+      var contentTypes = [];
+      var accepts = ['application/json'];
+      var returnType = SubmissionBatch;
+
+      return this.apiClient.callApi(
+        '/submissions/batches/{submission_batch_id}', 'GET',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );

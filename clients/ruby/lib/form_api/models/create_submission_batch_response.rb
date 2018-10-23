@@ -61,7 +61,7 @@ module FormAPI
     def self.openapi_types
       {
         :'submission_batch' => :'SubmissionBatch',
-        :'submissions' => :'Array<CreateSubmissionResponse1>',
+        :'submissions' => :'Array<CreateSubmissionBatchSubmissionsResponse>',
         :'error' => :'String',
         :'errors' => :'Array<String>',
         :'status' => :'String'

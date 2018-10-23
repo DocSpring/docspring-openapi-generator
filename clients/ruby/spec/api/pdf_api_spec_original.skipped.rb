@@ -43,7 +43,7 @@ describe 'PDFApi' do
   # @param template_id 
   # @param create_submission_data 
   # @param [Hash] opts the optional parameters
-  # @return [Array<CreateSubmissionResponse>]
+  # @return [Array<CreateSubmissionBatchV1SubmissionsResponse>]
   describe 'batch_generate_pdf_v1 test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001' # String | 
@@ -117,7 +117,7 @@ describe 'PDFApi' do
   # @param template_id 
   # @param create_submission_data 
   # @param [Hash] opts the optional parameters
-  # @return [CreateSubmissionResponse2]
+  # @return [CreateSubmissionResponse]
   describe 'generate_pdf test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001' # String | 

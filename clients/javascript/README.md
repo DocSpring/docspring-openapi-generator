@@ -113,7 +113,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.batchGeneratePDF(templateId, createSubmissionData, callback);
+api.batchGeneratePdfV1(templateId, createSubmissionData, callback);
 
 ```
 
@@ -123,13 +123,17 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*FormAPI.PDFApi* | [**batchGeneratePDF**](docs/PDFApi.md#batchGeneratePDF) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+*FormAPI.PDFApi* | [**batchGeneratePdfV1**](docs/PDFApi.md#batchGeneratePdfV1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+*FormAPI.PDFApi* | [**batchGeneratePdfs**](docs/PDFApi.md#batchGeneratePdfs) | **POST** /submissions/batches | Generates multiple PDFs
 *FormAPI.PDFApi* | [**combineSubmissions**](docs/PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
+*FormAPI.PDFApi* | [**createDataRequestToken**](docs/PDFApi.md#createDataRequestToken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 *FormAPI.PDFApi* | [**expireCombinedSubmission**](docs/PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 *FormAPI.PDFApi* | [**expireSubmission**](docs/PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 *FormAPI.PDFApi* | [**generatePDF**](docs/PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 *FormAPI.PDFApi* | [**getCombinedSubmission**](docs/PDFApi.md#getCombinedSubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+*FormAPI.PDFApi* | [**getDataRequest**](docs/PDFApi.md#getDataRequest) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 *FormAPI.PDFApi* | [**getSubmission**](docs/PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+*FormAPI.PDFApi* | [**getSubmissionBatch**](docs/PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 *FormAPI.PDFApi* | [**getTemplates**](docs/PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
 *FormAPI.PDFApi* | [**testAuthentication**](docs/PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 
@@ -141,11 +145,20 @@ Class | Method | HTTP request | Description
  - [FormAPI.CombinedSubmission](docs/CombinedSubmission.md)
  - [FormAPI.CombinedSubmissionData](docs/CombinedSubmissionData.md)
  - [FormAPI.CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
+ - [FormAPI.CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
+ - [FormAPI.CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
+ - [FormAPI.CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [FormAPI.CreateSubmissionData](docs/CreateSubmissionData.md)
+ - [FormAPI.CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [FormAPI.CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
+ - [FormAPI.CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [FormAPI.CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
  - [FormAPI.Error](docs/Error.md)
  - [FormAPI.InvalidRequest](docs/InvalidRequest.md)
  - [FormAPI.Submission](docs/Submission.md)
+ - [FormAPI.SubmissionBatch](docs/SubmissionBatch.md)
+ - [FormAPI.SubmissionBatchData](docs/SubmissionBatchData.md)
+ - [FormAPI.SubmissionDataRequest](docs/SubmissionDataRequest.md)
  - [FormAPI.Template](docs/Template.md)
 
 

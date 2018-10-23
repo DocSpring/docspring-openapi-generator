@@ -43,7 +43,7 @@ class PDFApi(object):
         :param async_req bool
         :param str template_id: (required)
         :param list[CreateSubmissionData] create_submission_data: (required)
-        :return: list[CreateSubmissionResponse]
+        :return: list[CreateSubmissionBatchV1SubmissionsResponse]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -65,7 +65,7 @@ class PDFApi(object):
         :param async_req bool
         :param str template_id: (required)
         :param list[CreateSubmissionData] create_submission_data: (required)
-        :return: list[CreateSubmissionResponse]
+        :return: list[CreateSubmissionBatchV1SubmissionsResponse]
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -130,7 +130,7 @@ class PDFApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[CreateSubmissionResponse]',  # noqa: E501
+            response_type='list[CreateSubmissionBatchV1SubmissionsResponse]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -327,6 +327,100 @@ class PDFApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='CreateCombinedSubmissionResponse',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def create_data_request_token(self, data_request_id, **kwargs):  # noqa: E501
+        """Creates a new data request token for form authentication  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_data_request_token(data_request_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str data_request_id: (required)
+        :return: CreateSubmissionDataRequestTokenResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.create_data_request_token_with_http_info(data_request_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.create_data_request_token_with_http_info(data_request_id, **kwargs)  # noqa: E501
+            return data
+
+    def create_data_request_token_with_http_info(self, data_request_id, **kwargs):  # noqa: E501
+        """Creates a new data request token for form authentication  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.create_data_request_token_with_http_info(data_request_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str data_request_id: (required)
+        :return: CreateSubmissionDataRequestTokenResponse
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['data_request_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_data_request_token" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'data_request_id' is set
+        if ('data_request_id' not in local_var_params or
+                local_var_params['data_request_id'] is None):
+            raise ValueError("Missing the required parameter `data_request_id` when calling `create_data_request_token`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'data_request_id' in local_var_params:
+            path_params['data_request_id'] = local_var_params['data_request_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/data_requests/{data_request_id}/tokens', 'POST',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='CreateSubmissionDataRequestTokenResponse',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
@@ -715,6 +809,100 @@ class PDFApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type='CombinedSubmission',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=local_var_params.get('async_req'),
+            _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=local_var_params.get('_preload_content', True),
+            _request_timeout=local_var_params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def get_data_request(self, data_request_id, **kwargs):  # noqa: E501
+        """Look up a submission data request  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_data_request(data_request_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str data_request_id: (required)
+        :return: SubmissionDataRequest
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.get_data_request_with_http_info(data_request_id, **kwargs)  # noqa: E501
+        else:
+            (data) = self.get_data_request_with_http_info(data_request_id, **kwargs)  # noqa: E501
+            return data
+
+    def get_data_request_with_http_info(self, data_request_id, **kwargs):  # noqa: E501
+        """Look up a submission data request  # noqa: E501
+
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.get_data_request_with_http_info(data_request_id, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str data_request_id: (required)
+        :return: SubmissionDataRequest
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        local_var_params = locals()
+
+        all_params = ['data_request_id']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        for key, val in six.iteritems(local_var_params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_data_request" % key
+                )
+            local_var_params[key] = val
+        del local_var_params['kwargs']
+        # verify the required parameter 'data_request_id' is set
+        if ('data_request_id' not in local_var_params or
+                local_var_params['data_request_id'] is None):
+            raise ValueError("Missing the required parameter `data_request_id` when calling `get_data_request`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'data_request_id' in local_var_params:
+            path_params['data_request_id'] = local_var_params['data_request_id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['api_token_basic']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/data_requests/{data_request_id}', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='SubmissionDataRequest',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

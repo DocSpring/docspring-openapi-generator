@@ -19,6 +19,8 @@ if [ -z "$LANGUAGE" ]; then
   exit
 fi
 
+echo "Generating $LANGUAGE API client..."
+
 GENERATOR_NAME="formapi-$LANGUAGE"
 
 mkdir -p "examples/$LANGUAGE"
@@ -31,23 +33,24 @@ if [ ! -f "$CONFIG_FILE" ]; then
 fi
 
 # Preserve any vendored dependencies between rebuilds
-case "$LANGUAGE" in
-  php)
-    for f in $CLIENT_DIR/*; do
-      if ! [[ "$f" = *'/vendor' ]]; then rm -r $f; fi
-    done;;
-  csharp)
-    for f in $CLIENT_DIR/*; do
-      if ! [[ "$f" = *'/nuget.exe' ]] && ! [[ "$f" = *'/packages' ]]; then rm -r $f; fi
-    done;;
-  javascript)
-    for f in $CLIENT_DIR/*; do
-      if ! [[ "$f" = *'/node_modules' ]]; then rm -r $f; fi
-    done;;
-  *)
-    rm -rf "$CLIENT_DIR"
-esac
-
+if [ -d $CLIENT_DIR ]; then
+  case "$LANGUAGE" in
+    php)
+      for f in $CLIENT_DIR/*; do
+        if ! [[ "$f" = *'/vendor' ]]; then rm -r $f; fi
+      done;;
+    csharp)
+      for f in $CLIENT_DIR/*; do
+        if ! [[ "$f" = *'/nuget.exe' ]] && ! [[ "$f" = *'/packages' ]]; then rm -r $f; fi
+      done;;
+    javascript)
+      for f in $CLIENT_DIR/*; do
+        if ! [[ "$f" = *'/node_modules' ]]; then rm -r $f; fi
+      done;;
+    *)
+      rm -rf "$CLIENT_DIR"
+  esac
+fi
 
 ./openapi-generator-cli generate \
   --input-spec ../form_api/swagger/v1/swagger.json \

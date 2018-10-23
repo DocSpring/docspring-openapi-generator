@@ -80,6 +80,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property processedAt (base name: "processed_at")', function() {
+      // uncomment below and update the code to test the property processedAt
+      //var instance = new FormAPI.Submission();
+      //expect(instance).to.be();
+    });
+
     it('should have the property state (base name: "state")', function() {
       // uncomment below and update the code to test the property state
       //var instance = new FormAPI.Submission();
@@ -94,6 +100,12 @@
 
     it('should have the property downloadUrl (base name: "download_url")', function() {
       // uncomment below and update the code to test the property downloadUrl
+      //var instance = new FormAPI.Submission();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property batchId (base name: "batch_id")', function() {
+      // uncomment below and update the code to test the property batchId
       //var instance = new FormAPI.Submission();
       //expect(instance).to.be();
     });

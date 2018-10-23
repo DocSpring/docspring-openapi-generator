@@ -55,7 +55,9 @@
     _this['test'] = test;
     _this['expired'] = expired;
 
+
     _this['state'] = state;
+
 
 
   };
@@ -83,6 +85,9 @@
       if (data.hasOwnProperty('expires_at')) {
         obj['expires_at'] = ApiClient.convertToType(data['expires_at'], 'String');
       }
+      if (data.hasOwnProperty('processed_at')) {
+        obj['processed_at'] = ApiClient.convertToType(data['processed_at'], 'String');
+      }
       if (data.hasOwnProperty('state')) {
         obj['state'] = ApiClient.convertToType(data['state'], 'String');
       }
@@ -91,6 +96,9 @@
       }
       if (data.hasOwnProperty('download_url')) {
         obj['download_url'] = ApiClient.convertToType(data['download_url'], 'String');
+      }
+      if (data.hasOwnProperty('batch_id')) {
+        obj['batch_id'] = ApiClient.convertToType(data['batch_id'], 'String');
       }
     }
     return obj;
@@ -113,6 +121,10 @@
    */
   exports.prototype['expires_at'] = undefined;
   /**
+   * @member {String} processed_at
+   */
+  exports.prototype['processed_at'] = undefined;
+  /**
    * @member {module:model/Submission.StateEnum} state
    */
   exports.prototype['state'] = undefined;
@@ -124,6 +136,10 @@
    * @member {String} download_url
    */
   exports.prototype['download_url'] = undefined;
+  /**
+   * @member {String} batch_id
+   */
+  exports.prototype['batch_id'] = undefined;
 
 
   /**
@@ -161,7 +177,12 @@
      * value: "image_processing_failed"
      * @const
      */
-    "image_processing_failed": "image_processing_failed"  };
+    "image_processing_failed": "image_processing_failed",
+    /**
+     * value: "waiting_for_data_requests"
+     * @const
+     */
+    "waiting_for_data_requests": "waiting_for_data_requests"  };
 
 
   return exports;

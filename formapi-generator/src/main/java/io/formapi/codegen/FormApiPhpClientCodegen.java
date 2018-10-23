@@ -22,7 +22,7 @@ public class FormApiPhpClientCodegen extends PhpClientCodegen {
     public void processOpts() {
         super.processOpts();
         supportingFiles.add(new SupportingFile("Client.php", "lib/Client.php"));
-        supportingFiles.add(new SupportingFile("ClientTest.php", "test/ClientTest.php"));
-        supportingFiles.add(new SupportingFile("PDFApiTest.php", "test/Api/PDFApiTest.php"));
+        supportingFiles.add(new SupportingFile("ClientIntegrationTest.php", "test/ClientIntegrationTest.php"));
+        supportingFiles.add(new SupportingFile("PDFApiIntegrationTest.php", "test/Api/PDFApiIntegrationTest.php"));
     }
 }

@@ -99,6 +99,14 @@ namespace FormApi.Client.Test
             // TODO unit test for the property 'ExpiresAt'
         }
         /// <summary>
+        /// Test the property 'ProcessedAt'
+        /// </summary>
+        [Test]
+        public void ProcessedAtTest()
+        {
+            // TODO unit test for the property 'ProcessedAt'
+        }
+        /// <summary>
         /// Test the property 'State'
         /// </summary>
         [Test]
@@ -121,6 +129,14 @@ namespace FormApi.Client.Test
         public void DownloadUrlTest()
         {
             // TODO unit test for the property 'DownloadUrl'
+        }
+        /// <summary>
+        /// Test the property 'BatchId'
+        /// </summary>
+        [Test]
+        public void BatchIdTest()
+        {
+            // TODO unit test for the property 'BatchId'
         }
 
     }

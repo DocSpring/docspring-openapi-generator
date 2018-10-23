@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Example of how to generate a generator
+# Example of how to generate a generator class
 
 ./openapi-generator-cli meta -n FormApiClient -o generators/ruby \
   -t CLIENT \

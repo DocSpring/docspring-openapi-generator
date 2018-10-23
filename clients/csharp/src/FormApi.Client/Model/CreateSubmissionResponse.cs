@@ -59,10 +59,14 @@ namespace FormApi.Client.Model
         /// Initializes a new instance of the <see cref="CreateSubmissionResponse" /> class.
         /// </summary>
         /// <param name="submission">submission.</param>
+        /// <param name="errors">errors.</param>
+        /// <param name="dataRequests">dataRequests.</param>
         /// <param name="status">status.</param>
-        public CreateSubmissionResponse(Submission submission = default(Submission), StatusEnum? status = default(StatusEnum?))
+        public CreateSubmissionResponse(Submission submission = default(Submission), List<string> errors = default(List<string>), List<SubmissionDataRequest> dataRequests = default(List<SubmissionDataRequest>), StatusEnum? status = default(StatusEnum?))
         {
             this.Submission = submission;
+            this.Errors = errors;
+            this.DataRequests = dataRequests;
             this.Status = status;
         }
         
@@ -71,6 +75,18 @@ namespace FormApi.Client.Model
         /// </summary>
         [DataMember(Name="submission", EmitDefaultValue=false)]
         public Submission Submission { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Errors
+        /// </summary>
+        [DataMember(Name="errors", EmitDefaultValue=false)]
+        public List<string> Errors { get; set; }
+
+        /// <summary>
+        /// Gets or Sets DataRequests
+        /// </summary>
+        [DataMember(Name="data_requests", EmitDefaultValue=false)]
+        public List<SubmissionDataRequest> DataRequests { get; set; }
 
 
         /// <summary>
@@ -82,6 +98,8 @@ namespace FormApi.Client.Model
             var sb = new StringBuilder();
             sb.Append("class CreateSubmissionResponse {\n");
             sb.Append("  Submission: ").Append(Submission).Append("\n");
+            sb.Append("  Errors: ").Append(Errors).Append("\n");
+            sb.Append("  DataRequests: ").Append(DataRequests).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -123,6 +141,16 @@ namespace FormApi.Client.Model
                     this.Submission.Equals(input.Submission))
                 ) && 
                 (
+                    this.Errors == input.Errors ||
+                    this.Errors != null &&
+                    this.Errors.SequenceEqual(input.Errors)
+                ) && 
+                (
+                    this.DataRequests == input.DataRequests ||
+                    this.DataRequests != null &&
+                    this.DataRequests.SequenceEqual(input.DataRequests)
+                ) && 
+                (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
@@ -140,6 +168,10 @@ namespace FormApi.Client.Model
                 int hashCode = 41;
                 if (this.Submission != null)
                     hashCode = hashCode * 59 + this.Submission.GetHashCode();
+                if (this.Errors != null)
+                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
+                if (this.DataRequests != null)
+                    hashCode = hashCode * 59 + this.DataRequests.GetHashCode();
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 return hashCode;

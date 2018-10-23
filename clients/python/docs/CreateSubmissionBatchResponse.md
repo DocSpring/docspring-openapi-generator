@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **submission_batch** | [**SubmissionBatch**](SubmissionBatch.md) |  | [optional] 
-**submissions** | [**list[CreateSubmissionResponse1]**](CreateSubmissionResponse1.md) |  | [optional] 
+**submissions** | [**list[CreateSubmissionBatchSubmissionsResponse]**](CreateSubmissionBatchSubmissionsResponse.md) |  | [optional] 
 **error** | **str** |  | [optional] 
 **errors** | **list[str]** |  | [optional] 
 **status** | **str** |  | [optional] 

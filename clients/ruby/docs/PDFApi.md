@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf_v1**
-> Array&lt;CreateSubmissionResponse&gt; batch_generate_pdf_v1(template_id, create_submission_data)
+> Array&lt;CreateSubmissionBatchV1SubmissionsResponse&gt; batch_generate_pdf_v1(template_id, create_submission_data)
 
 Generates multiple PDFs
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Array&lt;CreateSubmissionResponse&gt;**](CreateSubmissionResponse.md)
+[**Array&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;**](CreateSubmissionBatchV1SubmissionsResponse.md)
 
 ### Authorization
 
@@ -316,7 +316,7 @@ Name | Type | Description  | Notes
 
 
 # **generate_pdf**
-> CreateSubmissionResponse2 generate_pdf(template_id, create_submission_data)
+> CreateSubmissionResponse generate_pdf(template_id, create_submission_data)
 
 Generates a new PDF
 
@@ -353,7 +353,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSubmissionResponse2**](CreateSubmissionResponse2.md)
+[**CreateSubmissionResponse**](CreateSubmissionResponse.md)
 
 ### Authorization
 

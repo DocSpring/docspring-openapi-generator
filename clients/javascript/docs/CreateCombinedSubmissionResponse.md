@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **combinedSubmission** | [**CombinedSubmission**](CombinedSubmission.md) |  | [optional] 
+**errors** | **[String]** |  | [optional] 
 **status** | **String** |  | [optional] 
 
 

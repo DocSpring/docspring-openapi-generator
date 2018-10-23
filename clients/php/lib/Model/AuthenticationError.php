@@ -57,6 +57,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
+        'status' => 'string',
         'error' => 'string'
     ];
 
@@ -66,6 +67,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
+        'status' => null,
         'error' => null
     ];
 
@@ -96,6 +98,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'status' => 'status',
         'error' => 'error'
     ];
 
@@ -105,6 +108,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'status' => 'setStatus',
         'error' => 'setError'
     ];
 
@@ -114,6 +118,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'status' => 'getStatus',
         'error' => 'getError'
     ];
 
@@ -158,8 +163,21 @@ class AuthenticationError implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const STATUS_ERROR = 'error';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_ERROR,
+        ];
+    }
     
 
     /**
@@ -177,6 +195,7 @@ class AuthenticationError implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['error'] = isset($data['error']) ? $data['error'] : null;
     }
 
@@ -188,6 +207,14 @@ class AuthenticationError implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         if ($this->container['error'] === null) {
             $invalidProperties[] = "'error' can't be null";
@@ -206,6 +233,39 @@ class AuthenticationError implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets status
+     *
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string|null $status status
+     *
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
 
     /**
      * Gets error

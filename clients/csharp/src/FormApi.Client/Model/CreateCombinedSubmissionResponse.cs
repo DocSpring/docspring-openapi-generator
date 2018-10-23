@@ -59,10 +59,12 @@ namespace FormApi.Client.Model
         /// Initializes a new instance of the <see cref="CreateCombinedSubmissionResponse" /> class.
         /// </summary>
         /// <param name="combinedSubmission">combinedSubmission.</param>
+        /// <param name="errors">errors.</param>
         /// <param name="status">status.</param>
-        public CreateCombinedSubmissionResponse(CombinedSubmission combinedSubmission = default(CombinedSubmission), StatusEnum? status = default(StatusEnum?))
+        public CreateCombinedSubmissionResponse(CombinedSubmission combinedSubmission = default(CombinedSubmission), List<string> errors = default(List<string>), StatusEnum? status = default(StatusEnum?))
         {
             this.CombinedSubmission = combinedSubmission;
+            this.Errors = errors;
             this.Status = status;
         }
         
@@ -71,6 +73,12 @@ namespace FormApi.Client.Model
         /// </summary>
         [DataMember(Name="combined_submission", EmitDefaultValue=false)]
         public CombinedSubmission CombinedSubmission { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Errors
+        /// </summary>
+        [DataMember(Name="errors", EmitDefaultValue=false)]
+        public List<string> Errors { get; set; }
 
 
         /// <summary>
@@ -82,6 +90,7 @@ namespace FormApi.Client.Model
             var sb = new StringBuilder();
             sb.Append("class CreateCombinedSubmissionResponse {\n");
             sb.Append("  CombinedSubmission: ").Append(CombinedSubmission).Append("\n");
+            sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -123,6 +132,11 @@ namespace FormApi.Client.Model
                     this.CombinedSubmission.Equals(input.CombinedSubmission))
                 ) && 
                 (
+                    this.Errors == input.Errors ||
+                    this.Errors != null &&
+                    this.Errors.SequenceEqual(input.Errors)
+                ) && 
+                (
                     this.Status == input.Status ||
                     (this.Status != null &&
                     this.Status.Equals(input.Status))
@@ -140,6 +154,8 @@ namespace FormApi.Client.Model
                 int hashCode = 41;
                 if (this.CombinedSubmission != null)
                     hashCode = hashCode * 59 + this.CombinedSubmission.GetHashCode();
+                if (this.Errors != null)
+                    hashCode = hashCode * 59 + this.Errors.GetHashCode();
                 if (this.Status != null)
                     hashCode = hashCode * 59 + this.Status.GetHashCode();
                 return hashCode;

@@ -81,12 +81,12 @@ namespace Example
             try
             {
                 // Generates multiple PDFs
-                List<CreateSubmissionResponse> result = apiInstance.BatchGeneratePDF(templateId, createSubmissionData);
+                List<CreateSubmissionBatchV1SubmissionsResponse> result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionData);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PDFApi.BatchGeneratePDF: " + e.Message );
+                Debug.Print("Exception when calling PDFApi.BatchGeneratePdfV1: " + e.Message );
             }
 
         }
@@ -101,13 +101,17 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PDFApi* | [**BatchGeneratePDF**](docs/PDFApi.md#batchgeneratepdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+*PDFApi* | [**BatchGeneratePdfV1**](docs/PDFApi.md#batchgeneratepdfv1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+*PDFApi* | [**BatchGeneratePdfs**](docs/PDFApi.md#batchgeneratepdfs) | **POST** /submissions/batches | Generates multiple PDFs
 *PDFApi* | [**CombineSubmissions**](docs/PDFApi.md#combinesubmissions) | **POST** /combined_submissions | Merge generated PDFs together
+*PDFApi* | [**CreateDataRequestToken**](docs/PDFApi.md#createdatarequesttoken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 *PDFApi* | [**ExpireCombinedSubmission**](docs/PDFApi.md#expirecombinedsubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 *PDFApi* | [**ExpireSubmission**](docs/PDFApi.md#expiresubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 *PDFApi* | [**GeneratePDF**](docs/PDFApi.md#generatepdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 *PDFApi* | [**GetCombinedSubmission**](docs/PDFApi.md#getcombinedsubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+*PDFApi* | [**GetDataRequest**](docs/PDFApi.md#getdatarequest) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 *PDFApi* | [**GetSubmission**](docs/PDFApi.md#getsubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+*PDFApi* | [**GetSubmissionBatch**](docs/PDFApi.md#getsubmissionbatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 *PDFApi* | [**GetTemplates**](docs/PDFApi.md#gettemplates) | **GET** /templates | Get a list of all templates
 *PDFApi* | [**TestAuthentication**](docs/PDFApi.md#testauthentication) | **GET** /authentication | Test Authentication
 
@@ -120,11 +124,20 @@ Class | Method | HTTP request | Description
  - [Model.CombinedSubmission](docs/CombinedSubmission.md)
  - [Model.CombinedSubmissionData](docs/CombinedSubmissionData.md)
  - [Model.CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
+ - [Model.CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
+ - [Model.CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
+ - [Model.CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [Model.CreateSubmissionData](docs/CreateSubmissionData.md)
+ - [Model.CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [Model.CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
+ - [Model.CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [Model.CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
  - [Model.Error](docs/Error.md)
  - [Model.InvalidRequest](docs/InvalidRequest.md)
  - [Model.Submission](docs/Submission.md)
+ - [Model.SubmissionBatch](docs/SubmissionBatch.md)
+ - [Model.SubmissionBatchData](docs/SubmissionBatchData.md)
+ - [Model.SubmissionDataRequest](docs/SubmissionDataRequest.md)
  - [Model.Template](docs/Template.md)
 
 

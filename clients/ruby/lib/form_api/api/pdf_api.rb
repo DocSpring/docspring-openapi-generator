@@ -23,7 +23,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [Array<CreateSubmissionResponse>]
+    # @return [Array<CreateSubmissionBatchV1SubmissionsResponse>]
     def batch_generate_pdf_v1(template_id, create_submission_data, opts = {})
       data, _status_code, _headers = batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts)
       data
@@ -33,7 +33,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<CreateSubmissionResponse>, Fixnum, Hash)>] Array<CreateSubmissionResponse> data, response status code and response headers
+    # @return [Array<(Array<CreateSubmissionBatchV1SubmissionsResponse>, Fixnum, Hash)>] Array<CreateSubmissionBatchV1SubmissionsResponse> data, response status code and response headers
     def batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.batch_generate_pdf_v1 ...'
@@ -71,7 +71,7 @@ module FormAPI
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<CreateSubmissionResponse>')
+        :return_type => 'Array<CreateSubmissionBatchV1SubmissionsResponse>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#batch_generate_pdf_v1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
@@ -341,7 +341,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [CreateSubmissionResponse2]
+    # @return [CreateSubmissionResponse]
     def generate_pdf(template_id, create_submission_data, opts = {})
       data, _status_code, _headers = generate_pdf_with_http_info(template_id, create_submission_data, opts)
       data
@@ -351,7 +351,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateSubmissionResponse2, Fixnum, Hash)>] CreateSubmissionResponse2 data, response status code and response headers
+    # @return [Array<(CreateSubmissionResponse, Fixnum, Hash)>] CreateSubmissionResponse data, response status code and response headers
     def generate_pdf_with_http_info(template_id, create_submission_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.generate_pdf ...'
@@ -389,7 +389,7 @@ module FormAPI
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'CreateSubmissionResponse2')
+        :return_type => 'CreateSubmissionResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#generate_pdf\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

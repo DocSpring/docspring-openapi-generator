@@ -27,6 +27,6 @@ public class FormApiCSharpClientCodegen extends CSharpClientCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
-        supportingFiles.add(new SupportingFile("PDFApiTests.cs", "src/FormApi.Client.Test/Api/PDFApiTests.cs"));
+        supportingFiles.add(new SupportingFile("PDFApiIntegrationTests.cs", "src/FormApi.Client.Test/Api/PDFApiIntegrationTests.cs"));
     }
 }

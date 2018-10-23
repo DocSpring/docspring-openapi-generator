@@ -114,7 +114,7 @@ namespace FormApi.Client.Client
         /// </summary>
         public Configuration()
         {
-            UserAgent = "OpenAPI-Generator/1.0.0/csharp";
+            UserAgent = "formapi-csharp-#{VERSION}";
             BasePath = "https://app.formapi.io/api/v1";
             DefaultHeader = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
@@ -187,7 +187,7 @@ namespace FormApi.Client.Client
             string tempFolderPath = null,
             string dateTimeFormat = null,
             int timeout = 100000,
-            string userAgent = "OpenAPI-Generator/1.0.0/csharp"
+            string userAgent = "formapi-csharp-#{VERSION}"
             // ReSharper restore UnusedParameter.Local
             )
         {

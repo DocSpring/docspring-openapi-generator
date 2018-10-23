@@ -56,6 +56,12 @@
       //expect(instance).to.be.a(FormAPI.AuthenticationError);
     });
 
+    it('should have the property status (base name: "status")', function() {
+      // uncomment below and update the code to test the property status
+      //var instance = new FormAPI.AuthenticationError();
+      //expect(instance).to.be();
+    });
+
     it('should have the property error (base name: "error")', function() {
       // uncomment below and update the code to test the property error
       //var instance = new FormAPI.AuthenticationError();

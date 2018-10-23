@@ -61,9 +61,11 @@ class Submission implements ModelInterface, ArrayAccess
         'test' => 'bool',
         'expired' => 'bool',
         'expires_at' => 'string',
+        'processed_at' => 'string',
         'state' => 'string',
         'metadata' => 'object',
-        'download_url' => 'string'
+        'download_url' => 'string',
+        'batch_id' => 'string'
     ];
 
     /**
@@ -76,9 +78,11 @@ class Submission implements ModelInterface, ArrayAccess
         'test' => null,
         'expired' => null,
         'expires_at' => null,
+        'processed_at' => null,
         'state' => null,
         'metadata' => null,
-        'download_url' => null
+        'download_url' => null,
+        'batch_id' => null
     ];
 
     /**
@@ -112,9 +116,11 @@ class Submission implements ModelInterface, ArrayAccess
         'test' => 'test',
         'expired' => 'expired',
         'expires_at' => 'expires_at',
+        'processed_at' => 'processed_at',
         'state' => 'state',
         'metadata' => 'metadata',
-        'download_url' => 'download_url'
+        'download_url' => 'download_url',
+        'batch_id' => 'batch_id'
     ];
 
     /**
@@ -127,9 +133,11 @@ class Submission implements ModelInterface, ArrayAccess
         'test' => 'setTest',
         'expired' => 'setExpired',
         'expires_at' => 'setExpiresAt',
+        'processed_at' => 'setProcessedAt',
         'state' => 'setState',
         'metadata' => 'setMetadata',
-        'download_url' => 'setDownloadUrl'
+        'download_url' => 'setDownloadUrl',
+        'batch_id' => 'setBatchId'
     ];
 
     /**
@@ -142,9 +150,11 @@ class Submission implements ModelInterface, ArrayAccess
         'test' => 'getTest',
         'expired' => 'getExpired',
         'expires_at' => 'getExpiresAt',
+        'processed_at' => 'getProcessedAt',
         'state' => 'getState',
         'metadata' => 'getMetadata',
-        'download_url' => 'getDownloadUrl'
+        'download_url' => 'getDownloadUrl',
+        'batch_id' => 'getBatchId'
     ];
 
     /**
@@ -194,6 +204,7 @@ class Submission implements ModelInterface, ArrayAccess
     const STATE_ERROR = 'error';
     const STATE_IMAGE_DOWNLOAD_FAILED = 'image_download_failed';
     const STATE_IMAGE_PROCESSING_FAILED = 'image_processing_failed';
+    const STATE_WAITING_FOR_DATA_REQUESTS = 'waiting_for_data_requests';
     
 
     
@@ -211,6 +222,7 @@ class Submission implements ModelInterface, ArrayAccess
             self::STATE_ERROR,
             self::STATE_IMAGE_DOWNLOAD_FAILED,
             self::STATE_IMAGE_PROCESSING_FAILED,
+            self::STATE_WAITING_FOR_DATA_REQUESTS,
         ];
     }
     
@@ -234,9 +246,11 @@ class Submission implements ModelInterface, ArrayAccess
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
         $this->container['expired'] = isset($data['expired']) ? $data['expired'] : null;
         $this->container['expires_at'] = isset($data['expires_at']) ? $data['expires_at'] : null;
+        $this->container['processed_at'] = isset($data['processed_at']) ? $data['processed_at'] : null;
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
         $this->container['download_url'] = isset($data['download_url']) ? $data['download_url'] : null;
+        $this->container['batch_id'] = isset($data['batch_id']) ? $data['batch_id'] : null;
     }
 
     /**
@@ -380,6 +394,30 @@ class Submission implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets processed_at
+     *
+     * @return string|null
+     */
+    public function getProcessedAt()
+    {
+        return $this->container['processed_at'];
+    }
+
+    /**
+     * Sets processed_at
+     *
+     * @param string|null $processed_at processed_at
+     *
+     * @return $this
+     */
+    public function setProcessedAt($processed_at)
+    {
+        $this->container['processed_at'] = $processed_at;
+
+        return $this;
+    }
+
+    /**
      * Gets state
      *
      * @return string
@@ -456,6 +494,30 @@ class Submission implements ModelInterface, ArrayAccess
     public function setDownloadUrl($download_url)
     {
         $this->container['download_url'] = $download_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets batch_id
+     *
+     * @return string|null
+     */
+    public function getBatchId()
+    {
+        return $this->container['batch_id'];
+    }
+
+    /**
+     * Sets batch_id
+     *
+     * @param string|null $batch_id batch_id
+     *
+     * @return $this
+     */
+    public function setBatchId($batch_id)
+    {
+        $this->container['batch_id'] = $batch_id;
 
         return $this;
     }

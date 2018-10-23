@@ -58,6 +58,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'combined_submission' => '\FormAPI\Model\CombinedSubmission',
+        'errors' => 'string[]',
         'status' => 'string'
     ];
 
@@ -68,6 +69,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'combined_submission' => null,
+        'errors' => null,
         'status' => null
     ];
 
@@ -99,6 +101,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'combined_submission' => 'combined_submission',
+        'errors' => 'errors',
         'status' => 'status'
     ];
 
@@ -109,6 +112,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'combined_submission' => 'setCombinedSubmission',
+        'errors' => 'setErrors',
         'status' => 'setStatus'
     ];
 
@@ -119,6 +123,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'combined_submission' => 'getCombinedSubmission',
+        'errors' => 'getErrors',
         'status' => 'getStatus'
     ];
 
@@ -198,6 +203,7 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['combined_submission'] = isset($data['combined_submission']) ? $data['combined_submission'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
@@ -253,6 +259,30 @@ class CreateCombinedSubmissionResponse implements ModelInterface, ArrayAccess
     public function setCombinedSubmission($combined_submission)
     {
         $this->container['combined_submission'] = $combined_submission;
+
+        return $this;
+    }
+
+    /**
+     * Gets errors
+     *
+     * @return string[]|null
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /**
+     * Sets errors
+     *
+     * @param string[]|null $errors errors
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
 
         return $this;
     }

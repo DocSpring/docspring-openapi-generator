@@ -105,6 +105,13 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "processed_at"
+     */
+    public function testPropertyProcessedAt()
+    {
+    }
+
+    /**
      * Test attribute "state"
      */
     public function testPropertyState()
@@ -122,6 +129,13 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
      * Test attribute "download_url"
      */
     public function testPropertyDownloadUrl()
+    {
+    }
+
+    /**
+     * Test attribute "batch_id"
+     */
+    public function testPropertyBatchId()
     {
     }
 }

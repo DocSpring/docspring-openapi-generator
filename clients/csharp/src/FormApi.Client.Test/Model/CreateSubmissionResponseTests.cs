@@ -75,6 +75,22 @@ namespace FormApi.Client.Test
             // TODO unit test for the property 'Submission'
         }
         /// <summary>
+        /// Test the property 'Errors'
+        /// </summary>
+        [Test]
+        public void ErrorsTest()
+        {
+            // TODO unit test for the property 'Errors'
+        }
+        /// <summary>
+        /// Test the property 'DataRequests'
+        /// </summary>
+        [Test]
+        public void DataRequestsTest()
+        {
+            // TODO unit test for the property 'DataRequests'
+        }
+        /// <summary>
         /// Test the property 'Status'
         /// </summary>
         [Test]

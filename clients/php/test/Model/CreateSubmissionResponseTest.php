@@ -84,6 +84,20 @@ class CreateSubmissionResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "errors"
+     */
+    public function testPropertyErrors()
+    {
+    }
+
+    /**
+     * Test attribute "data_requests"
+     */
+    public function testPropertyDataRequests()
+    {
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

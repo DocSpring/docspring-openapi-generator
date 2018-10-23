@@ -22,9 +22,9 @@ public class FormApiPythonClientCodegen extends PythonClientCodegen {
     public void processOpts() {
         super.processOpts();
         supportingFiles.add(new SupportingFile("client.py", packageName, "api/client.py"));
-        supportingFiles.add(new SupportingFile("test_client.py", "test/test_client.py"));
+        supportingFiles.add(new SupportingFile("test_client_integration.py", "test/test_client_integration.py"));
         // Comment this out when updating tests from swagger spec
-        supportingFiles.add(new SupportingFile("test_pdf_api.py", "test/test_pdf_api.py"));
+        supportingFiles.add(new SupportingFile("test_pdf_api_integration.py", "test/test_pdf_api_integration.py"));
     }
 
     /**

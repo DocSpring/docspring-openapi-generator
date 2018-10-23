@@ -84,6 +84,13 @@ class CreateCombinedSubmissionResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "errors"
+     */
+    public function testPropertyErrors()
+    {
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

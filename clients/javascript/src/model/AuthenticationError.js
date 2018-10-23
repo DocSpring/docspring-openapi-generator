@@ -48,6 +48,7 @@
   var exports = function(error) {
     var _this = this;
 
+
     _this['error'] = error;
   };
 
@@ -62,6 +63,9 @@
     if (data) {
       obj = obj || new exports();
 
+      if (data.hasOwnProperty('status')) {
+        obj['status'] = ApiClient.convertToType(data['status'], 'String');
+      }
       if (data.hasOwnProperty('error')) {
         obj['error'] = ApiClient.convertToType(data['error'], 'String');
       }
@@ -70,10 +74,26 @@
   }
 
   /**
+   * @member {module:model/AuthenticationError.StatusEnum} status
+   */
+  exports.prototype['status'] = undefined;
+  /**
    * @member {String} error
    */
   exports.prototype['error'] = undefined;
 
+
+  /**
+   * Allowed values for the <code>status</code> property.
+   * @enum {String}
+   * @readonly
+   */
+  exports.StatusEnum = {
+    /**
+     * value: "error"
+     * @const
+     */
+    "error": "error"  };
 
 
   return exports;

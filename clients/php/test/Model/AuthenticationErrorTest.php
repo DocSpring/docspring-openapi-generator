@@ -77,6 +77,13 @@ class AuthenticationErrorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+    }
+
+    /**
      * Test attribute "error"
      */
     public function testPropertyError()

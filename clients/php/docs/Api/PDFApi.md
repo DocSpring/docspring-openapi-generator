@@ -4,19 +4,23 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**batchGeneratePDF**](PDFApi.md#batchGeneratePDF) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batchGeneratePdfV1**](PDFApi.md#batchGeneratePdfV1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**batchGeneratePdfs**](PDFApi.md#batchGeneratePdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combineSubmissions**](PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**createDataRequestToken**](PDFApi.md#createDataRequestToken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**expireCombinedSubmission**](PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expireSubmission**](PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generatePDF**](PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**getCombinedSubmission**](PDFApi.md#getCombinedSubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+[**getDataRequest**](PDFApi.md#getDataRequest) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 [**getSubmission**](PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**getSubmissionBatch**](PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**getTemplates**](PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 
 
-# **batchGeneratePDF**
-> \FormAPI\Model\CreateSubmissionResponse[] batchGeneratePDF($template_id, $create_submission_data)
+# **batchGeneratePdfV1**
+> \FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[] batchGeneratePdfV1($template_id, $create_submission_data)
 
 Generates multiple PDFs
 
@@ -41,10 +45,10 @@ $template_id = tpl_000000000000000001; // string |
 $create_submission_data = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionData[] | 
 
 try {
-    $result = $apiInstance->batchGeneratePDF($template_id, $create_submission_data);
+    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PDFApi->batchGeneratePDF: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PDFApi->batchGeneratePdfV1: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -58,7 +62,61 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\CreateSubmissionResponse[]**](../Model/CreateSubmissionResponse.md)
+[**\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]**](../Model/CreateSubmissionBatchV1SubmissionsResponse.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **batchGeneratePdfs**
+> \FormAPI\Model\CreateSubmissionBatchResponse batchGeneratePdfs($submission_batch_data)
+
+Generates multiple PDFs
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$submission_batch_data = new \FormAPI\Model\SubmissionBatchData(); // \FormAPI\Model\SubmissionBatchData | 
+
+try {
+    $result = $apiInstance->batchGeneratePdfs($submission_batch_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->batchGeneratePdfs: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_data** | [**\FormAPI\Model\SubmissionBatchData**](../Model/SubmissionBatchData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\CreateSubmissionBatchResponse**](../Model/CreateSubmissionBatchResponse.md)
 
 ### Authorization
 
@@ -108,7 +166,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combined_submission_data** | [**\FormAPI\Model\CombinedSubmissionData**](../Model/CombinedSubmissionData.md)|  | [optional]
+ **combined_submission_data** | [**\FormAPI\Model\CombinedSubmissionData**](../Model/CombinedSubmissionData.md)|  |
 
 ### Return type
 
@@ -121,6 +179,60 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **createDataRequestToken**
+> \FormAPI\Model\CreateSubmissionDataRequestTokenResponse createDataRequestToken($data_request_id)
+
+Creates a new data request token for form authentication
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$data_request_id = drq_000000000000000001; // string | 
+
+try {
+    $result = $apiInstance->createDataRequestToken($data_request_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->createDataRequestToken: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **string**|  |
+
+### Return type
+
+[**\FormAPI\Model\CreateSubmissionDataRequestTokenResponse**](../Model/CreateSubmissionDataRequestTokenResponse.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -343,6 +455,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **getDataRequest**
+> \FormAPI\Model\SubmissionDataRequest getDataRequest($data_request_id)
+
+Look up a submission data request
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$data_request_id = drq_000000000000000001; // string | 
+
+try {
+    $result = $apiInstance->getDataRequest($data_request_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->getDataRequest: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **string**|  |
+
+### Return type
+
+[**\FormAPI\Model\SubmissionDataRequest**](../Model/SubmissionDataRequest.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **getSubmission**
 > \FormAPI\Model\Submission getSubmission($submission_id)
 
@@ -385,6 +551,62 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\FormAPI\Model\Submission**](../Model/Submission.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **getSubmissionBatch**
+> \FormAPI\Model\SubmissionBatch getSubmissionBatch($submission_batch_id, $include_submissions)
+
+Check the status of a submission batch job
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$submission_batch_id = sba_000000000000000001; // string | 
+$include_submissions = true; // bool | 
+
+try {
+    $result = $apiInstance->getSubmissionBatch($submission_batch_id, $include_submissions);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->getSubmissionBatch: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submission_batch_id** | **string**|  |
+ **include_submissions** | **bool**|  | [optional]
+
+### Return type
+
+[**\FormAPI\Model\SubmissionBatch**](../Model/SubmissionBatch.md)
 
 ### Authorization
 

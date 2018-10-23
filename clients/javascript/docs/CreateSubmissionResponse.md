@@ -4,6 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **submission** | [**Submission**](Submission.md) |  | [optional] 
+**errors** | **[String]** |  | [optional] 
+**dataRequests** | [**[SubmissionDataRequest]**](SubmissionDataRequest.md) |  | [optional] 
 **status** | **String** |  | [optional] 
 
 

@@ -4,20 +4,24 @@ All URIs are relative to *https://app.formapi.io/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**BatchGeneratePDF**](PDFApi.md#batchgeneratepdf) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**BatchGeneratePdfV1**](PDFApi.md#batchgeneratepdfv1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
+[**BatchGeneratePdfs**](PDFApi.md#batchgeneratepdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**CombineSubmissions**](PDFApi.md#combinesubmissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**CreateDataRequestToken**](PDFApi.md#createdatarequesttoken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**ExpireCombinedSubmission**](PDFApi.md#expirecombinedsubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**ExpireSubmission**](PDFApi.md#expiresubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**GeneratePDF**](PDFApi.md#generatepdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**GetCombinedSubmission**](PDFApi.md#getcombinedsubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+[**GetDataRequest**](PDFApi.md#getdatarequest) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 [**GetSubmission**](PDFApi.md#getsubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
+[**GetSubmissionBatch**](PDFApi.md#getsubmissionbatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**GetTemplates**](PDFApi.md#gettemplates) | **GET** /templates | Get a list of all templates
 [**TestAuthentication**](PDFApi.md#testauthentication) | **GET** /authentication | Test Authentication
 
 
-<a name="batchgeneratepdf"></a>
-# **BatchGeneratePDF**
-> List<CreateSubmissionResponse> BatchGeneratePDF (string templateId, List<CreateSubmissionData> createSubmissionData)
+<a name="batchgeneratepdfv1"></a>
+# **BatchGeneratePdfV1**
+> List<CreateSubmissionBatchV1SubmissionsResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionData> createSubmissionData)
 
 Generates multiple PDFs
 
@@ -31,7 +35,7 @@ using FormApi.Client.Model;
 
 namespace Example
 {
-    public class BatchGeneratePDFExample
+    public class BatchGeneratePdfV1Example
     {
         public void main()
         {
@@ -40,18 +44,18 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var templateId = tpl_000000000000000001;  // string |
-            var createSubmissionData = new List<CreateSubmissionData>(); // List<CreateSubmissionData> |
+            var templateId = tpl_000000000000000001;  // string | 
+            var createSubmissionData = new List<CreateSubmissionData>(); // List<CreateSubmissionData> | 
 
             try
             {
                 // Generates multiple PDFs
-                List&lt;CreateSubmissionResponse&gt; result = apiInstance.BatchGeneratePDF(templateId, createSubmissionData);
+                List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt; result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionData);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
             {
-                Debug.Print("Exception when calling PDFApi.BatchGeneratePDF: " + e.Message );
+                Debug.Print("Exception when calling PDFApi.BatchGeneratePdfV1: " + e.Message );
             }
         }
     }
@@ -62,12 +66,75 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **string**|  |
- **createSubmissionData** | [**List&lt;CreateSubmissionData&gt;**](List.md)|  |
+ **templateId** | **string**|  | 
+ **createSubmissionData** | [**List&lt;CreateSubmissionData&gt;**](List.md)|  | 
 
 ### Return type
 
-[**List<CreateSubmissionResponse>**](CreateSubmissionResponse.md)
+[**List<CreateSubmissionBatchV1SubmissionsResponse>**](CreateSubmissionBatchV1SubmissionsResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="batchgeneratepdfs"></a>
+# **BatchGeneratePdfs**
+> CreateSubmissionBatchResponse BatchGeneratePdfs (SubmissionBatchData submissionBatchData)
+
+Generates multiple PDFs
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FormApi.Client.Api;
+using FormApi.Client.Client;
+using FormApi.Client.Model;
+
+namespace Example
+{
+    public class BatchGeneratePdfsExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: api_token_basic
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new PDFApi();
+            var submissionBatchData = new SubmissionBatchData(); // SubmissionBatchData | 
+
+            try
+            {
+                // Generates multiple PDFs
+                CreateSubmissionBatchResponse result = apiInstance.BatchGeneratePdfs(submissionBatchData);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PDFApi.BatchGeneratePdfs: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submissionBatchData** | [**SubmissionBatchData**](SubmissionBatchData.md)|  | 
+
+### Return type
+
+[**CreateSubmissionBatchResponse**](CreateSubmissionBatchResponse.md)
 
 ### Authorization
 
@@ -82,7 +149,7 @@ Name | Type | Description  | Notes
 
 <a name="combinesubmissions"></a>
 # **CombineSubmissions**
-> CreateCombinedSubmissionResponse CombineSubmissions (CombinedSubmissionData combinedSubmissionData = null)
+> CreateCombinedSubmissionResponse CombineSubmissions (CombinedSubmissionData combinedSubmissionData)
 
 Merge generated PDFs together
 
@@ -105,7 +172,7 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var combinedSubmissionData = new CombinedSubmissionData(); // CombinedSubmissionData |  (optional)
+            var combinedSubmissionData = new CombinedSubmissionData(); // CombinedSubmissionData | 
 
             try
             {
@@ -126,7 +193,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionData** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | [optional]
+ **combinedSubmissionData** | [**CombinedSubmissionData**](CombinedSubmissionData.md)|  | 
 
 ### Return type
 
@@ -139,6 +206,69 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="createdatarequesttoken"></a>
+# **CreateDataRequestToken**
+> CreateSubmissionDataRequestTokenResponse CreateDataRequestToken (string dataRequestId)
+
+Creates a new data request token for form authentication
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FormApi.Client.Api;
+using FormApi.Client.Client;
+using FormApi.Client.Model;
+
+namespace Example
+{
+    public class CreateDataRequestTokenExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: api_token_basic
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new PDFApi();
+            var dataRequestId = drq_000000000000000001;  // string | 
+
+            try
+            {
+                // Creates a new data request token for form authentication
+                CreateSubmissionDataRequestTokenResponse result = apiInstance.CreateDataRequestToken(dataRequestId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PDFApi.CreateDataRequestToken: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dataRequestId** | **string**|  | 
+
+### Return type
+
+[**CreateSubmissionDataRequestTokenResponse**](CreateSubmissionDataRequestTokenResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -168,7 +298,7 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var combinedSubmissionId = com_000000000000000001;  // string |
+            var combinedSubmissionId = com_000000000000000001;  // string | 
 
             try
             {
@@ -189,7 +319,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **string**|  |
+ **combinedSubmissionId** | **string**|  | 
 
 ### Return type
 
@@ -231,7 +361,7 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var submissionId = sub_000000000000000001;  // string |
+            var submissionId = sub_000000000000000001;  // string | 
 
             try
             {
@@ -252,7 +382,7 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **string**|  |
+ **submissionId** | **string**|  | 
 
 ### Return type
 
@@ -294,8 +424,8 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var templateId = tpl_000000000000000001;  // string |
-            var createSubmissionData = new CreateSubmissionData(); // CreateSubmissionData |
+            var templateId = tpl_000000000000000001;  // string | 
+            var createSubmissionData = new CreateSubmissionData(); // CreateSubmissionData | 
 
             try
             {
@@ -316,8 +446,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **templateId** | **string**|  |
- **createSubmissionData** | [**CreateSubmissionData**](CreateSubmissionData.md)|  |
+ **templateId** | **string**|  | 
+ **createSubmissionData** | [**CreateSubmissionData**](CreateSubmissionData.md)|  | 
 
 ### Return type
 
@@ -359,7 +489,7 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var combinedSubmissionId = com_000000000000000001;  // string |
+            var combinedSubmissionId = com_000000000000000001;  // string | 
 
             try
             {
@@ -380,11 +510,74 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **combinedSubmissionId** | **string**|  |
+ **combinedSubmissionId** | **string**|  | 
 
 ### Return type
 
 [**CombinedSubmission**](CombinedSubmission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="getdatarequest"></a>
+# **GetDataRequest**
+> SubmissionDataRequest GetDataRequest (string dataRequestId)
+
+Look up a submission data request
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FormApi.Client.Api;
+using FormApi.Client.Client;
+using FormApi.Client.Model;
+
+namespace Example
+{
+    public class GetDataRequestExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: api_token_basic
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new PDFApi();
+            var dataRequestId = drq_000000000000000001;  // string | 
+
+            try
+            {
+                // Look up a submission data request
+                SubmissionDataRequest result = apiInstance.GetDataRequest(dataRequestId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PDFApi.GetDataRequest: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dataRequestId** | **string**|  | 
+
+### Return type
+
+[**SubmissionDataRequest**](SubmissionDataRequest.md)
 
 ### Authorization
 
@@ -422,7 +615,7 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var submissionId = sub_000000000000000001;  // string |
+            var submissionId = sub_000000000000000001;  // string | 
 
             try
             {
@@ -443,11 +636,76 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **submissionId** | **string**|  |
+ **submissionId** | **string**|  | 
 
 ### Return type
 
 [**Submission**](Submission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="getsubmissionbatch"></a>
+# **GetSubmissionBatch**
+> SubmissionBatch GetSubmissionBatch (string submissionBatchId, bool? includeSubmissions = null)
+
+Check the status of a submission batch job
+
+### Example
+```csharp
+using System;
+using System.Diagnostics;
+using FormApi.Client.Api;
+using FormApi.Client.Client;
+using FormApi.Client.Model;
+
+namespace Example
+{
+    public class GetSubmissionBatchExample
+    {
+        public void main()
+        {
+            // Configure HTTP basic authorization: api_token_basic
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new PDFApi();
+            var submissionBatchId = sba_000000000000000001;  // string | 
+            var includeSubmissions = true;  // bool? |  (optional) 
+
+            try
+            {
+                // Check the status of a submission batch job
+                SubmissionBatch result = apiInstance.GetSubmissionBatch(submissionBatchId, includeSubmissions);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PDFApi.GetSubmissionBatch: " + e.Message );
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **submissionBatchId** | **string**|  | 
+ **includeSubmissions** | **bool?**|  | [optional] 
+
+### Return type
+
+[**SubmissionBatch**](SubmissionBatch.md)
 
 ### Authorization
 
@@ -485,8 +743,8 @@ namespace Example
             Configuration.Default.Password = "YOUR_PASSWORD";
 
             var apiInstance = new PDFApi();
-            var page = 2;  // int? | Default: 1 (optional)
-            var perPage = 1;  // int? | Default: 50 (optional)
+            var page = 2;  // int? | Default: 1 (optional) 
+            var perPage = 1;  // int? | Default: 50 (optional) 
 
             try
             {
@@ -507,8 +765,8 @@ namespace Example
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **page** | **int?**| Default: 1 | [optional]
- **perPage** | **int?**| Default: 50 | [optional]
+ **page** | **int?**| Default: 1 | [optional] 
+ **perPage** | **int?**| Default: 50 | [optional] 
 
 ### Return type
 

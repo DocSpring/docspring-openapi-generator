@@ -7,10 +7,12 @@ Method | HTTP request | Description
 [**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+[**get_data_request**](PDFApi.md#get_data_request) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
@@ -18,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf_v1**
-> list[CreateSubmissionResponse] batch_generate_pdf_v1(template_id, create_submission_data)
+> list[CreateSubmissionBatchV1SubmissionsResponse] batch_generate_pdf_v1(template_id, create_submission_data)
 
 Generates multiple PDFs
 
@@ -59,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**list[CreateSubmissionResponse]**](CreateSubmissionResponse.md)
+[**list[CreateSubmissionBatchV1SubmissionsResponse]**](CreateSubmissionBatchV1SubmissionsResponse.md)
 
 ### Authorization
 
@@ -174,6 +176,59 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_data_request_token**
+> CreateSubmissionDataRequestTokenResponse create_data_request_token(data_request_id)
+
+Creates a new data request token for form authentication
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+data_request_id = 'drq_000000000000000001' # str | 
+
+try:
+    # Creates a new data request token for form authentication
+    api_response = api_instance.create_data_request_token(data_request_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->create_data_request_token: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **str**|  | 
+
+### Return type
+
+[**CreateSubmissionDataRequestTokenResponse**](CreateSubmissionDataRequestTokenResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -380,6 +435,59 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CombinedSubmission**](CombinedSubmission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_data_request**
+> SubmissionDataRequest get_data_request(data_request_id)
+
+Look up a submission data request
+
+### Example
+
+* Basic Authentication (api_token_basic): 
+```python
+from __future__ import print_function
+import time
+import form_api
+from form_api.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: api_token_basic
+configuration = form_api.Configuration()
+configuration.username = 'YOUR_USERNAME'
+configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
+data_request_id = 'drq_000000000000000001' # str | 
+
+try:
+    # Look up a submission data request
+    api_response = api_instance.get_data_request(data_request_id)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PDFApi->get_data_request: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **str**|  | 
+
+### Return type
+
+[**SubmissionDataRequest**](SubmissionDataRequest.md)
 
 ### Authorization
 

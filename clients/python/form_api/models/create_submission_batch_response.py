@@ -32,7 +32,7 @@ class CreateSubmissionBatchResponse(object):
     """
     openapi_types = {
         'submission_batch': 'SubmissionBatch',
-        'submissions': 'list[CreateSubmissionResponse1]',
+        'submissions': 'list[CreateSubmissionBatchSubmissionsResponse]',
         'error': 'str',
         'errors': 'list[str]',
         'status': 'str'
@@ -94,7 +94,7 @@ class CreateSubmissionBatchResponse(object):
 
 
         :return: The submissions of this CreateSubmissionBatchResponse.  # noqa: E501
-        :rtype: list[CreateSubmissionResponse1]
+        :rtype: list[CreateSubmissionBatchSubmissionsResponse]
         """
         return self._submissions
 
@@ -104,7 +104,7 @@ class CreateSubmissionBatchResponse(object):
 
 
         :param submissions: The submissions of this CreateSubmissionBatchResponse.  # noqa: E501
-        :type: list[CreateSubmissionResponse1]
+        :type: list[CreateSubmissionBatchSubmissionsResponse]
         """
 
         self._submissions = submissions

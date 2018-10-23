@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 **test** | **Boolean** |  | 
 **expired** | **Boolean** |  | 
 **expiresAt** | **String** |  | [optional] 
+**processedAt** | **String** |  | [optional] 
 **state** | **String** |  | 
 **metadata** | **Object** |  | [optional] 
 **downloadUrl** | **String** |  | [optional] 
+**batchId** | **String** |  | [optional] 
 
 
 <a name="StateEnum"></a>
@@ -27,6 +29,8 @@ Name | Type | Description | Notes
 * `image_download_failed` (value: `"image_download_failed"`)
 
 * `image_processing_failed` (value: `"image_processing_failed"`)
+
+* `waiting_for_data_requests` (value: `"waiting_for_data_requests"`)
 
 
 

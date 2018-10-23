@@ -49,6 +49,7 @@
 
 
 
+
   };
 
   /**
@@ -65,6 +66,9 @@
       if (data.hasOwnProperty('combined_submission')) {
         obj['combined_submission'] = CombinedSubmission.constructFromObject(data['combined_submission']);
       }
+      if (data.hasOwnProperty('errors')) {
+        obj['errors'] = ApiClient.convertToType(data['errors'], ['String']);
+      }
       if (data.hasOwnProperty('status')) {
         obj['status'] = ApiClient.convertToType(data['status'], 'String');
       }
@@ -76,6 +80,10 @@
    * @member {module:model/CombinedSubmission} combined_submission
    */
   exports.prototype['combined_submission'] = undefined;
+  /**
+   * @member {Array.<String>} errors
+   */
+  exports.prototype['errors'] = undefined;
   /**
    * @member {module:model/CreateCombinedSubmissionResponse.StatusEnum} status
    */

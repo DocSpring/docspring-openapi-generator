@@ -58,6 +58,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'submission' => '\FormAPI\Model\Submission',
+        'errors' => 'string[]',
+        'data_requests' => '\FormAPI\Model\SubmissionDataRequest[]',
         'status' => 'string'
     ];
 
@@ -68,6 +70,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'submission' => null,
+        'errors' => null,
+        'data_requests' => null,
         'status' => null
     ];
 
@@ -99,6 +103,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'submission' => 'submission',
+        'errors' => 'errors',
+        'data_requests' => 'data_requests',
         'status' => 'status'
     ];
 
@@ -109,6 +115,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'submission' => 'setSubmission',
+        'errors' => 'setErrors',
+        'data_requests' => 'setDataRequests',
         'status' => 'setStatus'
     ];
 
@@ -119,6 +127,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'submission' => 'getSubmission',
+        'errors' => 'getErrors',
+        'data_requests' => 'getDataRequests',
         'status' => 'getStatus'
     ];
 
@@ -198,6 +208,8 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['submission'] = isset($data['submission']) ? $data['submission'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
@@ -253,6 +265,54 @@ class CreateSubmissionResponse implements ModelInterface, ArrayAccess
     public function setSubmission($submission)
     {
         $this->container['submission'] = $submission;
+
+        return $this;
+    }
+
+    /**
+     * Gets errors
+     *
+     * @return string[]|null
+     */
+    public function getErrors()
+    {
+        return $this->container['errors'];
+    }
+
+    /**
+     * Sets errors
+     *
+     * @param string[]|null $errors errors
+     *
+     * @return $this
+     */
+    public function setErrors($errors)
+    {
+        $this->container['errors'] = $errors;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_requests
+     *
+     * @return \FormAPI\Model\SubmissionDataRequest[]|null
+     */
+    public function getDataRequests()
+    {
+        return $this->container['data_requests'];
+    }
+
+    /**
+     * Sets data_requests
+     *
+     * @param \FormAPI\Model\SubmissionDataRequest[]|null $data_requests data_requests
+     *
+     * @return $this
+     */
+    public function setDataRequests($data_requests)
+    {
+        $this->container['data_requests'] = $data_requests;
 
         return $this;
     }

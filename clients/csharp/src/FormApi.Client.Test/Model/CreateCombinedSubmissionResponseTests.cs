@@ -75,6 +75,14 @@ namespace FormApi.Client.Test
             // TODO unit test for the property 'CombinedSubmission'
         }
         /// <summary>
+        /// Test the property 'Errors'
+        /// </summary>
+        [Test]
+        public void ErrorsTest()
+        {
+            // TODO unit test for the property 'Errors'
+        }
+        /// <summary>
         /// Test the property 'Status'
         /// </summary>
         [Test]

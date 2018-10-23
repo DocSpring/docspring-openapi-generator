@@ -31,6 +31,25 @@ namespace FormApi.Client.Model
     public partial class AuthenticationError :  IEquatable<AuthenticationError>, IValidatableObject
     {
         /// <summary>
+        /// Defines Status
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum StatusEnum
+        {
+            /// <summary>
+            /// Enum Error for value: error
+            /// </summary>
+            [EnumMember(Value = "error")]
+            Error = 1
+
+        }
+
+        /// <summary>
+        /// Gets or Sets Status
+        /// </summary>
+        [DataMember(Name="status", EmitDefaultValue=false)]
+        public StatusEnum? Status { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationError" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -38,8 +57,9 @@ namespace FormApi.Client.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AuthenticationError" /> class.
         /// </summary>
+        /// <param name="status">status.</param>
         /// <param name="error">error (required).</param>
-        public AuthenticationError(string error = default(string))
+        public AuthenticationError(StatusEnum? status = default(StatusEnum?), string error = default(string))
         {
             // to ensure "error" is required (not null)
             if (error == null)
@@ -50,8 +70,10 @@ namespace FormApi.Client.Model
             {
                 this.Error = error;
             }
+            this.Status = status;
         }
         
+
         /// <summary>
         /// Gets or Sets Error
         /// </summary>
@@ -66,6 +88,7 @@ namespace FormApi.Client.Model
         {
             var sb = new StringBuilder();
             sb.Append("class AuthenticationError {\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Error: ").Append(Error).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -102,6 +125,11 @@ namespace FormApi.Client.Model
 
             return 
                 (
+                    this.Status == input.Status ||
+                    (this.Status != null &&
+                    this.Status.Equals(input.Status))
+                ) && 
+                (
                     this.Error == input.Error ||
                     (this.Error != null &&
                     this.Error.Equals(input.Error))
@@ -117,6 +145,8 @@ namespace FormApi.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Status != null)
+                    hashCode = hashCode * 59 + this.Status.GetHashCode();
                 if (this.Error != null)
                     hashCode = hashCode * 59 + this.Error.GetHashCode();
                 return hashCode;
