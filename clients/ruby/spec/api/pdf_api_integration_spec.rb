@@ -140,6 +140,25 @@ describe 'PDFApi' do
       expect(response.combined_submission.state).to eq 'pending'
     end
   end
+  # integration tests for create_data_request_token
+  # Creates a new data request token for form authentication
+  # @param data_request_id
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSubmissionDataRequestTokenResponse]
+  describe 'create_data_request_token test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String |
+      response = api_instance.create_data_request_token(data_request_id)
+      expect(response.status).to eq 'success'
+      expect(response.token.id).to_not be_nil
+      expect(response.token.secret).to_not be_nil
+      expect(response.token.data_request_url).to start_with \
+        'http://localhost/data_requests/drq_000000000000000001?token_id='
+      expect(response.token.data_request_url).to include \
+        "?token_id=#{response.token.id}" \
+        "&token_secret=#{response.token.secret}"
+    end
+  end
   # integration tests for expire_combined_submission
   # Expire a combined submission
   # @param combined_submission_id

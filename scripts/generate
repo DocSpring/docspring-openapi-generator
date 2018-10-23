@@ -30,6 +30,7 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
+# Preserve any vendored dependencies between rebuilds
 case "$LANGUAGE" in
   php)
     for f in $CLIENT_DIR/*; do
@@ -54,33 +55,6 @@ esac
   --config "$CONFIG_FILE" \
   --output "$CLIENT_DIR"
 
-# cd "$CLIENT_DIR"
-# find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
-
-# git init
-# git add -A
-# git commit -m "Initial commit"
-
-# if [ -f "../../patches/$LANGUAGE.diff" ]; then
-#   if ! git apply --check "../../patches/$LANGUAGE.diff"; then
-#     echo "Could not apply patch: ../../patches/$LANGUAGE.diff. Please fix the conflicts."
-#     exit 1
-#   fi
-
-#   git apply "../../patches/$LANGUAGE.diff"
-#   git add -A
-#   git commit -m "Applied patch"
-
-#   if [ -f "../../scripts/$LANGUAGE/install_deps" ]; then
-#     ../../scripts/$LANGUAGE/install_deps
-#   fi
-# elif [ -f "../../scripts/$LANGUAGE/post_generate" ]; then
-#   ../../scripts/$LANGUAGE/post_generate
-#   find . -not -path './.git/*' -type f -exec sed -E -i 's/[[:space:]]+$//g' {} +
-
-#   git add -A
-#   git commit -m "Ran post_generate script"
-
-#   cd ../..
-#   ./scripts/update-patch $LANGUAGE
-# fi
+if [ -f "./scripts/$LANGUAGE/post-generate" ]; then
+  "./scripts/$LANGUAGE/post-generate"
+fi

@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *FormAPI::PDFApi* | [**batch_generate_pdf_v1**](docs/PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 *FormAPI::PDFApi* | [**batch_generate_pdfs**](docs/PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 *FormAPI::PDFApi* | [**combine_submissions**](docs/PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+*FormAPI::PDFApi* | [**create_data_request_token**](docs/PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 *FormAPI::PDFApi* | [**expire_combined_submission**](docs/PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 *FormAPI::PDFApi* | [**expire_submission**](docs/PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 *FormAPI::PDFApi* | [**generate_pdf**](docs/PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
@@ -104,8 +105,12 @@ Class | Method | HTTP request | Description
  - [FormAPI::CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
  - [FormAPI::CreateSubmissionData](docs/CreateSubmissionData.md)
  - [FormAPI::CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [FormAPI::CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
+ - [FormAPI::CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [FormAPI::CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
  - [FormAPI::CreateSubmissionResponse1](docs/CreateSubmissionResponse1.md)
+ - [FormAPI::CreateSubmissionResponse2](docs/CreateSubmissionResponse2.md)
+ - [FormAPI::DataRequest](docs/DataRequest.md)
  - [FormAPI::Error](docs/Error.md)
  - [FormAPI::InvalidRequest](docs/InvalidRequest.md)
  - [FormAPI::Submission](docs/Submission.md)

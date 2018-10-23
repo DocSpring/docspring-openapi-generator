@@ -32,6 +32,26 @@ describe FormAPI::Client do
       expect(submission.state).to eq 'processed'
       expect(submission.download_url).to include 'submissions/submission.pdf'
     end
+
+    it 'should handle invalid data errors' do
+      client = FormAPI::Client.new
+      template_id = 'tpl_000000000000000001'
+
+      expect(client).to_not receive(:sleep)
+
+      expect {
+        client.generate_pdf(
+          template_id: template_id,
+          data: {
+            title: 'Test PDF'
+          }
+        )
+      }.to raise_error(
+        FormAPI::ApiError,
+        'Unprocessable Entity: The root object did not contain a ' \
+          "required property of 'description'"
+      )
+    end
   end
 
   describe '#batch_generate_pdfs' do

@@ -37,21 +37,20 @@ describe FormAPI::Client do
       client = FormAPI::Client.new
       template_id = 'tpl_000000000000000001'
 
-      expect(client).to receive(:sleep).with(1).once
+      expect(client).to_not receive(:sleep)
 
-      response = client.generate_pdf(
-        template_id: template_id,
-        data: {
-          title: 'Test PDF'
-        }
+      expect {
+        client.generate_pdf(
+          template_id: template_id,
+          data: {
+            title: 'Test PDF'
+          }
+        )
+      }.to raise_error(
+        FormAPI::ApiError,
+        'Unprocessable Entity: The root object did not contain a ' \
+          "required property of 'description'"
       )
-
-      expect(response.status).to eq 'error'
-      submission = response.submission
-      expect(submission.id).to start_with 'sub_'
-      expect(submission.expired).to eq false
-      expect(submission.state).to eq 'processed'
-      expect(submission.download_url).to include 'submissions/submission.pdf'
     end
   end
 

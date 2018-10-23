@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
@@ -166,6 +167,55 @@ Name | Type | Description  | Notes
 
 
 
+# **create_data_request_token**
+> CreateSubmissionDataRequestTokenResponse create_data_request_token(data_request_id)
+
+Creates a new data request token for form authentication
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+data_request_id = 'drq_000000000000000001' # String | 
+
+begin
+  #Creates a new data request token for form authentication
+  result = api_instance.create_data_request_token(data_request_id)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->create_data_request_token: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **String**|  | 
+
+### Return type
+
+[**CreateSubmissionDataRequestTokenResponse**](CreateSubmissionDataRequestTokenResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
 # **expire_combined_submission**
 > CombinedSubmission expire_combined_submission(combined_submission_id)
 
@@ -265,7 +315,7 @@ Name | Type | Description  | Notes
 
 
 # **generate_pdf**
-> CreateSubmissionResponse generate_pdf(template_id, create_submission_data)
+> CreateSubmissionResponse2 generate_pdf(template_id, create_submission_data)
 
 Generates a new PDF
 
@@ -302,7 +352,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSubmissionResponse**](CreateSubmissionResponse.md)
+[**CreateSubmissionResponse2**](CreateSubmissionResponse2.md)
 
 ### Authorization
 

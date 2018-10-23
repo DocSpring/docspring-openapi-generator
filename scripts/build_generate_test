@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+LANGUAGE="$1"
+
+if [ -z "$LANGUAGE" ]; then
+  echo "Usage: $0 <LANGUAGE>"
+  exit 1
+fi
+
+cd "$(dirname "$0")/"
+echo "Building formapi-generator..."
+# Sometimes we need to refresh java packages by building openapi-generator first.
+./build-formapi-generator || (./build-openapi-generator && ./build-formapi-generator)
+echo "Generating $LANGUAGE API client..."
+./generate "$LANGUAGE"
+
+echo "Starting FormAPI test server and running $LANGUAGE API client tests..."
+(cd ../../form_api && ./scripts/run_api_client_tests "$LANGUAGE" ${@:2})

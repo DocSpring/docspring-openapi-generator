@@ -184,6 +184,57 @@ module FormAPI
       return data, status_code, headers
     end
 
+    # Creates a new data request token for form authentication
+    # @param data_request_id 
+    # @param [Hash] opts the optional parameters
+    # @return [CreateSubmissionDataRequestTokenResponse]
+    def create_data_request_token(data_request_id, opts = {})
+      data, _status_code, _headers = create_data_request_token_with_http_info(data_request_id, opts)
+      data
+    end
+
+    # Creates a new data request token for form authentication
+    # @param data_request_id 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CreateSubmissionDataRequestTokenResponse, Fixnum, Hash)>] CreateSubmissionDataRequestTokenResponse data, response status code and response headers
+    def create_data_request_token_with_http_info(data_request_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.create_data_request_token ...'
+      end
+      # verify the required parameter 'data_request_id' is set
+      if @api_client.config.client_side_validation && data_request_id.nil?
+        fail ArgumentError, "Missing the required parameter 'data_request_id' when calling PDFApi.create_data_request_token"
+      end
+      # resource path
+      local_var_path = '/data_requests/{data_request_id}/tokens'.sub('{' + 'data_request_id' + '}', data_request_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'CreateSubmissionDataRequestTokenResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#create_data_request_token\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Expire a combined submission
     # @param combined_submission_id 
     # @param [Hash] opts the optional parameters
@@ -290,7 +341,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [CreateSubmissionResponse]
+    # @return [CreateSubmissionResponse2]
     def generate_pdf(template_id, create_submission_data, opts = {})
       data, _status_code, _headers = generate_pdf_with_http_info(template_id, create_submission_data, opts)
       data
@@ -300,7 +351,7 @@ module FormAPI
     # @param template_id 
     # @param create_submission_data 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(CreateSubmissionResponse, Fixnum, Hash)>] CreateSubmissionResponse data, response status code and response headers
+    # @return [Array<(CreateSubmissionResponse2, Fixnum, Hash)>] CreateSubmissionResponse2 data, response status code and response headers
     def generate_pdf_with_http_info(template_id, create_submission_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.generate_pdf ...'
@@ -338,7 +389,7 @@ module FormAPI
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'CreateSubmissionResponse')
+        :return_type => 'CreateSubmissionResponse2')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#generate_pdf\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

@@ -26,10 +26,10 @@ public class FormApiRubyClientCodegen extends RubyClientCodegen {
         String gemFolder = libFolder + File.separator + gemName;
         supportingFiles.add(new SupportingFile("client.rb",
                 gemFolder, "api/client.rb"));
-        supportingFiles.add(new SupportingFile("pdf_api_spec.rb",
-                "spec/api/pdf_api_spec.rb"));
-        supportingFiles.add(new SupportingFile("client_spec.rb",
-                "spec/api/client_spec.rb"));
+        supportingFiles.add(new SupportingFile("pdf_api_integration_spec.rb",
+                "spec/api/pdf_api_integration_spec.rb"));
+        supportingFiles.add(new SupportingFile("client_integration_spec.rb",
+                "spec/api/client_integration_spec.rb"));
     }
 
     @Override

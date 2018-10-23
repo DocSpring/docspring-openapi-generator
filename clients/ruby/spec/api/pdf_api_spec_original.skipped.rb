@@ -38,101 +38,131 @@ describe 'PDFApi' do
     end
   end
 
-  # integration tests for batch_generate_pdf
+  # integration tests for batch_generate_pdf_v1
   # Generates multiple PDFs
-  # @param template_id
-  # @param create_submission_data
+  # @param template_id 
+  # @param create_submission_data 
   # @param [Hash] opts the optional parameters
   # @return [Array<CreateSubmissionResponse>]
-  describe 'batch_generate_pdf test' do
+  describe 'batch_generate_pdf_v1 test' do
     it 'should work' do
-      template_id = 'tpl_000000000000000001' # String |
-      result = api_instance.batch_generate_pdf(template_id, [
-        {
-          data: {
-            title: 'Test PDF',
-            description: 'This PDF is great!',
-          }
-        }
-      ])
+      template_id = 'tpl_000000000000000001' # String | 
+      create_submission_data = nil # Array<CreateSubmissionData> | 
+      result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
+      expect(result).to_not be_nil
+    end
+  end
+  # integration tests for batch_generate_pdfs
+  # Generates multiple PDFs
+  # @param submission_batch_data 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSubmissionBatchResponse]
+  describe 'batch_generate_pdfs test' do
+    it 'should work' do
+      submission_batch_data = FormAPI::SubmissionBatchData.new # SubmissionBatchData | 
+      result = api_instance.batch_generate_pdfs(submission_batch_data)
       expect(result).to_not be_nil
     end
   end
   # integration tests for combine_submissions
   # Merge generated PDFs together
+  # @param combined_submission_data 
   # @param [Hash] opts the optional parameters
-  # @option opts [CombinedSubmissionData] :combined_submission_data
   # @return [CreateCombinedSubmissionResponse]
   describe 'combine_submissions test' do
     it 'should work' do
-      result = api_instance.combine_submissions(combined_submission_data: {
-        submission_ids: ['sub_000000000000000001', 'sub_000000000000000002'],
-      })
+      combined_submission_data = FormAPI::CombinedSubmissionData.new # CombinedSubmissionData | 
+      result = api_instance.combine_submissions(combined_submission_data)
+      expect(result).to_not be_nil
+    end
+  end
+  # integration tests for create_data_request_token
+  # Creates a new data request token for form authentication
+  # @param data_request_id 
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSubmissionDataRequestTokenResponse]
+  describe 'create_data_request_token test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String | 
+      result = api_instance.create_data_request_token(data_request_id)
       expect(result).to_not be_nil
     end
   end
   # integration tests for expire_combined_submission
   # Expire a combined submission
-  # @param combined_submission_id
+  # @param combined_submission_id 
   # @param [Hash] opts the optional parameters
   # @return [CombinedSubmission]
   describe 'expire_combined_submission test' do
     it 'should work' do
-      combined_submission_id = 'com_000000000000000001' # String |
+      combined_submission_id = 'com_000000000000000001' # String | 
       result = api_instance.expire_combined_submission(combined_submission_id)
       expect(result).to_not be_nil
     end
   end
   # integration tests for expire_submission
   # Expire a PDF submission
-  # @param submission_id
+  # @param submission_id 
   # @param [Hash] opts the optional parameters
   # @return [Submission]
   describe 'expire_submission test' do
     it 'should work' do
-      submission_id = 'sub_000000000000000001' # String |
+      submission_id = 'sub_000000000000000001' # String | 
       result = api_instance.expire_submission(submission_id)
       expect(result).to_not be_nil
     end
   end
   # integration tests for generate_pdf
   # Generates a new PDF
-  # @param template_id
-  # @param create_submission_data
+  # @param template_id 
+  # @param create_submission_data 
   # @param [Hash] opts the optional parameters
-  # @return [CreateSubmissionResponse]
+  # @return [CreateSubmissionResponse2]
   describe 'generate_pdf test' do
     it 'should work' do
-      template_id = 'tpl_000000000000000001' # String |
-      result = api_instance.generate_pdf(template_id,
-        data: {
-          title: 'Test PDF',
-          description: 'This PDF is great!',
-        })
+      template_id = 'tpl_000000000000000001' # String | 
+      create_submission_data = FormAPI::CreateSubmissionData.new # CreateSubmissionData | 
+      result = api_instance.generate_pdf(template_id, create_submission_data)
       expect(result).to_not be_nil
     end
   end
   # integration tests for get_combined_submission
   # Check the status of a combined submission (merged PDFs)
-  # @param combined_submission_id
+  # @param combined_submission_id 
   # @param [Hash] opts the optional parameters
   # @return [CombinedSubmission]
   describe 'get_combined_submission test' do
     it 'should work' do
-      combined_submission_id = 'com_000000000000000001' # String |
+      combined_submission_id = 'com_000000000000000001' # String | 
       result = api_instance.get_combined_submission(combined_submission_id)
       expect(result).to_not be_nil
     end
   end
   # integration tests for get_submission
   # Check the status of a PDF
-  # @param submission_id
+  # @param submission_id 
   # @param [Hash] opts the optional parameters
   # @return [Submission]
   describe 'get_submission test' do
     it 'should work' do
-      submission_id = 'sub_000000000000000001' # String |
+      submission_id = 'sub_000000000000000001' # String | 
       result = api_instance.get_submission(submission_id)
+      expect(result).to_not be_nil
+    end
+  end
+  # integration tests for get_submission_batch
+  # Check the status of a submission batch job
+  # @param submission_batch_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [BOOLEAN] :include_submissions 
+  # @return [SubmissionBatch]
+  describe 'get_submission_batch test' do
+    it 'should work' do
+      submission_batch_id = 'sba_000000000000000001' # String | 
+      opts = {
+        include_submissions: true # BOOLEAN | 
+      }
+      result = api_instance.get_submission_batch(submission_batch_id, opts)
       expect(result).to_not be_nil
     end
   end

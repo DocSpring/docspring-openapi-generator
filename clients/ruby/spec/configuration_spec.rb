@@ -26,7 +26,7 @@ describe FormAPI::Configuration do
     # end
   end
 
-  it 'loads the api token from ENV variables' do
+  it 'adds aliases for #api_token_*, and loads the api token from ENV variables' do
     ENV['FORMAPI_TOKEN_ID'] = 'test_token_id_from_env'
     ENV['FORMAPI_TOKEN_SECRET'] = 'test_token_secret_from_env'
 
