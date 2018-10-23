@@ -1,5 +1,0 @@
-#!/bin/bash
-set -e
-cd "$(dirname "$0")/../../clients/javascript"
-
-python setup.py bdist_wheel --universal
