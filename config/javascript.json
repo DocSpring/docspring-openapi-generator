@@ -1,7 +1,7 @@
 {
-  "projectName": "@formapi/formapi",
+  "projectName": "formapi",
   "moduleName": "FormAPI",
-  "projectVersion": "1.0.0",
+  "projectVersion": "2.0.0",
   "projectLicenseName": "Apache-2.0",
   "projectDescription": "An API client for the FormAPI PDF generation service",
   "httpUserAgent": "formapi-js-#{VERSION}"
