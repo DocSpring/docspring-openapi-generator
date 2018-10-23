@@ -138,6 +138,18 @@ describe 'PDFApi' do
       expect(result).to_not be_nil
     end
   end
+  # integration tests for get_data_request
+  # Look up a submission data request
+  # @param data_request_id 
+  # @param [Hash] opts the optional parameters
+  # @return [SubmissionDataRequest]
+  describe 'get_data_request test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String | 
+      result = api_instance.get_data_request(data_request_id)
+      expect(result).to_not be_nil
+    end
+  end
   # integration tests for get_submission
   # Check the status of a PDF
   # @param submission_id 

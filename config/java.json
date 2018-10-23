@@ -4,5 +4,6 @@
   "apiPackage": "io.formapi",
   "groupId": "io.formapi",
   "artifactId": "FormAPI",
-  "artifactVersion": "1.0.0"
+  "artifactVersion": "1.0.0",
+  "httpUserAgent": "formapi-java-#{VERSION}"
 }

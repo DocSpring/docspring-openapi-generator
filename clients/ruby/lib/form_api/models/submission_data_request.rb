@@ -13,24 +13,24 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module FormAPI
-  class DataRequest
-    attr_accessor :completed_at
-
-    attr_accessor :metadata
-
-    attr_accessor :viewed_at
-
-    attr_accessor :name
-
+  class SubmissionDataRequest
     attr_accessor :id
 
-    attr_accessor :state
-
-    attr_accessor :fields
+    attr_accessor :name
 
     attr_accessor :email
 
     attr_accessor :order
+
+    attr_accessor :fields
+
+    attr_accessor :metadata
+
+    attr_accessor :state
+
+    attr_accessor :viewed_at
+
+    attr_accessor :completed_at
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -57,30 +57,30 @@ module FormAPI
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'completed_at' => :'completed_at',
-        :'metadata' => :'metadata',
-        :'viewed_at' => :'viewed_at',
-        :'name' => :'name',
         :'id' => :'id',
-        :'state' => :'state',
-        :'fields' => :'fields',
+        :'name' => :'name',
         :'email' => :'email',
-        :'order' => :'order'
+        :'order' => :'order',
+        :'fields' => :'fields',
+        :'metadata' => :'metadata',
+        :'state' => :'state',
+        :'viewed_at' => :'viewed_at',
+        :'completed_at' => :'completed_at'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'completed_at' => :'String',
-        :'metadata' => :'Object',
-        :'viewed_at' => :'String',
-        :'name' => :'String',
         :'id' => :'String',
-        :'state' => :'String',
-        :'fields' => :'Array<String>',
+        :'name' => :'String',
         :'email' => :'String',
-        :'order' => :'Float'
+        :'order' => :'Float',
+        :'fields' => :'Array<String>',
+        :'metadata' => :'Object',
+        :'state' => :'String',
+        :'viewed_at' => :'String',
+        :'completed_at' => :'String'
       }
     end
 
@@ -92,34 +92,12 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'completed_at')
-        self.completed_at = attributes[:'completed_at']
-      end
-
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
-      end
-
-      if attributes.has_key?(:'viewed_at')
-        self.viewed_at = attributes[:'viewed_at']
-      end
-
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
       if attributes.has_key?(:'id')
         self.id = attributes[:'id']
       end
 
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'fields')
-        if (value = attributes[:'fields']).is_a?(Array)
-          self.fields = value
-        end
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
       end
 
       if attributes.has_key?(:'email')
@@ -129,20 +107,87 @@ module FormAPI
       if attributes.has_key?(:'order')
         self.order = attributes[:'order']
       end
+
+      if attributes.has_key?(:'fields')
+        if (value = attributes[:'fields']).is_a?(Array)
+          self.fields = value
+        end
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.has_key?(:'viewed_at')
+        self.viewed_at = attributes[:'viewed_at']
+      end
+
+      if attributes.has_key?(:'completed_at')
+        self.completed_at = attributes[:'completed_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
+      end
+
+      if @email.nil?
+        invalid_properties.push('invalid value for "email", email cannot be nil.')
+      end
+
+      if @order.nil?
+        invalid_properties.push('invalid value for "order", order cannot be nil.')
+      end
+
+      if @fields.nil?
+        invalid_properties.push('invalid value for "fields", fields cannot be nil.')
+      end
+
+      if @metadata.nil?
+        invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
+      end
+
+      if @state.nil?
+        invalid_properties.push('invalid value for "state", state cannot be nil.')
+      end
+
+      if @viewed_at.nil?
+        invalid_properties.push('invalid value for "viewed_at", viewed_at cannot be nil.')
+      end
+
+      if @completed_at.nil?
+        invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @name.nil?
+      return false if @email.nil?
+      return false if @order.nil?
+      return false if @fields.nil?
+      return false if @metadata.nil?
+      return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ['pending', 'complete'])
       return false unless state_validator.valid?(@state)
+      return false if @viewed_at.nil?
+      return false if @completed_at.nil?
       true
     end
 
@@ -161,15 +206,15 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          completed_at == o.completed_at &&
-          metadata == o.metadata &&
-          viewed_at == o.viewed_at &&
-          name == o.name &&
           id == o.id &&
-          state == o.state &&
-          fields == o.fields &&
+          name == o.name &&
           email == o.email &&
-          order == o.order
+          order == o.order &&
+          fields == o.fields &&
+          metadata == o.metadata &&
+          state == o.state &&
+          viewed_at == o.viewed_at &&
+          completed_at == o.completed_at
     end
 
     # @see the `==` method
@@ -181,7 +226,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [completed_at, metadata, viewed_at, name, id, state, fields, email, order].hash
+      [id, name, email, order, fields, metadata, state, viewed_at, completed_at].hash
     end
 
     # Builds the object from hash

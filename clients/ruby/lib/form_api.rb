@@ -30,12 +30,12 @@ require 'form_api/models/create_submission_data_request_token_response_token'
 require 'form_api/models/create_submission_response'
 require 'form_api/models/create_submission_response1'
 require 'form_api/models/create_submission_response2'
-require 'form_api/models/data_request'
 require 'form_api/models/error'
 require 'form_api/models/invalid_request'
 require 'form_api/models/submission'
 require 'form_api/models/submission_batch'
 require 'form_api/models/submission_batch_data'
+require 'form_api/models/submission_data_request'
 require 'form_api/models/template'
 
 # APIs

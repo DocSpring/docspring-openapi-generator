@@ -59,7 +59,7 @@ module FormAPI
       {
         :'submission' => :'Submission',
         :'errors' => :'Array<String>',
-        :'data_requests' => :'Array<DataRequest>',
+        :'data_requests' => :'Array<SubmissionDataRequest>',
         :'status' => :'String'
       }
     end

@@ -216,6 +216,26 @@ describe 'PDFApi' do
       expect(combined_submission.id).to start_with 'com_'
     end
   end
+  # integration tests for get_data_request
+  # Look up a submission data request
+  # @param data_request_id
+  # @param [Hash] opts the optional parameters
+  # @return [SubmissionDataRequest]
+  describe 'get_data_request test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String |
+      data_request = api_instance.get_data_request(data_request_id)
+      expect(data_request.id).to start_with 'drq_'
+      expect(data_request.order).to eq 1
+      expect(data_request.name).to eq 'John Doe'
+      expect(data_request.email).to eq 'jdoe@example.com'
+      expect(data_request.fields).to eq ['description']
+      expect(data_request.metadata).to eq(user_id: 123)
+      expect(data_request.state).to eq 'pending'
+      expect(data_request.viewed_at).to eq '2018-10-23T13:00:00Z'
+      expect(data_request.completed_at).to be_nil
+    end
+  end
   # integration tests for get_submission
   # Check the status of a PDF
   # @param submission_id

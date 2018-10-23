@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generate_pdf**](PDFApi.md#generate_pdf) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**get_combined_submission**](PDFApi.md#get_combined_submission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
+[**get_data_request**](PDFApi.md#get_data_request) | **GET** /data_requests/{data_request_id} | Look up a submission data request
 [**get_submission**](PDFApi.md#get_submission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**get_submission_batch**](PDFApi.md#get_submission_batch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**get_templates**](PDFApi.md#get_templates) | **GET** /templates | Get a list of all templates
@@ -402,6 +403,55 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CombinedSubmission**](CombinedSubmission.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+
+# **get_data_request**
+> SubmissionDataRequest get_data_request(data_request_id)
+
+Look up a submission data request
+
+### Example
+```ruby
+# load the gem
+require 'form_api'
+# setup authorization
+FormAPI.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = FormAPI::PDFApi.new
+data_request_id = 'drq_000000000000000001' # String | 
+
+begin
+  #Look up a submission data request
+  result = api_instance.get_data_request(data_request_id)
+  p result
+rescue FormAPI::ApiError => e
+  puts "Exception when calling PDFApi->get_data_request: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_request_id** | **String**|  | 
+
+### Return type
+
+[**SubmissionDataRequest**](SubmissionDataRequest.md)
 
 ### Authorization
 
