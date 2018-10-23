@@ -32,6 +32,27 @@ describe FormAPI::Client do
       expect(submission.state).to eq 'processed'
       expect(submission.download_url).to include 'submissions/submission.pdf'
     end
+
+    it 'should handle invalid data errors' do
+      client = FormAPI::Client.new
+      template_id = 'tpl_000000000000000001'
+
+      expect(client).to receive(:sleep).with(1).once
+
+      response = client.generate_pdf(
+        template_id: template_id,
+        data: {
+          title: 'Test PDF'
+        }
+      )
+
+      expect(response.status).to eq 'error'
+      submission = response.submission
+      expect(submission.id).to start_with 'sub_'
+      expect(submission.expired).to eq false
+      expect(submission.state).to eq 'processed'
+      expect(submission.download_url).to include 'submissions/submission.pdf'
+    end
   end
 
   describe '#batch_generate_pdfs' do

@@ -76,11 +76,11 @@ class TestClient(unittest.TestCase):
                             'title': 'Test PDF',
                         }
                     })
-            # self.assertEquals(context.exception.data['status'], 'error')
-            # self.assertEquals(context.exception.data['errors'], [
-            #     "The root object did not contain a required property of 'description'"
-            # ])
             wait_patched.assert_not_called()
+            self.assertEquals(context.exception.data['status'], 'error')
+            self.assertEquals(context.exception.data['errors'], [
+                "The root object did not contain a required property of 'description'"
+            ])
 
     def test_batch_generate_pdfs(self):
         """Test case for batch_generate_pdfs

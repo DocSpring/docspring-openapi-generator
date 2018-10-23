@@ -38,8 +38,7 @@ class Client(PDFApi):
 
     def wait(self):
         """
-        Just calls sleep(1), but we need to mock this specific sleep
-        in tests.
+        Just calls sleep(1), but we need to mock this method in tests.
         """
         time.sleep(1)
 
