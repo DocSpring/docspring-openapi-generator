@@ -81,7 +81,7 @@ OpenAPI spec version: v1
   <Import Project="$(MsBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
       <ProjectReference Include="..\FormApi.Client\FormApi.Client.csproj">
-          <Project>{5A9E51CB-0B6B-4B61-91BC-7176E796EC92}</Project>
+          <Project>{CEBC5F67-328D-4F13-877D-1AF4EE054B6A}</Project>
           <Name>FormApi.Client</Name>
       </ProjectReference>
   </ItemGroup>

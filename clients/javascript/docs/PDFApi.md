@@ -27,7 +27,7 @@ Generates multiple PDFs
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -76,7 +76,7 @@ Generates multiple PDFs
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -123,7 +123,7 @@ Merge generated PDFs together
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -170,7 +170,7 @@ Creates a new data request token for form authentication
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -217,7 +217,7 @@ Expire a combined submission
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -264,7 +264,7 @@ Expire a PDF submission
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -311,7 +311,7 @@ Generates a new PDF
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -360,7 +360,7 @@ Check the status of a combined submission (merged PDFs)
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -407,7 +407,7 @@ Look up a submission data request
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -454,7 +454,7 @@ Check the status of a PDF
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -501,7 +501,7 @@ Check the status of a submission batch job
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -552,7 +552,7 @@ Get a list of all templates
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic
@@ -603,7 +603,7 @@ Test Authentication
 
 ### Example
 ```javascript
-var FormAPI = require('@formapi/formapi');
+var FormAPI = require('formapi');
 var defaultClient = FormAPI.ApiClient.instance;
 
 // Configure HTTP basic authorization: api_token_basic

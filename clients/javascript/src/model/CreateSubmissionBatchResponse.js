@@ -36,7 +36,7 @@
   /**
    * The CreateSubmissionBatchResponse model module.
    * @module model/CreateSubmissionBatchResponse
-   * @version 1.0.0
+   * @version 2.0.0
    */
 
   /**

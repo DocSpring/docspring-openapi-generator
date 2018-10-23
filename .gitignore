@@ -24,6 +24,10 @@ Thumbs.db
 ## Ignore baked in swagger generator
 swagger-codegen
 
+# Not sure where these are coming from
+bootsnap-compile-cache
+
 
 clients/python/test/venv-2/
 clients/python/test/venv-3/
+clients/php/build

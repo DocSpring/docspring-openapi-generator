@@ -36,8 +36,9 @@ fi
 if [ -d $CLIENT_DIR ]; then
   case "$LANGUAGE" in
     php)
+      # PHP uses a git repo for pushing new releases.
       for f in $CLIENT_DIR/*; do
-        if ! [[ "$f" = *'/vendor' ]]; then rm -r $f; fi
+        if ! [[ "$f" = *'/vendor' ]] && ! [[ "$f" = *'.git' ]]; then rm -r $f; fi
       done;;
     csharp)
       for f in $CLIENT_DIR/*; do
