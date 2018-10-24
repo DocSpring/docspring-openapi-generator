@@ -5,16 +5,16 @@ cd "$(dirname "$0")/.."
 LANGUAGE="$1"
 
 if [ -n "$LANGUAGE" ]; then
-  ./scripts/release "$LANGUAGE"
+  ./scripts/$LANGUAGE/release
   exit
 fi
 
 for f in config/*; do
-  LANG="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
+  LANGUAGE="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
   if [ "$LANGUAGE" = "java" ]; then
     echo "Skipping $LANGUAGE for now, not implemented yet."
     continue
   fi
   echo "Releasing new version of $LANGUAGE client library..."
-  ./scripts/release "$LANGUAGE"
+  ./scripts/$LANGUAGE/release
 done
