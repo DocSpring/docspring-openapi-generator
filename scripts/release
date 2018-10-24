@@ -1,11 +1,19 @@
 #!/bin/bash
+# I always forget to regenerate the API clients after bumping the versions.
+# So I'll do that in here too.
 set -e
 cd "$(dirname "$0")/.."
 
 LANGUAGE="$1"
 
+generate_and_release() {
+  ./scripts/generate "$1"
+  echo "Releasing new version of $1 client library..."
+  ./scripts/$1/release
+}
+
 if [ -n "$LANGUAGE" ]; then
-  ./scripts/$LANGUAGE/release
+  generate_and_release "$LANGUAGE"
   exit
 fi
 
@@ -15,6 +23,5 @@ for f in config/*; do
     echo "Skipping $LANGUAGE for now, not implemented yet."
     continue
   fi
-  echo "Releasing new version of $LANGUAGE client library..."
-  ./scripts/$LANGUAGE/release
+  generate_and_release "$LANGUAGE"
 done
