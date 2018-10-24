@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Submission', 'model/SubmissionDataRequest'], factory);
+    define(['ApiClient', 'model/Submission'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Submission'), require('./SubmissionDataRequest'));
+    module.exports = factory(require('../ApiClient'), require('./Submission'));
   } else {
     // Browser globals (root is window)
     if (!root.FormAPI) {
       root.FormAPI = {};
     }
-    root.FormAPI.CreateSubmissionResponse = factory(root.FormAPI.ApiClient, root.FormAPI.Submission, root.FormAPI.SubmissionDataRequest);
+    root.FormAPI.CreateSubmissionResponse = factory(root.FormAPI.ApiClient, root.FormAPI.Submission);
   }
-}(this, function(ApiClient, Submission, SubmissionDataRequest) {
+}(this, function(ApiClient, Submission) {
   'use strict';
 
 
@@ -46,7 +46,6 @@
    */
   var exports = function() {
     var _this = this;
-
 
 
 
@@ -70,9 +69,6 @@
       if (data.hasOwnProperty('errors')) {
         obj['errors'] = ApiClient.convertToType(data['errors'], ['String']);
       }
-      if (data.hasOwnProperty('data_requests')) {
-        obj['data_requests'] = ApiClient.convertToType(data['data_requests'], [SubmissionDataRequest]);
-      }
       if (data.hasOwnProperty('status')) {
         obj['status'] = ApiClient.convertToType(data['status'], 'String');
       }
@@ -88,10 +84,6 @@
    * @member {Array.<String>} errors
    */
   exports.prototype['errors'] = undefined;
-  /**
-   * @member {Array.<module:model/SubmissionDataRequest>} data_requests
-   */
-  exports.prototype['data_requests'] = undefined;
   /**
    * @member {module:model/CreateSubmissionResponse.StatusEnum} status
    */

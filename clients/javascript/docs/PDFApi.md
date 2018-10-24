@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 <a name="batchGeneratePdfV1"></a>
 # **batchGeneratePdfV1**
-> [CreateSubmissionBatchV1SubmissionsResponse] batchGeneratePdfV1(templateId, createSubmissionData)
+> [CreateSubmissionResponse] batchGeneratePdfV1(templateId, createSubmissionDataBatchV1)
 
 Generates multiple PDFs
 
@@ -37,7 +37,7 @@ api_token_basic.password = 'YOUR PASSWORD';
 
 var apiInstance = new FormAPI.PDFApi();
 var templateId = tpl_000000000000000001; // String | 
-var createSubmissionData = [new FormAPI.CreateSubmissionData()]; // [CreateSubmissionData] | 
+var createSubmissionDataBatchV1 = [new FormAPI.CreateSubmissionDataBatchV1()]; // [CreateSubmissionDataBatchV1] | 
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -45,7 +45,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-apiInstance.batchGeneratePdfV1(templateId, createSubmissionData, callback);
+apiInstance.batchGeneratePdfV1(templateId, createSubmissionDataBatchV1, callback);
 ```
 
 ### Parameters
@@ -53,11 +53,11 @@ apiInstance.batchGeneratePdfV1(templateId, createSubmissionData, callback);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **templateId** | **String**|  | 
- **createSubmissionData** | [**[CreateSubmissionData]**](Array.md)|  | 
+ **createSubmissionDataBatchV1** | [**[CreateSubmissionDataBatchV1]**](Array.md)|  | 
 
 ### Return type
 
-[**[CreateSubmissionBatchV1SubmissionsResponse]**](CreateSubmissionBatchV1SubmissionsResponse.md)
+[**[CreateSubmissionResponse]**](CreateSubmissionResponse.md)
 
 ### Authorization
 

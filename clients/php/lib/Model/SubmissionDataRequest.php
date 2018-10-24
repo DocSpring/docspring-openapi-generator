@@ -60,7 +60,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'id' => 'string',
         'name' => 'string',
         'email' => 'string',
-        'order' => 'float',
+        'order' => 'int',
         'fields' => 'string[]',
         'metadata' => 'object',
         'state' => 'string',
@@ -281,12 +281,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
             );
         }
 
-        if ($this->container['viewed_at'] === null) {
-            $invalidProperties[] = "'viewed_at' can't be null";
-        }
-        if ($this->container['completed_at'] === null) {
-            $invalidProperties[] = "'completed_at' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -377,7 +371,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets order
      *
-     * @return float
+     * @return int
      */
     public function getOrder()
     {
@@ -387,7 +381,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets order
      *
-     * @param float $order order
+     * @param int $order order
      *
      * @return $this
      */
@@ -482,7 +476,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets viewed_at
      *
-     * @return string
+     * @return string|null
      */
     public function getViewedAt()
     {
@@ -492,7 +486,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets viewed_at
      *
-     * @param string $viewed_at viewed_at
+     * @param string|null $viewed_at viewed_at
      *
      * @return $this
      */
@@ -506,7 +500,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets completed_at
      *
-     * @return string
+     * @return string|null
      */
     public function getCompletedAt()
     {
@@ -516,7 +510,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets completed_at
      *
-     * @param string $completed_at completed_at
+     * @param string|null $completed_at completed_at
      *
      * @return $this
      */

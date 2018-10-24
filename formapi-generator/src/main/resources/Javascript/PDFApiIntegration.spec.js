@@ -141,6 +141,46 @@
         });
       });
     });
+    describe('generatePDF with data_requests', function () {
+      it('should call generatePDF with data_requests successfully', function (done) {
+        var templateId = 'tpl_000000000000000001';
+        var submissionData = {
+          data: {
+            title: 'Test PDF',
+            description: 'This PDF is great!',
+          },
+          data_requests: [
+            {
+              name: 'John Smith',
+              email: 'jsmith@example.com',
+              fields: ['description'],
+              order: 1
+            }
+          ]
+        };
+        instance.generatePDF(templateId, submissionData, function (error, response) {
+          if (error) throw error;
+          expect(response.status).to.be('success');
+          var submission = response.submission;
+          expect(submission.id).to.match(/^sub_/);
+          expect(submission.expired).to.be(false);
+          expect(submission.state).to.be('waiting_for_data_requests');
+
+          var data_requests = submission.data_requests;
+          expect(data_requests.length).to.be(1);
+          var data_request = data_requests[0];
+
+          expect(data_request.id).to.match(/^drq_/);
+          expect(data_request.state).to.be('pending');
+          expect(data_request.fields).to.eql(['description']);
+          expect(data_request.order).to.be(1);
+          expect(data_request.name).to.be('John Smith');
+          expect(data_request.email).to.be('jsmith@example.com');
+
+          done();
+        });
+      });
+    });
     describe('getCombinedSubmission', function () {
       it('should call getCombinedSubmission successfully', function (done) {
         var combinedSubmissionId = 'com_000000000000000001';

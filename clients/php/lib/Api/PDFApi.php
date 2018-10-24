@@ -93,15 +93,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData[] $create_submission_data create_submission_data (required)
+     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 create_submission_data_batch_v1 (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[]
+     * @return \FormAPI\Model\CreateSubmissionResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[]
      */
-    public function batchGeneratePdfV1($template_id, $create_submission_data)
+    public function batchGeneratePdfV1($template_id, $create_submission_data_batch_v1)
     {
-        list($response) = $this->batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data);
+        list($response) = $this->batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data_batch_v1);
         return $response;
     }
 
@@ -111,15 +111,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData[] $create_submission_data (required)
+     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\CreateSubmissionResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data)
+    public function batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data_batch_v1)
     {
-        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data);
+        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1);
 
         try {
             $options = $this->createHttpClientOption();
@@ -152,17 +152,17 @@ class PDFApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 201:
-                    if ('\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]' === '\SplFileObject') {
+                    if ('\FormAPI\Model\CreateSubmissionResponse[]' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
-                        if ('\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]' !== 'string') {
+                        if ('\FormAPI\Model\CreateSubmissionResponse[]' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]', []),
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\CreateSubmissionResponse[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -213,7 +213,7 @@ class PDFApi
                     ];
             }
 
-            $returnType = '\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]';
+            $returnType = '\FormAPI\Model\CreateSubmissionResponse[]';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -235,7 +235,7 @@ class PDFApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]',
+                        '\FormAPI\Model\CreateSubmissionResponse[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -275,14 +275,14 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData[] $create_submission_data (required)
+     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchGeneratePdfV1Async($template_id, $create_submission_data)
+    public function batchGeneratePdfV1Async($template_id, $create_submission_data_batch_v1)
     {
-        return $this->batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data)
+        return $this->batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data_batch_v1)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -296,15 +296,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData[] $create_submission_data (required)
+     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data)
+    public function batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data_batch_v1)
     {
-        $returnType = '\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]';
-        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data);
+        $returnType = '\FormAPI\Model\CreateSubmissionResponse[]';
+        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -347,12 +347,12 @@ class PDFApi
      * Create request for operation 'batchGeneratePdfV1'
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData[] $create_submission_data (required)
+     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function batchGeneratePdfV1Request($template_id, $create_submission_data)
+    protected function batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1)
     {
         // verify the required parameter 'template_id' is set
         if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
@@ -360,10 +360,10 @@ class PDFApi
                 'Missing the required parameter $template_id when calling batchGeneratePdfV1'
             );
         }
-        // verify the required parameter 'create_submission_data' is set
-        if ($create_submission_data === null || (is_array($create_submission_data) && count($create_submission_data) === 0)) {
+        // verify the required parameter 'create_submission_data_batch_v1' is set
+        if ($create_submission_data_batch_v1 === null || (is_array($create_submission_data_batch_v1) && count($create_submission_data_batch_v1) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $create_submission_data when calling batchGeneratePdfV1'
+                'Missing the required parameter $create_submission_data_batch_v1 when calling batchGeneratePdfV1'
             );
         }
 
@@ -386,8 +386,8 @@ class PDFApi
 
         // body params
         $_tempBody = null;
-        if (isset($create_submission_data)) {
-            $_tempBody = $create_submission_data;
+        if (isset($create_submission_data_batch_v1)) {
+            $_tempBody = $create_submission_data_batch_v1;
         }
 
         if ($multipart) {

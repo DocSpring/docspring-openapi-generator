@@ -34,7 +34,7 @@ class SubmissionDataRequest(object):
         'id': 'str',
         'name': 'str',
         'email': 'str',
-        'order': 'float',
+        'order': 'int',
         'fields': 'list[str]',
         'metadata': 'object',
         'state': 'str',
@@ -75,8 +75,10 @@ class SubmissionDataRequest(object):
         self.fields = fields
         self.metadata = metadata
         self.state = state
-        self.viewed_at = viewed_at
-        self.completed_at = completed_at
+        if viewed_at is not None:
+            self.viewed_at = viewed_at
+        if completed_at is not None:
+            self.completed_at = completed_at
 
     @property
     def id(self):
@@ -153,7 +155,7 @@ class SubmissionDataRequest(object):
 
 
         :return: The order of this SubmissionDataRequest.  # noqa: E501
-        :rtype: float
+        :rtype: int
         """
         return self._order
 
@@ -163,7 +165,7 @@ class SubmissionDataRequest(object):
 
 
         :param order: The order of this SubmissionDataRequest.  # noqa: E501
-        :type: float
+        :type: int
         """
         if order is None:
             raise ValueError("Invalid value for `order`, must not be `None`")  # noqa: E501
@@ -263,8 +265,6 @@ class SubmissionDataRequest(object):
         :param viewed_at: The viewed_at of this SubmissionDataRequest.  # noqa: E501
         :type: str
         """
-        if viewed_at is None:
-            raise ValueError("Invalid value for `viewed_at`, must not be `None`")  # noqa: E501
 
         self._viewed_at = viewed_at
 
@@ -286,8 +286,6 @@ class SubmissionDataRequest(object):
         :param completed_at: The completed_at of this SubmissionDataRequest.  # noqa: E501
         :type: str
         """
-        if completed_at is None:
-            raise ValueError("Invalid value for `completed_at`, must not be `None`")  # noqa: E501
 
         self._completed_at = completed_at
 

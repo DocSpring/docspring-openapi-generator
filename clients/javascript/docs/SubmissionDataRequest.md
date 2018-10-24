@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **fields** | **[String]** |  | 
 **metadata** | **Object** |  | 
 **state** | **String** |  | 
-**viewedAt** | **String** |  | 
-**completedAt** | **String** |  | 
+**viewedAt** | **String** |  | [optional] 
+**completedAt** | **String** |  | [optional] 
 
 
 <a name="StateEnum"></a>

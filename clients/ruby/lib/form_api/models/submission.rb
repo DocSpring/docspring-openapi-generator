@@ -32,6 +32,8 @@ module FormAPI
 
     attr_accessor :batch_id
 
+    attr_accessor :data_requests
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -65,7 +67,8 @@ module FormAPI
         :'state' => :'state',
         :'metadata' => :'metadata',
         :'download_url' => :'download_url',
-        :'batch_id' => :'batch_id'
+        :'batch_id' => :'batch_id',
+        :'data_requests' => :'data_requests'
       }
     end
 
@@ -80,7 +83,8 @@ module FormAPI
         :'state' => :'String',
         :'metadata' => :'Object',
         :'download_url' => :'String',
-        :'batch_id' => :'String'
+        :'batch_id' => :'String',
+        :'data_requests' => :'Array<SubmissionDataRequest>'
       }
     end
 
@@ -126,6 +130,12 @@ module FormAPI
 
       if attributes.has_key?(:'batch_id')
         self.batch_id = attributes[:'batch_id']
+      end
+
+      if attributes.has_key?(:'data_requests')
+        if (value = attributes[:'data_requests']).is_a?(Array)
+          self.data_requests = value
+        end
       end
     end
 
@@ -187,7 +197,8 @@ module FormAPI
           state == o.state &&
           metadata == o.metadata &&
           download_url == o.download_url &&
-          batch_id == o.batch_id
+          batch_id == o.batch_id &&
+          data_requests == o.data_requests
     end
 
     # @see the `==` method
@@ -199,7 +210,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, test, expired, expires_at, processed_at, state, metadata, download_url, batch_id].hash
+      [id, test, expired, expires_at, processed_at, state, metadata, download_url, batch_id, data_requests].hash
     end
 
     # Builds the object from hash

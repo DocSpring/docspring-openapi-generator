@@ -61,7 +61,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'data' => 'object',
         'html' => 'string',
         'css' => 'string',
-        'metadata' => 'object'
+        'metadata' => 'object',
+        'data_requests' => '\FormAPI\Model\SubmissionDataRequestData[]'
     ];
 
     /**
@@ -74,7 +75,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'data' => null,
         'html' => null,
         'css' => null,
-        'metadata' => null
+        'metadata' => null,
+        'data_requests' => null
     ];
 
     /**
@@ -108,7 +110,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'data' => 'data',
         'html' => 'html',
         'css' => 'css',
-        'metadata' => 'metadata'
+        'metadata' => 'metadata',
+        'data_requests' => 'data_requests'
     ];
 
     /**
@@ -121,7 +124,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'data' => 'setData',
         'html' => 'setHtml',
         'css' => 'setCss',
-        'metadata' => 'setMetadata'
+        'metadata' => 'setMetadata',
+        'data_requests' => 'setDataRequests'
     ];
 
     /**
@@ -134,7 +138,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'data' => 'getData',
         'html' => 'getHtml',
         'css' => 'getCss',
-        'metadata' => 'getMetadata'
+        'metadata' => 'getMetadata',
+        'data_requests' => 'getDataRequests'
     ];
 
     /**
@@ -202,6 +207,7 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         $this->container['html'] = isset($data['html']) ? $data['html'] : null;
         $this->container['css'] = isset($data['css']) ? $data['css'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
     }
 
     /**
@@ -347,6 +353,30 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     public function setMetadata($metadata)
     {
         $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_requests
+     *
+     * @return \FormAPI\Model\SubmissionDataRequestData[]|null
+     */
+    public function getDataRequests()
+    {
+        return $this->container['data_requests'];
+    }
+
+    /**
+     * Sets data_requests
+     *
+     * @param \FormAPI\Model\SubmissionDataRequestData[]|null $data_requests data_requests
+     *
+     * @return $this
+     */
+    public function setDataRequests($data_requests)
+    {
+        $this->container['data_requests'] = $data_requests;
 
         return $this;
     }

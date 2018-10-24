@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **metadata** | **Object** |  | [optional] 
 **downloadUrl** | **String** |  | [optional] 
 **batchId** | **String** |  | [optional] 
+**dataRequests** | [**[SubmissionDataRequest]**](SubmissionDataRequest.md) |  | [optional] 
 
 
 <a name="StateEnum"></a>

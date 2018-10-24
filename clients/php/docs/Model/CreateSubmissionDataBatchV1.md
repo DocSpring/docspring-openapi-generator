@@ -1,11 +1,14 @@
-# FormApi.Client.Model.CreateSubmissionBatchV1SubmissionsResponse
-## Properties
+# CreateSubmissionDataBatchV1
 
+## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Submission** | [**Submission**](Submission.md) |  | [optional] 
-**Errors** | **List&lt;string&gt;** |  | [optional] 
-**Status** | **string** |  | [optional] 
+**test** | **bool** |  | [optional] 
+**data** | **object** |  | 
+**html** | **string** |  | [optional] 
+**css** | **string** |  | [optional] 
+**metadata** | **object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
 

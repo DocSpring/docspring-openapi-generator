@@ -43,7 +43,8 @@ namespace FormApi.Client.Model
         /// <param name="html">html.</param>
         /// <param name="css">css.</param>
         /// <param name="metadata">metadata.</param>
-        public CreateSubmissionData(bool? test = default(bool?), Object data = default(Object), string html = default(string), string css = default(string), Object metadata = default(Object))
+        /// <param name="dataRequests">dataRequests.</param>
+        public CreateSubmissionData(bool? test = default(bool?), Object data = default(Object), string html = default(string), string css = default(string), Object metadata = default(Object), List<SubmissionDataRequestData> dataRequests = default(List<SubmissionDataRequestData>))
         {
             // to ensure "data" is required (not null)
             if (data == null)
@@ -58,6 +59,7 @@ namespace FormApi.Client.Model
             this.Html = html;
             this.Css = css;
             this.Metadata = metadata;
+            this.DataRequests = dataRequests;
         }
         
         /// <summary>
@@ -91,6 +93,12 @@ namespace FormApi.Client.Model
         public Object Metadata { get; set; }
 
         /// <summary>
+        /// Gets or Sets DataRequests
+        /// </summary>
+        [DataMember(Name="data_requests", EmitDefaultValue=false)]
+        public List<SubmissionDataRequestData> DataRequests { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -103,6 +111,7 @@ namespace FormApi.Client.Model
             sb.Append("  Html: ").Append(Html).Append("\n");
             sb.Append("  Css: ").Append(Css).Append("\n");
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  DataRequests: ").Append(DataRequests).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -161,6 +170,11 @@ namespace FormApi.Client.Model
                     this.Metadata == input.Metadata ||
                     (this.Metadata != null &&
                     this.Metadata.Equals(input.Metadata))
+                ) && 
+                (
+                    this.DataRequests == input.DataRequests ||
+                    this.DataRequests != null &&
+                    this.DataRequests.SequenceEqual(input.DataRequests)
                 );
         }
 
@@ -183,6 +197,8 @@ namespace FormApi.Client.Model
                     hashCode = hashCode * 59 + this.Css.GetHashCode();
                 if (this.Metadata != null)
                     hashCode = hashCode * 59 + this.Metadata.GetHashCode();
+                if (this.DataRequests != null)
+                    hashCode = hashCode * 59 + this.DataRequests.GetHashCode();
                 return hashCode;
             }
         }

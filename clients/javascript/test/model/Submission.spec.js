@@ -110,6 +110,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property dataRequests (base name: "data_requests")', function() {
+      // uncomment below and update the code to test the property dataRequests
+      //var instance = new FormAPI.Submission();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

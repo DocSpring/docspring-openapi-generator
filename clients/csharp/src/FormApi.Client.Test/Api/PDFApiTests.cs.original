@@ -72,9 +72,9 @@ namespace FormApi.Client.Test
         {
             // TODO uncomment below to test the method and replace null with proper value
             //string templateId = null;
-            //List<CreateSubmissionData> createSubmissionData = null;
-            //var response = instance.BatchGeneratePdfV1(templateId, createSubmissionData);
-            //Assert.IsInstanceOf<List<CreateSubmissionBatchV1SubmissionsResponse>> (response, "response is List<CreateSubmissionBatchV1SubmissionsResponse>");
+            //List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1 = null;
+            //var response = instance.BatchGeneratePdfV1(templateId, createSubmissionDataBatchV1);
+            //Assert.IsInstanceOf<List<CreateSubmissionResponse>> (response, "response is List<CreateSubmissionResponse>");
         }
         
         /// <summary>

@@ -76,12 +76,12 @@ namespace Example
 
             var apiInstance = new PDFApi();
             var templateId = tpl_000000000000000001;  // string | 
-            var createSubmissionData = new List<CreateSubmissionData>(); // List<CreateSubmissionData> | 
+            var createSubmissionDataBatchV1 = new List<CreateSubmissionDataBatchV1>(); // List<CreateSubmissionDataBatchV1> | 
 
             try
             {
                 // Generates multiple PDFs
-                List<CreateSubmissionBatchV1SubmissionsResponse> result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionData);
+                List<CreateSubmissionResponse> result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionDataBatchV1);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -126,9 +126,9 @@ Class | Method | HTTP request | Description
  - [Model.CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
  - [Model.CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
  - [Model.CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
- - [Model.CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [Model.CreateSubmissionData](docs/CreateSubmissionData.md)
  - [Model.CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [Model.CreateSubmissionDataBatchV1](docs/CreateSubmissionDataBatchV1.md)
  - [Model.CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
  - [Model.CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [Model.CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
@@ -138,6 +138,7 @@ Class | Method | HTTP request | Description
  - [Model.SubmissionBatch](docs/SubmissionBatch.md)
  - [Model.SubmissionBatchData](docs/SubmissionBatchData.md)
  - [Model.SubmissionDataRequest](docs/SubmissionDataRequest.md)
+ - [Model.SubmissionDataRequestData](docs/SubmissionDataRequestData.md)
  - [Model.Template](docs/Template.md)
 
 

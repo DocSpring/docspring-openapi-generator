@@ -59,11 +59,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_id = 'tpl_000000000000000001' # str | 
-create_submission_data = NULL # list[CreateSubmissionData] | 
+create_submission_data_batch_v1 = NULL # list[CreateSubmissionDataBatchV1] | 
 
 try:
     # Generates multiple PDFs
-    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
+    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->batch_generate_pdf_v1: %s\n" % e)
@@ -100,9 +100,9 @@ Class | Method | HTTP request | Description
  - [CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
  - [CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
  - [CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
- - [CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [CreateSubmissionData](docs/CreateSubmissionData.md)
  - [CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [CreateSubmissionDataBatchV1](docs/CreateSubmissionDataBatchV1.md)
  - [CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
  - [CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
@@ -112,6 +112,7 @@ Class | Method | HTTP request | Description
  - [SubmissionBatch](docs/SubmissionBatch.md)
  - [SubmissionBatchData](docs/SubmissionBatchData.md)
  - [SubmissionDataRequest](docs/SubmissionDataRequest.md)
+ - [SubmissionDataRequestData](docs/SubmissionDataRequestData.md)
  - [Template](docs/Template.md)
 
 

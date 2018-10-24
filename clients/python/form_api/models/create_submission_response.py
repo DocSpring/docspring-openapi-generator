@@ -33,23 +33,20 @@ class CreateSubmissionResponse(object):
     openapi_types = {
         'submission': 'Submission',
         'errors': 'list[str]',
-        'data_requests': 'list[SubmissionDataRequest]',
         'status': 'str'
     }
 
     attribute_map = {
         'submission': 'submission',
         'errors': 'errors',
-        'data_requests': 'data_requests',
         'status': 'status'
     }
 
-    def __init__(self, submission=None, errors=None, data_requests=None, status=None):  # noqa: E501
+    def __init__(self, submission=None, errors=None, status=None):  # noqa: E501
         """CreateSubmissionResponse - a model defined in OpenAPI"""  # noqa: E501
 
         self._submission = None
         self._errors = None
-        self._data_requests = None
         self._status = None
         self.discriminator = None
 
@@ -57,8 +54,6 @@ class CreateSubmissionResponse(object):
             self.submission = submission
         if errors is not None:
             self.errors = errors
-        if data_requests is not None:
-            self.data_requests = data_requests
         if status is not None:
             self.status = status
 
@@ -103,27 +98,6 @@ class CreateSubmissionResponse(object):
         """
 
         self._errors = errors
-
-    @property
-    def data_requests(self):
-        """Gets the data_requests of this CreateSubmissionResponse.  # noqa: E501
-
-
-        :return: The data_requests of this CreateSubmissionResponse.  # noqa: E501
-        :rtype: list[SubmissionDataRequest]
-        """
-        return self._data_requests
-
-    @data_requests.setter
-    def data_requests(self, data_requests):
-        """Sets the data_requests of this CreateSubmissionResponse.
-
-
-        :param data_requests: The data_requests of this CreateSubmissionResponse.  # noqa: E501
-        :type: list[SubmissionDataRequest]
-        """
-
-        self._data_requests = data_requests
 
     @property
     def status(self):

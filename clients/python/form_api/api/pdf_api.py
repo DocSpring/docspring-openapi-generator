@@ -32,47 +32,47 @@ class PDFApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def batch_generate_pdf_v1(self, template_id, create_submission_data, **kwargs):  # noqa: E501
+    def batch_generate_pdf_v1(self, template_id, create_submission_data_batch_v1, **kwargs):  # noqa: E501
         """Generates multiple PDFs  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.batch_generate_pdf_v1(template_id, create_submission_data, async_req=True)
+        >>> thread = api.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str template_id: (required)
-        :param list[CreateSubmissionData] create_submission_data: (required)
-        :return: list[CreateSubmissionBatchV1SubmissionsResponse]
+        :param list[CreateSubmissionDataBatchV1] create_submission_data_batch_v1: (required)
+        :return: list[CreateSubmissionResponse]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
+            return self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data_batch_v1, **kwargs)  # noqa: E501
         else:
-            (data) = self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, **kwargs)  # noqa: E501
+            (data) = self.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data_batch_v1, **kwargs)  # noqa: E501
             return data
 
-    def batch_generate_pdf_v1_with_http_info(self, template_id, create_submission_data, **kwargs):  # noqa: E501
+    def batch_generate_pdf_v1_with_http_info(self, template_id, create_submission_data_batch_v1, **kwargs):  # noqa: E501
         """Generates multiple PDFs  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, async_req=True)
+        >>> thread = api.batch_generate_pdf_v1_with_http_info(template_id, create_submission_data_batch_v1, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str template_id: (required)
-        :param list[CreateSubmissionData] create_submission_data: (required)
-        :return: list[CreateSubmissionBatchV1SubmissionsResponse]
+        :param list[CreateSubmissionDataBatchV1] create_submission_data_batch_v1: (required)
+        :return: list[CreateSubmissionResponse]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
         local_var_params = locals()
 
-        all_params = ['template_id', 'create_submission_data']  # noqa: E501
+        all_params = ['template_id', 'create_submission_data_batch_v1']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -90,10 +90,10 @@ class PDFApi(object):
         if ('template_id' not in local_var_params or
                 local_var_params['template_id'] is None):
             raise ValueError("Missing the required parameter `template_id` when calling `batch_generate_pdf_v1`")  # noqa: E501
-        # verify the required parameter 'create_submission_data' is set
-        if ('create_submission_data' not in local_var_params or
-                local_var_params['create_submission_data'] is None):
-            raise ValueError("Missing the required parameter `create_submission_data` when calling `batch_generate_pdf_v1`")  # noqa: E501
+        # verify the required parameter 'create_submission_data_batch_v1' is set
+        if ('create_submission_data_batch_v1' not in local_var_params or
+                local_var_params['create_submission_data_batch_v1'] is None):
+            raise ValueError("Missing the required parameter `create_submission_data_batch_v1` when calling `batch_generate_pdf_v1`")  # noqa: E501
 
         collection_formats = {}
 
@@ -109,8 +109,8 @@ class PDFApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'create_submission_data' in local_var_params:
-            body_params = local_var_params['create_submission_data']
+        if 'create_submission_data_batch_v1' in local_var_params:
+            body_params = local_var_params['create_submission_data_batch_v1']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
             ['application/json'])  # noqa: E501
@@ -130,7 +130,7 @@ class PDFApi(object):
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[CreateSubmissionBatchV1SubmissionsResponse]',  # noqa: E501
+            response_type='list[CreateSubmissionResponse]',  # noqa: E501
             auth_settings=auth_settings,
             async_req=local_var_params.get('async_req'),
             _return_http_data_only=local_var_params.get('_return_http_data_only'),  # noqa: E501

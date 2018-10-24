@@ -69,10 +69,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $template_id = tpl_000000000000000001; // string | 
-$create_submission_data = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionData[] | 
+$create_submission_data_batch_v1 = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionDataBatchV1[] | 
 
 try {
-    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data);
+    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data_batch_v1);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->batchGeneratePdfV1: ', $e->getMessage(), PHP_EOL;
@@ -111,9 +111,9 @@ Class | Method | HTTP request | Description
  - [CreateCombinedSubmissionResponse](docs/Model/CreateCombinedSubmissionResponse.md)
  - [CreateSubmissionBatchResponse](docs/Model/CreateSubmissionBatchResponse.md)
  - [CreateSubmissionBatchSubmissionsResponse](docs/Model/CreateSubmissionBatchSubmissionsResponse.md)
- - [CreateSubmissionBatchV1SubmissionsResponse](docs/Model/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [CreateSubmissionData](docs/Model/CreateSubmissionData.md)
  - [CreateSubmissionDataBatchRequest](docs/Model/CreateSubmissionDataBatchRequest.md)
+ - [CreateSubmissionDataBatchV1](docs/Model/CreateSubmissionDataBatchV1.md)
  - [CreateSubmissionDataRequestTokenResponse](docs/Model/CreateSubmissionDataRequestTokenResponse.md)
  - [CreateSubmissionDataRequestTokenResponseToken](docs/Model/CreateSubmissionDataRequestTokenResponseToken.md)
  - [CreateSubmissionResponse](docs/Model/CreateSubmissionResponse.md)
@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
  - [SubmissionBatch](docs/Model/SubmissionBatch.md)
  - [SubmissionBatchData](docs/Model/SubmissionBatchData.md)
  - [SubmissionDataRequest](docs/Model/SubmissionDataRequest.md)
+ - [SubmissionDataRequestData](docs/Model/SubmissionDataRequestData.md)
  - [Template](docs/Model/Template.md)
 
 

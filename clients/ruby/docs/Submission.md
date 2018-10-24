@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **metadata** | **Object** |  | [optional] 
 **download_url** | **String** |  | [optional] 
 **batch_id** | **String** |  | [optional] 
+**data_requests** | [**Array&lt;SubmissionDataRequest&gt;**](SubmissionDataRequest.md) |  | [optional] 
 
 

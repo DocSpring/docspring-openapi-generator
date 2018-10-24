@@ -38,7 +38,7 @@ module FormAPI
         :'test' => :'BOOLEAN',
         :'submission_ids' => :'Array<String>',
         :'metadata' => :'Object',
-        :'expires_in' => :'Float'
+        :'expires_in' => :'Integer'
       }
     end
 

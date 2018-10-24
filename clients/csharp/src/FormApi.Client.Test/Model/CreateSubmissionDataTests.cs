@@ -106,6 +106,14 @@ namespace FormApi.Client.Test
         {
             // TODO unit test for the property 'Metadata'
         }
+        /// <summary>
+        /// Test the property 'DataRequests'
+        /// </summary>
+        [Test]
+        public void DataRequestsTest()
+        {
+            // TODO unit test for the property 'DataRequests'
+        }
 
     }
 

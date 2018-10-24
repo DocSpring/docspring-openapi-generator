@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf_v1**
-> Array&lt;CreateSubmissionBatchV1SubmissionsResponse&gt; batch_generate_pdf_v1(template_id, create_submission_data)
+> Array&lt;CreateSubmissionResponse&gt; batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
 
 Generates multiple PDFs
 
@@ -37,11 +37,11 @@ end
 
 api_instance = FormAPI::PDFApi.new
 template_id = 'tpl_000000000000000001' # String | 
-create_submission_data = nil # Array<CreateSubmissionData> | 
+create_submission_data_batch_v1 = nil # Array<CreateSubmissionDataBatchV1> | 
 
 begin
   #Generates multiple PDFs
-  result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
+  result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
   p result
 rescue FormAPI::ApiError => e
   puts "Exception when calling PDFApi->batch_generate_pdf_v1: #{e}"
@@ -53,11 +53,11 @@ end
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **String**|  | 
- **create_submission_data** | [**Array&lt;CreateSubmissionData&gt;**](Array.md)|  | 
+ **create_submission_data_batch_v1** | [**Array&lt;CreateSubmissionDataBatchV1&gt;**](Array.md)|  | 
 
 ### Return type
 
-[**Array&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;**](CreateSubmissionBatchV1SubmissionsResponse.md)
+[**Array&lt;CreateSubmissionResponse&gt;**](CreateSubmissionResponse.md)
 
 ### Authorization
 

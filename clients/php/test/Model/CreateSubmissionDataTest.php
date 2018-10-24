@@ -110,4 +110,11 @@ class CreateSubmissionDataTest extends \PHPUnit_Framework_TestCase
     public function testPropertyMetadata()
     {
     }
+
+    /**
+     * Test attribute "data_requests"
+     */
+    public function testPropertyDataRequests()
+    {
+    }
 }

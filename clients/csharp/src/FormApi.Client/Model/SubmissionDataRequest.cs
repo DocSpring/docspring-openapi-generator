@@ -70,9 +70,9 @@ namespace FormApi.Client.Model
         /// <param name="fields">fields (required).</param>
         /// <param name="metadata">metadata (required).</param>
         /// <param name="state">state (required).</param>
-        /// <param name="viewedAt">viewedAt (required).</param>
-        /// <param name="completedAt">completedAt (required).</param>
-        public SubmissionDataRequest(string id = default(string), string name = default(string), string email = default(string), decimal? order = default(decimal?), List<string> fields = default(List<string>), Object metadata = default(Object), StateEnum state = default(StateEnum), string viewedAt = default(string), string completedAt = default(string))
+        /// <param name="viewedAt">viewedAt.</param>
+        /// <param name="completedAt">completedAt.</param>
+        public SubmissionDataRequest(string id = default(string), string name = default(string), string email = default(string), int? order = default(int?), List<string> fields = default(List<string>), Object metadata = default(Object), StateEnum state = default(StateEnum), string viewedAt = default(string), string completedAt = default(string))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -137,24 +137,8 @@ namespace FormApi.Client.Model
             {
                 this.State = state;
             }
-            // to ensure "viewedAt" is required (not null)
-            if (viewedAt == null)
-            {
-                throw new InvalidDataException("viewedAt is a required property for SubmissionDataRequest and cannot be null");
-            }
-            else
-            {
-                this.ViewedAt = viewedAt;
-            }
-            // to ensure "completedAt" is required (not null)
-            if (completedAt == null)
-            {
-                throw new InvalidDataException("completedAt is a required property for SubmissionDataRequest and cannot be null");
-            }
-            else
-            {
-                this.CompletedAt = completedAt;
-            }
+            this.ViewedAt = viewedAt;
+            this.CompletedAt = completedAt;
         }
         
         /// <summary>
@@ -179,7 +163,7 @@ namespace FormApi.Client.Model
         /// Gets or Sets Order
         /// </summary>
         [DataMember(Name="order", EmitDefaultValue=false)]
-        public decimal? Order { get; set; }
+        public int? Order { get; set; }
 
         /// <summary>
         /// Gets or Sets Fields

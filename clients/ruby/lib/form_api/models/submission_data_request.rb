@@ -75,7 +75,7 @@ module FormAPI
         :'id' => :'String',
         :'name' => :'String',
         :'email' => :'String',
-        :'order' => :'Float',
+        :'order' => :'Integer',
         :'fields' => :'Array<String>',
         :'metadata' => :'Object',
         :'state' => :'String',
@@ -163,14 +163,6 @@ module FormAPI
         invalid_properties.push('invalid value for "state", state cannot be nil.')
       end
 
-      if @viewed_at.nil?
-        invalid_properties.push('invalid value for "viewed_at", viewed_at cannot be nil.')
-      end
-
-      if @completed_at.nil?
-        invalid_properties.push('invalid value for "completed_at", completed_at cannot be nil.')
-      end
-
       invalid_properties
     end
 
@@ -186,8 +178,6 @@ module FormAPI
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ['pending', 'complete'])
       return false unless state_validator.valid?(@state)
-      return false if @viewed_at.nil?
-      return false if @completed_at.nil?
       true
     end
 

@@ -42,7 +42,7 @@ namespace FormApi.Client.Model
         /// <param name="submissionIds">submissionIds (required).</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="expiresIn">expiresIn.</param>
-        public CombinedSubmissionData(bool? test = default(bool?), List<string> submissionIds = default(List<string>), Object metadata = default(Object), decimal? expiresIn = default(decimal?))
+        public CombinedSubmissionData(bool? test = default(bool?), List<string> submissionIds = default(List<string>), Object metadata = default(Object), int? expiresIn = default(int?))
         {
             // to ensure "submissionIds" is required (not null)
             if (submissionIds == null)
@@ -80,7 +80,7 @@ namespace FormApi.Client.Model
         /// Gets or Sets ExpiresIn
         /// </summary>
         [DataMember(Name="expires_in", EmitDefaultValue=false)]
-        public decimal? ExpiresIn { get; set; }
+        public int? ExpiresIn { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

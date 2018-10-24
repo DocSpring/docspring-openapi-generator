@@ -45,8 +45,8 @@ class TestPDFApi(unittest.TestCase):
         Generates multiple PDFs  # noqa: E501
         """
         template_id = 'tpl_000000000000000001' # str | 
-        create_submission_data = NULL # list[CreateSubmissionData] | 
-        api_response = self.api.batch_generate_pdf_v1(template_id, create_submission_data)
+        create_submission_data_batch_v1 = NULL # list[CreateSubmissionDataBatchV1] | 
+        api_response = self.api.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
     def test_batch_generate_pdfs(self):
         """Test case for batch_generate_pdfs
 

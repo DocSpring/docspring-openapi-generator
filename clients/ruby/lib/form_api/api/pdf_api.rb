@@ -21,20 +21,20 @@ module FormAPI
     end
     # Generates multiple PDFs
     # @param template_id 
-    # @param create_submission_data 
+    # @param create_submission_data_batch_v1 
     # @param [Hash] opts the optional parameters
-    # @return [Array<CreateSubmissionBatchV1SubmissionsResponse>]
-    def batch_generate_pdf_v1(template_id, create_submission_data, opts = {})
-      data, _status_code, _headers = batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts)
+    # @return [Array<CreateSubmissionResponse>]
+    def batch_generate_pdf_v1(template_id, create_submission_data_batch_v1, opts = {})
+      data, _status_code, _headers = batch_generate_pdf_v1_with_http_info(template_id, create_submission_data_batch_v1, opts)
       data
     end
 
     # Generates multiple PDFs
     # @param template_id 
-    # @param create_submission_data 
+    # @param create_submission_data_batch_v1 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(Array<CreateSubmissionBatchV1SubmissionsResponse>, Fixnum, Hash)>] Array<CreateSubmissionBatchV1SubmissionsResponse> data, response status code and response headers
-    def batch_generate_pdf_v1_with_http_info(template_id, create_submission_data, opts = {})
+    # @return [Array<(Array<CreateSubmissionResponse>, Fixnum, Hash)>] Array<CreateSubmissionResponse> data, response status code and response headers
+    def batch_generate_pdf_v1_with_http_info(template_id, create_submission_data_batch_v1, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.batch_generate_pdf_v1 ...'
       end
@@ -42,9 +42,9 @@ module FormAPI
       if @api_client.config.client_side_validation && template_id.nil?
         fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.batch_generate_pdf_v1"
       end
-      # verify the required parameter 'create_submission_data' is set
-      if @api_client.config.client_side_validation && create_submission_data.nil?
-        fail ArgumentError, "Missing the required parameter 'create_submission_data' when calling PDFApi.batch_generate_pdf_v1"
+      # verify the required parameter 'create_submission_data_batch_v1' is set
+      if @api_client.config.client_side_validation && create_submission_data_batch_v1.nil?
+        fail ArgumentError, "Missing the required parameter 'create_submission_data_batch_v1' when calling PDFApi.batch_generate_pdf_v1"
       end
       # resource path
       local_var_path = '/templates/{template_id}/submissions/batch'.sub('{' + 'template_id' + '}', template_id.to_s)
@@ -63,7 +63,7 @@ module FormAPI
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(create_submission_data)
+      post_body = @api_client.object_to_http_body(create_submission_data_batch_v1)
       auth_names = ['api_token_basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -71,7 +71,7 @@ module FormAPI
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'Array<CreateSubmissionBatchV1SubmissionsResponse>')
+        :return_type => 'Array<CreateSubmissionResponse>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#batch_generate_pdf_v1\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

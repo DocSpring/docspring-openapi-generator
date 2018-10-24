@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionBatchV1SubmissionsResponse
+ * SubmissionDataRequestData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CreateSubmissionBatchV1SubmissionsResponse Class Doc Comment
+ * SubmissionDataRequestData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, ArrayAccess
+class SubmissionDataRequestData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
       *
       * @var string
       */
-    protected static $openAPIModelName = 'create_submission_batch_v1_submissions_response';
+    protected static $openAPIModelName = 'submission_data_request_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
       * @var string[]
       */
     protected static $openAPITypes = [
-        'submission' => '\FormAPI\Model\Submission',
-        'errors' => 'string[]',
-        'status' => 'string'
+        'metadata' => 'object',
+        'name' => 'string',
+        'fields' => 'string[]',
+        'email' => 'string',
+        'order' => 'int'
     ];
 
     /**
@@ -68,9 +70,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'submission' => null,
-        'errors' => null,
-        'status' => null
+        'metadata' => null,
+        'name' => null,
+        'fields' => null,
+        'email' => null,
+        'order' => null
     ];
 
     /**
@@ -100,9 +104,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
      * @var string[]
      */
     protected static $attributeMap = [
-        'submission' => 'submission',
-        'errors' => 'errors',
-        'status' => 'status'
+        'metadata' => 'metadata',
+        'name' => 'name',
+        'fields' => 'fields',
+        'email' => 'email',
+        'order' => 'order'
     ];
 
     /**
@@ -111,9 +117,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
      * @var string[]
      */
     protected static $setters = [
-        'submission' => 'setSubmission',
-        'errors' => 'setErrors',
-        'status' => 'setStatus'
+        'metadata' => 'setMetadata',
+        'name' => 'setName',
+        'fields' => 'setFields',
+        'email' => 'setEmail',
+        'order' => 'setOrder'
     ];
 
     /**
@@ -122,9 +130,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
      * @var string[]
      */
     protected static $getters = [
-        'submission' => 'getSubmission',
-        'errors' => 'getErrors',
-        'status' => 'getStatus'
+        'metadata' => 'getMetadata',
+        'name' => 'getName',
+        'fields' => 'getFields',
+        'email' => 'getEmail',
+        'order' => 'getOrder'
     ];
 
     /**
@@ -168,23 +178,8 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
         return self::$openAPIModelName;
     }
 
-    const STATUS_SUCCESS = 'success';
-    const STATUS_ERROR = 'error';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_SUCCESS,
-            self::STATUS_ERROR,
-        ];
-    }
     
 
     /**
@@ -202,9 +197,11 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
      */
     public function __construct(array $data = null)
     {
-        $this->container['submission'] = isset($data['submission']) ? $data['submission'] : null;
-        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
+        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
+        $this->container['order'] = isset($data['order']) ? $data['order'] : null;
     }
 
     /**
@@ -215,14 +212,6 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'status', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         return $invalidProperties;
     }
@@ -240,82 +229,121 @@ class CreateSubmissionBatchV1SubmissionsResponse implements ModelInterface, Arra
 
 
     /**
-     * Gets submission
+     * Gets metadata
      *
-     * @return \FormAPI\Model\Submission|null
+     * @return object|null
      */
-    public function getSubmission()
+    public function getMetadata()
     {
-        return $this->container['submission'];
+        return $this->container['metadata'];
     }
 
     /**
-     * Sets submission
+     * Sets metadata
      *
-     * @param \FormAPI\Model\Submission|null $submission submission
+     * @param object|null $metadata metadata
      *
      * @return $this
      */
-    public function setSubmission($submission)
+    public function setMetadata($metadata)
     {
-        $this->container['submission'] = $submission;
+        $this->container['metadata'] = $metadata;
 
         return $this;
     }
 
     /**
-     * Gets errors
-     *
-     * @return string[]|null
-     */
-    public function getErrors()
-    {
-        return $this->container['errors'];
-    }
-
-    /**
-     * Sets errors
-     *
-     * @param string[]|null $errors errors
-     *
-     * @return $this
-     */
-    public function setErrors($errors)
-    {
-        $this->container['errors'] = $errors;
-
-        return $this;
-    }
-
-    /**
-     * Gets status
+     * Gets name
      *
      * @return string|null
      */
-    public function getStatus()
+    public function getName()
     {
-        return $this->container['status'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets status
+     * Sets name
      *
-     * @param string|null $status status
+     * @param string|null $name name
      *
      * @return $this
      */
-    public function setStatus($status)
+    public function setName($name)
     {
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'status', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['status'] = $status;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets fields
+     *
+     * @return string[]|null
+     */
+    public function getFields()
+    {
+        return $this->container['fields'];
+    }
+
+    /**
+     * Sets fields
+     *
+     * @param string[]|null $fields fields
+     *
+     * @return $this
+     */
+    public function setFields($fields)
+    {
+        $this->container['fields'] = $fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string|null $email email
+     *
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets order
+     *
+     * @return int|null
+     */
+    public function getOrder()
+    {
+        return $this->container['order'];
+    }
+
+    /**
+     * Sets order
+     *
+     * @param int|null $order order
+     *
+     * @return $this
+     */
+    public function setOrder($order)
+    {
+        $this->container['order'] = $order;
 
         return $this;
     }

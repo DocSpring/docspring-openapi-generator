@@ -2,6 +2,16 @@
 set -e
 cd "$(dirname "$0")/../"
 
+if [ "$2" = "update_swagger" ]; then
+  echo "Updating FormAPI swagger specification..."
+  (cd ../form_api && ./scripts/update_swagger)
+  for arg do
+    shift
+    [ "$arg" = "update_swagger" ] && continue
+    set -- "$@" "$arg"
+  done
+fi
+
 echo "Building formapi-generator..."
 # Sometimes we need to refresh java packages by building openapi-generator first.
 ./scripts/build-formapi-generator || (
@@ -23,4 +33,4 @@ if [ -z "$LANGUAGE" ]; then
 fi
 
 ./scripts/generate "$LANGUAGE"
-./scripts/run_integration_tests "$LANGUAGE"
+./scripts/run_integration_tests "$LANGUAGE" ${@:2}

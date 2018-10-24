@@ -209,6 +209,58 @@ namespace FormApi.Client.Test
         }
 
         /// <summary>
+        /// Test GeneratePDF
+        /// </summary>
+        [Test]
+        public void GeneratePDFWithDataRequestsTest()
+        {
+            string templateId = "tpl_000000000000000001";
+            var createSubmissionData = new CreateSubmissionData(
+              test: false,
+              data: new {
+                title = "Test PDF",
+              },
+              dataRequests: new List<SubmissionDataRequestData>{
+                new SubmissionDataRequestData(
+                  name: "John Smith",
+                  email: "jsmith@example.com",
+                  fields: new List<string>{ "description" },
+                  order: 1
+                )
+              }
+            );
+
+            var response = instance.GeneratePDF(templateId, createSubmissionData);
+            Assert.IsInstanceOf<CreateSubmissionResponse> (response, "response is CreateSubmissionResponse");
+            Assert.AreEqual(
+              CreateSubmissionResponse.StatusEnum.Success,
+              response.Status);
+            var submission = response.Submission;
+            StringAssert.StartsWith("sub_", submission.Id);
+            Assert.AreEqual(submission.Expired, false);
+            Assert.AreEqual(
+              submission.State,
+              Submission.StateEnum.Waitingfordatarequests);
+
+            var dataRequests = submission.DataRequests;
+            Assert.That(dataRequests, Has.Count.EqualTo(1));
+
+            var dataRequest = dataRequests.First();
+            Assert.IsInstanceOf<SubmissionDataRequest> (dataRequest, "dataRequest is SubmissionDataRequest");
+
+            StringAssert.StartsWith("drq_", dataRequest.Id);
+            Assert.AreEqual(
+              dataRequest.State,
+              SubmissionDataRequest.StateEnum.Pending);
+            CollectionAssert.AreEqual(
+              new List<string>{ "description" },
+              dataRequest.Fields);
+            Assert.AreEqual(1, dataRequest.Order);
+            Assert.AreEqual("John Smith", dataRequest.Name);
+            Assert.AreEqual("jsmith@example.com", dataRequest.Email);
+        }
+
+        /// <summary>
         /// Test GetCombinedSubmission
         /// </summary>
         [Test]

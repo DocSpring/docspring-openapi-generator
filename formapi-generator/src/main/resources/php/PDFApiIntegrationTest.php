@@ -190,6 +190,48 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for generatePDF with data_requests
+     *
+     * Generates a new PDF.
+     *
+     */
+    public function testGeneratePDFWithDataRequests()
+    {
+      $template_id = 'tpl_000000000000000001'; // string |
+
+      $submission = new Model\CreateSubmissionData();
+      $submission->setData([
+        "title" => 'Test PDF',
+      ]);
+      $submission->setDataRequests(array(
+        [
+          "name" => 'John Smith',
+          "email" => 'jsmith@example.com',
+          "fields" => array('description'),
+          "order" => 1
+        ]
+      ));
+      $response = $this->apiInstance->generatePDF($template_id, $submission);
+
+      $this->assertEquals('success', $response->getStatus());
+      $submission = $response->getSubmission();
+      $this->assertStringStartsWith('sub_', $submission->getId());
+      $this->assertEquals(False, $submission->getExpired());
+      $this->assertEquals('waiting_for_data_requests', $submission->getState());
+
+      $data_requests = $submission->getDataRequests();
+      $this->assertCount(1, $data_requests);
+      $data_request = $data_requests[0];
+
+      $this->assertStringStartsWith('drq_', $data_request->getId());
+      $this->assertEquals('pending', $data_request->getState());
+      $this->assertEquals(array('description'), $data_request->getFields());
+      $this->assertEquals(1, $data_request->getOrder());
+      $this->assertEquals('John Smith', $data_request->getName());
+      $this->assertEquals('jsmith@example.com', $data_request->getEmail());
+    }
+
+    /**
      * Test case for getCombinedSubmission
      *
      * Check the status of a combined submission (merged PDFs).

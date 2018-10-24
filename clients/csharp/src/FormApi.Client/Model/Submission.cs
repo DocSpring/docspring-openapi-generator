@@ -102,7 +102,8 @@ namespace FormApi.Client.Model
         /// <param name="metadata">metadata.</param>
         /// <param name="downloadUrl">downloadUrl.</param>
         /// <param name="batchId">batchId.</param>
-        public Submission(string id = default(string), bool? test = default(bool?), bool? expired = default(bool?), string expiresAt = default(string), string processedAt = default(string), StateEnum state = default(StateEnum), Object metadata = default(Object), string downloadUrl = default(string), string batchId = default(string))
+        /// <param name="dataRequests">dataRequests.</param>
+        public Submission(string id = default(string), bool? test = default(bool?), bool? expired = default(bool?), string expiresAt = default(string), string processedAt = default(string), StateEnum state = default(StateEnum), Object metadata = default(Object), string downloadUrl = default(string), string batchId = default(string), List<SubmissionDataRequest> dataRequests = default(List<SubmissionDataRequest>))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -145,6 +146,7 @@ namespace FormApi.Client.Model
             this.Metadata = metadata;
             this.DownloadUrl = downloadUrl;
             this.BatchId = batchId;
+            this.DataRequests = dataRequests;
         }
         
         /// <summary>
@@ -197,6 +199,12 @@ namespace FormApi.Client.Model
         public string BatchId { get; set; }
 
         /// <summary>
+        /// Gets or Sets DataRequests
+        /// </summary>
+        [DataMember(Name="data_requests", EmitDefaultValue=false)]
+        public List<SubmissionDataRequest> DataRequests { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -213,6 +221,7 @@ namespace FormApi.Client.Model
             sb.Append("  Metadata: ").Append(Metadata).Append("\n");
             sb.Append("  DownloadUrl: ").Append(DownloadUrl).Append("\n");
             sb.Append("  BatchId: ").Append(BatchId).Append("\n");
+            sb.Append("  DataRequests: ").Append(DataRequests).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -291,6 +300,11 @@ namespace FormApi.Client.Model
                     this.BatchId == input.BatchId ||
                     (this.BatchId != null &&
                     this.BatchId.Equals(input.BatchId))
+                ) && 
+                (
+                    this.DataRequests == input.DataRequests ||
+                    this.DataRequests != null &&
+                    this.DataRequests.SequenceEqual(input.DataRequests)
                 );
         }
 
@@ -321,6 +335,8 @@ namespace FormApi.Client.Model
                     hashCode = hashCode * 59 + this.DownloadUrl.GetHashCode();
                 if (this.BatchId != null)
                     hashCode = hashCode * 59 + this.BatchId.GetHashCode();
+                if (this.DataRequests != null)
+                    hashCode = hashCode * 59 + this.DataRequests.GetHashCode();
                 return hashCode;
             }
         }

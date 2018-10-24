@@ -13,50 +13,36 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module FormAPI
-  class CreateSubmissionBatchV1SubmissionsResponse
-    attr_accessor :submission
+  class CreateSubmissionDataBatchV1
+    attr_accessor :test
 
-    attr_accessor :errors
+    attr_accessor :data
 
-    attr_accessor :status
+    attr_accessor :html
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    attr_accessor :css
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    attr_accessor :metadata
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'submission' => :'submission',
-        :'errors' => :'errors',
-        :'status' => :'status'
+        :'test' => :'test',
+        :'data' => :'data',
+        :'html' => :'html',
+        :'css' => :'css',
+        :'metadata' => :'metadata'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'submission' => :'Submission',
-        :'errors' => :'Array<String>',
-        :'status' => :'String'
+        :'test' => :'BOOLEAN',
+        :'data' => :'Object',
+        :'html' => :'String',
+        :'css' => :'String',
+        :'metadata' => :'Object'
       }
     end
 
@@ -68,18 +54,24 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'submission')
-        self.submission = attributes[:'submission']
+      if attributes.has_key?(:'test')
+        self.test = attributes[:'test']
       end
 
-      if attributes.has_key?(:'errors')
-        if (value = attributes[:'errors']).is_a?(Array)
-          self.errors = value
-        end
+      if attributes.has_key?(:'data')
+        self.data = attributes[:'data']
       end
 
-      if attributes.has_key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.has_key?(:'html')
+        self.html = attributes[:'html']
+      end
+
+      if attributes.has_key?(:'css')
+        self.css = attributes[:'css']
+      end
+
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
       end
     end
 
@@ -87,25 +79,18 @@ module FormAPI
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @data.nil?
+        invalid_properties.push('invalid value for "data", data cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      status_validator = EnumAttributeValidator.new('String', ['success', 'error'])
-      return false unless status_validator.valid?(@status)
+      return false if @data.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] status Object to be assigned
-    def status=(status)
-      validator = EnumAttributeValidator.new('String', ['success', 'error'])
-      unless validator.valid?(status)
-        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
-      end
-      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -113,9 +98,11 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          submission == o.submission &&
-          errors == o.errors &&
-          status == o.status
+          test == o.test &&
+          data == o.data &&
+          html == o.html &&
+          css == o.css &&
+          metadata == o.metadata
     end
 
     # @see the `==` method
@@ -127,7 +114,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [submission, errors, status].hash
+      [test, data, html, css, metadata].hash
     end
 
     # Builds the object from hash

@@ -133,6 +133,46 @@ class TestPDFApi(unittest.TestCase):
         self.assertEquals(submission.expired, False)
         self.assertEquals(submission.state, 'pending')
 
+    def test_generate_pdf_with_data_requests(self):
+        """Test case for generate_pdf with data_requests
+
+        Generates a new PDF with data_requests # noqa: E501
+        """
+        template_id = 'tpl_000000000000000001'  # str |
+        api_response = self.api.generate_pdf(
+            template_id, {
+                'data': {
+                    'title': 'Test PDF',
+                },
+                "data_requests": [
+                    {
+                        'name': 'John Smith',
+                        'email': 'jsmith@example.com',
+                        'fields': ['description'],
+                        'order': 1,
+                        'metadata': {
+                            'user_id': 123
+                        }
+                    }
+                ]
+            })
+        self.assertEquals(api_response.status, 'success')
+        submission = api_response.submission
+        self.assertRegexpMatches(submission.id, '^sub_')
+        self.assertEquals(submission.expired, False)
+        self.assertEquals(submission.state, 'waiting_for_data_requests')
+
+        data_requests = submission.data_requests
+        self.assertEquals(len(data_requests), 1)
+        data_request = data_requests[0]
+
+        self.assertRegexpMatches(data_request.id, '^drq_')
+        self.assertEquals(data_request.state, 'pending')
+        self.assertEquals(data_request.fields, ['description'])
+        self.assertEquals(data_request.order, 1)
+        self.assertEquals(data_request.name, 'John Smith')
+        self.assertEquals(data_request.email, 'jsmith@example.com')
+
     def test_get_combined_submission(self):
         """Test case for get_combined_submission
 

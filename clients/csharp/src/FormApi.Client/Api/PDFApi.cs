@@ -32,9 +32,9 @@ namespace FormApi.Client.Api
         /// </remarks>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        List<CreateSubmissionBatchV1SubmissionsResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionData> createSubmissionData);
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>List&lt;CreateSubmissionResponse&gt;</returns>
+        List<CreateSubmissionResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1);
 
         /// <summary>
         /// Generates multiple PDFs
@@ -44,9 +44,9 @@ namespace FormApi.Client.Api
         /// </remarks>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>ApiResponse of List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>> BatchGeneratePdfV1WithHttpInfo (string templateId, List<CreateSubmissionData> createSubmissionData);
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>ApiResponse of List&lt;CreateSubmissionResponse&gt;</returns>
+        ApiResponse<List<CreateSubmissionResponse>> BatchGeneratePdfV1WithHttpInfo (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1);
         /// <summary>
         /// Generates multiple PDFs
         /// </summary>
@@ -313,9 +313,9 @@ namespace FormApi.Client.Api
         /// </remarks>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>Task of List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        System.Threading.Tasks.Task<List<CreateSubmissionBatchV1SubmissionsResponse>> BatchGeneratePdfV1Async (string templateId, List<CreateSubmissionData> createSubmissionData);
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>Task of List&lt;CreateSubmissionResponse&gt;</returns>
+        System.Threading.Tasks.Task<List<CreateSubmissionResponse>> BatchGeneratePdfV1Async (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1);
 
         /// <summary>
         /// Generates multiple PDFs
@@ -325,9 +325,9 @@ namespace FormApi.Client.Api
         /// </remarks>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>Task of ApiResponse (List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>>> BatchGeneratePdfV1AsyncWithHttpInfo (string templateId, List<CreateSubmissionData> createSubmissionData);
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>Task of ApiResponse (List&lt;CreateSubmissionResponse&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<CreateSubmissionResponse>>> BatchGeneratePdfV1AsyncWithHttpInfo (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1);
         /// <summary>
         /// Generates multiple PDFs
         /// </summary>
@@ -689,11 +689,11 @@ namespace FormApi.Client.Api
         /// </summary>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        public List<CreateSubmissionBatchV1SubmissionsResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionData> createSubmissionData)
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>List&lt;CreateSubmissionResponse&gt;</returns>
+        public List<CreateSubmissionResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1)
         {
-             ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>> localVarResponse = BatchGeneratePdfV1WithHttpInfo(templateId, createSubmissionData);
+             ApiResponse<List<CreateSubmissionResponse>> localVarResponse = BatchGeneratePdfV1WithHttpInfo(templateId, createSubmissionDataBatchV1);
              return localVarResponse.Data;
         }
 
@@ -702,16 +702,16 @@ namespace FormApi.Client.Api
         /// </summary>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>ApiResponse of List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        public ApiResponse< List<CreateSubmissionBatchV1SubmissionsResponse> > BatchGeneratePdfV1WithHttpInfo (string templateId, List<CreateSubmissionData> createSubmissionData)
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>ApiResponse of List&lt;CreateSubmissionResponse&gt;</returns>
+        public ApiResponse< List<CreateSubmissionResponse> > BatchGeneratePdfV1WithHttpInfo (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1)
         {
             // verify the required parameter 'templateId' is set
             if (templateId == null)
                 throw new ApiException(400, "Missing required parameter 'templateId' when calling PDFApi->BatchGeneratePdfV1");
-            // verify the required parameter 'createSubmissionData' is set
-            if (createSubmissionData == null)
-                throw new ApiException(400, "Missing required parameter 'createSubmissionData' when calling PDFApi->BatchGeneratePdfV1");
+            // verify the required parameter 'createSubmissionDataBatchV1' is set
+            if (createSubmissionDataBatchV1 == null)
+                throw new ApiException(400, "Missing required parameter 'createSubmissionDataBatchV1' when calling PDFApi->BatchGeneratePdfV1");
 
             var localVarPath = "/templates/{template_id}/submissions/batch";
             var localVarPathParams = new Dictionary<String, String>();
@@ -736,13 +736,13 @@ namespace FormApi.Client.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (templateId != null) localVarPathParams.Add("template_id", this.Configuration.ApiClient.ParameterToString(templateId)); // path parameter
-            if (createSubmissionData != null && createSubmissionData.GetType() != typeof(byte[]))
+            if (createSubmissionDataBatchV1 != null && createSubmissionDataBatchV1.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createSubmissionData); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createSubmissionDataBatchV1); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = createSubmissionData; // byte array
+                localVarPostBody = createSubmissionDataBatchV1; // byte array
             }
 
             // authentication (api_token_basic) required
@@ -765,9 +765,9 @@ namespace FormApi.Client.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>>(localVarStatusCode,
+            return new ApiResponse<List<CreateSubmissionResponse>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<CreateSubmissionBatchV1SubmissionsResponse>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<CreateSubmissionBatchV1SubmissionsResponse>)));
+                (List<CreateSubmissionResponse>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<CreateSubmissionResponse>)));
         }
 
         /// <summary>
@@ -775,11 +775,11 @@ namespace FormApi.Client.Api
         /// </summary>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>Task of List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;</returns>
-        public async System.Threading.Tasks.Task<List<CreateSubmissionBatchV1SubmissionsResponse>> BatchGeneratePdfV1Async (string templateId, List<CreateSubmissionData> createSubmissionData)
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>Task of List&lt;CreateSubmissionResponse&gt;</returns>
+        public async System.Threading.Tasks.Task<List<CreateSubmissionResponse>> BatchGeneratePdfV1Async (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1)
         {
-             ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>> localVarResponse = await BatchGeneratePdfV1AsyncWithHttpInfo(templateId, createSubmissionData);
+             ApiResponse<List<CreateSubmissionResponse>> localVarResponse = await BatchGeneratePdfV1AsyncWithHttpInfo(templateId, createSubmissionDataBatchV1);
              return localVarResponse.Data;
 
         }
@@ -789,16 +789,16 @@ namespace FormApi.Client.Api
         /// </summary>
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="templateId"></param>
-        /// <param name="createSubmissionData"></param>
-        /// <returns>Task of ApiResponse (List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>>> BatchGeneratePdfV1AsyncWithHttpInfo (string templateId, List<CreateSubmissionData> createSubmissionData)
+        /// <param name="createSubmissionDataBatchV1"></param>
+        /// <returns>Task of ApiResponse (List&lt;CreateSubmissionResponse&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<CreateSubmissionResponse>>> BatchGeneratePdfV1AsyncWithHttpInfo (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1)
         {
             // verify the required parameter 'templateId' is set
             if (templateId == null)
                 throw new ApiException(400, "Missing required parameter 'templateId' when calling PDFApi->BatchGeneratePdfV1");
-            // verify the required parameter 'createSubmissionData' is set
-            if (createSubmissionData == null)
-                throw new ApiException(400, "Missing required parameter 'createSubmissionData' when calling PDFApi->BatchGeneratePdfV1");
+            // verify the required parameter 'createSubmissionDataBatchV1' is set
+            if (createSubmissionDataBatchV1 == null)
+                throw new ApiException(400, "Missing required parameter 'createSubmissionDataBatchV1' when calling PDFApi->BatchGeneratePdfV1");
 
             var localVarPath = "/templates/{template_id}/submissions/batch";
             var localVarPathParams = new Dictionary<String, String>();
@@ -823,13 +823,13 @@ namespace FormApi.Client.Api
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             if (templateId != null) localVarPathParams.Add("template_id", this.Configuration.ApiClient.ParameterToString(templateId)); // path parameter
-            if (createSubmissionData != null && createSubmissionData.GetType() != typeof(byte[]))
+            if (createSubmissionDataBatchV1 != null && createSubmissionDataBatchV1.GetType() != typeof(byte[]))
             {
-                localVarPostBody = this.Configuration.ApiClient.Serialize(createSubmissionData); // http body (model) parameter
+                localVarPostBody = this.Configuration.ApiClient.Serialize(createSubmissionDataBatchV1); // http body (model) parameter
             }
             else
             {
-                localVarPostBody = createSubmissionData; // byte array
+                localVarPostBody = createSubmissionDataBatchV1; // byte array
             }
 
             // authentication (api_token_basic) required
@@ -852,9 +852,9 @@ namespace FormApi.Client.Api
                 if (exception != null) throw exception;
             }
 
-            return new ApiResponse<List<CreateSubmissionBatchV1SubmissionsResponse>>(localVarStatusCode,
+            return new ApiResponse<List<CreateSubmissionResponse>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<CreateSubmissionBatchV1SubmissionsResponse>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<CreateSubmissionBatchV1SubmissionsResponse>)));
+                (List<CreateSubmissionResponse>) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(List<CreateSubmissionResponse>)));
         }
 
         /// <summary>

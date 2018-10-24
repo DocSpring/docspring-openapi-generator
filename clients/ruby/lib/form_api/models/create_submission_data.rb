@@ -24,6 +24,8 @@ module FormAPI
 
     attr_accessor :metadata
 
+    attr_accessor :data_requests
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -31,7 +33,8 @@ module FormAPI
         :'data' => :'data',
         :'html' => :'html',
         :'css' => :'css',
-        :'metadata' => :'metadata'
+        :'metadata' => :'metadata',
+        :'data_requests' => :'data_requests'
       }
     end
 
@@ -42,7 +45,8 @@ module FormAPI
         :'data' => :'Object',
         :'html' => :'String',
         :'css' => :'String',
-        :'metadata' => :'Object'
+        :'metadata' => :'Object',
+        :'data_requests' => :'Array<SubmissionDataRequestData>'
       }
     end
 
@@ -73,6 +77,12 @@ module FormAPI
       if attributes.has_key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
+
+      if attributes.has_key?(:'data_requests')
+        if (value = attributes[:'data_requests']).is_a?(Array)
+          self.data_requests = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -102,7 +112,8 @@ module FormAPI
           data == o.data &&
           html == o.html &&
           css == o.css &&
-          metadata == o.metadata
+          metadata == o.metadata &&
+          data_requests == o.data_requests
     end
 
     # @see the `==` method
@@ -114,7 +125,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [test, data, html, css, metadata].hash
+      [test, data, html, css, metadata, data_requests].hash
     end
 
     # Builds the object from hash

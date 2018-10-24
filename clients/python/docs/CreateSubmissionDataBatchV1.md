@@ -1,11 +1,13 @@
-# CreateSubmissionBatchV1SubmissionsResponse
+# CreateSubmissionDataBatchV1
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**submission** | [**Submission**](Submission.md) |  | [optional] 
-**errors** | **list[str]** |  | [optional] 
-**status** | **str** |  | [optional] 
+**test** | **bool** |  | [optional] 
+**data** | **object** |  | 
+**html** | **str** |  | [optional] 
+**css** | **str** |  | [optional] 
+**metadata** | **object** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

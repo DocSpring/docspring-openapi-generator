@@ -34,7 +34,7 @@ class CombinedSubmissionData(object):
         'test': 'bool',
         'submission_ids': 'list[str]',
         'metadata': 'object',
-        'expires_in': 'float'
+        'expires_in': 'int'
     }
 
     attribute_map = {
@@ -132,7 +132,7 @@ class CombinedSubmissionData(object):
 
 
         :return: The expires_in of this CombinedSubmissionData.  # noqa: E501
-        :rtype: float
+        :rtype: int
         """
         return self._expires_in
 
@@ -142,7 +142,7 @@ class CombinedSubmissionData(object):
 
 
         :param expires_in: The expires_in of this CombinedSubmissionData.  # noqa: E501
-        :type: float
+        :type: int
         """
 
         self._expires_in = expires_in

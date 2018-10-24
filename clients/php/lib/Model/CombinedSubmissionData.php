@@ -60,7 +60,7 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
         'test' => 'bool',
         'submission_ids' => 'string[]',
         'metadata' => 'object',
-        'expires_in' => 'float'
+        'expires_in' => 'int'
     ];
 
     /**
@@ -300,7 +300,7 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     /**
      * Gets expires_in
      *
-     * @return float|null
+     * @return int|null
      */
     public function getExpiresIn()
     {
@@ -310,7 +310,7 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     /**
      * Sets expires_in
      *
-     * @param float|null $expires_in expires_in
+     * @param int|null $expires_in expires_in
      *
      * @return $this
      */

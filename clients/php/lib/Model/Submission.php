@@ -65,7 +65,8 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'string',
         'metadata' => 'object',
         'download_url' => 'string',
-        'batch_id' => 'string'
+        'batch_id' => 'string',
+        'data_requests' => '\FormAPI\Model\SubmissionDataRequest[]'
     ];
 
     /**
@@ -82,7 +83,8 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => null,
         'metadata' => null,
         'download_url' => null,
-        'batch_id' => null
+        'batch_id' => null,
+        'data_requests' => null
     ];
 
     /**
@@ -120,7 +122,8 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'state',
         'metadata' => 'metadata',
         'download_url' => 'download_url',
-        'batch_id' => 'batch_id'
+        'batch_id' => 'batch_id',
+        'data_requests' => 'data_requests'
     ];
 
     /**
@@ -137,7 +140,8 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'setState',
         'metadata' => 'setMetadata',
         'download_url' => 'setDownloadUrl',
-        'batch_id' => 'setBatchId'
+        'batch_id' => 'setBatchId',
+        'data_requests' => 'setDataRequests'
     ];
 
     /**
@@ -154,7 +158,8 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'getState',
         'metadata' => 'getMetadata',
         'download_url' => 'getDownloadUrl',
-        'batch_id' => 'getBatchId'
+        'batch_id' => 'getBatchId',
+        'data_requests' => 'getDataRequests'
     ];
 
     /**
@@ -251,6 +256,7 @@ class Submission implements ModelInterface, ArrayAccess
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
         $this->container['download_url'] = isset($data['download_url']) ? $data['download_url'] : null;
         $this->container['batch_id'] = isset($data['batch_id']) ? $data['batch_id'] : null;
+        $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
     }
 
     /**
@@ -518,6 +524,30 @@ class Submission implements ModelInterface, ArrayAccess
     public function setBatchId($batch_id)
     {
         $this->container['batch_id'] = $batch_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_requests
+     *
+     * @return \FormAPI\Model\SubmissionDataRequest[]|null
+     */
+    public function getDataRequests()
+    {
+        return $this->container['data_requests'];
+    }
+
+    /**
+     * Sets data_requests
+     *
+     * @param \FormAPI\Model\SubmissionDataRequest[]|null $data_requests data_requests
+     *
+     * @return $this
+     */
+    public function setDataRequests($data_requests)
+    {
+        $this->container['data_requests'] = $data_requests;
 
         return $this;
     }

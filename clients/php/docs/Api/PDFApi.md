@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **batchGeneratePdfV1**
-> \FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[] batchGeneratePdfV1($template_id, $create_submission_data)
+> \FormAPI\Model\CreateSubmissionResponse[] batchGeneratePdfV1($template_id, $create_submission_data_batch_v1)
 
 Generates multiple PDFs
 
@@ -42,10 +42,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $template_id = tpl_000000000000000001; // string | 
-$create_submission_data = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionData[] | 
+$create_submission_data_batch_v1 = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionDataBatchV1[] | 
 
 try {
-    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data);
+    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data_batch_v1);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->batchGeneratePdfV1: ', $e->getMessage(), PHP_EOL;
@@ -58,11 +58,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **create_submission_data** | [**\FormAPI\Model\CreateSubmissionData[]**](../Model/array.md)|  |
+ **create_submission_data_batch_v1** | [**\FormAPI\Model\CreateSubmissionDataBatchV1[]**](../Model/array.md)|  |
 
 ### Return type
 
-[**\FormAPI\Model\CreateSubmissionBatchV1SubmissionsResponse[]**](../Model/CreateSubmissionBatchV1SubmissionsResponse.md)
+[**\FormAPI\Model\CreateSubmissionResponse[]**](../Model/CreateSubmissionResponse.md)
 
 ### Authorization
 

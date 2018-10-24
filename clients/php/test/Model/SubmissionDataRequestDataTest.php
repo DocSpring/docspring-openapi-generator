@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionBatchV1SubmissionsResponseTest
+ * SubmissionDataRequestDataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CreateSubmissionBatchV1SubmissionsResponseTest Class Doc Comment
+ * SubmissionDataRequestDataTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSubmissionBatchV1SubmissionsResponse
+ * @description SubmissionDataRequestData
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CreateSubmissionBatchV1SubmissionsResponseTest extends \PHPUnit_Framework_TestCase
+class SubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,30 +70,44 @@ class CreateSubmissionBatchV1SubmissionsResponseTest extends \PHPUnit_Framework_
     }
 
     /**
-     * Test "CreateSubmissionBatchV1SubmissionsResponse"
+     * Test "SubmissionDataRequestData"
      */
-    public function testCreateSubmissionBatchV1SubmissionsResponse()
+    public function testSubmissionDataRequestData()
     {
     }
 
     /**
-     * Test attribute "submission"
+     * Test attribute "metadata"
      */
-    public function testPropertySubmission()
+    public function testPropertyMetadata()
     {
     }
 
     /**
-     * Test attribute "errors"
+     * Test attribute "name"
      */
-    public function testPropertyErrors()
+    public function testPropertyName()
     {
     }
 
     /**
-     * Test attribute "status"
+     * Test attribute "fields"
      */
-    public function testPropertyStatus()
+    public function testPropertyFields()
+    {
+    }
+
+    /**
+     * Test attribute "email"
+     */
+    public function testPropertyEmail()
+    {
+    }
+
+    /**
+     * Test attribute "order"
+     */
+    public function testPropertyOrder()
     {
     }
 }

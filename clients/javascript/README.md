@@ -104,7 +104,7 @@ api_token_basic.password = 'YOUR PASSWORD'
 
 var api = new FormAPI.PDFApi()
 var templateId = tpl_000000000000000001; // {String} 
-var createSubmissionData = [new FormAPI.CreateSubmissionData()]; // {[CreateSubmissionData]} 
+var createSubmissionDataBatchV1 = [new FormAPI.CreateSubmissionDataBatchV1()]; // {[CreateSubmissionDataBatchV1]} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -113,7 +113,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.batchGeneratePdfV1(templateId, createSubmissionData, callback);
+api.batchGeneratePdfV1(templateId, createSubmissionDataBatchV1, callback);
 
 ```
 
@@ -147,9 +147,9 @@ Class | Method | HTTP request | Description
  - [FormAPI.CreateCombinedSubmissionResponse](docs/CreateCombinedSubmissionResponse.md)
  - [FormAPI.CreateSubmissionBatchResponse](docs/CreateSubmissionBatchResponse.md)
  - [FormAPI.CreateSubmissionBatchSubmissionsResponse](docs/CreateSubmissionBatchSubmissionsResponse.md)
- - [FormAPI.CreateSubmissionBatchV1SubmissionsResponse](docs/CreateSubmissionBatchV1SubmissionsResponse.md)
  - [FormAPI.CreateSubmissionData](docs/CreateSubmissionData.md)
  - [FormAPI.CreateSubmissionDataBatchRequest](docs/CreateSubmissionDataBatchRequest.md)
+ - [FormAPI.CreateSubmissionDataBatchV1](docs/CreateSubmissionDataBatchV1.md)
  - [FormAPI.CreateSubmissionDataRequestTokenResponse](docs/CreateSubmissionDataRequestTokenResponse.md)
  - [FormAPI.CreateSubmissionDataRequestTokenResponseToken](docs/CreateSubmissionDataRequestTokenResponseToken.md)
  - [FormAPI.CreateSubmissionResponse](docs/CreateSubmissionResponse.md)
@@ -159,6 +159,7 @@ Class | Method | HTTP request | Description
  - [FormAPI.SubmissionBatch](docs/SubmissionBatch.md)
  - [FormAPI.SubmissionBatchData](docs/SubmissionBatchData.md)
  - [FormAPI.SubmissionDataRequest](docs/SubmissionDataRequest.md)
+ - [FormAPI.SubmissionDataRequestData](docs/SubmissionDataRequestData.md)
  - [FormAPI.Template](docs/Template.md)
 
 

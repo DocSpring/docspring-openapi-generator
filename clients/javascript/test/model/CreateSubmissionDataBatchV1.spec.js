@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new FormAPI.CreateSubmissionBatchV1SubmissionsResponse();
+    instance = new FormAPI.CreateSubmissionDataBatchV1();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,28 +49,40 @@
       object[property] = value;
   }
 
-  describe('CreateSubmissionBatchV1SubmissionsResponse', function() {
-    it('should create an instance of CreateSubmissionBatchV1SubmissionsResponse', function() {
-      // uncomment below and update the code to test CreateSubmissionBatchV1SubmissionsResponse
-      //var instance = new FormAPI.CreateSubmissionBatchV1SubmissionsResponse();
-      //expect(instance).to.be.a(FormAPI.CreateSubmissionBatchV1SubmissionsResponse);
+  describe('CreateSubmissionDataBatchV1', function() {
+    it('should create an instance of CreateSubmissionDataBatchV1', function() {
+      // uncomment below and update the code to test CreateSubmissionDataBatchV1
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
+      //expect(instance).to.be.a(FormAPI.CreateSubmissionDataBatchV1);
     });
 
-    it('should have the property submission (base name: "submission")', function() {
-      // uncomment below and update the code to test the property submission
-      //var instance = new FormAPI.CreateSubmissionBatchV1SubmissionsResponse();
+    it('should have the property test (base name: "test")', function() {
+      // uncomment below and update the code to test the property test
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
       //expect(instance).to.be();
     });
 
-    it('should have the property errors (base name: "errors")', function() {
-      // uncomment below and update the code to test the property errors
-      //var instance = new FormAPI.CreateSubmissionBatchV1SubmissionsResponse();
+    it('should have the property data (base name: "data")', function() {
+      // uncomment below and update the code to test the property data
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
       //expect(instance).to.be();
     });
 
-    it('should have the property status (base name: "status")', function() {
-      // uncomment below and update the code to test the property status
-      //var instance = new FormAPI.CreateSubmissionBatchV1SubmissionsResponse();
+    it('should have the property html (base name: "html")', function() {
+      // uncomment below and update the code to test the property html
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property css (base name: "css")', function() {
+      // uncomment below and update the code to test the property css
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property metadata (base name: "metadata")', function() {
+      // uncomment below and update the code to test the property metadata
+      //var instance = new FormAPI.CreateSubmissionDataBatchV1();
       //expect(instance).to.be();
     });
 

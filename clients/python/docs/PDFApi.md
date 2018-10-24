@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **batch_generate_pdf_v1**
-> list[CreateSubmissionBatchV1SubmissionsResponse] batch_generate_pdf_v1(template_id, create_submission_data)
+> list[CreateSubmissionResponse] batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
 
 Generates multiple PDFs
 
@@ -42,11 +42,11 @@ configuration.password = 'YOUR_PASSWORD'
 # create an instance of the API class
 api_instance = form_api.PDFApi(form_api.ApiClient(configuration))
 template_id = 'tpl_000000000000000001' # str | 
-create_submission_data = NULL # list[CreateSubmissionData] | 
+create_submission_data_batch_v1 = NULL # list[CreateSubmissionDataBatchV1] | 
 
 try:
     # Generates multiple PDFs
-    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
+    api_response = api_instance.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PDFApi->batch_generate_pdf_v1: %s\n" % e)
@@ -57,11 +57,11 @@ except ApiException as e:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **str**|  | 
- **create_submission_data** | [**list[CreateSubmissionData]**](list.md)|  | 
+ **create_submission_data_batch_v1** | [**list[CreateSubmissionDataBatchV1]**](list.md)|  | 
 
 ### Return type
 
-[**list[CreateSubmissionBatchV1SubmissionsResponse]**](CreateSubmissionBatchV1SubmissionsResponse.md)
+[**list[CreateSubmissionResponse]**](CreateSubmissionResponse.md)
 
 ### Authorization
 

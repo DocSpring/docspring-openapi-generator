@@ -50,10 +50,8 @@
    * @param fields {Array.<String>} 
    * @param metadata {Object} 
    * @param state {module:model/SubmissionDataRequest.StateEnum} 
-   * @param viewedAt {String} 
-   * @param completedAt {String} 
    */
-  var exports = function(id, name, email, order, fields, metadata, state, viewedAt, completedAt) {
+  var exports = function(id, name, email, order, fields, metadata, state) {
     var _this = this;
 
     _this['id'] = id;
@@ -63,8 +61,8 @@
     _this['fields'] = fields;
     _this['metadata'] = metadata;
     _this['state'] = state;
-    _this['viewed_at'] = viewedAt;
-    _this['completed_at'] = completedAt;
+
+
   };
 
   /**

@@ -204,6 +204,47 @@ describe 'PDFApi' do
       expect(submission.state).to eq 'pending'
     end
   end
+  # integration tests for generate_pdf with data requests
+  # Generates a new PDF
+  # @param template_id
+  # @param create_submission_data
+  # @param [Hash] opts the optional parameters
+  # @return [CreateSubmissionResponse]
+  describe 'generate_pdf test with data_requests' do
+    it 'should work' do
+      template_id = 'tpl_000000000000000001'
+      response = api_instance.generate_pdf(template_id,
+        data: {
+          title: 'Test PDF',
+        },
+        data_requests: [
+          {
+            name: 'John Smith',
+            email: 'jsmith@example.com',
+            fields: ['description'],
+            order: 1,
+          }
+        ]
+      )
+      expect(response.status).to eq 'success'
+      submission = response.submission
+      expect(submission.id).to start_with 'sub_'
+      expect(submission.expired).to eq false
+      expect(submission.state).to eq 'waiting_for_data_requests'
+
+      data_requests = submission.data_requests
+      expect(data_requests.count).to eq 1
+      data_request = data_requests.first
+
+      expect(data_request.id).to start_with 'drq_'
+      expect(data_request.state).to eq 'pending'
+      expect(data_request.fields).to eq ['description']
+      expect(data_request.order).to eq 1
+      expect(data_request.name).to eq 'John Smith'
+      expect(data_request.email).to eq 'jsmith@example.com'
+    end
+  end
+
   # integration tests for get_combined_submission
   # Check the status of a combined submission (merged PDFs)
   # @param combined_submission_id

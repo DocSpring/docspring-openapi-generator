@@ -92,8 +92,8 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     public function testBatchGeneratePdfV1()
     {
       $template_id = tpl_000000000000000001; // string | 
-      $create_submission_data = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionData[] | 
-      $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data);
+      $create_submission_data_batch_v1 = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionDataBatchV1[] | 
+      $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data_batch_v1);
     }
 
     /**

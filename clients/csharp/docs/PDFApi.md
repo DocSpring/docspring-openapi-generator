@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 <a name="batchgeneratepdfv1"></a>
 # **BatchGeneratePdfV1**
-> List<CreateSubmissionBatchV1SubmissionsResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionData> createSubmissionData)
+> List<CreateSubmissionResponse> BatchGeneratePdfV1 (string templateId, List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1)
 
 Generates multiple PDFs
 
@@ -45,12 +45,12 @@ namespace Example
 
             var apiInstance = new PDFApi();
             var templateId = tpl_000000000000000001;  // string | 
-            var createSubmissionData = new List<CreateSubmissionData>(); // List<CreateSubmissionData> | 
+            var createSubmissionDataBatchV1 = new List<CreateSubmissionDataBatchV1>(); // List<CreateSubmissionDataBatchV1> | 
 
             try
             {
                 // Generates multiple PDFs
-                List&lt;CreateSubmissionBatchV1SubmissionsResponse&gt; result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionData);
+                List&lt;CreateSubmissionResponse&gt; result = apiInstance.BatchGeneratePdfV1(templateId, createSubmissionDataBatchV1);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -67,11 +67,11 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **templateId** | **string**|  | 
- **createSubmissionData** | [**List&lt;CreateSubmissionData&gt;**](List.md)|  | 
+ **createSubmissionDataBatchV1** | [**List&lt;CreateSubmissionDataBatchV1&gt;**](List.md)|  | 
 
 ### Return type
 
-[**List<CreateSubmissionBatchV1SubmissionsResponse>**](CreateSubmissionBatchV1SubmissionsResponse.md)
+[**List<CreateSubmissionResponse>**](CreateSubmissionResponse.md)
 
 ### Authorization
 

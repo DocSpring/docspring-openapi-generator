@@ -138,4 +138,11 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     public function testPropertyBatchId()
     {
     }
+
+    /**
+     * Test attribute "data_requests"
+     */
+    public function testPropertyDataRequests()
+    {
+    }
 }

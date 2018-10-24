@@ -41,14 +41,14 @@ describe 'PDFApi' do
   # integration tests for batch_generate_pdf_v1
   # Generates multiple PDFs
   # @param template_id 
-  # @param create_submission_data 
+  # @param create_submission_data_batch_v1 
   # @param [Hash] opts the optional parameters
-  # @return [Array<CreateSubmissionBatchV1SubmissionsResponse>]
+  # @return [Array<CreateSubmissionResponse>]
   describe 'batch_generate_pdf_v1 test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001' # String | 
-      create_submission_data = nil # Array<CreateSubmissionData> | 
-      result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data)
+      create_submission_data_batch_v1 = nil # Array<CreateSubmissionDataBatchV1> | 
+      result = api_instance.batch_generate_pdf_v1(template_id, create_submission_data_batch_v1)
       expect(result).to_not be_nil
     end
   end
