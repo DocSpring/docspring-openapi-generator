@@ -284,7 +284,7 @@ describe 'PDFApi' do
   # @param data_request_id
   # @param [Hash] opts the optional parameters
   # @return [SubmissionDataRequest]
-  describe 'get_data_request test' do
+  describe 'update_data_request test' do
     it 'should work' do
       data_request_id = 'drq_000000000000000001' # String |
       response = api_instance.update_data_request(
@@ -301,7 +301,7 @@ describe 'PDFApi' do
       expect(response.status).to eq 'success'
       data_request = response.data_request
       expect(data_request.id).to start_with 'drq_'
-      # Not allowed to update order, name, email, etc.
+      # Not allowed to update order, name, email, fields
       expect(data_request.order).to eq 1
       expect(data_request.name).to eq 'John Doe'
       expect(data_request.email).to eq 'jdoe@example.com'
