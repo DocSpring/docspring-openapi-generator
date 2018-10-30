@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+require 'json'
+
+VERSION_REGEX = /^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/
+VERSION_TYPES = %w[major minor patch].freeze
+LANGUAGES = Dir.glob(File.expand_path('../config/*.json', __dir__)).map do |f|
+  f[%r{/([^/]+)\.json$}, 1]
+end.freeze
+LANGUAGE_MAX_LENGTH = LANGUAGES.map(&:length).max
+VERSION_KEYS = {
+  csharp: :packageVersion,
+  java: :artifactVersion,
+  javascript: :projectVersion,
+  php: :artifactVersion,
+  python: :packageVersion,
+  ruby: :gemVersion
+}.freeze
+
+@dry_run = false
+if ARGV.last == '--dry'
+  puts 'Running with the --dry flag. New versions will be printed to the console but not saved.'
+  @dry_run = true
+  ARGV.pop
+end
+
+if ARGV.empty?
+  puts 'Usage: bump_version <major|minor|patch> [--dry]  (to bump all clients)'
+  puts "Or:    bump_version <#{LANGUAGES.join('|')}> <major|minor|patch> [--dry]"
+  exit 1
+end
+
+language = nil
+version_type = nil
+if ARGV.count == 1
+  version_type = ARGV[0]
+elsif ARGV.count == 2
+  language = ARGV[0]
+  version_type = ARGV[1]
+end
+
+unless VERSION_TYPES.include?(version_type)
+  puts "'#{version_type}' is not a valid version type. Must be one of: " \
+    "#{VERSION_TYPES.join(', ')}"
+  exit 1
+end
+if !language.nil? && !LANGUAGES.include?(language)
+  puts "'#{language}' is not a valid language. Must be one of: " \
+    "#{LANGUAGES.join(', ')}"
+  exit 1
+end
+
+def increment_major(match)
+  [match[:major].to_i + 1, 0, 0].join('.')
+end
+
+def increment_minor(match)
+  [match[:major], match[:minor].to_i + 1, 0].join('.')
+end
+
+def increment_patch(match)
+  [match[:major], match[:minor], match[:patch].to_i + 1].join('.')
+end
+
+def increment_version(version_type, match)
+  case version_type
+  when :major then increment_major(match)
+  when :minor then increment_minor(match)
+  when :patch then increment_patch(match)
+  else raise "Invalid version type: #{version_type}"
+  end
+end
+
+def update_version_for(language)
+  config_file = File.expand_path("../config/#{language}.json", __dir__)
+  config = JSON.parse(File.read(config_file))
+  version_key = VERSION_KEYS.fetch(language).to_s
+  current_version = config[version_key]
+  new_version = yield current_version
+  puts [current_version, new_version].join(' => ')
+  config[version_key] = new_version
+  return if @dry_run
+  File.open(config_file, 'w') { |f| f.puts JSON.pretty_generate(config) }
+end
+
+def bump_version(language, version_type)
+  puts "Bumping #{version_type} version for #{language} client..."
+  update_version_for language do |current_version|
+    version_match = current_version.match(VERSION_REGEX)
+    raise "#{current_version} is invalid! Format must match: x.x.x" unless version_match
+    increment_version(version_type, version_match)
+  end
+end
+
+if language
+  bump_version(language.to_sym, version_type.to_sym)
+else
+  LANGUAGES.each { |l| bump_version(l.to_sym, version_type.to_sym) }
+end
