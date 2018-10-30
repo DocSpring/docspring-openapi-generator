@@ -32,6 +32,22 @@ module FormAPI
 
     attr_accessor :completed_at
 
+    attr_accessor :auth_type
+
+    attr_accessor :auth_second_factor_type
+
+    attr_accessor :auth_provider
+
+    attr_accessor :auth_session_started_at
+
+    attr_accessor :auth_session_id_hash
+
+    attr_accessor :auth_user_id_hash
+
+    attr_accessor :auth_username_hash
+
+    attr_accessor :auth_phone_number_hash
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -65,7 +81,15 @@ module FormAPI
         :'metadata' => :'metadata',
         :'state' => :'state',
         :'viewed_at' => :'viewed_at',
-        :'completed_at' => :'completed_at'
+        :'completed_at' => :'completed_at',
+        :'auth_type' => :'auth_type',
+        :'auth_second_factor_type' => :'auth_second_factor_type',
+        :'auth_provider' => :'auth_provider',
+        :'auth_session_started_at' => :'auth_session_started_at',
+        :'auth_session_id_hash' => :'auth_session_id_hash',
+        :'auth_user_id_hash' => :'auth_user_id_hash',
+        :'auth_username_hash' => :'auth_username_hash',
+        :'auth_phone_number_hash' => :'auth_phone_number_hash'
       }
     end
 
@@ -80,7 +104,15 @@ module FormAPI
         :'metadata' => :'Object',
         :'state' => :'String',
         :'viewed_at' => :'String',
-        :'completed_at' => :'String'
+        :'completed_at' => :'String',
+        :'auth_type' => :'String',
+        :'auth_second_factor_type' => :'String',
+        :'auth_provider' => :'String',
+        :'auth_session_started_at' => :'String',
+        :'auth_session_id_hash' => :'String',
+        :'auth_user_id_hash' => :'String',
+        :'auth_username_hash' => :'String',
+        :'auth_phone_number_hash' => :'String'
       }
     end
 
@@ -129,6 +161,38 @@ module FormAPI
       if attributes.has_key?(:'completed_at')
         self.completed_at = attributes[:'completed_at']
       end
+
+      if attributes.has_key?(:'auth_type')
+        self.auth_type = attributes[:'auth_type']
+      end
+
+      if attributes.has_key?(:'auth_second_factor_type')
+        self.auth_second_factor_type = attributes[:'auth_second_factor_type']
+      end
+
+      if attributes.has_key?(:'auth_provider')
+        self.auth_provider = attributes[:'auth_provider']
+      end
+
+      if attributes.has_key?(:'auth_session_started_at')
+        self.auth_session_started_at = attributes[:'auth_session_started_at']
+      end
+
+      if attributes.has_key?(:'auth_session_id_hash')
+        self.auth_session_id_hash = attributes[:'auth_session_id_hash']
+      end
+
+      if attributes.has_key?(:'auth_user_id_hash')
+        self.auth_user_id_hash = attributes[:'auth_user_id_hash']
+      end
+
+      if attributes.has_key?(:'auth_username_hash')
+        self.auth_username_hash = attributes[:'auth_username_hash']
+      end
+
+      if attributes.has_key?(:'auth_phone_number_hash')
+        self.auth_phone_number_hash = attributes[:'auth_phone_number_hash']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -176,19 +240,43 @@ module FormAPI
       return false if @fields.nil?
       return false if @metadata.nil?
       return false if @state.nil?
-      state_validator = EnumAttributeValidator.new('String', ['pending', 'complete'])
+      state_validator = EnumAttributeValidator.new('String', ['pending', 'completed'])
       return false unless state_validator.valid?(@state)
+      auth_type_validator = EnumAttributeValidator.new('String', ['none', 'password', 'oauth', 'email_link', 'phone_number', 'ldap', 'saml'])
+      return false unless auth_type_validator.valid?(@auth_type)
+      auth_second_factor_type_validator = EnumAttributeValidator.new('String', ['none', 'phone_number', 'totp', 'mobile_push', 'security_key', 'fingerprint'])
+      return false unless auth_second_factor_type_validator.valid?(@auth_second_factor_type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] state Object to be assigned
     def state=(state)
-      validator = EnumAttributeValidator.new('String', ['pending', 'complete'])
+      validator = EnumAttributeValidator.new('String', ['pending', 'completed'])
       unless validator.valid?(state)
         fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
       end
       @state = state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] auth_type Object to be assigned
+    def auth_type=(auth_type)
+      validator = EnumAttributeValidator.new('String', ['none', 'password', 'oauth', 'email_link', 'phone_number', 'ldap', 'saml'])
+      unless validator.valid?(auth_type)
+        fail ArgumentError, 'invalid value for "auth_type", must be one of #{validator.allowable_values}.'
+      end
+      @auth_type = auth_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] auth_second_factor_type Object to be assigned
+    def auth_second_factor_type=(auth_second_factor_type)
+      validator = EnumAttributeValidator.new('String', ['none', 'phone_number', 'totp', 'mobile_push', 'security_key', 'fingerprint'])
+      unless validator.valid?(auth_second_factor_type)
+        fail ArgumentError, 'invalid value for "auth_second_factor_type", must be one of #{validator.allowable_values}.'
+      end
+      @auth_second_factor_type = auth_second_factor_type
     end
 
     # Checks equality by comparing each attribute.
@@ -204,7 +292,15 @@ module FormAPI
           metadata == o.metadata &&
           state == o.state &&
           viewed_at == o.viewed_at &&
-          completed_at == o.completed_at
+          completed_at == o.completed_at &&
+          auth_type == o.auth_type &&
+          auth_second_factor_type == o.auth_second_factor_type &&
+          auth_provider == o.auth_provider &&
+          auth_session_started_at == o.auth_session_started_at &&
+          auth_session_id_hash == o.auth_session_id_hash &&
+          auth_user_id_hash == o.auth_user_id_hash &&
+          auth_username_hash == o.auth_username_hash &&
+          auth_phone_number_hash == o.auth_phone_number_hash
     end
 
     # @see the `==` method
@@ -216,7 +312,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, email, order, fields, metadata, state, viewed_at, completed_at].hash
+      [id, name, email, order, fields, metadata, state, viewed_at, completed_at, auth_type, auth_second_factor_type, auth_provider, auth_session_started_at, auth_session_id_hash, auth_user_id_hash, auth_username_hash, auth_phone_number_hash].hash
     end
 
     # Builds the object from hash

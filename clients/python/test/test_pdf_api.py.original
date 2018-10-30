@@ -133,6 +133,14 @@ class TestPDFApi(unittest.TestCase):
         Test Authentication  # noqa: E501
         """
         api_response = self.api.test_authentication()
+    def test_update_data_request(self):
+        """Test case for update_data_request
+
+        Update a submission data request  # noqa: E501
+        """
+        data_request_id = 'drq_000000000000000001' # str | 
+        update_submission_data_request_data = form_api.UpdateSubmissionDataRequestData() # UpdateSubmissionDataRequestData | 
+        api_response = self.api.update_data_request(data_request_id, update_submission_data_request_data)
 
 if __name__ == '__main__':
     unittest.main()

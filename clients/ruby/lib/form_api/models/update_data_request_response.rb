@@ -13,36 +13,50 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module FormAPI
-  class SubmissionDataRequestData
-    attr_accessor :metadata
+  class UpdateDataRequestResponse
+    attr_accessor :data_request
 
-    attr_accessor :name
+    attr_accessor :errors
 
-    attr_accessor :fields
+    attr_accessor :status
 
-    attr_accessor :email
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    attr_accessor :order
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'metadata' => :'metadata',
-        :'name' => :'name',
-        :'fields' => :'fields',
-        :'email' => :'email',
-        :'order' => :'order'
+        :'data_request' => :'data_request',
+        :'errors' => :'errors',
+        :'status' => :'status'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'metadata' => :'Object',
-        :'name' => :'String',
-        :'fields' => :'Array<String>',
-        :'email' => :'String',
-        :'order' => :'Integer'
+        :'data_request' => :'SubmissionDataRequest',
+        :'errors' => :'Array<String>',
+        :'status' => :'String'
       }
     end
 
@@ -54,26 +68,18 @@ module FormAPI
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.has_key?(:'data_request')
+        self.data_request = attributes[:'data_request']
       end
 
-      if attributes.has_key?(:'name')
-        self.name = attributes[:'name']
-      end
-
-      if attributes.has_key?(:'fields')
-        if (value = attributes[:'fields']).is_a?(Array)
-          self.fields = value
+      if attributes.has_key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
         end
       end
 
-      if attributes.has_key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.has_key?(:'order')
-        self.order = attributes[:'order']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -87,7 +93,19 @@ module FormAPI
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      status_validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      return false unless status_validator.valid?(@status)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
+      end
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -95,11 +113,9 @@ module FormAPI
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          metadata == o.metadata &&
-          name == o.name &&
-          fields == o.fields &&
-          email == o.email &&
-          order == o.order
+          data_request == o.data_request &&
+          errors == o.errors &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -111,7 +127,7 @@ module FormAPI
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [metadata, name, fields, email, order].hash
+      [data_request, errors, status].hash
     end
 
     # Builds the object from hash

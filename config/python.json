@@ -1,5 +1,5 @@
 {
-    "packageName": "form_api",
-    "packageVersion": "1.2.0",
-    "httpUserAgent": "formapi-python-#{VERSION}"
+  "packageName": "form_api",
+  "packageVersion": "1.3.0",
+  "httpUserAgent": "formapi-python-#{VERSION}"
 }

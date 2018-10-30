@@ -39,7 +39,15 @@ class SubmissionDataRequest(object):
         'metadata': 'object',
         'state': 'str',
         'viewed_at': 'str',
-        'completed_at': 'str'
+        'completed_at': 'str',
+        'auth_type': 'str',
+        'auth_second_factor_type': 'str',
+        'auth_provider': 'str',
+        'auth_session_started_at': 'str',
+        'auth_session_id_hash': 'str',
+        'auth_user_id_hash': 'str',
+        'auth_username_hash': 'str',
+        'auth_phone_number_hash': 'str'
     }
 
     attribute_map = {
@@ -51,10 +59,18 @@ class SubmissionDataRequest(object):
         'metadata': 'metadata',
         'state': 'state',
         'viewed_at': 'viewed_at',
-        'completed_at': 'completed_at'
+        'completed_at': 'completed_at',
+        'auth_type': 'auth_type',
+        'auth_second_factor_type': 'auth_second_factor_type',
+        'auth_provider': 'auth_provider',
+        'auth_session_started_at': 'auth_session_started_at',
+        'auth_session_id_hash': 'auth_session_id_hash',
+        'auth_user_id_hash': 'auth_user_id_hash',
+        'auth_username_hash': 'auth_username_hash',
+        'auth_phone_number_hash': 'auth_phone_number_hash'
     }
 
-    def __init__(self, id=None, name=None, email=None, order=None, fields=None, metadata=None, state=None, viewed_at=None, completed_at=None):  # noqa: E501
+    def __init__(self, id=None, name=None, email=None, order=None, fields=None, metadata=None, state=None, viewed_at=None, completed_at=None, auth_type=None, auth_second_factor_type=None, auth_provider=None, auth_session_started_at=None, auth_session_id_hash=None, auth_user_id_hash=None, auth_username_hash=None, auth_phone_number_hash=None):  # noqa: E501
         """SubmissionDataRequest - a model defined in OpenAPI"""  # noqa: E501
 
         self._id = None
@@ -66,6 +82,14 @@ class SubmissionDataRequest(object):
         self._state = None
         self._viewed_at = None
         self._completed_at = None
+        self._auth_type = None
+        self._auth_second_factor_type = None
+        self._auth_provider = None
+        self._auth_session_started_at = None
+        self._auth_session_id_hash = None
+        self._auth_user_id_hash = None
+        self._auth_username_hash = None
+        self._auth_phone_number_hash = None
         self.discriminator = None
 
         self.id = id
@@ -79,6 +103,22 @@ class SubmissionDataRequest(object):
             self.viewed_at = viewed_at
         if completed_at is not None:
             self.completed_at = completed_at
+        if auth_type is not None:
+            self.auth_type = auth_type
+        if auth_second_factor_type is not None:
+            self.auth_second_factor_type = auth_second_factor_type
+        if auth_provider is not None:
+            self.auth_provider = auth_provider
+        if auth_session_started_at is not None:
+            self.auth_session_started_at = auth_session_started_at
+        if auth_session_id_hash is not None:
+            self.auth_session_id_hash = auth_session_id_hash
+        if auth_user_id_hash is not None:
+            self.auth_user_id_hash = auth_user_id_hash
+        if auth_username_hash is not None:
+            self.auth_username_hash = auth_username_hash
+        if auth_phone_number_hash is not None:
+            self.auth_phone_number_hash = auth_phone_number_hash
 
     @property
     def id(self):
@@ -238,7 +278,7 @@ class SubmissionDataRequest(object):
         """
         if state is None:
             raise ValueError("Invalid value for `state`, must not be `None`")  # noqa: E501
-        allowed_values = ["pending", "complete"]  # noqa: E501
+        allowed_values = ["pending", "completed"]  # noqa: E501
         if state not in allowed_values:
             raise ValueError(
                 "Invalid value for `state` ({0}), must be one of {1}"  # noqa: E501
@@ -288,6 +328,186 @@ class SubmissionDataRequest(object):
         """
 
         self._completed_at = completed_at
+
+    @property
+    def auth_type(self):
+        """Gets the auth_type of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_type of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_type
+
+    @auth_type.setter
+    def auth_type(self, auth_type):
+        """Sets the auth_type of this SubmissionDataRequest.
+
+
+        :param auth_type: The auth_type of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["none", "password", "oauth", "email_link", "phone_number", "ldap", "saml"]  # noqa: E501
+        if auth_type not in allowed_values:
+            raise ValueError(
+                "Invalid value for `auth_type` ({0}), must be one of {1}"  # noqa: E501
+                .format(auth_type, allowed_values)
+            )
+
+        self._auth_type = auth_type
+
+    @property
+    def auth_second_factor_type(self):
+        """Gets the auth_second_factor_type of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_second_factor_type of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_second_factor_type
+
+    @auth_second_factor_type.setter
+    def auth_second_factor_type(self, auth_second_factor_type):
+        """Sets the auth_second_factor_type of this SubmissionDataRequest.
+
+
+        :param auth_second_factor_type: The auth_second_factor_type of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+        allowed_values = ["none", "phone_number", "totp", "mobile_push", "security_key", "fingerprint"]  # noqa: E501
+        if auth_second_factor_type not in allowed_values:
+            raise ValueError(
+                "Invalid value for `auth_second_factor_type` ({0}), must be one of {1}"  # noqa: E501
+                .format(auth_second_factor_type, allowed_values)
+            )
+
+        self._auth_second_factor_type = auth_second_factor_type
+
+    @property
+    def auth_provider(self):
+        """Gets the auth_provider of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_provider of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_provider
+
+    @auth_provider.setter
+    def auth_provider(self, auth_provider):
+        """Sets the auth_provider of this SubmissionDataRequest.
+
+
+        :param auth_provider: The auth_provider of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_provider = auth_provider
+
+    @property
+    def auth_session_started_at(self):
+        """Gets the auth_session_started_at of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_session_started_at of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_session_started_at
+
+    @auth_session_started_at.setter
+    def auth_session_started_at(self, auth_session_started_at):
+        """Sets the auth_session_started_at of this SubmissionDataRequest.
+
+
+        :param auth_session_started_at: The auth_session_started_at of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_session_started_at = auth_session_started_at
+
+    @property
+    def auth_session_id_hash(self):
+        """Gets the auth_session_id_hash of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_session_id_hash of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_session_id_hash
+
+    @auth_session_id_hash.setter
+    def auth_session_id_hash(self, auth_session_id_hash):
+        """Sets the auth_session_id_hash of this SubmissionDataRequest.
+
+
+        :param auth_session_id_hash: The auth_session_id_hash of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_session_id_hash = auth_session_id_hash
+
+    @property
+    def auth_user_id_hash(self):
+        """Gets the auth_user_id_hash of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_user_id_hash of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_user_id_hash
+
+    @auth_user_id_hash.setter
+    def auth_user_id_hash(self, auth_user_id_hash):
+        """Sets the auth_user_id_hash of this SubmissionDataRequest.
+
+
+        :param auth_user_id_hash: The auth_user_id_hash of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_user_id_hash = auth_user_id_hash
+
+    @property
+    def auth_username_hash(self):
+        """Gets the auth_username_hash of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_username_hash of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_username_hash
+
+    @auth_username_hash.setter
+    def auth_username_hash(self, auth_username_hash):
+        """Sets the auth_username_hash of this SubmissionDataRequest.
+
+
+        :param auth_username_hash: The auth_username_hash of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_username_hash = auth_username_hash
+
+    @property
+    def auth_phone_number_hash(self):
+        """Gets the auth_phone_number_hash of this SubmissionDataRequest.  # noqa: E501
+
+
+        :return: The auth_phone_number_hash of this SubmissionDataRequest.  # noqa: E501
+        :rtype: str
+        """
+        return self._auth_phone_number_hash
+
+    @auth_phone_number_hash.setter
+    def auth_phone_number_hash(self, auth_phone_number_hash):
+        """Sets the auth_phone_number_hash of this SubmissionDataRequest.
+
+
+        :param auth_phone_number_hash: The auth_phone_number_hash of this SubmissionDataRequest.  # noqa: E501
+        :type: str
+        """
+
+        self._auth_phone_number_hash = auth_phone_number_hash
 
     def to_dict(self):
         """Returns the model properties as a dict"""

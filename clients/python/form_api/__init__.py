@@ -14,7 +14,7 @@
 
 from __future__ import absolute_import
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 # import apis into sdk package
 from form_api.api.pdf_api import PDFApi
@@ -35,6 +35,7 @@ from form_api.models.create_submission_batch_submissions_response import CreateS
 from form_api.models.create_submission_data import CreateSubmissionData
 from form_api.models.create_submission_data_batch_request import CreateSubmissionDataBatchRequest
 from form_api.models.create_submission_data_batch_v1 import CreateSubmissionDataBatchV1
+from form_api.models.create_submission_data_request_data import CreateSubmissionDataRequestData
 from form_api.models.create_submission_data_request_token_response import CreateSubmissionDataRequestTokenResponse
 from form_api.models.create_submission_data_request_token_response_token import CreateSubmissionDataRequestTokenResponseToken
 from form_api.models.create_submission_response import CreateSubmissionResponse
@@ -44,6 +45,7 @@ from form_api.models.submission import Submission
 from form_api.models.submission_batch import SubmissionBatch
 from form_api.models.submission_batch_data import SubmissionBatchData
 from form_api.models.submission_data_request import SubmissionDataRequest
-from form_api.models.submission_data_request_data import SubmissionDataRequestData
 from form_api.models.template import Template
+from form_api.models.update_data_request_response import UpdateDataRequestResponse
+from form_api.models.update_submission_data_request_data import UpdateSubmissionDataRequestData
 

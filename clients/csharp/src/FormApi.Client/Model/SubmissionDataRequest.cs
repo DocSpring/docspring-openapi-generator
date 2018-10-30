@@ -43,10 +43,10 @@ namespace FormApi.Client.Model
             Pending = 1,
 
             /// <summary>
-            /// Enum Complete for value: complete
+            /// Enum Completed for value: completed
             /// </summary>
-            [EnumMember(Value = "complete")]
-            Complete = 2
+            [EnumMember(Value = "completed")]
+            Completed = 2
 
         }
 
@@ -55,6 +55,110 @@ namespace FormApi.Client.Model
         /// </summary>
         [DataMember(Name="state", EmitDefaultValue=false)]
         public StateEnum State { get; set; }
+        /// <summary>
+        /// Defines AuthType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AuthTypeEnum
+        {
+            /// <summary>
+            /// Enum None for value: none
+            /// </summary>
+            [EnumMember(Value = "none")]
+            None = 1,
+
+            /// <summary>
+            /// Enum Password for value: password
+            /// </summary>
+            [EnumMember(Value = "password")]
+            Password = 2,
+
+            /// <summary>
+            /// Enum Oauth for value: oauth
+            /// </summary>
+            [EnumMember(Value = "oauth")]
+            Oauth = 3,
+
+            /// <summary>
+            /// Enum Emaillink for value: email_link
+            /// </summary>
+            [EnumMember(Value = "email_link")]
+            Emaillink = 4,
+
+            /// <summary>
+            /// Enum Phonenumber for value: phone_number
+            /// </summary>
+            [EnumMember(Value = "phone_number")]
+            Phonenumber = 5,
+
+            /// <summary>
+            /// Enum Ldap for value: ldap
+            /// </summary>
+            [EnumMember(Value = "ldap")]
+            Ldap = 6,
+
+            /// <summary>
+            /// Enum Saml for value: saml
+            /// </summary>
+            [EnumMember(Value = "saml")]
+            Saml = 7
+
+        }
+
+        /// <summary>
+        /// Gets or Sets AuthType
+        /// </summary>
+        [DataMember(Name="auth_type", EmitDefaultValue=false)]
+        public AuthTypeEnum? AuthType { get; set; }
+        /// <summary>
+        /// Defines AuthSecondFactorType
+        /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum AuthSecondFactorTypeEnum
+        {
+            /// <summary>
+            /// Enum None for value: none
+            /// </summary>
+            [EnumMember(Value = "none")]
+            None = 1,
+
+            /// <summary>
+            /// Enum Phonenumber for value: phone_number
+            /// </summary>
+            [EnumMember(Value = "phone_number")]
+            Phonenumber = 2,
+
+            /// <summary>
+            /// Enum Totp for value: totp
+            /// </summary>
+            [EnumMember(Value = "totp")]
+            Totp = 3,
+
+            /// <summary>
+            /// Enum Mobilepush for value: mobile_push
+            /// </summary>
+            [EnumMember(Value = "mobile_push")]
+            Mobilepush = 4,
+
+            /// <summary>
+            /// Enum Securitykey for value: security_key
+            /// </summary>
+            [EnumMember(Value = "security_key")]
+            Securitykey = 5,
+
+            /// <summary>
+            /// Enum Fingerprint for value: fingerprint
+            /// </summary>
+            [EnumMember(Value = "fingerprint")]
+            Fingerprint = 6
+
+        }
+
+        /// <summary>
+        /// Gets or Sets AuthSecondFactorType
+        /// </summary>
+        [DataMember(Name="auth_second_factor_type", EmitDefaultValue=false)]
+        public AuthSecondFactorTypeEnum? AuthSecondFactorType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmissionDataRequest" /> class.
         /// </summary>
@@ -72,7 +176,15 @@ namespace FormApi.Client.Model
         /// <param name="state">state (required).</param>
         /// <param name="viewedAt">viewedAt.</param>
         /// <param name="completedAt">completedAt.</param>
-        public SubmissionDataRequest(string id = default(string), string name = default(string), string email = default(string), int? order = default(int?), List<string> fields = default(List<string>), Object metadata = default(Object), StateEnum state = default(StateEnum), string viewedAt = default(string), string completedAt = default(string))
+        /// <param name="authType">authType.</param>
+        /// <param name="authSecondFactorType">authSecondFactorType.</param>
+        /// <param name="authProvider">authProvider.</param>
+        /// <param name="authSessionStartedAt">authSessionStartedAt.</param>
+        /// <param name="authSessionIdHash">authSessionIdHash.</param>
+        /// <param name="authUserIdHash">authUserIdHash.</param>
+        /// <param name="authUsernameHash">authUsernameHash.</param>
+        /// <param name="authPhoneNumberHash">authPhoneNumberHash.</param>
+        public SubmissionDataRequest(string id = default(string), string name = default(string), string email = default(string), int? order = default(int?), List<string> fields = default(List<string>), Object metadata = default(Object), StateEnum state = default(StateEnum), string viewedAt = default(string), string completedAt = default(string), AuthTypeEnum? authType = default(AuthTypeEnum?), AuthSecondFactorTypeEnum? authSecondFactorType = default(AuthSecondFactorTypeEnum?), string authProvider = default(string), string authSessionStartedAt = default(string), string authSessionIdHash = default(string), string authUserIdHash = default(string), string authUsernameHash = default(string), string authPhoneNumberHash = default(string))
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -139,6 +251,14 @@ namespace FormApi.Client.Model
             }
             this.ViewedAt = viewedAt;
             this.CompletedAt = completedAt;
+            this.AuthType = authType;
+            this.AuthSecondFactorType = authSecondFactorType;
+            this.AuthProvider = authProvider;
+            this.AuthSessionStartedAt = authSessionStartedAt;
+            this.AuthSessionIdHash = authSessionIdHash;
+            this.AuthUserIdHash = authUserIdHash;
+            this.AuthUsernameHash = authUsernameHash;
+            this.AuthPhoneNumberHash = authPhoneNumberHash;
         }
         
         /// <summary>
@@ -190,6 +310,44 @@ namespace FormApi.Client.Model
         [DataMember(Name="completed_at", EmitDefaultValue=false)]
         public string CompletedAt { get; set; }
 
+
+
+        /// <summary>
+        /// Gets or Sets AuthProvider
+        /// </summary>
+        [DataMember(Name="auth_provider", EmitDefaultValue=false)]
+        public string AuthProvider { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AuthSessionStartedAt
+        /// </summary>
+        [DataMember(Name="auth_session_started_at", EmitDefaultValue=false)]
+        public string AuthSessionStartedAt { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AuthSessionIdHash
+        /// </summary>
+        [DataMember(Name="auth_session_id_hash", EmitDefaultValue=false)]
+        public string AuthSessionIdHash { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AuthUserIdHash
+        /// </summary>
+        [DataMember(Name="auth_user_id_hash", EmitDefaultValue=false)]
+        public string AuthUserIdHash { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AuthUsernameHash
+        /// </summary>
+        [DataMember(Name="auth_username_hash", EmitDefaultValue=false)]
+        public string AuthUsernameHash { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AuthPhoneNumberHash
+        /// </summary>
+        [DataMember(Name="auth_phone_number_hash", EmitDefaultValue=false)]
+        public string AuthPhoneNumberHash { get; set; }
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -207,6 +365,14 @@ namespace FormApi.Client.Model
             sb.Append("  State: ").Append(State).Append("\n");
             sb.Append("  ViewedAt: ").Append(ViewedAt).Append("\n");
             sb.Append("  CompletedAt: ").Append(CompletedAt).Append("\n");
+            sb.Append("  AuthType: ").Append(AuthType).Append("\n");
+            sb.Append("  AuthSecondFactorType: ").Append(AuthSecondFactorType).Append("\n");
+            sb.Append("  AuthProvider: ").Append(AuthProvider).Append("\n");
+            sb.Append("  AuthSessionStartedAt: ").Append(AuthSessionStartedAt).Append("\n");
+            sb.Append("  AuthSessionIdHash: ").Append(AuthSessionIdHash).Append("\n");
+            sb.Append("  AuthUserIdHash: ").Append(AuthUserIdHash).Append("\n");
+            sb.Append("  AuthUsernameHash: ").Append(AuthUsernameHash).Append("\n");
+            sb.Append("  AuthPhoneNumberHash: ").Append(AuthPhoneNumberHash).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -285,6 +451,46 @@ namespace FormApi.Client.Model
                     this.CompletedAt == input.CompletedAt ||
                     (this.CompletedAt != null &&
                     this.CompletedAt.Equals(input.CompletedAt))
+                ) && 
+                (
+                    this.AuthType == input.AuthType ||
+                    (this.AuthType != null &&
+                    this.AuthType.Equals(input.AuthType))
+                ) && 
+                (
+                    this.AuthSecondFactorType == input.AuthSecondFactorType ||
+                    (this.AuthSecondFactorType != null &&
+                    this.AuthSecondFactorType.Equals(input.AuthSecondFactorType))
+                ) && 
+                (
+                    this.AuthProvider == input.AuthProvider ||
+                    (this.AuthProvider != null &&
+                    this.AuthProvider.Equals(input.AuthProvider))
+                ) && 
+                (
+                    this.AuthSessionStartedAt == input.AuthSessionStartedAt ||
+                    (this.AuthSessionStartedAt != null &&
+                    this.AuthSessionStartedAt.Equals(input.AuthSessionStartedAt))
+                ) && 
+                (
+                    this.AuthSessionIdHash == input.AuthSessionIdHash ||
+                    (this.AuthSessionIdHash != null &&
+                    this.AuthSessionIdHash.Equals(input.AuthSessionIdHash))
+                ) && 
+                (
+                    this.AuthUserIdHash == input.AuthUserIdHash ||
+                    (this.AuthUserIdHash != null &&
+                    this.AuthUserIdHash.Equals(input.AuthUserIdHash))
+                ) && 
+                (
+                    this.AuthUsernameHash == input.AuthUsernameHash ||
+                    (this.AuthUsernameHash != null &&
+                    this.AuthUsernameHash.Equals(input.AuthUsernameHash))
+                ) && 
+                (
+                    this.AuthPhoneNumberHash == input.AuthPhoneNumberHash ||
+                    (this.AuthPhoneNumberHash != null &&
+                    this.AuthPhoneNumberHash.Equals(input.AuthPhoneNumberHash))
                 );
         }
 
@@ -315,6 +521,22 @@ namespace FormApi.Client.Model
                     hashCode = hashCode * 59 + this.ViewedAt.GetHashCode();
                 if (this.CompletedAt != null)
                     hashCode = hashCode * 59 + this.CompletedAt.GetHashCode();
+                if (this.AuthType != null)
+                    hashCode = hashCode * 59 + this.AuthType.GetHashCode();
+                if (this.AuthSecondFactorType != null)
+                    hashCode = hashCode * 59 + this.AuthSecondFactorType.GetHashCode();
+                if (this.AuthProvider != null)
+                    hashCode = hashCode * 59 + this.AuthProvider.GetHashCode();
+                if (this.AuthSessionStartedAt != null)
+                    hashCode = hashCode * 59 + this.AuthSessionStartedAt.GetHashCode();
+                if (this.AuthSessionIdHash != null)
+                    hashCode = hashCode * 59 + this.AuthSessionIdHash.GetHashCode();
+                if (this.AuthUserIdHash != null)
+                    hashCode = hashCode * 59 + this.AuthUserIdHash.GetHashCode();
+                if (this.AuthUsernameHash != null)
+                    hashCode = hashCode * 59 + this.AuthUsernameHash.GetHashCode();
+                if (this.AuthPhoneNumberHash != null)
+                    hashCode = hashCode * 59 + this.AuthPhoneNumberHash.GetHashCode();
                 return hashCode;
             }
         }

@@ -36,7 +36,7 @@ class CreateSubmissionData(object):
         'html': 'str',
         'css': 'str',
         'metadata': 'object',
-        'data_requests': 'list[SubmissionDataRequestData]'
+        'data_requests': 'list[CreateSubmissionDataRequestData]'
     }
 
     attribute_map = {
@@ -184,7 +184,7 @@ class CreateSubmissionData(object):
 
 
         :return: The data_requests of this CreateSubmissionData.  # noqa: E501
-        :rtype: list[SubmissionDataRequestData]
+        :rtype: list[CreateSubmissionDataRequestData]
         """
         return self._data_requests
 
@@ -194,7 +194,7 @@ class CreateSubmissionData(object):
 
 
         :param data_requests: The data_requests of this CreateSubmissionData.  # noqa: E501
-        :type: list[SubmissionDataRequestData]
+        :type: list[CreateSubmissionDataRequestData]
         """
 
         self._data_requests = data_requests

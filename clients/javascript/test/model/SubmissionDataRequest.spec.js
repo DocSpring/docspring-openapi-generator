@@ -110,6 +110,54 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property authType (base name: "auth_type")', function() {
+      // uncomment below and update the code to test the property authType
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authSecondFactorType (base name: "auth_second_factor_type")', function() {
+      // uncomment below and update the code to test the property authSecondFactorType
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authProvider (base name: "auth_provider")', function() {
+      // uncomment below and update the code to test the property authProvider
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authSessionStartedAt (base name: "auth_session_started_at")', function() {
+      // uncomment below and update the code to test the property authSessionStartedAt
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authSessionIdHash (base name: "auth_session_id_hash")', function() {
+      // uncomment below and update the code to test the property authSessionIdHash
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authUserIdHash (base name: "auth_user_id_hash")', function() {
+      // uncomment below and update the code to test the property authUserIdHash
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authUsernameHash (base name: "auth_username_hash")', function() {
+      // uncomment below and update the code to test the property authUsernameHash
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property authPhoneNumberHash (base name: "auth_phone_number_hash")', function() {
+      // uncomment below and update the code to test the property authPhoneNumberHash
+      //var instance = new FormAPI.SubmissionDataRequest();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

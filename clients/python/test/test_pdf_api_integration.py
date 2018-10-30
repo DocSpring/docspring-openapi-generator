@@ -152,7 +152,8 @@ class TestPDFApi(unittest.TestCase):
                         'order': 1,
                         'metadata': {
                             'user_id': 123
-                        }
+                        },
+                        'auth_type': 'email_link'
                     }
                 ]
             })

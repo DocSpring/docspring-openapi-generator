@@ -30,7 +30,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new FormAPI.SubmissionDataRequestData();
+    instance = new FormAPI.UpdateDataRequestResponse();
   });
 
   var getProperty = function(object, getter, property) {
@@ -49,40 +49,28 @@
       object[property] = value;
   }
 
-  describe('SubmissionDataRequestData', function() {
-    it('should create an instance of SubmissionDataRequestData', function() {
-      // uncomment below and update the code to test SubmissionDataRequestData
-      //var instance = new FormAPI.SubmissionDataRequestData();
-      //expect(instance).to.be.a(FormAPI.SubmissionDataRequestData);
+  describe('UpdateDataRequestResponse', function() {
+    it('should create an instance of UpdateDataRequestResponse', function() {
+      // uncomment below and update the code to test UpdateDataRequestResponse
+      //var instance = new FormAPI.UpdateDataRequestResponse();
+      //expect(instance).to.be.a(FormAPI.UpdateDataRequestResponse);
     });
 
-    it('should have the property metadata (base name: "metadata")', function() {
-      // uncomment below and update the code to test the property metadata
-      //var instance = new FormAPI.SubmissionDataRequestData();
+    it('should have the property dataRequest (base name: "data_request")', function() {
+      // uncomment below and update the code to test the property dataRequest
+      //var instance = new FormAPI.UpdateDataRequestResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property name (base name: "name")', function() {
-      // uncomment below and update the code to test the property name
-      //var instance = new FormAPI.SubmissionDataRequestData();
+    it('should have the property errors (base name: "errors")', function() {
+      // uncomment below and update the code to test the property errors
+      //var instance = new FormAPI.UpdateDataRequestResponse();
       //expect(instance).to.be();
     });
 
-    it('should have the property fields (base name: "fields")', function() {
-      // uncomment below and update the code to test the property fields
-      //var instance = new FormAPI.SubmissionDataRequestData();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property email (base name: "email")', function() {
-      // uncomment below and update the code to test the property email
-      //var instance = new FormAPI.SubmissionDataRequestData();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property order (base name: "order")', function() {
-      // uncomment below and update the code to test the property order
-      //var instance = new FormAPI.SubmissionDataRequestData();
+    it('should have the property status (base name: "status")', function() {
+      // uncomment below and update the code to test the property status
+      //var instance = new FormAPI.UpdateDataRequestResponse();
       //expect(instance).to.be();
     });
 

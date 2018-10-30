@@ -138,4 +138,60 @@ class SubmissionDataRequestTest extends \PHPUnit_Framework_TestCase
     public function testPropertyCompletedAt()
     {
     }
+
+    /**
+     * Test attribute "auth_type"
+     */
+    public function testPropertyAuthType()
+    {
+    }
+
+    /**
+     * Test attribute "auth_second_factor_type"
+     */
+    public function testPropertyAuthSecondFactorType()
+    {
+    }
+
+    /**
+     * Test attribute "auth_provider"
+     */
+    public function testPropertyAuthProvider()
+    {
+    }
+
+    /**
+     * Test attribute "auth_session_started_at"
+     */
+    public function testPropertyAuthSessionStartedAt()
+    {
+    }
+
+    /**
+     * Test attribute "auth_session_id_hash"
+     */
+    public function testPropertyAuthSessionIdHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_user_id_hash"
+     */
+    public function testPropertyAuthUserIdHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_username_hash"
+     */
+    public function testPropertyAuthUsernameHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_phone_number_hash"
+     */
+    public function testPropertyAuthPhoneNumberHash()
+    {
+    }
 }

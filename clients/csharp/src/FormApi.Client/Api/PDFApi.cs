@@ -303,6 +303,29 @@ namespace FormApi.Client.Api
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of AuthenticationSuccessResponse</returns>
         ApiResponse<AuthenticationSuccessResponse> TestAuthenticationWithHttpInfo ();
+        /// <summary>
+        /// Update a submission data request
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>UpdateDataRequestResponse</returns>
+        UpdateDataRequestResponse UpdateDataRequest (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData);
+
+        /// <summary>
+        /// Update a submission data request
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>ApiResponse of UpdateDataRequestResponse</returns>
+        ApiResponse<UpdateDataRequestResponse> UpdateDataRequestWithHttpInfo (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -584,6 +607,29 @@ namespace FormApi.Client.Api
         /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (AuthenticationSuccessResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<AuthenticationSuccessResponse>> TestAuthenticationAsyncWithHttpInfo ();
+        /// <summary>
+        /// Update a submission data request
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>Task of UpdateDataRequestResponse</returns>
+        System.Threading.Tasks.Task<UpdateDataRequestResponse> UpdateDataRequestAsync (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData);
+
+        /// <summary>
+        /// Update a submission data request
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>Task of ApiResponse (UpdateDataRequestResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UpdateDataRequestResponse>> UpdateDataRequestAsyncWithHttpInfo (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData);
         #endregion Asynchronous Operations
     }
 
@@ -2649,6 +2695,179 @@ namespace FormApi.Client.Api
             return new ApiResponse<AuthenticationSuccessResponse>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (AuthenticationSuccessResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(AuthenticationSuccessResponse)));
+        }
+
+        /// <summary>
+        /// Update a submission data request 
+        /// </summary>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>UpdateDataRequestResponse</returns>
+        public UpdateDataRequestResponse UpdateDataRequest (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData)
+        {
+             ApiResponse<UpdateDataRequestResponse> localVarResponse = UpdateDataRequestWithHttpInfo(dataRequestId, updateSubmissionDataRequestData);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update a submission data request 
+        /// </summary>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>ApiResponse of UpdateDataRequestResponse</returns>
+        public ApiResponse< UpdateDataRequestResponse > UpdateDataRequestWithHttpInfo (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData)
+        {
+            // verify the required parameter 'dataRequestId' is set
+            if (dataRequestId == null)
+                throw new ApiException(400, "Missing required parameter 'dataRequestId' when calling PDFApi->UpdateDataRequest");
+            // verify the required parameter 'updateSubmissionDataRequestData' is set
+            if (updateSubmissionDataRequestData == null)
+                throw new ApiException(400, "Missing required parameter 'updateSubmissionDataRequestData' when calling PDFApi->UpdateDataRequest");
+
+            var localVarPath = "/data_requests/{data_request_id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (dataRequestId != null) localVarPathParams.Add("data_request_id", this.Configuration.ApiClient.ParameterToString(dataRequestId)); // path parameter
+            if (updateSubmissionDataRequestData != null && updateSubmissionDataRequestData.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(updateSubmissionDataRequestData); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updateSubmissionDataRequestData; // byte array
+            }
+
+            // authentication (api_token_basic) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) this.Configuration.ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("UpdateDataRequest", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<UpdateDataRequestResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (UpdateDataRequestResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateDataRequestResponse)));
+        }
+
+        /// <summary>
+        /// Update a submission data request 
+        /// </summary>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>Task of UpdateDataRequestResponse</returns>
+        public async System.Threading.Tasks.Task<UpdateDataRequestResponse> UpdateDataRequestAsync (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData)
+        {
+             ApiResponse<UpdateDataRequestResponse> localVarResponse = await UpdateDataRequestAsyncWithHttpInfo(dataRequestId, updateSubmissionDataRequestData);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Update a submission data request 
+        /// </summary>
+        /// <exception cref="FormApi.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="dataRequestId"></param>
+        /// <param name="updateSubmissionDataRequestData"></param>
+        /// <returns>Task of ApiResponse (UpdateDataRequestResponse)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<UpdateDataRequestResponse>> UpdateDataRequestAsyncWithHttpInfo (string dataRequestId, UpdateSubmissionDataRequestData updateSubmissionDataRequestData)
+        {
+            // verify the required parameter 'dataRequestId' is set
+            if (dataRequestId == null)
+                throw new ApiException(400, "Missing required parameter 'dataRequestId' when calling PDFApi->UpdateDataRequest");
+            // verify the required parameter 'updateSubmissionDataRequestData' is set
+            if (updateSubmissionDataRequestData == null)
+                throw new ApiException(400, "Missing required parameter 'updateSubmissionDataRequestData' when calling PDFApi->UpdateDataRequest");
+
+            var localVarPath = "/data_requests/{data_request_id}";
+            var localVarPathParams = new Dictionary<String, String>();
+            var localVarQueryParams = new List<KeyValuePair<String, String>>();
+            var localVarHeaderParams = new Dictionary<String, String>(this.Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<String, String>();
+            var localVarFileParams = new Dictionary<String, FileParameter>();
+            Object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            String[] localVarHttpContentTypes = new String[] {
+                "application/json"
+            };
+            String localVarHttpContentType = this.Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/json"
+            };
+            String localVarHttpHeaderAccept = this.Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            if (dataRequestId != null) localVarPathParams.Add("data_request_id", this.Configuration.ApiClient.ParameterToString(dataRequestId)); // path parameter
+            if (updateSubmissionDataRequestData != null && updateSubmissionDataRequestData.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = this.Configuration.ApiClient.Serialize(updateSubmissionDataRequestData); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = updateSubmissionDataRequestData; // byte array
+            }
+
+            // authentication (api_token_basic) required
+            // http basic authentication required
+            if (!String.IsNullOrEmpty(this.Configuration.Username) || !String.IsNullOrEmpty(this.Configuration.Password))
+            {
+                localVarHeaderParams["Authorization"] = "Basic " + ApiClient.Base64Encode(this.Configuration.Username + ":" + this.Configuration.Password);
+            }
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse) await this.Configuration.ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int) localVarResponse.StatusCode;
+
+            if (ExceptionFactory != null)
+            {
+                Exception exception = ExceptionFactory("UpdateDataRequest", localVarResponse);
+                if (exception != null) throw exception;
+            }
+
+            return new ApiResponse<UpdateDataRequestResponse>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (UpdateDataRequestResponse) this.Configuration.ApiClient.Deserialize(localVarResponse, typeof(UpdateDataRequestResponse)));
         }
 
     }

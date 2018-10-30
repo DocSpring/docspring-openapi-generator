@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**getSubmissionBatch**](PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**getTemplates**](PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
+[**updateDataRequest**](PDFApi.md#updateDataRequest) | **PUT** /data_requests/{data_request_id} | Update a submission data request
 
 
 <a name="batchGeneratePdfV1"></a>
@@ -636,5 +637,54 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="updateDataRequest"></a>
+# **updateDataRequest**
+> UpdateDataRequestResponse updateDataRequest(dataRequestId, updateSubmissionDataRequestData)
+
+Update a submission data request
+
+### Example
+```javascript
+var FormAPI = require('formapi');
+var defaultClient = FormAPI.ApiClient.instance;
+
+// Configure HTTP basic authorization: api_token_basic
+var api_token_basic = defaultClient.authentications['api_token_basic'];
+api_token_basic.username = 'YOUR USERNAME';
+api_token_basic.password = 'YOUR PASSWORD';
+
+var apiInstance = new FormAPI.PDFApi();
+var dataRequestId = drq_000000000000000001; // String | 
+var updateSubmissionDataRequestData = new FormAPI.UpdateSubmissionDataRequestData(); // UpdateSubmissionDataRequestData | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.updateDataRequest(dataRequestId, updateSubmissionDataRequestData, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dataRequestId** | **String**|  | 
+ **updateSubmissionDataRequestData** | [**UpdateSubmissionDataRequestData**](UpdateSubmissionDataRequestData.md)|  | 
+
+### Return type
+
+[**UpdateDataRequestResponse**](UpdateDataRequestResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 

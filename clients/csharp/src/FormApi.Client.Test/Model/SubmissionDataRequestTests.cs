@@ -138,6 +138,70 @@ namespace FormApi.Client.Test
         {
             // TODO unit test for the property 'CompletedAt'
         }
+        /// <summary>
+        /// Test the property 'AuthType'
+        /// </summary>
+        [Test]
+        public void AuthTypeTest()
+        {
+            // TODO unit test for the property 'AuthType'
+        }
+        /// <summary>
+        /// Test the property 'AuthSecondFactorType'
+        /// </summary>
+        [Test]
+        public void AuthSecondFactorTypeTest()
+        {
+            // TODO unit test for the property 'AuthSecondFactorType'
+        }
+        /// <summary>
+        /// Test the property 'AuthProvider'
+        /// </summary>
+        [Test]
+        public void AuthProviderTest()
+        {
+            // TODO unit test for the property 'AuthProvider'
+        }
+        /// <summary>
+        /// Test the property 'AuthSessionStartedAt'
+        /// </summary>
+        [Test]
+        public void AuthSessionStartedAtTest()
+        {
+            // TODO unit test for the property 'AuthSessionStartedAt'
+        }
+        /// <summary>
+        /// Test the property 'AuthSessionIdHash'
+        /// </summary>
+        [Test]
+        public void AuthSessionIdHashTest()
+        {
+            // TODO unit test for the property 'AuthSessionIdHash'
+        }
+        /// <summary>
+        /// Test the property 'AuthUserIdHash'
+        /// </summary>
+        [Test]
+        public void AuthUserIdHashTest()
+        {
+            // TODO unit test for the property 'AuthUserIdHash'
+        }
+        /// <summary>
+        /// Test the property 'AuthUsernameHash'
+        /// </summary>
+        [Test]
+        public void AuthUsernameHashTest()
+        {
+            // TODO unit test for the property 'AuthUsernameHash'
+        }
+        /// <summary>
+        /// Test the property 'AuthPhoneNumberHash'
+        /// </summary>
+        [Test]
+        public void AuthPhoneNumberHashTest()
+        {
+            // TODO unit test for the property 'AuthPhoneNumberHash'
+        }
 
     }
 

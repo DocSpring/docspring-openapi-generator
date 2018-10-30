@@ -36,7 +36,7 @@
   /**
    * The CreateSubmissionDataBatchV1 model module.
    * @module model/CreateSubmissionDataBatchV1
-   * @version 2.1.0
+   * @version 2.2.0
    */
 
   /**

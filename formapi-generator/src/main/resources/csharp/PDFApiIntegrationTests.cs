@@ -220,12 +220,13 @@ namespace FormApi.Client.Test
               data: new {
                 title = "Test PDF",
               },
-              dataRequests: new List<SubmissionDataRequestData>{
-                new SubmissionDataRequestData(
+              dataRequests: new List<CreateSubmissionDataRequestData>{
+                new CreateSubmissionDataRequestData(
                   name: "John Smith",
                   email: "jsmith@example.com",
                   fields: new List<string>{ "description" },
-                  order: 1
+                  order: 1,
+                  authType: CreateSubmissionDataRequestData.AuthTypeEnum.Emaillink
                 )
               }
             );

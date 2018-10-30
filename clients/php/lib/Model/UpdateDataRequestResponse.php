@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionDataRequestData
+ * UpdateDataRequestResponse
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionDataRequestData Class Doc Comment
+ * UpdateDataRequestResponse Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionDataRequestData implements ModelInterface, ArrayAccess
+class UpdateDataRequestResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_data_request_data';
+    protected static $openAPIModelName = 'update_data_request_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'name' => 'string',
-        'fields' => 'string[]',
-        'email' => 'string',
-        'order' => 'int'
+        'data_request' => '\FormAPI\Model\SubmissionDataRequest',
+        'errors' => 'string[]',
+        'status' => 'string'
     ];
 
     /**
@@ -70,11 +68,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
-        'name' => null,
-        'fields' => null,
-        'email' => null,
-        'order' => null
+        'data_request' => null,
+        'errors' => null,
+        'status' => null
     ];
 
     /**
@@ -104,11 +100,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
-        'name' => 'name',
-        'fields' => 'fields',
-        'email' => 'email',
-        'order' => 'order'
+        'data_request' => 'data_request',
+        'errors' => 'errors',
+        'status' => 'status'
     ];
 
     /**
@@ -117,11 +111,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
-        'name' => 'setName',
-        'fields' => 'setFields',
-        'email' => 'setEmail',
-        'order' => 'setOrder'
+        'data_request' => 'setDataRequest',
+        'errors' => 'setErrors',
+        'status' => 'setStatus'
     ];
 
     /**
@@ -130,11 +122,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
-        'name' => 'getName',
-        'fields' => 'getFields',
-        'email' => 'getEmail',
-        'order' => 'getOrder'
+        'data_request' => 'getDataRequest',
+        'errors' => 'getErrors',
+        'status' => 'getStatus'
     ];
 
     /**
@@ -178,8 +168,23 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const STATUS_SUCCESS = 'success';
+    const STATUS_ERROR = 'error';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_SUCCESS,
+            self::STATUS_ERROR,
+        ];
+    }
     
 
     /**
@@ -197,11 +202,9 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
-        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
-        $this->container['order'] = isset($data['order']) ? $data['order'] : null;
+        $this->container['data_request'] = isset($data['data_request']) ? $data['data_request'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
     /**
@@ -212,6 +215,14 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -229,121 +240,82 @@ class SubmissionDataRequestData implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets metadata
+     * Gets data_request
      *
-     * @return object|null
+     * @return \FormAPI\Model\SubmissionDataRequest|null
      */
-    public function getMetadata()
+    public function getDataRequest()
     {
-        return $this->container['metadata'];
+        return $this->container['data_request'];
     }
 
     /**
-     * Sets metadata
+     * Sets data_request
      *
-     * @param object|null $metadata metadata
+     * @param \FormAPI\Model\SubmissionDataRequest|null $data_request data_request
      *
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setDataRequest($data_request)
     {
-        $this->container['metadata'] = $metadata;
+        $this->container['data_request'] = $data_request;
 
         return $this;
     }
 
     /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets fields
+     * Gets errors
      *
      * @return string[]|null
      */
-    public function getFields()
+    public function getErrors()
     {
-        return $this->container['fields'];
+        return $this->container['errors'];
     }
 
     /**
-     * Sets fields
+     * Sets errors
      *
-     * @param string[]|null $fields fields
+     * @param string[]|null $errors errors
      *
      * @return $this
      */
-    public function setFields($fields)
+    public function setErrors($errors)
     {
-        $this->container['fields'] = $fields;
+        $this->container['errors'] = $errors;
 
         return $this;
     }
 
     /**
-     * Gets email
+     * Gets status
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getStatus()
     {
-        return $this->container['email'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets email
+     * Sets status
      *
-     * @param string|null $email email
+     * @param string|null $status status
      *
      * @return $this
      */
-    public function setEmail($email)
+    public function setStatus($status)
     {
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets order
-     *
-     * @return int|null
-     */
-    public function getOrder()
-    {
-        return $this->container['order'];
-    }
-
-    /**
-     * Sets order
-     *
-     * @param int|null $order order
-     *
-     * @return $this
-     */
-    public function setOrder($order)
-    {
-        $this->container['order'] = $order;
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }

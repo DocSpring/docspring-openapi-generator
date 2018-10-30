@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/SubmissionDataRequestData'], factory);
+    define(['ApiClient', 'model/CreateSubmissionDataRequestData'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./SubmissionDataRequestData'));
+    module.exports = factory(require('../ApiClient'), require('./CreateSubmissionDataRequestData'));
   } else {
     // Browser globals (root is window)
     if (!root.FormAPI) {
       root.FormAPI = {};
     }
-    root.FormAPI.CreateSubmissionData = factory(root.FormAPI.ApiClient, root.FormAPI.SubmissionDataRequestData);
+    root.FormAPI.CreateSubmissionData = factory(root.FormAPI.ApiClient, root.FormAPI.CreateSubmissionDataRequestData);
   }
-}(this, function(ApiClient, SubmissionDataRequestData) {
+}(this, function(ApiClient, CreateSubmissionDataRequestData) {
   'use strict';
 
 
@@ -36,7 +36,7 @@
   /**
    * The CreateSubmissionData model module.
    * @module model/CreateSubmissionData
-   * @version 2.1.0
+   * @version 2.2.0
    */
 
   /**
@@ -83,7 +83,7 @@
         obj['metadata'] = ApiClient.convertToType(data['metadata'], Object);
       }
       if (data.hasOwnProperty('data_requests')) {
-        obj['data_requests'] = ApiClient.convertToType(data['data_requests'], [SubmissionDataRequestData]);
+        obj['data_requests'] = ApiClient.convertToType(data['data_requests'], [CreateSubmissionDataRequestData]);
       }
     }
     return obj;
@@ -110,7 +110,7 @@
    */
   exports.prototype['metadata'] = undefined;
   /**
-   * @member {Array.<module:model/SubmissionDataRequestData>} data_requests
+   * @member {Array.<module:model/CreateSubmissionDataRequestData>} data_requests
    */
   exports.prototype['data_requests'] = undefined;
 

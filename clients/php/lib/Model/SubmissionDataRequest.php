@@ -65,7 +65,15 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'metadata' => 'object',
         'state' => 'string',
         'viewed_at' => 'string',
-        'completed_at' => 'string'
+        'completed_at' => 'string',
+        'auth_type' => 'string',
+        'auth_second_factor_type' => 'string',
+        'auth_provider' => 'string',
+        'auth_session_started_at' => 'string',
+        'auth_session_id_hash' => 'string',
+        'auth_user_id_hash' => 'string',
+        'auth_username_hash' => 'string',
+        'auth_phone_number_hash' => 'string'
     ];
 
     /**
@@ -82,7 +90,15 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'metadata' => null,
         'state' => null,
         'viewed_at' => null,
-        'completed_at' => null
+        'completed_at' => null,
+        'auth_type' => null,
+        'auth_second_factor_type' => null,
+        'auth_provider' => null,
+        'auth_session_started_at' => null,
+        'auth_session_id_hash' => null,
+        'auth_user_id_hash' => null,
+        'auth_username_hash' => null,
+        'auth_phone_number_hash' => null
     ];
 
     /**
@@ -120,7 +136,15 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'metadata' => 'metadata',
         'state' => 'state',
         'viewed_at' => 'viewed_at',
-        'completed_at' => 'completed_at'
+        'completed_at' => 'completed_at',
+        'auth_type' => 'auth_type',
+        'auth_second_factor_type' => 'auth_second_factor_type',
+        'auth_provider' => 'auth_provider',
+        'auth_session_started_at' => 'auth_session_started_at',
+        'auth_session_id_hash' => 'auth_session_id_hash',
+        'auth_user_id_hash' => 'auth_user_id_hash',
+        'auth_username_hash' => 'auth_username_hash',
+        'auth_phone_number_hash' => 'auth_phone_number_hash'
     ];
 
     /**
@@ -137,7 +161,15 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'metadata' => 'setMetadata',
         'state' => 'setState',
         'viewed_at' => 'setViewedAt',
-        'completed_at' => 'setCompletedAt'
+        'completed_at' => 'setCompletedAt',
+        'auth_type' => 'setAuthType',
+        'auth_second_factor_type' => 'setAuthSecondFactorType',
+        'auth_provider' => 'setAuthProvider',
+        'auth_session_started_at' => 'setAuthSessionStartedAt',
+        'auth_session_id_hash' => 'setAuthSessionIdHash',
+        'auth_user_id_hash' => 'setAuthUserIdHash',
+        'auth_username_hash' => 'setAuthUsernameHash',
+        'auth_phone_number_hash' => 'setAuthPhoneNumberHash'
     ];
 
     /**
@@ -154,7 +186,15 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         'metadata' => 'getMetadata',
         'state' => 'getState',
         'viewed_at' => 'getViewedAt',
-        'completed_at' => 'getCompletedAt'
+        'completed_at' => 'getCompletedAt',
+        'auth_type' => 'getAuthType',
+        'auth_second_factor_type' => 'getAuthSecondFactorType',
+        'auth_provider' => 'getAuthProvider',
+        'auth_session_started_at' => 'getAuthSessionStartedAt',
+        'auth_session_id_hash' => 'getAuthSessionIdHash',
+        'auth_user_id_hash' => 'getAuthUserIdHash',
+        'auth_username_hash' => 'getAuthUsernameHash',
+        'auth_phone_number_hash' => 'getAuthPhoneNumberHash'
     ];
 
     /**
@@ -199,7 +239,20 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     }
 
     const STATE_PENDING = 'pending';
-    const STATE_COMPLETE = 'complete';
+    const STATE_COMPLETED = 'completed';
+    const AUTH_TYPE_NONE = 'none';
+    const AUTH_TYPE_PASSWORD = 'password';
+    const AUTH_TYPE_OAUTH = 'oauth';
+    const AUTH_TYPE_EMAIL_LINK = 'email_link';
+    const AUTH_TYPE_PHONE_NUMBER = 'phone_number';
+    const AUTH_TYPE_LDAP = 'ldap';
+    const AUTH_TYPE_SAML = 'saml';
+    const AUTH_SECOND_FACTOR_TYPE_NONE = 'none';
+    const AUTH_SECOND_FACTOR_TYPE_PHONE_NUMBER = 'phone_number';
+    const AUTH_SECOND_FACTOR_TYPE_TOTP = 'totp';
+    const AUTH_SECOND_FACTOR_TYPE_MOBILE_PUSH = 'mobile_push';
+    const AUTH_SECOND_FACTOR_TYPE_SECURITY_KEY = 'security_key';
+    const AUTH_SECOND_FACTOR_TYPE_FINGERPRINT = 'fingerprint';
     
 
     
@@ -212,7 +265,42 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     {
         return [
             self::STATE_PENDING,
-            self::STATE_COMPLETE,
+            self::STATE_COMPLETED,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAuthTypeAllowableValues()
+    {
+        return [
+            self::AUTH_TYPE_NONE,
+            self::AUTH_TYPE_PASSWORD,
+            self::AUTH_TYPE_OAUTH,
+            self::AUTH_TYPE_EMAIL_LINK,
+            self::AUTH_TYPE_PHONE_NUMBER,
+            self::AUTH_TYPE_LDAP,
+            self::AUTH_TYPE_SAML,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAuthSecondFactorTypeAllowableValues()
+    {
+        return [
+            self::AUTH_SECOND_FACTOR_TYPE_NONE,
+            self::AUTH_SECOND_FACTOR_TYPE_PHONE_NUMBER,
+            self::AUTH_SECOND_FACTOR_TYPE_TOTP,
+            self::AUTH_SECOND_FACTOR_TYPE_MOBILE_PUSH,
+            self::AUTH_SECOND_FACTOR_TYPE_SECURITY_KEY,
+            self::AUTH_SECOND_FACTOR_TYPE_FINGERPRINT,
         ];
     }
     
@@ -241,6 +329,14 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['viewed_at'] = isset($data['viewed_at']) ? $data['viewed_at'] : null;
         $this->container['completed_at'] = isset($data['completed_at']) ? $data['completed_at'] : null;
+        $this->container['auth_type'] = isset($data['auth_type']) ? $data['auth_type'] : null;
+        $this->container['auth_second_factor_type'] = isset($data['auth_second_factor_type']) ? $data['auth_second_factor_type'] : null;
+        $this->container['auth_provider'] = isset($data['auth_provider']) ? $data['auth_provider'] : null;
+        $this->container['auth_session_started_at'] = isset($data['auth_session_started_at']) ? $data['auth_session_started_at'] : null;
+        $this->container['auth_session_id_hash'] = isset($data['auth_session_id_hash']) ? $data['auth_session_id_hash'] : null;
+        $this->container['auth_user_id_hash'] = isset($data['auth_user_id_hash']) ? $data['auth_user_id_hash'] : null;
+        $this->container['auth_username_hash'] = isset($data['auth_username_hash']) ? $data['auth_username_hash'] : null;
+        $this->container['auth_phone_number_hash'] = isset($data['auth_phone_number_hash']) ? $data['auth_phone_number_hash'] : null;
     }
 
     /**
@@ -277,6 +373,22 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
                 "invalid value for 'state', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getAuthTypeAllowableValues();
+        if (!is_null($this->container['auth_type']) && !in_array($this->container['auth_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'auth_type', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getAuthSecondFactorTypeAllowableValues();
+        if (!is_null($this->container['auth_second_factor_type']) && !in_array($this->container['auth_second_factor_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'auth_second_factor_type', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
@@ -517,6 +629,216 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     public function setCompletedAt($completed_at)
     {
         $this->container['completed_at'] = $completed_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_type
+     *
+     * @return string|null
+     */
+    public function getAuthType()
+    {
+        return $this->container['auth_type'];
+    }
+
+    /**
+     * Sets auth_type
+     *
+     * @param string|null $auth_type auth_type
+     *
+     * @return $this
+     */
+    public function setAuthType($auth_type)
+    {
+        $allowedValues = $this->getAuthTypeAllowableValues();
+        if (!is_null($auth_type) && !in_array($auth_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'auth_type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['auth_type'] = $auth_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_second_factor_type
+     *
+     * @return string|null
+     */
+    public function getAuthSecondFactorType()
+    {
+        return $this->container['auth_second_factor_type'];
+    }
+
+    /**
+     * Sets auth_second_factor_type
+     *
+     * @param string|null $auth_second_factor_type auth_second_factor_type
+     *
+     * @return $this
+     */
+    public function setAuthSecondFactorType($auth_second_factor_type)
+    {
+        $allowedValues = $this->getAuthSecondFactorTypeAllowableValues();
+        if (!is_null($auth_second_factor_type) && !in_array($auth_second_factor_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'auth_second_factor_type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['auth_second_factor_type'] = $auth_second_factor_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_provider
+     *
+     * @return string|null
+     */
+    public function getAuthProvider()
+    {
+        return $this->container['auth_provider'];
+    }
+
+    /**
+     * Sets auth_provider
+     *
+     * @param string|null $auth_provider auth_provider
+     *
+     * @return $this
+     */
+    public function setAuthProvider($auth_provider)
+    {
+        $this->container['auth_provider'] = $auth_provider;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_session_started_at
+     *
+     * @return string|null
+     */
+    public function getAuthSessionStartedAt()
+    {
+        return $this->container['auth_session_started_at'];
+    }
+
+    /**
+     * Sets auth_session_started_at
+     *
+     * @param string|null $auth_session_started_at auth_session_started_at
+     *
+     * @return $this
+     */
+    public function setAuthSessionStartedAt($auth_session_started_at)
+    {
+        $this->container['auth_session_started_at'] = $auth_session_started_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_session_id_hash
+     *
+     * @return string|null
+     */
+    public function getAuthSessionIdHash()
+    {
+        return $this->container['auth_session_id_hash'];
+    }
+
+    /**
+     * Sets auth_session_id_hash
+     *
+     * @param string|null $auth_session_id_hash auth_session_id_hash
+     *
+     * @return $this
+     */
+    public function setAuthSessionIdHash($auth_session_id_hash)
+    {
+        $this->container['auth_session_id_hash'] = $auth_session_id_hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_user_id_hash
+     *
+     * @return string|null
+     */
+    public function getAuthUserIdHash()
+    {
+        return $this->container['auth_user_id_hash'];
+    }
+
+    /**
+     * Sets auth_user_id_hash
+     *
+     * @param string|null $auth_user_id_hash auth_user_id_hash
+     *
+     * @return $this
+     */
+    public function setAuthUserIdHash($auth_user_id_hash)
+    {
+        $this->container['auth_user_id_hash'] = $auth_user_id_hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_username_hash
+     *
+     * @return string|null
+     */
+    public function getAuthUsernameHash()
+    {
+        return $this->container['auth_username_hash'];
+    }
+
+    /**
+     * Sets auth_username_hash
+     *
+     * @param string|null $auth_username_hash auth_username_hash
+     *
+     * @return $this
+     */
+    public function setAuthUsernameHash($auth_username_hash)
+    {
+        $this->container['auth_username_hash'] = $auth_username_hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_phone_number_hash
+     *
+     * @return string|null
+     */
+    public function getAuthPhoneNumberHash()
+    {
+        return $this->container['auth_phone_number_hash'];
+    }
+
+    /**
+     * Sets auth_phone_number_hash
+     *
+     * @param string|null $auth_phone_number_hash auth_phone_number_hash
+     *
+     * @return $this
+     */
+    public function setAuthPhoneNumberHash($auth_phone_number_hash)
+    {
+        $this->container['auth_phone_number_hash'] = $auth_phone_number_hash;
 
         return $this;
     }

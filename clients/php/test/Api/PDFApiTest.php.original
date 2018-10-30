@@ -241,4 +241,17 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $result = $apiInstance->testAuthentication();
     }
+
+    /**
+     * Test case for updateDataRequest
+     *
+     * Update a submission data request.
+     *
+     */
+    public function testUpdateDataRequest()
+    {
+      $data_request_id = drq_000000000000000001; // string | 
+      $update_submission_data_request_data = new \FormAPI\Model\UpdateSubmissionDataRequestData(); // \FormAPI\Model\UpdateSubmissionDataRequestData | 
+      $result = $apiInstance->updateDataRequest($data_request_id, $update_submission_data_request_data);
+    }
 }

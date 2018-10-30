@@ -208,7 +208,8 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
           "name" => 'John Smith',
           "email" => 'jsmith@example.com',
           "fields" => array('description'),
-          "order" => 1
+          "order" => 1,
+          "auth_type" => 'email_link'
         ]
       ));
       $response = $this->apiInstance->generatePDF($template_id, $submission);

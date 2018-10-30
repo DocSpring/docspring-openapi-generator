@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionDataRequestDataTest
+ * CreateSubmissionDataRequestDataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * SubmissionDataRequestDataTest Class Doc Comment
+ * CreateSubmissionDataRequestDataTest Class Doc Comment
  *
  * @category    Class
- * @description SubmissionDataRequestData
+ * @description CreateSubmissionDataRequestData
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
+class CreateSubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class SubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "SubmissionDataRequestData"
+     * Test "CreateSubmissionDataRequestData"
      */
-    public function testSubmissionDataRequestData()
+    public function testCreateSubmissionDataRequestData()
     {
     }
 
@@ -80,6 +80,55 @@ class SubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
+    {
+    }
+
+    /**
+     * Test attribute "auth_type"
+     */
+    public function testPropertyAuthType()
+    {
+    }
+
+    /**
+     * Test attribute "auth_second_factor_type"
+     */
+    public function testPropertyAuthSecondFactorType()
+    {
+    }
+
+    /**
+     * Test attribute "auth_phone_number_hash"
+     */
+    public function testPropertyAuthPhoneNumberHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_session_started_at"
+     */
+    public function testPropertyAuthSessionStartedAt()
+    {
+    }
+
+    /**
+     * Test attribute "auth_user_id_hash"
+     */
+    public function testPropertyAuthUserIdHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_session_id_hash"
+     */
+    public function testPropertyAuthSessionIdHash()
+    {
+    }
+
+    /**
+     * Test attribute "auth_username_hash"
+     */
+    public function testPropertyAuthUsernameHash()
     {
     }
 
@@ -101,6 +150,13 @@ class SubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
      * Test attribute "email"
      */
     public function testPropertyEmail()
+    {
+    }
+
+    /**
+     * Test attribute "auth_provider"
+     */
+    public function testPropertyAuthProvider()
     {
     }
 

@@ -62,7 +62,7 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
         'html' => 'string',
         'css' => 'string',
         'metadata' => 'object',
-        'data_requests' => '\FormAPI\Model\SubmissionDataRequestData[]'
+        'data_requests' => '\FormAPI\Model\CreateSubmissionDataRequestData[]'
     ];
 
     /**
@@ -360,7 +360,7 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     /**
      * Gets data_requests
      *
-     * @return \FormAPI\Model\SubmissionDataRequestData[]|null
+     * @return \FormAPI\Model\CreateSubmissionDataRequestData[]|null
      */
     public function getDataRequests()
     {
@@ -370,7 +370,7 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     /**
      * Sets data_requests
      *
-     * @param \FormAPI\Model\SubmissionDataRequestData[]|null $data_requests data_requests
+     * @param \FormAPI\Model\CreateSubmissionDataRequestData[]|null $data_requests data_requests
      *
      * @return $this
      */

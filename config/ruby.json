@@ -1,13 +1,13 @@
 {
-    "gemName": "form_api",
-    "moduleName": "FormAPI",
-    "gemVersion": "1.2.0",
-    "gemAuthor": "Form Applications, Inc.",
-    "gemAuthorEmail": "support@formapi.io",
-    "gemHomepage": "https://github.com/FormAPI/formapi-ruby",
-    "gemSummary": "FormAPI API Client",
-    "gemDescription": "Client library for the FormAPI PDF generation and e-signature service",
-    "gemLicense": "MIT",
-    "hideGenerationTimestamp": true,
-    "httpUserAgent": "formapi-ruby-#{VERSION}"
+  "gemName": "form_api",
+  "moduleName": "FormAPI",
+  "gemVersion": "1.3.0",
+  "gemAuthor": "Form Applications, Inc.",
+  "gemAuthorEmail": "support@formapi.io",
+  "gemHomepage": "https://github.com/FormAPI/formapi-ruby",
+  "gemSummary": "FormAPI API Client",
+  "gemDescription": "Client library for the FormAPI PDF generation and e-signature service",
+  "gemLicense": "MIT",
+  "hideGenerationTimestamp": true,
+  "httpUserAgent": "formapi-ruby-#{VERSION}"
 }

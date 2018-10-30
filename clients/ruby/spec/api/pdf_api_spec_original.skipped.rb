@@ -204,4 +204,18 @@ describe 'PDFApi' do
       expect(result).to_not be_nil
     end
   end
+  # integration tests for update_data_request
+  # Update a submission data request
+  # @param data_request_id 
+  # @param update_submission_data_request_data 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateDataRequestResponse]
+  describe 'update_data_request test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String | 
+      update_submission_data_request_data = FormAPI::UpdateSubmissionDataRequestData.new # UpdateSubmissionDataRequestData | 
+      result = api_instance.update_data_request(data_request_id, update_submission_data_request_data)
+      expect(result).to_not be_nil
+    end
+  end
 end

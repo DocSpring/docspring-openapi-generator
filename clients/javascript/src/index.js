@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'api/Client', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionBatchResponse', 'model/CreateSubmissionBatchSubmissionsResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionDataBatchRequest', 'model/CreateSubmissionDataBatchV1', 'model/CreateSubmissionDataRequestTokenResponse', 'model/CreateSubmissionDataRequestTokenResponseToken', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/SubmissionBatch', 'model/SubmissionBatchData', 'model/SubmissionDataRequest', 'model/SubmissionDataRequestData', 'model/Template', 'api/PDFApi'], factory);
+    define(['ApiClient', 'api/Client', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionBatchResponse', 'model/CreateSubmissionBatchSubmissionsResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionDataBatchRequest', 'model/CreateSubmissionDataBatchV1', 'model/CreateSubmissionDataRequestData', 'model/CreateSubmissionDataRequestTokenResponse', 'model/CreateSubmissionDataRequestTokenResponseToken', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/SubmissionBatch', 'model/SubmissionBatchData', 'model/SubmissionDataRequest', 'model/Template', 'model/UpdateDataRequestResponse', 'model/UpdateSubmissionDataRequestData', 'api/PDFApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./api/Client'), require('./model/AuthenticationError'), require('./model/AuthenticationSuccessResponse'), require('./model/CombinedSubmission'), require('./model/CombinedSubmissionData'), require('./model/CreateCombinedSubmissionResponse'), require('./model/CreateSubmissionBatchResponse'), require('./model/CreateSubmissionBatchSubmissionsResponse'), require('./model/CreateSubmissionData'), require('./model/CreateSubmissionDataBatchRequest'), require('./model/CreateSubmissionDataBatchV1'), require('./model/CreateSubmissionDataRequestTokenResponse'), require('./model/CreateSubmissionDataRequestTokenResponseToken'), require('./model/CreateSubmissionResponse'), require('./model/Error'), require('./model/InvalidRequest'), require('./model/Submission'), require('./model/SubmissionBatch'), require('./model/SubmissionBatchData'), require('./model/SubmissionDataRequest'), require('./model/SubmissionDataRequestData'), require('./model/Template'), require('./api/PDFApi'));
+    module.exports = factory(require('./ApiClient'), require('./api/Client'), require('./model/AuthenticationError'), require('./model/AuthenticationSuccessResponse'), require('./model/CombinedSubmission'), require('./model/CombinedSubmissionData'), require('./model/CreateCombinedSubmissionResponse'), require('./model/CreateSubmissionBatchResponse'), require('./model/CreateSubmissionBatchSubmissionsResponse'), require('./model/CreateSubmissionData'), require('./model/CreateSubmissionDataBatchRequest'), require('./model/CreateSubmissionDataBatchV1'), require('./model/CreateSubmissionDataRequestData'), require('./model/CreateSubmissionDataRequestTokenResponse'), require('./model/CreateSubmissionDataRequestTokenResponseToken'), require('./model/CreateSubmissionResponse'), require('./model/Error'), require('./model/InvalidRequest'), require('./model/Submission'), require('./model/SubmissionBatch'), require('./model/SubmissionBatchData'), require('./model/SubmissionDataRequest'), require('./model/Template'), require('./model/UpdateDataRequestResponse'), require('./model/UpdateSubmissionDataRequestData'), require('./api/PDFApi'));
   }
-}(function(ApiClient, Client, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionBatchResponse, CreateSubmissionBatchSubmissionsResponse, CreateSubmissionData, CreateSubmissionDataBatchRequest, CreateSubmissionDataBatchV1, CreateSubmissionDataRequestTokenResponse, CreateSubmissionDataRequestTokenResponseToken, CreateSubmissionResponse, Error, InvalidRequest, Submission, SubmissionBatch, SubmissionBatchData, SubmissionDataRequest, SubmissionDataRequestData, Template, PDFApi) {
+}(function(ApiClient, Client, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionBatchResponse, CreateSubmissionBatchSubmissionsResponse, CreateSubmissionData, CreateSubmissionDataBatchRequest, CreateSubmissionDataBatchV1, CreateSubmissionDataRequestData, CreateSubmissionDataRequestTokenResponse, CreateSubmissionDataRequestTokenResponseToken, CreateSubmissionResponse, Error, InvalidRequest, Submission, SubmissionBatch, SubmissionBatchData, SubmissionDataRequest, Template, UpdateDataRequestResponse, UpdateSubmissionDataRequestData, PDFApi) {
   'use strict';
 
   /**
@@ -53,7 +53,7 @@
    * </pre>
    * </p>
    * @module index
-   * @version 2.1.0
+   * @version 2.2.0
    */
   var exports = {
     /**
@@ -119,6 +119,11 @@
      */
     CreateSubmissionDataBatchV1: CreateSubmissionDataBatchV1,
     /**
+     * The CreateSubmissionDataRequestData model constructor.
+     * @property {module:model/CreateSubmissionDataRequestData}
+     */
+    CreateSubmissionDataRequestData: CreateSubmissionDataRequestData,
+    /**
      * The CreateSubmissionDataRequestTokenResponse model constructor.
      * @property {module:model/CreateSubmissionDataRequestTokenResponse}
      */
@@ -164,15 +169,20 @@
      */
     SubmissionDataRequest: SubmissionDataRequest,
     /**
-     * The SubmissionDataRequestData model constructor.
-     * @property {module:model/SubmissionDataRequestData}
-     */
-    SubmissionDataRequestData: SubmissionDataRequestData,
-    /**
      * The Template model constructor.
      * @property {module:model/Template}
      */
     Template: Template,
+    /**
+     * The UpdateDataRequestResponse model constructor.
+     * @property {module:model/UpdateDataRequestResponse}
+     */
+    UpdateDataRequestResponse: UpdateDataRequestResponse,
+    /**
+     * The UpdateSubmissionDataRequestData model constructor.
+     * @property {module:model/UpdateSubmissionDataRequestData}
+     */
+    UpdateSubmissionDataRequestData: UpdateSubmissionDataRequestData,
     /**
      * The PDFApi service constructor.
      * @property {module:api/PDFApi}

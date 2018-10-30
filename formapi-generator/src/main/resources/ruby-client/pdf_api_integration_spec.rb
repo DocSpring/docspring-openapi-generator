@@ -223,6 +223,7 @@ describe 'PDFApi' do
             email: 'jsmith@example.com',
             fields: ['description'],
             order: 1,
+            auth_type: 'email_link',
           }
         ]
       )
@@ -273,8 +274,45 @@ describe 'PDFApi' do
       expect(data_request.fields).to eq ['description']
       expect(data_request.metadata).to eq(user_id: 123)
       expect(data_request.state).to eq 'pending'
-      expect(data_request.viewed_at).to eq '2018-10-23T13:00:00Z'
+      expect(data_request.viewed_at).to be_nil
       expect(data_request.completed_at).to be_nil
+    end
+  end
+
+  # integration tests for update_data_request
+  # Update a submission data request
+  # @param data_request_id
+  # @param [Hash] opts the optional parameters
+  # @return [SubmissionDataRequest]
+  describe 'update_data_request test' do
+    it 'should work' do
+      data_request_id = 'drq_000000000000000001' # String |
+      response = api_instance.update_data_request(
+        data_request_id,
+        name: 'Harry Smith',
+        email: 'hsmith@example.com',
+        order: 2,
+        fields: ['title'],
+        metadata: { user_id: 345 },
+        auth_type: 'oauth',
+        auth_provider: 'twitter',
+        auth_session_started_at: '2018-10-23T13:00:00Z'
+      )
+      expect(response.status).to eq 'success'
+      data_request = response.data_request
+      expect(data_request.id).to start_with 'drq_'
+      # Not allowed to update order, name, email, fields
+      expect(data_request.order).to eq 1
+      expect(data_request.name).to eq 'John Doe'
+      expect(data_request.email).to eq 'jdoe@example.com'
+      expect(data_request.fields).to eq ['description']
+      expect(data_request.metadata).to eq(user_id: 345)
+      expect(data_request.state).to eq 'pending'
+      expect(data_request.viewed_at).to be_nil
+      expect(data_request.completed_at).to be_nil
+      expect(data_request.auth_type).to eq 'oauth'
+      expect(data_request.auth_provider).to eq 'twitter'
+      expect(data_request.auth_session_started_at).to eq '2018-10-23T13:00:00Z'
     end
   end
   # integration tests for get_submission

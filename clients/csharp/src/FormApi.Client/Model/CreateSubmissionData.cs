@@ -44,7 +44,7 @@ namespace FormApi.Client.Model
         /// <param name="css">css.</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="dataRequests">dataRequests.</param>
-        public CreateSubmissionData(bool? test = default(bool?), Object data = default(Object), string html = default(string), string css = default(string), Object metadata = default(Object), List<SubmissionDataRequestData> dataRequests = default(List<SubmissionDataRequestData>))
+        public CreateSubmissionData(bool? test = default(bool?), Object data = default(Object), string html = default(string), string css = default(string), Object metadata = default(Object), List<CreateSubmissionDataRequestData> dataRequests = default(List<CreateSubmissionDataRequestData>))
         {
             // to ensure "data" is required (not null)
             if (data == null)
@@ -96,7 +96,7 @@ namespace FormApi.Client.Model
         /// Gets or Sets DataRequests
         /// </summary>
         [DataMember(Name="data_requests", EmitDefaultValue=false)]
-        public List<SubmissionDataRequestData> DataRequests { get; set; }
+        public List<CreateSubmissionDataRequestData> DataRequests { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

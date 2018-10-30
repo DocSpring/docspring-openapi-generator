@@ -46,7 +46,7 @@ module FormAPI
         :'html' => :'String',
         :'css' => :'String',
         :'metadata' => :'Object',
-        :'data_requests' => :'Array<SubmissionDataRequestData>'
+        :'data_requests' => :'Array<CreateSubmissionDataRequestData>'
       }
     end
 

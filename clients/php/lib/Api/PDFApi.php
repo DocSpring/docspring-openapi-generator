@@ -4478,6 +4478,374 @@ class PDFApi
     }
 
     /**
+     * Operation updateDataRequest
+     *
+     * Update a submission data request
+     *
+     * @param  string $data_request_id data_request_id (required)
+     * @param  \FormAPI\Model\UpdateSubmissionDataRequestData $update_submission_data_request_data update_submission_data_request_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\UpdateDataRequestResponse|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\InvalidRequest
+     */
+    public function updateDataRequest($data_request_id, $update_submission_data_request_data)
+    {
+        list($response) = $this->updateDataRequestWithHttpInfo($data_request_id, $update_submission_data_request_data);
+        return $response;
+    }
+
+    /**
+     * Operation updateDataRequestWithHttpInfo
+     *
+     * Update a submission data request
+     *
+     * @param  string $data_request_id (required)
+     * @param  \FormAPI\Model\UpdateSubmissionDataRequestData $update_submission_data_request_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\UpdateDataRequestResponse|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\InvalidRequest, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateDataRequestWithHttpInfo($data_request_id, $update_submission_data_request_data)
+    {
+        $request = $this->updateDataRequestRequest($data_request_id, $update_submission_data_request_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\UpdateDataRequestResponse' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\UpdateDataRequestResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\UpdateDataRequestResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\FormAPI\Model\InvalidRequest' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\InvalidRequest' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\InvalidRequest', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\UpdateDataRequestResponse';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\UpdateDataRequestResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\InvalidRequest',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateDataRequestAsync
+     *
+     * Update a submission data request
+     *
+     * @param  string $data_request_id (required)
+     * @param  \FormAPI\Model\UpdateSubmissionDataRequestData $update_submission_data_request_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateDataRequestAsync($data_request_id, $update_submission_data_request_data)
+    {
+        return $this->updateDataRequestAsyncWithHttpInfo($data_request_id, $update_submission_data_request_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateDataRequestAsyncWithHttpInfo
+     *
+     * Update a submission data request
+     *
+     * @param  string $data_request_id (required)
+     * @param  \FormAPI\Model\UpdateSubmissionDataRequestData $update_submission_data_request_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateDataRequestAsyncWithHttpInfo($data_request_id, $update_submission_data_request_data)
+    {
+        $returnType = '\FormAPI\Model\UpdateDataRequestResponse';
+        $request = $this->updateDataRequestRequest($data_request_id, $update_submission_data_request_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateDataRequest'
+     *
+     * @param  string $data_request_id (required)
+     * @param  \FormAPI\Model\UpdateSubmissionDataRequestData $update_submission_data_request_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function updateDataRequestRequest($data_request_id, $update_submission_data_request_data)
+    {
+        // verify the required parameter 'data_request_id' is set
+        if ($data_request_id === null || (is_array($data_request_id) && count($data_request_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $data_request_id when calling updateDataRequest'
+            );
+        }
+        // verify the required parameter 'update_submission_data_request_data' is set
+        if ($update_submission_data_request_data === null || (is_array($update_submission_data_request_data) && count($update_submission_data_request_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_submission_data_request_data when calling updateDataRequest'
+            );
+        }
+
+        $resourcePath = '/data_requests/{data_request_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($data_request_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'data_request_id' . '}',
+                ObjectSerializer::toPathValue($data_request_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($update_submission_data_request_data)) {
+            $_tempBody = $update_submission_data_request_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Create http client option
      *
      * @throws \RuntimeException on file opening failure

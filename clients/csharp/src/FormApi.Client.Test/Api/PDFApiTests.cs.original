@@ -223,6 +223,19 @@ namespace FormApi.Client.Test
             //Assert.IsInstanceOf<AuthenticationSuccessResponse> (response, "response is AuthenticationSuccessResponse");
         }
         
+        /// <summary>
+        /// Test UpdateDataRequest
+        /// </summary>
+        [Test]
+        public void UpdateDataRequestTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //string dataRequestId = null;
+            //UpdateSubmissionDataRequestData updateSubmissionDataRequestData = null;
+            //var response = instance.UpdateDataRequest(dataRequestId, updateSubmissionDataRequestData);
+            //Assert.IsInstanceOf<UpdateDataRequestResponse> (response, "response is UpdateDataRequestResponse");
+        }
+        
     }
 
 }

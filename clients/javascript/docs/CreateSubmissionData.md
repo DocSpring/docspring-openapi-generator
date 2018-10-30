@@ -8,6 +8,6 @@ Name | Type | Description | Notes
 **html** | **String** |  | [optional] 
 **css** | **String** |  | [optional] 
 **metadata** | **Object** |  | [optional] 
-**dataRequests** | [**[SubmissionDataRequestData]**](SubmissionDataRequestData.md) |  | [optional] 
+**dataRequests** | [**[CreateSubmissionDataRequestData]**](CreateSubmissionDataRequestData.md) |  | [optional] 
 
 

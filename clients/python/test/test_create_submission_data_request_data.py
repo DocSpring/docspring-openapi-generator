@@ -15,12 +15,12 @@ from __future__ import absolute_import
 import unittest
 
 import form_api
-from form_api.models.submission_data_request_data import SubmissionDataRequestData  # noqa: E501
+from form_api.models.create_submission_data_request_data import CreateSubmissionDataRequestData  # noqa: E501
 from form_api.rest import ApiException
 
 
-class TestSubmissionDataRequestData(unittest.TestCase):
-    """SubmissionDataRequestData unit test stubs"""
+class TestCreateSubmissionDataRequestData(unittest.TestCase):
+    """CreateSubmissionDataRequestData unit test stubs"""
 
     def setUp(self):
         pass
@@ -28,10 +28,10 @@ class TestSubmissionDataRequestData(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def testSubmissionDataRequestData(self):
-        """Test SubmissionDataRequestData"""
+    def testCreateSubmissionDataRequestData(self):
+        """Test CreateSubmissionDataRequestData"""
         # FIXME: construct object with mandatory attributes with example values
-        # model = form_api.models.submission_data_request_data.SubmissionDataRequestData()  # noqa: E501
+        # model = form_api.models.create_submission_data_request_data.CreateSubmissionDataRequestData()  # noqa: E501
         pass
 
 

@@ -180,6 +180,16 @@
         done();
       });
     });
+    describe('updateDataRequest', function() {
+      it('should call updateDataRequest successfully', function(done) {
+        //uncomment below and update the code to test updateDataRequest
+        //instance.updateDataRequest(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 
 }));

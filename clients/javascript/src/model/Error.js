@@ -36,7 +36,7 @@
   /**
    * The Error model module.
    * @module model/Error
-   * @version 2.1.0
+   * @version 2.2.0
    */
 
   /**

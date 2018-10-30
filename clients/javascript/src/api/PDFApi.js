@@ -16,24 +16,24 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionBatchResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionDataBatchV1', 'model/CreateSubmissionDataRequestTokenResponse', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/SubmissionBatch', 'model/SubmissionBatchData', 'model/SubmissionDataRequest', 'model/Template'], factory);
+    define(['ApiClient', 'model/AuthenticationError', 'model/AuthenticationSuccessResponse', 'model/CombinedSubmission', 'model/CombinedSubmissionData', 'model/CreateCombinedSubmissionResponse', 'model/CreateSubmissionBatchResponse', 'model/CreateSubmissionData', 'model/CreateSubmissionDataBatchV1', 'model/CreateSubmissionDataRequestTokenResponse', 'model/CreateSubmissionResponse', 'model/Error', 'model/InvalidRequest', 'model/Submission', 'model/SubmissionBatch', 'model/SubmissionBatchData', 'model/SubmissionDataRequest', 'model/Template', 'model/UpdateDataRequestResponse', 'model/UpdateSubmissionDataRequestData'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AuthenticationError'), require('../model/AuthenticationSuccessResponse'), require('../model/CombinedSubmission'), require('../model/CombinedSubmissionData'), require('../model/CreateCombinedSubmissionResponse'), require('../model/CreateSubmissionBatchResponse'), require('../model/CreateSubmissionData'), require('../model/CreateSubmissionDataBatchV1'), require('../model/CreateSubmissionDataRequestTokenResponse'), require('../model/CreateSubmissionResponse'), require('../model/Error'), require('../model/InvalidRequest'), require('../model/Submission'), require('../model/SubmissionBatch'), require('../model/SubmissionBatchData'), require('../model/SubmissionDataRequest'), require('../model/Template'));
+    module.exports = factory(require('../ApiClient'), require('../model/AuthenticationError'), require('../model/AuthenticationSuccessResponse'), require('../model/CombinedSubmission'), require('../model/CombinedSubmissionData'), require('../model/CreateCombinedSubmissionResponse'), require('../model/CreateSubmissionBatchResponse'), require('../model/CreateSubmissionData'), require('../model/CreateSubmissionDataBatchV1'), require('../model/CreateSubmissionDataRequestTokenResponse'), require('../model/CreateSubmissionResponse'), require('../model/Error'), require('../model/InvalidRequest'), require('../model/Submission'), require('../model/SubmissionBatch'), require('../model/SubmissionBatchData'), require('../model/SubmissionDataRequest'), require('../model/Template'), require('../model/UpdateDataRequestResponse'), require('../model/UpdateSubmissionDataRequestData'));
   } else {
     // Browser globals (root is window)
     if (!root.FormAPI) {
       root.FormAPI = {};
     }
-    root.FormAPI.PDFApi = factory(root.FormAPI.ApiClient, root.FormAPI.AuthenticationError, root.FormAPI.AuthenticationSuccessResponse, root.FormAPI.CombinedSubmission, root.FormAPI.CombinedSubmissionData, root.FormAPI.CreateCombinedSubmissionResponse, root.FormAPI.CreateSubmissionBatchResponse, root.FormAPI.CreateSubmissionData, root.FormAPI.CreateSubmissionDataBatchV1, root.FormAPI.CreateSubmissionDataRequestTokenResponse, root.FormAPI.CreateSubmissionResponse, root.FormAPI.Error, root.FormAPI.InvalidRequest, root.FormAPI.Submission, root.FormAPI.SubmissionBatch, root.FormAPI.SubmissionBatchData, root.FormAPI.SubmissionDataRequest, root.FormAPI.Template);
+    root.FormAPI.PDFApi = factory(root.FormAPI.ApiClient, root.FormAPI.AuthenticationError, root.FormAPI.AuthenticationSuccessResponse, root.FormAPI.CombinedSubmission, root.FormAPI.CombinedSubmissionData, root.FormAPI.CreateCombinedSubmissionResponse, root.FormAPI.CreateSubmissionBatchResponse, root.FormAPI.CreateSubmissionData, root.FormAPI.CreateSubmissionDataBatchV1, root.FormAPI.CreateSubmissionDataRequestTokenResponse, root.FormAPI.CreateSubmissionResponse, root.FormAPI.Error, root.FormAPI.InvalidRequest, root.FormAPI.Submission, root.FormAPI.SubmissionBatch, root.FormAPI.SubmissionBatchData, root.FormAPI.SubmissionDataRequest, root.FormAPI.Template, root.FormAPI.UpdateDataRequestResponse, root.FormAPI.UpdateSubmissionDataRequestData);
   }
-}(this, function(ApiClient, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionBatchResponse, CreateSubmissionData, CreateSubmissionDataBatchV1, CreateSubmissionDataRequestTokenResponse, CreateSubmissionResponse, Error, InvalidRequest, Submission, SubmissionBatch, SubmissionBatchData, SubmissionDataRequest, Template) {
+}(this, function(ApiClient, AuthenticationError, AuthenticationSuccessResponse, CombinedSubmission, CombinedSubmissionData, CreateCombinedSubmissionResponse, CreateSubmissionBatchResponse, CreateSubmissionData, CreateSubmissionDataBatchV1, CreateSubmissionDataRequestTokenResponse, CreateSubmissionResponse, Error, InvalidRequest, Submission, SubmissionBatch, SubmissionBatchData, SubmissionDataRequest, Template, UpdateDataRequestResponse, UpdateSubmissionDataRequestData) {
   'use strict';
 
   /**
    * PDF service.
    * @module api/PDFApi
-   * @version 2.1.0
+   * @version 2.2.0
    */
 
   /**
@@ -659,6 +659,59 @@
 
       return this.apiClient.callApi(
         '/authentication', 'GET',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the updateDataRequest operation.
+     * @callback module:api/PDFApi~updateDataRequestCallback
+     * @param {String} error Error message, if any.
+     * @param {module:model/UpdateDataRequestResponse} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Update a submission data request
+     * @param {String} dataRequestId 
+     * @param {module:model/UpdateSubmissionDataRequestData} updateSubmissionDataRequestData 
+     * @param {module:api/PDFApi~updateDataRequestCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/UpdateDataRequestResponse}
+     */
+    this.updateDataRequest = function(dataRequestId, updateSubmissionDataRequestData, callback) {
+      var postBody = updateSubmissionDataRequestData;
+
+      // verify the required parameter 'dataRequestId' is set
+      if (dataRequestId === undefined || dataRequestId === null) {
+        throw new Error("Missing the required parameter 'dataRequestId' when calling updateDataRequest");
+      }
+
+      // verify the required parameter 'updateSubmissionDataRequestData' is set
+      if (updateSubmissionDataRequestData === undefined || updateSubmissionDataRequestData === null) {
+        throw new Error("Missing the required parameter 'updateSubmissionDataRequestData' when calling updateDataRequest");
+      }
+
+
+      var pathParams = {
+        'data_request_id': dataRequestId
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['api_token_basic'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = UpdateDataRequestResponse;
+
+      return this.apiClient.callApi(
+        '/data_requests/{data_request_id}', 'PUT',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, callback
       );
