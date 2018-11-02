@@ -10,7 +10,7 @@ if ! [ -d .git ]; then
   git fetch origin
   git reset --hard origin/master
   echo "Pulled FormAPI/formapi-php from GitHub and reset to master branch."
-  echo "Please re-run the generater script, then run ./scripts/php/release again"
+  echo "Please re-run the generator script, then run ./scripts/php/release again"
   echo "to commit the changes."
   exit 1
 fi

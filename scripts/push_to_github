@@ -30,7 +30,7 @@ if ! [ -d .git ]; then
   git fetch origin
   git reset --hard origin/master
   echo "Pulled FormAPI/formapi-$LANGUAGE from GitHub and reset the master branch to origin/master."
-  echo "Please re-run the generater script, then run the release script again"
+  echo "Please re-run the generator script, then run the release script again"
   echo "to commit the changes."
   exit 1
 fi
