@@ -15,7 +15,7 @@ if ! [ -d .git ]; then
   exit 1
 fi
 
-COMMIT_MESSAGE="Update on $(date). Version: $VERSION"
+COMMIT_MESSAGE="Update on $(date "+%F %T"). Version: $VERSION"
 git add -A
 git commit -m "$COMMIT_MESSAGE"
 echo "Committed changes with message: $COMMIT_MESSAGE"

@@ -26,6 +26,7 @@ cd "./clients/$LANGUAGE"
 if ! [ -d .git ]; then
   git init
   git remote add origin "git@github.com:FormAPI/formapi-$LANGUAGE.git"
+  echo "Pulling code from FormAPI/formapi-$LANGUAGE.git..."
   git fetch origin
   git reset --hard origin/master
   echo "Pulled FormAPI/formapi-$LANGUAGE from GitHub and reset the master branch to origin/master."
@@ -34,9 +35,9 @@ if ! [ -d .git ]; then
   exit 1
 fi
 
-COMMIT_MESSAGE="Update on $(date). Version: $VERSION"
+COMMIT_MESSAGE="Updated on $(date "+%F %T"). Version: $VERSION"
 git add -A
 git commit -m "$COMMIT_MESSAGE"
 echo "Committed changes with message: $COMMIT_MESSAGE"
 
-# git push origin master -f
+git push origin master -f
