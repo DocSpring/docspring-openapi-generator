@@ -27,25 +27,20 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
-# Preserve any vendored dependencies between rebuilds
+# Preserve .git repo and any vendored dependencies between generations
 if [ -d $CLIENT_DIR ]; then
-  case "$LANGUAGE" in
-    php)
-      # PHP uses a git repo for pushing new releases.
-      for f in $CLIENT_DIR/*; do
-        if ! [[ "$f" = *'/vendor' ]] && ! [[ "$f" = *'.git' ]]; then rm -r $f; fi
-      done;;
-    csharp)
-      for f in $CLIENT_DIR/*; do
-        if ! [[ "$f" = *'/nuget.exe' ]] && ! [[ "$f" = *'/packages' ]]; then rm -r $f; fi
-      done;;
-    javascript)
-      for f in $CLIENT_DIR/*; do
-        if ! [[ "$f" = *'/node_modules' ]]; then rm -r $f; fi
-      done;;
-    *)
-      rm -rf "$CLIENT_DIR"
-  esac
+  for f in $CLIENT_DIR/*; do
+    if [[ "$f" = *'.git' ]]; then continue; fi
+    case "$LANGUAGE" in
+      php)
+        if [[ "$f" = *'/vendor' ]]; then continue; fi;;
+      csharp)
+        if [[ "$f" = *'/nuget.exe' ]] || [[ "$f" = *'/packages' ]]; then continue; fi;;
+      javascript)
+        if [[ "$f" = *'/node_modules' ]]; then continue; fi;;
+    esac
+    rm -rf "$f"
+  done
 fi
 
 ./openapi-generator-cli generate \
@@ -53,6 +48,9 @@ fi
   --generator-name "$GENERATOR_NAME" \
   --config "$CONFIG_FILE" \
   --output "$CLIENT_DIR"
+
+# None of the generators include a LICENSE, so copy one in.
+cp LICENSE "$CLIENT_DIR/LICENSE"
 
 if [ -f "./scripts/$LANGUAGE/post-generate" ]; then
   "./scripts/$LANGUAGE/post-generate"

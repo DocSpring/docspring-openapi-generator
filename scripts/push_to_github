@@ -24,6 +24,7 @@ echo "Pushing formapi-$LANGUAGE v$VERSION to GitHub..."
 cd "./clients/$LANGUAGE"
 
 if ! [ -d .git ]; then
+  echo "Initializing git repository for clients/$LANGUAGE..."
   git init
   git remote add origin "git@github.com:FormAPI/formapi-$LANGUAGE.git"
   echo "Pulling code from FormAPI/formapi-$LANGUAGE.git..."
