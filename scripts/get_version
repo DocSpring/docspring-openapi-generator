@@ -1,0 +1,62 @@
+#!/usr/bin/env ruby
+require 'json'
+
+VERSION_REGEX = /^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/
+VERSION_TYPES = %w[major minor patch].freeze
+LANGUAGES = Dir.glob(File.expand_path('../config/*.json', __dir__)).map do |f|
+  f[%r{/([^/]+)\.json$}, 1]
+end.freeze
+LANGUAGE_MAX_LENGTH = LANGUAGES.map(&:length).max
+VERSION_KEYS = {
+  csharp: :packageVersion,
+  java: :artifactVersion,
+  javascript: :projectVersion,
+  php: :artifactVersion,
+  python: :packageVersion,
+  ruby: :gemVersion
+}.freeze
+
+if ARGV[0] && ARGV[0].match?(/help$/)
+  puts "Usage: get_version <all|#{LANGUAGES.join('|')}> [all|major|minor|patch]"
+  exit 1
+end
+
+language = nil
+version_type = 'all'
+if ARGV.count == 1
+  language = ARGV[0]
+elsif ARGV.count == 2
+  language = ARGV[0]
+  version_type = ARGV[1]
+end
+
+if !VERSION_TYPES.include?(version_type) && version_type != 'all'
+  puts "'#{version_type}' is not a valid version type. Must be one of: " \
+    "#{VERSION_TYPES.join(', ')}"
+  exit 1
+end
+if !language.nil? && !LANGUAGES.include?(language) && language != 'all'
+  puts "'#{language}' is not a valid language. Must be one of: " \
+    "#{LANGUAGES.join(', ')}"
+  exit 1
+end
+
+def get_version_for(language, version_type)
+  config_file = File.expand_path("../config/#{language}.json", __dir__)
+  config = JSON.parse(File.read(config_file))
+  version_key = VERSION_KEYS.fetch(language).to_s
+  version = config[version_key]
+  version_match = version.match(VERSION_REGEX)
+  raise "#{current_version} is invalid! Format must match: x.x.x" unless version_match
+  return version if version_type == :all
+  version_match[version_type]
+end
+
+if language && language != 'all'
+  puts get_version_for(language.to_sym, version_type.to_sym)
+else
+  LANGUAGES.each do |l|
+    version = get_version_for(l.to_sym, version_type.to_sym)
+    puts [l, version].join(' => ')
+  end
+end

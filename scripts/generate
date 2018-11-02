@@ -9,7 +9,6 @@ CLIENT_DIR="clients/$LANGUAGE"
 if [ -z "$LANGUAGE" ]; then
   for f in config/*; do
     LANG="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
-    echo "Generating $LANG client library..."
     ./scripts/generate "$LANG"
   done
   exit
