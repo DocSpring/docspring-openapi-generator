@@ -1,8 +1,9 @@
 {
   "invokerPackage": "FormAPI",
+  "packageName": "FormAPI",
   "packagePath": ".",
-  "composerVendorName": "formapi",
-  "composerProjectName": "formapi",
-  "artifactVersion": "1.3.0",
+  "gitUserId": "formapi",
+  "gitRepoId": "formapi",
+  "artifactVersion": "1.3.1",
   "httpUserAgent": "formapi-php-#{VERSION}"
 }
