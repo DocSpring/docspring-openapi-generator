@@ -1,21 +1,19 @@
 #!/bin/bash
 set -e
 cd "$(dirname "$0")/../.."
-VERSION=$(cat config/php.json | jq -r .artifactVersion)
-cd "./clients/php"
+VERSION=$(cat config/java.json | jq -r .artifactVersion)
+cd "./clients/java"
 
 if ! [ -d .git ]; then
   git init
-  git remote add origin git@github.com:FormAPI/formapi-php.git
+  git remote add origin git@github.com:FormAPI/formapi-java.git
   git fetch origin
   git reset --hard origin/master
-  echo "Pulled FormAPI/formapi-php from GitHub and reset to master branch."
-  echo "Please re-run the generater script, then run ./scripts/php/release again"
+  echo "Pulled FormAPI/formapi-java from GitHub and reset to master branch."
+  echo "Please re-run the generater script, then run ./scripts/java/release again"
   echo "to commit the changes."
   exit 1
 fi
-
-echo "vendor" > .gitignore
 
 COMMIT_MESSAGE="Update on $(date). Version: $VERSION"
 git add -A

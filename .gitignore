@@ -27,10 +27,6 @@ swagger-codegen
 # Not sure where these are coming from
 bootsnap-compile-cache
 
-
-clients/python/test/venv-2/
-clients/python/test/venv-3/
-clients/python/.pytest_cache
-clients/php/build
-
-clients/csharp/wget-log*
+# Don't check in any auto-generated clients.
+# We push these up to their respective GitHub repos.
+clients/*
