@@ -2,10 +2,6 @@ package io.formapi.codegen;
 
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.languages.CSharpClientCodegen;
-// import io.swagger.v3.oas.models.parameters.Parameter;
-// import io.swagger.v3.oas.models.media.Schema;
-// import io.swagger.v3.oas.models.examples.Example;
-
 public class FormApiCSharpClientCodegen extends CSharpClientCodegen {
     public FormApiCSharpClientCodegen() {
         super();

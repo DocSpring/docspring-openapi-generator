@@ -7,7 +7,6 @@ import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.examples.Example;
 
 import java.io.File;
-
 public class FormApiRubyClientCodegen extends RubyClientCodegen {
     @Override
     public String getName() {

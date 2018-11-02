@@ -7,10 +7,6 @@ LANGUAGE="$1"
 if [ -z "$LANGUAGE" ]; then
   for f in config/*; do
     LANG="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
-    if [ "$LANG" = "java" ]; then
-      echo "Skipping $LANG for now, not implemented yet."
-      continue
-    fi
     echo "Running integration tests for $LANG client library..."
     ./scripts/run_integration_tests "$LANG"
   done

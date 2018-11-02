@@ -3,7 +3,14 @@
   "invokerPackage": "io.formapi",
   "apiPackage": "io.formapi",
   "groupId": "io.formapi",
+  "developerName": "FormAPI",
+  "developerEmail": "support@formapi.io",
+  "developerOrganization": "FormAPI",
+  "developerOrganizationUrl": "https://formapi.io",
+  "licenseName": "MIT",
+  "licenseUrl": "https://opensource.org/licenses/MIT",
   "artifactId": "FormAPI",
-  "artifactVersion": "1.1.0",
-  "httpUserAgent": "formapi-java-#{VERSION}"
+  "artifactVersion": "1.0.0",
+  "httpUserAgent": "formapi-java-#{VERSION}",
+  "library": "retrofit2"
 }

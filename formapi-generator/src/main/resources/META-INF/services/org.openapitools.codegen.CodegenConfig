@@ -3,3 +3,4 @@ io.formapi.codegen.FormApiPythonClientCodegen
 io.formapi.codegen.FormApiPhpClientCodegen
 io.formapi.codegen.FormApiCSharpClientCodegen
 io.formapi.codegen.FormApiJavascriptClientCodegen
+io.formapi.codegen.FormApiJavaClientCodegen

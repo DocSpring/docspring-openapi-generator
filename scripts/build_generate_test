@@ -22,10 +22,6 @@ LANGUAGE="$1"
 if [ -z "$LANGUAGE" ]; then
   for f in config/*; do
     LANGUAGE="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
-    if [ "$LANGUAGE" = "java" ]; then
-      echo "Skipping $LANGUAGE for now, not implemented yet."
-      continue
-    fi
     ./scripts/generate "$LANGUAGE"
     ./scripts/run_integration_tests "$LANGUAGE"
   done

@@ -5,7 +5,6 @@ import org.openapitools.codegen.languages.PythonClientCodegen;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.examples.Example;
-
 public class FormApiPythonClientCodegen extends PythonClientCodegen {
     @Override
     public String getName() {
