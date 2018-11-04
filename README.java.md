@@ -1,6 +1,6 @@
-# DocRaptor Java Native Client Library
+# formapi Java Native Client Library
 
-This is a maven package for using [DocRaptor API](https://docraptor.com/documentation) to convert [HTML to PDF and XLSX](https://docraptor.com).
+This is a maven package for using [formapi API](https://formapi.com/documentation) to convert [HTML to PDF and XLSX](https://formapi.com).
 
 
 ## Installation
@@ -21,8 +21,8 @@ After the client libarary is installed/deployed, you can use it in your Maven pr
 
 ```xml
 <dependency>
-  <groupId>com.docraptor</groupId>
-  <artifactId>docraptor</artifactId>
+  <groupId>com.formapi</groupId>
+  <artifactId>formapi</artifactId>
   <version>1.1.1</version>
 </dependency>
 ```
@@ -35,27 +35,27 @@ See [examples](examples/) for runnable examples with file output, error handling
 ```java
 import java.io.*;
 import java.net.*;
-import com.docraptor.*;
+import com.formapi.*;
 
 public class Sync {
   public static void main(String[] args) throws Exception {
-    DocApi docraptor = new DocApi();
-    ApiClient client = docraptor.getApiClient();
+    DocApi formapi = new DocApi();
+    ApiClient client = formapi.getApiClient();
    client.setUsername("YOUR_API_KEY_HERE"); // this key works for test documents
     //client.setDebugging(true);
 
     Doc doc = new Doc();
     doc.setTest(true);                                                   // test documents are free but watermarked
     doc.setDocumentContent("<html><body>Hello World</body></html>");     // supply content directly
-    // doc.setDocumentUrl("http://docraptor.com/examples/invoice.html"); // or use a url
+    // doc.setDocumentUrl("http://formapi.com/examples/invoice.html"); // or use a url
     doc.setDocumentType(Doc.DocumentTypeEnum.PDF);                       // PDF or XLS or XLSX
-    doc.setName("docraptor-java.pdf");                                   // help you find a document later
+    doc.setName("formapi-java.pdf");                                   // help you find a document later
     doc.setJavascript(true);                                             // enable JavaScript processing
     // prince_options = new PrinceOptions();
     // doc.setPrinceOptions(prince_options);
     // prince_options.setMedia("screen");                                // use screen styles instead of print styles
     // prince_options.setBaseurl("http://hello.com")                     // pretend URL when using document_content
-    docraptor.createDoc(doc);
+    formapi.createDoc(doc);
   }
 }
 ```
@@ -64,26 +64,29 @@ Docs created like this are limited to 60 seconds to render, check out the [async
 
 We have guides for doing some of the common things:
 
-* [Headers and Footers](https://docraptor.com/documentation/style#pdf-headers-footers) including page skipping
-* [CSS Media Selector](https://docraptor.com/documentation/api#api_basic_pdf) to make the page look exactly as it does in your browser
-* Protect content with [HTTP authentication](https://docraptor.com/documentation/api#api_http_user) or [proxies](https://docraptor.com/documentation/api#api_http_proxy) so only DocRaptor can access them
+* [Headers and Footers](https://formapi.com/documentation/style#pdf-headers-footers) including page skipping
+* [CSS Media Selector](https://formapi.com/documentation/api#api_basic_pdf) to make the page look exactly as it does in your browser
+* Protect content with [HTTP authentication](https://formapi.com/documentation/api#api_http_user) or [proxies](https://formapi.com/documentation/api#api_http_proxy) so only formapi can access them
 
 
 ## More Help
 
-DocRaptor has a lot of more [styling](https://docraptor.com/documentation/style) and [implementation options](https://docraptor.com/documentation/api).
+formapi has a lot of more [styling](https://formapi.com/documentation/style) and [implementation options](https://formapi.com/documentation/api).
 
-Stuck? We're experts at using DocRaptor so please [email us](mailto:support@docraptor.com) if you run into trouble.
+Stuck? We're experts at using formapi so please [email us](mailto:support@formapi.com) if you run into trouble.
 
 
 ## Development
 
-The majority of the code in this repo is generated using swagger-codegen on [docraptor.yaml](docraptor.yaml). You can modify this file and regenerate the client using `script/generate_language java`.
+The majority of the code in this repo is generated using swagger-codegen on [formapi.yaml](formapi.yaml). You can modify this file and regenerate the client using `script/generate_language java`.
 
+## How to set up the release process:
+
+Follow this guide: https://medium.com/@scottyab/how-to-publish-your-open-source-library-to-maven-central-5178d9579c5
 
 ## Release Process
 
-If you haven't released before, please see the [release setup guide](RELEASE_SETUP.md).
+If you haven't released before, please see the [release setup guide](RELEASE_SETUP.java.md).
 
 1. Pull latest master
 2. Merge feature branch(es) into master
@@ -100,10 +103,9 @@ If you haven't released before, please see the [release setup guide](RELEASE_SET
 9. `eval $(gpg-agent --daemon)`
 10. `gpg --use-agent --armor --detach-sign` and press ^C after authenticating
 11. `mvn clean deploy`
-12. Verify package release at [Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.docraptor%22%20AND%20a%3A%22docraptor%22)  (takes anywhere from minutes to days)
-13. Use the git tag and make a new release with `target/docraptor-*` attached, https://github.com/DocRaptor/docraptor-java/tags
-14. Refresh documentation on docraptor.com
-
+12. Verify package release at [Central](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.formapi%22%20AND%20a%3A%22formapi%22)  (takes anywhere from minutes to days)
+13. Use the git tag and make a new release with `target/formapi-*` attached, https://github.com/formapi/formapi-java/tags
+14. Refresh documentation on formapi.com
 
 ## Version Policy
 
