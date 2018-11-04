@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
+
+LANGUAGE="$1"
+
+if [ -z "$LANGUAGE" ]; then
+  for f in config/*; do
+    LANG="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
+    ./scripts/tag_version "$LANG"
+  done
+  exit
+fi
+
+VERSION="$(./scripts/get_version $LANG)"
+GIT_TAG="$LANGUAGE-$VERSION"
+
+CURRENT_TAG_REVISION="$(git rev-parse "$GIT_TAG" 2> /dev/null || true)"
+
+if [ -n "$CURRENT_TAG_REVISION" ]; then
+  echo "$GIT_TAG tag already exists for revision: ${CURRENT_TAG_REVISION:0:7}"
+  exit
+fi
+
+echo "Tagging current commit with: $GIT_TAG"
+git tag "$GIT_TAG"
