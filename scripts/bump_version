@@ -143,6 +143,9 @@ def bump_version(language, version_type, changelog_entries)
 end
 
 def prompt_for_changelog_entries
+  puts "----------------------------------------------------------------"
+  puts "Remember to prefix breaking changes with \"**BREAKING CHANGE**: \""
+  puts "----------------------------------------------------------------\n\n"
   entries = []
   loop do
     input = ask 'Add Changelog Entry (leave blank to end): '

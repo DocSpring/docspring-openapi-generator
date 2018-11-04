@@ -4,20 +4,4 @@ cd "$(dirname "$0")/../.."
 VERSION=$(cat config/java.json | jq -r .artifactVersion)
 cd "./clients/java"
 
-if ! [ -d .git ]; then
-  git init
-  git remote add origin git@github.com:FormAPI/formapi-java.git
-  git fetch origin
-  git reset --hard origin/master
-  echo "Pulled FormAPI/formapi-java from GitHub and reset to master branch."
-  echo "Please re-run the generator script, then run ./scripts/java/release again"
-  echo "to commit the changes."
-  exit 1
-fi
-
-COMMIT_MESSAGE="Update on $(date "+%F %T"). Version: $VERSION"
-git add -A
-git commit -m "$COMMIT_MESSAGE"
-echo "Committed changes with message: $COMMIT_MESSAGE"
-
-git push origin master -f
+mvn -DskipTests clean deploy

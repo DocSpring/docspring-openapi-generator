@@ -5,3 +5,6 @@ cd "$(dirname "$0")/../../clients/java"
 # It's useful to have access to the original generated tests,
 # so we can copy them into our custom specs and modify them.
 mv src/test/java/io/formapi/PdfApiTest.java src/test/java/io/formapi/PdfApiTest.java.original
+
+# gradlew needs to be executable
+chmod +x ./gradlew
