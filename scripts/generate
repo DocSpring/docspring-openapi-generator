@@ -49,8 +49,11 @@ fi
   --config "$CONFIG_FILE" \
   --output "$CLIENT_DIR"
 
-# None of the generators include a LICENSE, so copy one in.
+# Copy in LICENSE and CHANGELOG
 cp LICENSE "$CLIENT_DIR/LICENSE"
+if [ -f "./changelogs/CHANGELOG.$LANGUAGE.md" ]; then
+  cp "./changelogs/CHANGELOG.$LANGUAGE.md" "$CLIENT_DIR/CHANGELOG.md"
+fi
 
 if [ -f "./scripts/$LANGUAGE/post-generate" ]; then
   "./scripts/$LANGUAGE/post-generate"

@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'json'
+require 'highline/import'
 
-VERSION_REGEX = /^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/
+VERSION_REGEX = /^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)$/.freeze
 VERSION_TYPES = %w[major minor patch].freeze
 LANGUAGES = Dir.glob(File.expand_path('../config/*.json', __dir__)).map do |f|
   f[%r{/([^/]+)\.json$}, 1]
@@ -18,14 +19,18 @@ VERSION_KEYS = {
 
 @dry_run = false
 if ARGV.last == '--dry'
-  puts 'Running with the --dry flag. New versions will be printed to the console but not saved.'
+  puts 'Running with the --dry flag. New versions will be printed ' \
+    'to the console but not saved.'
   @dry_run = true
   ARGV.pop
 end
 
 if ARGV.empty?
-  puts 'Usage: bump_version <major|minor|patch> [--dry]  (to bump all clients)'
-  puts "Or:    bump_version <#{LANGUAGES.join('|')}> <major|minor|patch> [--dry]"
+  version_options = VERSION_TYPES.join('|')
+  puts "Usage: bump_version <#{version_options}> [--dry]  " \
+    '(to bump all clients)'
+  language_options = LANGUAGES.join('|')
+  puts "Or:    bump_version <#{language_options}> <#{version_options}> [--dry]"
   exit 1
 end
 
@@ -70,8 +75,16 @@ def increment_version(version_type, match)
   end
 end
 
+def config_file_for(language)
+  File.expand_path("../config/#{language}.json", __dir__)
+end
+
+def changelog_file_for(language)
+  File.expand_path("../changelogs/CHANGELOG.#{language}.md", __dir__)
+end
+
 def update_version_for(language)
-  config_file = File.expand_path("../config/#{language}.json", __dir__)
+  config_file = config_file_for(language)
   config = JSON.parse(File.read(config_file))
   version_key = VERSION_KEYS.fetch(language).to_s
   current_version = config[version_key]
@@ -79,20 +92,84 @@ def update_version_for(language)
   puts [current_version, new_version].join(' => ')
   config[version_key] = new_version
   return if @dry_run
+
   File.open(config_file, 'w') { |f| f.puts JSON.pretty_generate(config) }
+  new_version
 end
 
-def bump_version(language, version_type)
-  puts "Bumping #{version_type} version for #{language} client..."
-  update_version_for language do |current_version|
-    version_match = current_version.match(VERSION_REGEX)
-    raise "#{current_version} is invalid! Format must match: x.x.x" unless version_match
-    increment_version(version_type, version_match)
+def update_changelog(language)
+  changelog_file = changelog_file_for(language)
+  new_changelog = yield File.read(changelog_file)
+  return if new_changelog == false
+
+  puts "Adding entry to #{language} changelog..."
+  File.open(changelog_file, 'w') { |f| f.puts new_changelog }
+end
+
+def new_changelog_entry(new_version, changelog_entries)
+  date = Time.now.strftime('%B %-d, %Y')
+  changelog_lines = ["### #{new_version} [#{date}]"]
+  changelog_entries.each do |l|
+    changelog_lines << "* #{l}"
+  end
+  changelog_lines << ''
+  changelog_lines
+end
+
+def add_changelog_entries(language, new_version, changelog_entries)
+  update_changelog language do |current_changelog|
+    if current_changelog.include?("### #{new_version}")
+      puts "#{language} changelog already includes an entry for #{new_version}!"
+      return false
+    end
+    [
+      new_changelog_entry(new_version, changelog_entries).join("\n"),
+      current_changelog
+    ].join("\n")
   end
 end
 
+def bump_version(language, version_type, changelog_entries)
+  puts "Bumping #{version_type} version for #{language} client..."
+  new_version = update_version_for language do |current_version|
+    version_match = current_version.match(VERSION_REGEX)
+    unless version_match
+      raise "#{current_version} is invalid! Format must match: x.x.x"
+    end
+
+    increment_version(version_type, version_match)
+  end
+  add_changelog_entries(language, new_version, changelog_entries)
+end
+
+def prompt_for_changelog_entries
+  entries = []
+  loop do
+    input = ask 'Add Changelog Entry (leave blank to end): '
+    break if input == ''
+
+    entries << input
+  end
+  entries << 'No significant code changes' if entries.empty?
+  entries
+end
+
+def confirm_changelog_entries!(entries)
+  puts "\nChangelog Entries:\n\n"
+  puts entries.map { |l| "* #{l}" }.join("\n")
+  puts
+
+  confirm = ask('OK? [y/n] ') { |yn| yn.limit = 1, yn.validate = /[yn]/i }
+  exit unless confirm.casecmp('y').zero?
+end
+
+changelog_entries = prompt_for_changelog_entries
+confirm_changelog_entries!(changelog_entries)
+
 if language
-  bump_version(language.to_sym, version_type.to_sym)
+  bump_version(language.to_sym, version_type.to_sym, changelog_entries)
 else
-  LANGUAGES.each { |l| bump_version(l.to_sym, version_type.to_sym) }
+  LANGUAGES.each do |l|
+    bump_version(l.to_sym, version_type.to_sym, changelog_entries)
+  end
 end
