@@ -295,8 +295,41 @@ namespace FormApi.Client.Test
             int? perPage = 10;
             var response = instance.GetTemplates(page, perPage);
             Assert.IsInstanceOf<List<Template>> (response, "response is List<Template>");
-            Assert.That(response, Has.Count.EqualTo(2));
+            // Ugly but we have some state that leaks between tests.
+            // (CreateTemplateTest creates a new template)
+            Assert.That(response, Has.Count.GreaterThan(1));
             StringAssert.StartsWith("tpl_", response.First().Id);
+        }
+
+        /// <summary>
+        /// Test GetTemplate
+        /// </summary>
+        [Test]
+        public void GetTemplateTest()
+        {
+            string templateId = "tpl_000000000000000001";
+            var template = instance.GetTemplate(templateId);
+            Assert.IsInstanceOf<Template> (template, "template is Template");
+            Assert.AreEqual(template.Id, "tpl_000000000000000001");
+        }
+
+        /// <summary>
+        /// Test GetTemplate
+        /// </summary>
+        [Test]
+        public void CreateTemplateTest()
+        {
+            // Path is relative to clients/csharp/src/FormApi.Client.Test/bin/Debug
+            var pdfFixturePath = Path.Combine(
+              Directory.GetCurrentDirectory(),
+              "../../../../../../test_fixtures/first_last_signature.pdf");
+            Stream templateDocument = File.OpenRead(pdfFixturePath);
+            var templateName = "Test PDF Template from C Sharp";
+            var template = instance.CreateTemplate(templateDocument, templateName);
+
+            Assert.IsInstanceOf<Template1> (template, "template is Template");
+            StringAssert.StartsWith("tpl_", template.Id);
+            Assert.AreEqual(template.Name, "Test PDF Template from C Sharp");
         }
 
         /// <summary>
