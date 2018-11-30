@@ -15,10 +15,8 @@ fi
 VERSION="$(./scripts/get_version $LANG)"
 GIT_TAG="$LANGUAGE-$VERSION"
 
-CURRENT_TAG_REVISION="$(git rev-parse "$GIT_TAG" 2> /dev/null || true)"
-
-if [ -n "$CURRENT_TAG_REVISION" ]; then
-  echo "$GIT_TAG tag already exists for revision: ${CURRENT_TAG_REVISION:0:7}"
+if git rev-parse -q --verify "refs/tags/$GIT_TAG" > /dev/null; then
+  echo "$GIT_TAG tag already exists!"
   exit
 fi
 
