@@ -2,5 +2,5 @@
 set -e
 (cd "`dirname \"$0\"`/../../clients/python" && rm -rf build dist)
 ./scripts/python/build
-(cd "`dirname \"$0\"`/../../clients/python" && twine upload dist/*)
+(cd "`dirname \"$0\"`/../../clients/python" && twine upload --repository formapi dist/*)
 
