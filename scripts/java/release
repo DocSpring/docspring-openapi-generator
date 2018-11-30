@@ -4,4 +4,7 @@ cd "$(dirname "$0")/../.."
 VERSION=$(cat config/java.json | jq -r .artifactVersion)
 cd "./clients/java"
 
+# Needed for entering GPG passphrase
+export GPG_TTY=$(tty)
+
 mvn -DskipTests clean deploy
