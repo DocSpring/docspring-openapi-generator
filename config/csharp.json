@@ -1,6 +1,6 @@
 {
   "targetFramework": "v4.5",
   "packageName": "FormApi.Client",
-  "packageVersion": "1.4.0",
+  "packageVersion": "1.5.0",
   "httpUserAgent": "formapi-csharp-#{VERSION}"
 }
