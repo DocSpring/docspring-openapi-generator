@@ -23,6 +23,11 @@ echo "Pushing formapi-$LANGUAGE v$VERSION to GitHub..."
 
 cd "./clients/$LANGUAGE"
 
+if git diff --quiet HEAD; then
+  echo "Nothing to commit."
+  exit 0
+fi
+
 if ! [ -d .git ]; then
   echo "Initializing git repository for clients/$LANGUAGE..."
   git init
