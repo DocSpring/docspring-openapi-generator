@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
+
+LANGUAGE="$1"
+
+if [ -z "$LANGUAGE" ]; then
+  for f in config/*; do
+    LANG="$(echo $f | sed -e "s/config\///g" -e "s/\.json//g")"
+    ./scripts/commit_changes "$LANG"
+  done
+  exit
+fi
+
+if ! [ -f "config/$LANGUAGE.json" ]; then
+  echo "config/$LANGUAGE.json does not exist!"
+  exit 1
+fi
+
+VERSION=$(./scripts/get_version $LANGUAGE)
+
+cd "./clients/$LANGUAGE"
+
+if git diff --quiet HEAD; then
+  echo "Nothing to commit."
+  exit 0
+fi
+
+echo "Committing changes for formapi-$LANGUAGE v$VERSION..."
+
+if ! [ -d .git ]; then
+  echo "Initializing git repository for clients/$LANGUAGE..."
+  git init
+  git remote add origin "git@github.com:FormAPI/formapi-$LANGUAGE.git"
+  echo "Pulling code from FormAPI/formapi-$LANGUAGE.git..."
+  git fetch origin
+  git reset --hard origin/master
+  echo "Pulled FormAPI/formapi-$LANGUAGE from GitHub and reset the master branch to origin/master."
+  echo "Please re-run the generator script, then run the release script again"
+  echo "to commit the changes."
+  exit 1
+fi
+
+COMMIT_MESSAGE="Updated on $(date "+%F %T"). Version: $VERSION"
+git add -A
+git commit -m "$COMMIT_MESSAGE"
+echo "Committed changes with message: $COMMIT_MESSAGE"

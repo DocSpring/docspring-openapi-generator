@@ -1,6 +1,14 @@
 #!/bin/sh
 set -e
-./scripts/ruby/build
-
 cd "$(dirname "$0")/../../clients/ruby"
+
+if ! git diff --quiet HEAD; then
+  echo "Cannot build Ruby gem while there are changes in the git repo!"
+  echo "(The gemspec calls 'git ls-files')"
+  echo "Please run './scripts/commit_changes ruby' first."
+  exit 1
+fi
+
+../../scripts/ruby/build
+
 gem push form_api-*.gem

@@ -23,27 +23,4 @@ echo "Pushing formapi-$LANGUAGE v$VERSION to GitHub..."
 
 cd "./clients/$LANGUAGE"
 
-if git diff --quiet HEAD; then
-  echo "Nothing to commit."
-  exit 0
-fi
-
-if ! [ -d .git ]; then
-  echo "Initializing git repository for clients/$LANGUAGE..."
-  git init
-  git remote add origin "git@github.com:FormAPI/formapi-$LANGUAGE.git"
-  echo "Pulling code from FormAPI/formapi-$LANGUAGE.git..."
-  git fetch origin
-  git reset --hard origin/master
-  echo "Pulled FormAPI/formapi-$LANGUAGE from GitHub and reset the master branch to origin/master."
-  echo "Please re-run the generator script, then run the release script again"
-  echo "to commit the changes."
-  exit 1
-fi
-
-COMMIT_MESSAGE="Updated on $(date "+%F %T"). Version: $VERSION"
-git add -A
-git commit -m "$COMMIT_MESSAGE"
-echo "Committed changes with message: $COMMIT_MESSAGE"
-
-git push origin master -f
+git push origin master

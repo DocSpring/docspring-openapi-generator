@@ -7,9 +7,15 @@ cd "$(dirname "$0")/.."
 LANGUAGE="$1"
 
 generate_and_release() {
+  echo "==> Generating $1 client library..."
   ./scripts/generate "$1"
-  echo "Releasing new version of $1 client library..."
+  echo "==> Committing changes..."
+  ./scripts/commit_changes "$1"
+  echo "==> Building and releasing new version..."
   ./scripts/$1/release
+  echo "==> Pushing to GitHub..."
+  ./scripts/push_to_github "$1"
+  echo "==> Finished!"
 }
 
 if [ -n "$LANGUAGE" ]; then
