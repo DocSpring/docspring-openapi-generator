@@ -9,7 +9,7 @@
   "developerOrganizationUrl": "https://formapi.io",
   "licenseName": "MIT",
   "licenseUrl": "https://opensource.org/licenses/MIT",
-  "artifactVersion": "1.2.0",
+  "artifactVersion": "1.3.0",
   "artifactId": "FormAPI",
   "artifactUrl": "https://github.com/FormAPI/formapi-java",
   "artifactDescription": "Java API client for the FormAPI PDF generation service",
