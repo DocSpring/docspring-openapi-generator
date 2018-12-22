@@ -31,7 +31,7 @@ class TestClient(unittest.TestCase):
         configuration = form_api.Configuration()
         configuration.api_token_id = 'api_token123'
         configuration.api_token_secret = 'testsecret123'
-        configuration.host = 'localhost:31337/api/v1'
+        configuration.host = 'api.formapi.local:31337/api/v1'
 
         # create an instance of the API class
         self.client = form_api.Client(form_api.ApiClient(configuration))

@@ -43,7 +43,7 @@ namespace FormApi.Client.Test
         {
             Configuration.Default.Username = "api_token123";
             Configuration.Default.Password = "testsecret123";
-            Configuration.Default.BasePath = "http://localhost:31337/api/v1";
+            Configuration.Default.BasePath = "http://api.formapi.local:31337/api/v1";
             instance = new PDFApi();
         }
 

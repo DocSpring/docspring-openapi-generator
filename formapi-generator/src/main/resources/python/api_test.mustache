@@ -22,7 +22,7 @@ class {{#operations}}Test{{classname}}(unittest.TestCase):
         configuration = form_api.Configuration()
         configuration.username = 'api_token123'
         configuration.password = 'testsecret123'
-        configuration.host = 'localhost:31337/api/v1'
+        configuration.host = 'api.formapi.local:31337/api/v1'
         configuration.scheme = 'http'
 
         # create an instance of the API class

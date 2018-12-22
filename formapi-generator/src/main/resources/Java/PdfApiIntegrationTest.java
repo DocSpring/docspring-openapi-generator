@@ -46,7 +46,7 @@ public class PdfApiIntegrationTest {
     @Before
     public void setup() {
       ApiClient client = new ApiClient("api_token_basic", "api_token123", "testsecret123");
-      client.getAdapterBuilder().baseUrl("http://localhost:31337/api/v1/");
+      client.getAdapterBuilder().baseUrl("http://api.formapi.local:31337/api/v1/");
       api = client.createService(PdfApi.class);
     }
 

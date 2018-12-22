@@ -21,7 +21,7 @@ describe 'PDFApi' do
     FormAPI.configure do |c|
       c.api_token_id = 'api_token123'
       c.api_token_secret = 'testsecret123'
-      c.host = 'http://localhost:31337'
+      c.host = 'http://api.formapi.local:31337'
     end
   end
 
@@ -89,7 +89,7 @@ describe 'PDFApi' do
       )
       expect(response.status).to eq 'success'
       batch = response.submission_batch
-      expect(batch.id).to start_with 'sba_'
+      expect(batch.id).to start_with 'sbb_'
       expect(batch.state).to eq 'pending'
       expect(batch.total_count).to eq 2
       expect(batch.pending_count).to eq 2
@@ -108,9 +108,9 @@ describe 'PDFApi' do
 
   describe 'get_submission_batch test' do
     it 'should get the batch including submissions' do
-      submission_batch_id = 'sba_000000000000000001'
+      submission_batch_id = 'sbb_000000000000000001'
       batch = api_instance.get_submission_batch(submission_batch_id, include_submissions: true)
-      expect(batch.id).to eq 'sba_000000000000000001'
+      expect(batch.id).to eq 'sbb_000000000000000001'
       expect(batch.total_count).to eq 2
       expect(batch.pending_count).to eq 0
       expect(batch.completion_percentage).to eq 100
@@ -119,9 +119,9 @@ describe 'PDFApi' do
     end
 
     it 'should get the batch without submissions' do
-      submission_batch_id = 'sba_000000000000000001'
+      submission_batch_id = 'sbb_000000000000000001'
       batch = api_instance.get_submission_batch(submission_batch_id)
-      expect(batch.id).to eq 'sba_000000000000000001'
+      expect(batch.id).to eq 'sbb_000000000000000001'
       expect(batch.submissions).to be_nil
     end
   end
@@ -153,7 +153,7 @@ describe 'PDFApi' do
       expect(response.token.id).to_not be_nil
       expect(response.token.secret).to_not be_nil
       expect(response.token.data_request_url).to start_with \
-        'http://localhost/data_requests/drq_000000000000000001?token_id='
+        'http://app.formapi.local/data_requests/drq_000000000000000001?token_id='
       expect(response.token.data_request_url).to include \
         "?token_id=#{response.token.id}" \
         "&token_secret=#{response.token.secret}"

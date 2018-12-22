@@ -58,7 +58,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
       $this->client->getConfig()
         ->setUsername("api_token123")
         ->setPassword('testsecret123')
-        ->setHost('http://localhost:31337/api/v1');
+        ->setHost('http://api.formapi.local:31337/api/v1');
     }
 
     /**

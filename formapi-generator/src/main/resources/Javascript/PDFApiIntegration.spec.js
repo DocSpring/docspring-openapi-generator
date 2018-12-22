@@ -36,7 +36,7 @@
     // Configure HTTP basic authorization: api_token_basic
     defaultConfiguration.apiTokenId = 'api_token123';
     defaultConfiguration.apiTokenSecret = 'testsecret123';
-    defaultConfiguration.basePath = 'http://localhost:31337/api/v1'
+    defaultConfiguration.basePath = 'http://api.formapi.local:31337/api/v1'
     instance = new FormAPI.PDFApi();
   });
 

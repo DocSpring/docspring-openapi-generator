@@ -13,13 +13,14 @@ module FormAPI
       end
 
       # Wait for job to finish by default.
-      options[:wait] = options.key?(:wait) ? options[:wait] : true
+      wait = options.key?(:wait) ? options[:wait] : true
+      options.delete :wait
 
       template_id = options.delete :template_id
       create_submission_data = options
       response = super(template_id, create_submission_data)
 
-      return response unless options[:wait]
+      return response unless wait
 
       submission = response.submission
       timeout = options[:timeout] || 60
@@ -52,12 +53,13 @@ module FormAPI
       end
 
       # Wait for job to finish by default.
-      options[:wait] = options.key?(:wait) ? options[:wait] : true
+      wait = options.key?(:wait) ? options[:wait] : true
+      options.delete :wait
 
       submission_batch_data = options
       response = super(submission_batch_data)
 
-      return response unless options[:wait]
+      return response unless wait
 
       batch = response.submission_batch
       submission_responses = response.submissions
@@ -103,18 +105,19 @@ module FormAPI
       )
     end
 
-    def combine_submissions(options)
-      unless options[:submission_ids].is_a?(::Array)
-        raise InvalidDataError, "submission_ids is required, and must be an Array."
+    def combine_pdfs(options)
+      unless options[:source_pdfs].is_a?(::Array)
+        raise InvalidDataError, "source_pdfs is required, and must be an Array."
       end
 
       # Wait for job to finish by default.
-      options[:wait] = options.key?(:wait) ? options[:wait] : true
+      wait = options.key?(:wait) ? options[:wait] : true
+      options.delete :wait
 
       # PdfAPI requires a :combined_submission_data option.
       response = super(options)
 
-      return response unless options[:wait]
+      return response unless wait
 
       combined_submission = response.combined_submission
       timeout = options[:timeout] || 600
@@ -134,6 +137,19 @@ module FormAPI
         status: combined_submission.state == 'processed' ? 'success' : 'error',
         combined_submission: combined_submission
       )
+    end
+
+    # Alias for combine_pdfs, for backwards compatibility
+    def combine_submissions(options)
+      unless options[:submission_ids].is_a?(::Array)
+        raise InvalidDataError, "submission_ids is required, and must be an Array."
+      end
+      options[:source_pdfs] = options[:submission_ids].map do |id|
+        { type: 'submission', id: id }
+      end
+      options.delete :submission_ids
+
+      combine_pdfs(options)
     end
 
     def batch_generate_and_combine_pdfs(options)

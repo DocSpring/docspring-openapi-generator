@@ -6,7 +6,7 @@ describe FormAPI::Client do
     FormAPI.configure do |c|
       c.api_token_id = 'api_token123'
       c.api_token_secret = 'testsecret123'
-      c.host = 'http://localhost:31337'
+      c.host = 'http://api.formapi.local:31337'
     end
   end
 
@@ -84,7 +84,7 @@ describe FormAPI::Client do
 
       expect(response.status).to eq 'success'
       batch = response.submission_batch
-      expect(batch.id).to start_with 'sba_'
+      expect(batch.id).to start_with 'sbb_'
       expect(batch.state).to eq 'processed'
       expect(batch.total_count).to eq 2
       expect(batch.pending_count).to eq 0
@@ -137,7 +137,7 @@ describe FormAPI::Client do
 
       expect(response.status).to eq 'error'
       batch = response.submission_batch
-      expect(batch.id).to start_with 'sba_'
+      expect(batch.id).to start_with 'sbb_'
       expect(batch.state).to eq 'error'
       expect(batch.total_count).to eq 2
       expect(batch.pending_count).to eq 0
@@ -158,7 +158,7 @@ describe FormAPI::Client do
     end
   end
 
-  describe '#combine_submissions' do
+  describe '#combine_submissions with submission_ids' do
     it 'should merge multiple PDFs and wait for the job to be processed' do
       client = FormAPI::Client.new
       expect(client).to receive(:sleep).with(1).once
@@ -171,8 +171,45 @@ describe FormAPI::Client do
       expect(combined_submission.id).to start_with 'com_'
       expect(combined_submission.expired).to eq false
       expect(combined_submission.state).to eq 'processed'
+      expect(combined_submission.source_pdfs).to eq(
+        [
+          { type: 'submission', id: 'sub_000000000000000001' },
+          { type: 'submission', id: 'sub_000000000000000002' }
+        ]
+      )
+      # Backwards compatibility - We still set submission_ids
       expect(combined_submission.submission_ids).to eq(
         %w[sub_000000000000000001 sub_000000000000000002])
+      expect(combined_submission.download_url).to include(
+        'combined_submissions/combined_submission.pdf')
+    end
+  end
+
+  describe '#combine_pdfs with source_pdfs' do
+    it 'should merge multiple PDFs and wait for the job to be processed' do
+      client = FormAPI::Client.new
+      expect(client).to receive(:sleep).with(1).once
+
+      response = client.combine_pdfs(
+        source_pdfs: [
+          { type: 'submission', id: 'sub_000000000000000001' },
+          { type: 'template',   id: 'tpl_000000000000000001' },
+          { type: 'submission', id: 'sub_000000000000000002' }
+        ]
+      )
+
+      expect(response.status).to eq 'success'
+      combined_submission = response.combined_submission
+      expect(combined_submission.id).to start_with 'com_'
+      expect(combined_submission.expired).to eq false
+      expect(combined_submission.state).to eq 'processed'
+      expect(combined_submission.source_pdfs).to eq(
+        [
+          { type: 'submission', id: 'sub_000000000000000001' },
+          { type: 'template',   id: 'tpl_000000000000000001' },
+          { type: 'submission', id: 'sub_000000000000000002' }
+        ]
+      )
       expect(combined_submission.download_url).to include(
         'combined_submissions/combined_submission.pdf')
     end
