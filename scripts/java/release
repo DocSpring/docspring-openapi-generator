@@ -5,7 +5,7 @@ VERSION=$(cat config/java.json | jq -r .artifactVersion)
 
 if [ -f .gpg_passphrase ]; then
   GPG_PASSPHRASE=$(cat .gpg_passphrase)
-  GPG_PASSPHRASE_ARG="-Dgpg.passphrase=$GPG_PASSPHRASE"
+  GPG_PASSPHRASE_ARG="-Darguments=\"-Dgpg.passphrase=$GPG_PASSPHRASE\""
 else
   echo "No GPG passphrase found in .gpg_passphrase. Will prompt for passphrase."
 fi
