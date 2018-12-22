@@ -3,19 +3,23 @@ package io.formapi;
 import io.formapi.ApiClient;
 import io.formapi.AuthenticationError;
 import io.formapi.AuthenticationSuccessResponse;
+import io.formapi.CombinePdfsData;
 import io.formapi.CombinedSubmission;
 import io.formapi.CombinedSubmissionData;
 import io.formapi.CreateCombinedSubmissionResponse;
+import io.formapi.CreateCustomFileData;
+import io.formapi.CreateCustomFileResponse;
 import io.formapi.CreateSubmissionBatchResponse;
-import io.formapi.CreateSubmissionData;
-import io.formapi.CreateSubmissionDataBatchV1;
 import io.formapi.CreateSubmissionDataRequestTokenResponse;
 import io.formapi.CreateSubmissionResponse;
+import io.formapi.CreateTemplateData;
 import io.formapi.Error;
 import io.formapi.InvalidRequest;
+import io.formapi.PendingTemplate;
 import io.formapi.Submission;
 import io.formapi.SubmissionBatch;
 import io.formapi.SubmissionBatchData;
+import io.formapi.SubmissionData;
 import io.formapi.SubmissionDataRequest;
 import io.formapi.Template;
 import io.formapi.UpdateDataRequestResponse;
@@ -27,6 +31,7 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -58,8 +63,8 @@ public class PdfApiIntegrationTest {
     @Test
     public void batchGeneratePdfV1Test() {
         String templateId = null;
-        List<CreateSubmissionDataBatchV1> createSubmissionDataBatchV1 = null;
-        // List<CreateSubmissionResponse> response = api.batchGeneratePdfV1(templateId, createSubmissionDataBatchV1);
+        List<SubmissionData> submissionDataBatchV1 = null;
+        // List<CreateSubmissionResponse> response = api.batchGeneratePdfV1(templateId, submissionDataBatchV1);
 
         // TODO: test validations
     }
@@ -95,7 +100,7 @@ public class PdfApiIntegrationTest {
     @Test
     public void createDataRequestTokenTest() {
         String dataRequestId = null;
-        // CreateSubmissionDataRequestTokenResponse response = api.createDataRequestToken(dataRequestId);
+        // submissionDataRequestTokenResponse response = api.createDataRequestToken(dataRequestId);
 
         // TODO: test validations
     }
@@ -131,14 +136,14 @@ public class PdfApiIntegrationTest {
     @Test
     public void generatePDFTest() throws java.io.IOException {
         String templateId = "tpl_000000000000000001";
-        CreateSubmissionData createSubmissionData = new CreateSubmissionData();
-        Map<String, String> submissionData = new HashMap<>();
-        submissionData.put("title", "Test PDF");
-        submissionData.put("description", "This PDF is great!");
-        createSubmissionData.setData(submissionData);
+        SubmissionData submissionData = new SubmissionData();
+        Map<String, String> data = new HashMap<>();
+        data.put("title", "Test PDF");
+        data.put("description", "This PDF is great!");
+        submissionData.setData(data);
         retrofit2.Response<CreateSubmissionResponse> retrofitResponse = api.generatePDF(
           templateId,
-          createSubmissionData
+          submissionData
         ).execute();
         if (!retrofitResponse.isSuccessful()) {
           logger.info(retrofitResponse.errorBody().string());
@@ -164,11 +169,11 @@ public class PdfApiIntegrationTest {
     @Test
     public void generatePDFWithDataRequestTest() throws java.io.IOException {
         String templateId = "tpl_000000000000000001";
-        CreateSubmissionData createSubmissionData = new CreateSubmissionData();
-        Map<String, String> submissionData = new HashMap<>();
-        submissionData.put("title", "Test PDF");
-        submissionData.put("description", "This PDF is great!");
-        createSubmissionData.setData(submissionData);
+        SubmissionData submissionData = new SubmissionData();
+        Map<String, String> data = new HashMap<>();
+        data.put("title", "Test PDF");
+        data.put("description", "This PDF is great!");
+        submissionData.setData(data);
 
         List<CreateSubmissionDataRequestData> dataRequestsList = new ArrayList<>();
         CreateSubmissionDataRequestData dataRequestData = new CreateSubmissionDataRequestData();
@@ -180,11 +185,11 @@ public class PdfApiIntegrationTest {
         dataRequestData.setFields(fields);
 
         dataRequestsList.add(dataRequestData);
-        createSubmissionData.setDataRequests(dataRequestsList);
+        submissionData.setDataRequests(dataRequestsList);
 
         retrofit2.Response<CreateSubmissionResponse> retrofitResponse = api.generatePDF(
           templateId,
-          createSubmissionData
+          submissionData
         ).execute();
         if (!retrofitResponse.isSuccessful()) {
           logger.info(retrofitResponse.errorBody().string());
