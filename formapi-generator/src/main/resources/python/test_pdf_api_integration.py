@@ -66,7 +66,7 @@ class TestPDFApi(unittest.TestCase):
 
         self.assertEquals(api_response.status, 'success')
         batch = api_response.submission_batch
-        self.assertRegexpMatches(batch.id, '^sba_')
+        self.assertRegexpMatches(batch.id, '^sbb_')
         self.assertEquals(batch.state, 'pending')
         self.assertEquals(batch.metadata['user_id'], 123)
         self.assertEquals(batch.total_count, 2)

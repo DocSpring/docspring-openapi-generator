@@ -112,7 +112,7 @@ class TestClient(unittest.TestCase):
 
             self.assertEquals(response.status, 'success')
             batch = response.submission_batch
-            self.assertRegexpMatches(batch.id, '^sba_')
+            self.assertRegexpMatches(batch.id, '^sbb_')
             self.assertEquals(batch.state, 'processed')
             self.assertEquals(batch.metadata['user_id'], 123)
             self.assertEquals(batch.total_count, 2)
