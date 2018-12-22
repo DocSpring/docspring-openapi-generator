@@ -160,6 +160,7 @@ namespace FormApi.Client.Test
         [Test]
         public void CombinePdfsTest()
         {
+          // {% BeginCodeExample combinePdfs %}
             var combinedSubmissionData = new CombinePdfsData(
               test: false,
               sourcePdfs: new List<Object>(new Object[] {
@@ -174,11 +175,12 @@ namespace FormApi.Client.Test
               })
             );
             var response = instance.CombinePdfs(combinedSubmissionData);
+            var combinedSubmission = response.CombinedSubmission;
+          // {% EndCodeExample combinePdfs %}
             Assert.IsInstanceOf<CreateCombinedSubmissionResponse> (response, "response is CreateCombinedSubmissionResponse");
             Assert.AreEqual(
               CreateCombinedSubmissionResponse.StatusEnum.Success,
               response.Status);
-            var combinedSubmission = response.CombinedSubmission;
             StringAssert.StartsWith("com_", combinedSubmission.Id);
             Assert.AreEqual(
               CombinedSubmission.StateEnum.Pending,
