@@ -9,10 +9,13 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 using System.Reflection;
 using RestSharp;
 using NUnit.Framework;
@@ -66,7 +69,6 @@ namespace FormApi.Client.Test
             //Assert.IsInstanceOfType(typeof(PDFApi), instance, "instance is a PDFApi");
         }
 
-
         /// <summary>
         /// Test BatchGeneratePDF
         /// </summary>
@@ -75,23 +77,22 @@ namespace FormApi.Client.Test
         {
             string templateId = "tpl_000000000000000001";
             var submissionBatchData = new SubmissionBatchData(
-              new {},
-              false,
-              templateId,
-              new List<CreateSubmissionDataBatchRequest>(
-                new CreateSubmissionDataBatchRequest[] {
-                  new CreateSubmissionDataBatchRequest(
-                    templateId,
-                    false,
-                    new {
+              test: false,
+              templateId: templateId,
+              submissions: new List<SubmissionDataBatchRequest>(
+                new SubmissionDataBatchRequest[] {
+                  new SubmissionDataBatchRequest(
+                    templateId: templateId,
+                    test: false,
+                    data: new {
                       title = "Test PDF",
                       description = "This PDF is great!"
                     }
                   ),
-                  new CreateSubmissionDataBatchRequest(
-                    templateId,
-                    false,
-                    new {
+                  new SubmissionDataBatchRequest(
+                    templateId: templateId,
+                    test: false,
+                    data: new {
                       title = "Test PDF 2",
                       description = "This PDF is also great!"
                     }
@@ -154,6 +155,87 @@ namespace FormApi.Client.Test
         }
 
         /// <summary>
+        /// Test CombinePdfs
+        /// </summary>
+        [Test]
+        public void CombinePdfsTest()
+        {
+            var combinedSubmissionData = new CombinePdfsData(
+              test: false,
+              sourcePdfs: new List<Object>(new Object[] {
+                new {
+                  type = "submission",
+                  id = "sub_000000000000000001",
+                },
+                new {
+                  type = "submission",
+                  id = "sub_000000000000000002",
+                },
+              })
+            );
+            var response = instance.CombinePdfs(combinedSubmissionData);
+            Assert.IsInstanceOf<CreateCombinedSubmissionResponse> (response, "response is CreateCombinedSubmissionResponse");
+            Assert.AreEqual(
+              CreateCombinedSubmissionResponse.StatusEnum.Success,
+              response.Status);
+            var combinedSubmission = response.CombinedSubmission;
+            StringAssert.StartsWith("com_", combinedSubmission.Id);
+            Assert.AreEqual(
+              CombinedSubmission.StateEnum.Pending,
+              combinedSubmission.State);
+        }
+
+        /// <summary>
+        /// Test CombinePdfs
+        /// </summary>
+        [Test]
+        public void GetPresignUrlAndCreateCustomFileTest()
+        {
+          // Path is relative to clients/csharp/src/FormApi.Client.Test/bin/Debug
+          var pdfFixturePath = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "../../../../../../test_fixtures/first_last_signature.pdf");
+
+          var presignUrlResponse = instance.GetPresignUrl();
+
+          var baseUrl = (string) presignUrlResponse["url"];
+          var presignFields = (JObject) presignUrlResponse["fields"];
+
+          var baseUri = new UriBuilder(baseUrl);
+          var path = baseUri.Path;
+          baseUri.Path = null;
+          var client = new RestClient(baseUri.ToString());
+
+          // Use POST when submitting as form data
+          // See: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOST.html
+          var request = new RestRequest(path, Method.POST);
+          request.AddHeader("Content-Type", "multipart/form-data");
+          request.AlwaysMultipartFormData = true;
+          foreach (JProperty field in (JToken)presignFields)
+          {
+            request.AddParameter(field.Name, (string) field.Value);
+          }
+          request.AddFile("file", pdfFixturePath);
+
+          var response = client.Execute(request);
+
+          Assert.AreEqual(HttpStatusCode.NoContent, response.StatusCode);
+
+          var customFileResponse = instance.CreateCustomFileFromUpload(
+            new CreateCustomFileData(
+              cacheId: (string) presignFields["key"]
+            )
+          );
+          Assert.IsInstanceOf<CreateCustomFileResponse> (customFileResponse, "response is CreateCustomFileResponse");
+          Assert.AreEqual(
+            CreateCustomFileResponse.StatusEnum.Success,
+            customFileResponse.Status);
+
+          var customFile = customFileResponse.CustomFile;
+          StringAssert.StartsWith("cfi_", customFile.Id);
+        }
+
+        /// <summary>
         /// Test ExpireCombinedSubmission
         /// </summary>
         [Test]
@@ -187,15 +269,15 @@ namespace FormApi.Client.Test
         public void GeneratePDFTest()
         {
             string templateId = "tpl_000000000000000001";
-            var createSubmissionData = new CreateSubmissionData(
-              false,
-              new {
+            var submissionData = new SubmissionData(
+              test: false,
+              data: new {
                 title = "Test PDF",
                 description = "This PDF is great!"
               }
             );
 
-            var response = instance.GeneratePDF(templateId, createSubmissionData);
+            var response = instance.GeneratePDF(templateId, submissionData);
             Assert.IsInstanceOf<CreateSubmissionResponse> (response, "response is CreateSubmissionResponse");
             Assert.AreEqual(
               CreateSubmissionResponse.StatusEnum.Success,
@@ -215,7 +297,7 @@ namespace FormApi.Client.Test
         public void GeneratePDFWithDataRequestsTest()
         {
             string templateId = "tpl_000000000000000001";
-            var createSubmissionData = new CreateSubmissionData(
+            var submissionData = new SubmissionData(
               test: false,
               data: new {
                 title = "Test PDF",
@@ -231,7 +313,7 @@ namespace FormApi.Client.Test
               }
             );
 
-            var response = instance.GeneratePDF(templateId, createSubmissionData);
+            var response = instance.GeneratePDF(templateId, submissionData);
             Assert.IsInstanceOf<CreateSubmissionResponse> (response, "response is CreateSubmissionResponse");
             Assert.AreEqual(
               CreateSubmissionResponse.StatusEnum.Success,
@@ -366,7 +448,5 @@ namespace FormApi.Client.Test
               AuthenticationSuccessResponse.StatusEnum.Success,
               response.Status);
         }
-
     }
-
 }
