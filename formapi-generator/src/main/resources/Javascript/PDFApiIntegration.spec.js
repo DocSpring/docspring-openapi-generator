@@ -78,7 +78,7 @@
           expect(secondSubmission.submission.expired).to.be(false);
           expect(secondSubmission.submission.state).to.be('pending');
           var batch = response.submission_batch;
-          expect(batch.id).to.match(/^sba_/);
+          expect(batch.id).to.match(/^sbb_/);
           expect(batch.state).to.be('pending');
           expect(batch.total_count).to.be(2);
           expect(batch.pending_count).to.be(2);
