@@ -13,6 +13,7 @@
 /tmp/
 .byebug_history
 formapi-generator/target
+.gpg_passphrase
 
 ## Emacs files
 *~

@@ -2,9 +2,17 @@
 set -e
 cd "$(dirname "$0")/../.."
 VERSION=$(cat config/java.json | jq -r .artifactVersion)
+
+if [ -f .gpg_passphrase ]; then
+  GPG_PASSPHRASE=$(cat .gpg_passphrase)
+  GPG_PASSPHRASE_ARG="-Dgpg.passphrase=$GPG_PASSPHRASE"
+else
+  echo "No GPG passphrase found in .gpg_passphrase. Will prompt for passphrase."
+fi
+
 cd "./clients/java"
 
 # Needed for entering GPG passphrase
 export GPG_TTY=$(tty)
 
-mvn -DskipTests clean deploy
+mvn -DskipTests clean deploy $GPG_PASSPHRASE_ARG
