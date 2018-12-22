@@ -175,7 +175,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $template_id = 'tpl_000000000000000001'; // string |
 
-      $submission = new Model\CreateSubmissionData();
+      $submission = new Model\SubmissionData();
       $submission->setData([
         "title" => 'Test PDF',
         "description" => 'This PDF is great!',
@@ -199,7 +199,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $template_id = 'tpl_000000000000000001'; // string |
 
-      $submission = new Model\CreateSubmissionData();
+      $submission = new Model\SubmissionData();
       $submission->setData([
         "title" => 'Test PDF',
       ]);

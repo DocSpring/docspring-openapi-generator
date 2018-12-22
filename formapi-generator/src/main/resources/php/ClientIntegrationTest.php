@@ -84,7 +84,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePDF()
     {
       $template_id = 'tpl_000000000000000001'; // string |
-      $submission_data = new Model\CreateSubmissionData();
+      $submission_data = new Model\SubmissionData();
       $submission_data->setData([
         "title" => 'Test PDF',
         "description" => 'This PDF is great!',
