@@ -1,6 +1,6 @@
 // Run: node getSubmission.js
 
-var FormAPI = require('@formapi/formapi')
+var FormAPI = require('formapi')
 
 var config = new FormAPI.Configuration()
 config.apiTokenId = 'yRaaR9JmTPtGX7EN'

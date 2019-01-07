@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@formapi/formapi": "1.0.0"
+    "formapi": "^1.0.0"
   }
 }
