@@ -1,3 +1,6 @@
+### 1.8.0 [April 11, 2019]
+* Added support for editable PDFS (editable: true)
+
 ### 1.7.0 [December 23, 2018]
 * Added CustomFiles, and combinePdf call to support many different types of source PDFs. Renamed a few models
 
