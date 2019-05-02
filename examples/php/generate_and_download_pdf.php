@@ -22,7 +22,7 @@ $template_id = 'tpl_gdHHYPqcEF94Phgzfh';
 $pdf_filename = '/tmp/formapi-php.pdf';
 
 try {
-  $data = new FormAPI\Model\CreateSubmissionBody();
+  $data = new FormAPI\Model\SubmissionData();
   $data->setData([
     "first_name" => 'John',
     "last_name" => 'Smith',
@@ -33,11 +33,11 @@ try {
 
   echo "Generating PDF...\n";
 
-  $response = $formapi->generatePDF($template_id, $data);
+  $submission = $formapi->generatePDF($template_id, $data);
 
-  if ($response->getStatus() == "processed") {
+  if ($submission->getStatus() == "processed") {
     echo "Downloading PDF to " . $pdf_filename . "...\n";
-    $downloaded_pdf = fopen($response->getSubmission()->getDownloadUrl(), 'r');
+    $downloaded_pdf = fopen($submission->getDownloadUrl(), 'r');
     file_put_contents($pdf_filename, $downloaded_pdf);
 
     echo "Opening " . $pdf_filename . "...\n";
@@ -45,7 +45,7 @@ try {
       . $pdf_filename . "' || open '" . $pdf_filename ."'");
   } else {
       echo "Error generating PDF!\n";
-      echo $response;
+      echo $submission;
   }
 } catch (FormAPI\ApiException $exception) {
   echo $exception . "\n";

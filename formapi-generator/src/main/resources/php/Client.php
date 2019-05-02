@@ -10,7 +10,7 @@ class Client extends Api\PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionBody $create_submission_body create_submission_body (optional)
+     * @param  \FormAPI\Model\SubmissionData $create_submission_body create_submission_body (optional)
      * @param  integer $timeout (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
