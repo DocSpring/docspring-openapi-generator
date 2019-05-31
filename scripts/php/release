@@ -21,5 +21,9 @@ COMMIT_MESSAGE="Update on $(date "+%F %T"). Version: $VERSION"
 git add -A
 git commit -m "$COMMIT_MESSAGE"
 echo "Committed changes with message: $COMMIT_MESSAGE"
+# Need to tag the new version, otherwise it's not picked up by packagist
+# (If tag already exists, then the script will crash at this point.)
+git tag "v$VERSION"
 
 git push origin master -f
+git push origin "v$VERSION"
