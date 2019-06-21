@@ -44,7 +44,7 @@ if [ -d $CLIENT_DIR ]; then
 fi
 
 ./openapi-generator-cli generate \
-  --input-spec ../form_api/swagger/v1/swagger.json \
+  --input-spec ../docspring/swagger/v1/swagger.json \
   --generator-name "$GENERATOR_NAME" \
   --config "$CONFIG_FILE" \
   --output "$CLIENT_DIR"

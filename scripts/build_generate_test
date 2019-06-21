@@ -4,7 +4,7 @@ cd "$(dirname "$0")/../"
 
 if [ "$2" = "update_swagger" ]; then
   echo "Updating FormAPI swagger specification..."
-  (cd ../form_api && ./scripts/update_swagger)
+  (cd ../docspring && ./scripts/update_swagger)
   for arg do
     shift
     [ "$arg" = "update_swagger" ] && continue

@@ -16,4 +16,4 @@ fi
 echo "Starting FormAPI test server and running $LANGUAGE API client tests..."
 # Need to use correct Ruby version.
 source ~/.rvm/scripts/rvm
-(cd ../form_api && rvm use && ./scripts/run_api_client_tests "$LANGUAGE" ${@:2})
+(cd ../docspring && rvm use && ./scripts/run_api_client_tests "$LANGUAGE" ${@:2})
