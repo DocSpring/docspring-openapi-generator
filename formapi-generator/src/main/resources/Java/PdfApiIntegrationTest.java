@@ -272,12 +272,30 @@ public class PdfApiIntegrationTest {
      *
      */
     @Test
-    public void getTemplatesTest() {
-        Integer page = null;
-        Integer perPage = null;
-        // List<Template> response = api.getTemplates(page, perPage);
+    public void listTemplatesTest() throws java.io.IOException {
+        String query = "API Client Test Template 2";
+        Integer page = 1;
+        Integer perPage = 10;
 
-        // TODO: test validations
+        retrofit2.Response<List<Template>> retrofitResponse = api.listTemplates(
+          query,
+          page,
+          perPage
+        ).execute();
+        if (!retrofitResponse.isSuccessful()) {
+          logger.info(retrofitResponse.errorBody().string());
+        }
+        assertEquals(200, retrofitResponse.code());
+        List<Template> response = retrofitResponse.body();
+
+        assertEquals(
+          1,
+          response.size()
+        );
+        assertEquals(
+          "tpl_000000000000000002",
+          response.get(0).getId()
+        );
     }
     /**
      * Test Authentication
@@ -285,10 +303,14 @@ public class PdfApiIntegrationTest {
      *
      */
     @Test
-    public void testAuthenticationTest() {
-        // AuthenticationSuccessResponse response = api.testAuthentication();
+    public void testAuthenticationTest() throws java.io.IOException {
+      retrofit2.Response<AuthenticationSuccessResponse> response =
+        api.testAuthentication().execute();
 
-        // TODO: test validations
+      assertEquals(
+        AuthenticationSuccessResponse.StatusEnum.SUCCESS,
+        response.body().getStatus()
+      );
     }
     /**
      * Update a submission data request

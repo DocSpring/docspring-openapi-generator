@@ -371,19 +371,17 @@ namespace FormApi.Client.Test
         }
 
         /// <summary>
-        /// Test GetTemplates
+        /// Test ListTemplates
         /// </summary>
         [Test]
-        public void GetTemplatesTest()
+        public void ListTemplatesTest()
         {
             int? page = 1;
             int? perPage = 10;
-            var response = instance.GetTemplates(page, perPage);
+            var response = instance.ListTemplates("API Client Test Template 2", page, perPage);
             Assert.IsInstanceOf<List<Template>> (response, "response is List<Template>");
-            // Ugly but we have some state that leaks between tests.
-            // (CreateTemplateTest creates a new template)
-            Assert.That(response, Has.Count.GreaterThan(1));
-            StringAssert.StartsWith("tpl_", response.First().Id);
+            Assert.That(response, Has.Count.EqualTo(1));
+            Assert.AreEqual("tpl_000000000000000002", response.First().Id);
         }
 
         /// <summary>

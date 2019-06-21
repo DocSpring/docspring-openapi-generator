@@ -327,23 +327,43 @@ describe 'PDFApi' do
       expect(submission.id).to start_with 'sub_'
     end
   end
-  # integration tests for get_templates
+  # integration tests for list_templates
   # Get a list of all templates
   # @param [Hash] opts the optional parameters
   # @option opts [Integer] :page Default: 1
   # @option opts [Integer] :per_page Default: 50
   # @return [Array<Template>]
-  describe 'get_templates test' do
+  describe 'list_templates test' do
     it 'should work' do
       opts = {
+        query: 'API Client Test Template 2', # String | Search By Name
         page: 1, # Integer | Default: 1
         per_page: 10 # Integer | Default: 50
       }
-      templates = api_instance.get_templates(opts)
-      expect(templates.size).to eq 2
-      expect(templates.first.id).to start_with 'tpl_'
+      templates = api_instance.list_templates(opts)
+      expect(templates.size).to eq 1
+      expect(templates.first.id).to eq 'tpl_000000000000000002'
     end
   end
+  # integration tests for list_templates
+  # Get a list of all templates
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :query Search By Name
+  # @option opts [Integer] :page Default: 1
+  # @option opts [Integer] :per_page Default: 50
+  # @return [Array<Template>]
+  describe 'list_templates test' do
+    it 'should work' do
+      opts = {
+        query: '2', # String | Search By Name
+        page: 2, # Integer | Default: 1
+        per_page: 1 # Integer | Default: 50
+      }
+      result = api_instance.list_templates(opts)
+      expect(result).to_not be_nil
+    end
+  end
+
   # integration tests for test_authentication
   # Test Authentication
   # @param [Hash] opts the optional parameters

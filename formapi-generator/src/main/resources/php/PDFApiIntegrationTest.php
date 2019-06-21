@@ -259,19 +259,20 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test case for getTemplates
+     * Test case for listTemplates
      *
      * Get a list of all templates.
      *
      */
-    public function testGetTemplates()
+    public function testListTemplates()
     {
+      $query = 'API Client Test Template 2'; # String | Search By Name
       $page = 1; // int | Default: 1
       $per_page = 10; // int | Default: 50
-      $responses = $this->apiInstance->getTemplates($page, $per_page);
-      $this->assertCount(2, $responses);
+      $responses = $this->apiInstance->listTemplates($query, $page, $per_page);
+      $this->assertCount(1, $responses);
       $firstTemplate = $responses[0];
-      $this->assertStringStartsWith('tpl_', $firstTemplate->getId());
+      $this->assertEquals('tpl_000000000000000002', $firstTemplate->getId());
     }
 
     /**

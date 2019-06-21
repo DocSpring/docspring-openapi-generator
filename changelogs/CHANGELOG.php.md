@@ -1,3 +1,6 @@
+### 1.9.0 [June 22, 2019]
+* **BREAKING CHANGE** Renamed "Get Templates" endpoint to "List Templates". Added a search query parameter.
+
 ### 1.8.0 [April 11, 2019]
 * Added support for editable PDFS (editable: true)
 

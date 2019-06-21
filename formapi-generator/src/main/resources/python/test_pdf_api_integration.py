@@ -192,16 +192,17 @@ class TestPDFApi(unittest.TestCase):
         api_response = self.api.get_submission(submission_id)
         self.assertRegexpMatches(api_response.id, '^sub_')
 
-    def test_get_templates(self):
-        """Test case for get_templates
+    def test_list_templates(self):
+        """Test case for list_templates
 
         Get a list of all templates  # noqa: E501
         """
+        query = 'API Client Test Template 2' # String | Search By Name
         page = 1  # int | Default: 1 (optional)
         per_page = 10  # int | Default: 50 (optional)
-        api_response = self.api.get_templates(page=page, per_page=per_page)
-        self.assertEquals(len(api_response), 2)
-        self.assertRegexpMatches(api_response[0].id, '^tpl_')
+        api_response = self.api.list_templates(page=page, per_page=per_page, query=query)
+        self.assertEquals(len(api_response), 1)
+        self.assertEquals(api_response[0].id, 'tpl_000000000000000002')
 
     def test_test_authentication(self):
         """Test case for test_authentication
