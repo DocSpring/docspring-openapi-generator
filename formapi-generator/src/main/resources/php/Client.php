@@ -46,7 +46,7 @@ class Client extends Api\PDFApi
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\CreateCombinedSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest
      */
-    public function combineSubmissions($combined_submission_data = null)
+    public function combineSubmissions($combined_submission_data = null, $timeout = 60)
     {
         $combine_response = parent::combineSubmissions($combined_submission_data);
         $combined_submission = $combine_response->getCombinedSubmission();
@@ -75,7 +75,7 @@ class Client extends Api\PDFApi
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\CreateCombinedSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest
      */
-    public function combinePdfs($combine_pdfs_data = null)
+    public function combinePdfs($combine_pdfs_data = null, $timeout = 60)
     {
         $combine_response = parent::combinePdfs($combine_pdfs_data);
         $combined_submission = $combine_response->getCombinedSubmission();

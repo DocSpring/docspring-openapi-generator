@@ -1,3 +1,6 @@
+### 1.10.1 [July 3, 2019]
+* Fixed combineSubmissions and combinePdfs helpers when "strict mode" is enabled by setting error_reporting
+
 ### 1.10.0 [July 3, 2019]
 * Added combinePdfs wrapper that handles polling and doesn't return a pending combined submission job
 
