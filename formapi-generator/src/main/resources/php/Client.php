@@ -63,4 +63,33 @@ class Client extends Api\PDFApi
         }
         return $combined_submission;
     }
+
+    /**
+     * Operation combinePdfs
+     *
+     * Merge submission PDFs, template PDFs, or custom files
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data combine_pdfs_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\CreateCombinedSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest
+     */
+    public function combinePdfs($combine_pdfs_data = null)
+    {
+        $combine_response = parent::combinePdfs($combine_pdfs_data);
+        $combined_submission = $combine_response->getCombinedSubmission();
+        $id = $combined_submission->getId();
+        while ($combined_submission->getState() == 'pending') {
+          sleep(1);
+          $combined_submission = parent::getCombinedSubmission($id);
+          $timeout--;
+          if ($timeout < 0) {
+            throw new ApiException(
+                "Timeout Error: PDF was not processed within " . $timeout . " seconds."
+            );
+          }
+        }
+        return $combined_submission;
+    }
 }

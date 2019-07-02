@@ -1,3 +1,6 @@
+### 1.10.0 [July 3, 2019]
+* Added combinePdfs wrapper that handles polling and doesn't return a pending combined submission job
+
 ### 1.9.0 [June 22, 2019]
 * **BREAKING CHANGE** Renamed "Get Templates" endpoint to "List Templates". Added a search query parameter.
 

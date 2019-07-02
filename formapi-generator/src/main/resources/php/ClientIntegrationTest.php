@@ -115,4 +115,24 @@ class ClientTest extends \PHPUnit_Framework_TestCase
       $this->assertStringStartsWith('com_', $combined_submission->getId());
       $this->assertEquals('processed', $combined_submission->getState());
     }
+
+    /**
+     * Test case for combinePdfs
+     *
+     * Merge submission PDFs, template PDFs, or custom files.
+     *
+     */
+    public function testCombinePdfs()
+    {
+      $combine_pdfs_data = new Model\CombinePdfsData(); // \FormAPI\Model\CombinePdfsData |
+      $combine_pdfs_data->setSourcePdfs(
+        array(
+          ['type' => 'submission', 'id' => 'sub_000000000000000002'],
+          ['type' => 'submission', 'id' => 'sub_000000000000000004']
+        )
+      );
+      $combined_submission = $this->client->combinePdfs($combine_pdfs_data);
+      $this->assertStringStartsWith('com_', $combined_submission->getId());
+      $this->assertEquals('processed', $combined_submission->getState());
+    }
 }
